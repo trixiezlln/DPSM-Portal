@@ -8,7 +8,7 @@ Machine Problem Repository for CMSC 128.2
 ```
 https://github.com/enzo-kun/cmsc128-2.git
 ```
-You may do it via Windows CLI or use GitHub Desktop for easier use
+You may do it via Windows/MacOS/Linux CLI or use GitHub Desktop (Windows/MacOS) for easier use
 
 ### Setup Enviornment (WALA PA TESTING MD PALANG HEHE)
 ```
