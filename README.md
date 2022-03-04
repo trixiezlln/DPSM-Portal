@@ -13,11 +13,16 @@ You may do it via Windows/MacOS/Linux CLI or use GitHub Desktop (Windows/MacOS) 
 
 ### Setup Enviornment (WALA PA TESTING MD PALANG HEHE)
 ```
+pip install pipenv
+```
+
+```
 pipenv shell
 ```
 ```
 pip install -r requirements.txt
 ```
+
 ### Start and Run Server (WALA PA TESTING MD PALANG HEHE)
 ```
 pipenv shell
