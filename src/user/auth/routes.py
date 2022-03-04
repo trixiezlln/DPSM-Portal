@@ -33,9 +33,9 @@ flow = Flow.from_client_secrets_file(
 	client_secrets_file = client_secrets_file,
 	scopes = ["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
 	# Heroku
-	#redirect_uri = "https://cmsc-128-2.herokuapp.com/google_sign_in_callback")
-	
-	redirect_uri = "http://127.0.0.1:5000/google_sign_in_callback")
+	redirect_uri = "https://cmsc-128-2.herokuapp.com/google_sign_in_callback")
+	#Localhost
+	#redirect_uri = "http://127.0.0.1:5000/google_sign_in_callback")
 '''END'''
 
 
