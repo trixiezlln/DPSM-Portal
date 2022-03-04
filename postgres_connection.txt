@@ -1,0 +1,20 @@
+Host
+ec2-54-80-70-66.compute-1.amazonaws.com
+
+Database
+ddlriqt4i0he4e
+
+User
+zpzfypxdcepggx
+
+Port
+5432
+
+Password
+1495d6c9b28593a26da3087676b18fed18de94ef7668757f766d3d7c291fd0ff
+
+URI
+postgres://zpzfypxdcepggx:1495d6c9b28593a26da3087676b18fed18de94ef7668757f766d3d7c291fd0ff@ec2-54-80-70-66.compute-1.amazonaws.com:5432/ddlriqt4i0he4e
+
+Heroku CLI
+heroku pg:psql postgresql-lively-01922 --app cmsc-128-2
