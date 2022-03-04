@@ -9,8 +9,29 @@ import os
 from datetime import datetime as dt, date
 from datetime import timedelta, date
 
+
+#Google OAuth
+from google import auth
+import google
+from google.auth import credentials
+from google_auth_oauthlib.flow import Flow
+import google.oauth2.id_token as id_token
+
+#Env Vars
+from os import environ
+from dotenv import load_dotenv
+load_dotenv(override=True)
+
+GOOGLE_CLIENT_ID = environ.get('GOOGLE_CLIENT_ID')
+client_secrets_file = environ.get('CLIENTS_SECRETS_FILE')
+
+
 auth_blueprint = Blueprint('auth_blueprint', __name__)
 
 @auth_blueprint.route('/', methods=['GET'])
 def index():
+	return 'App Successfully Initialized. Pakyu.', 200
+
+@auth_blueprint.route('/google_sign_in', methods=['GET'])
+def google_sign_in():
 	return 'App Successfully Initialized. Pakyu.', 200
