@@ -13,4 +13,4 @@ auth_blueprint = Blueprint('auth_blueprint', __name__)
 
 @auth_blueprint.route('/', methods=['GET'])
 def index():
-	return 'App Successfully Initialized. Pakyu.', 400
+	return 'App Successfully Initialized. Pakyu.', 200
