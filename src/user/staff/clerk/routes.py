@@ -15,7 +15,7 @@ import pip._vendor.cachecontrol as cacheControl
 import json
 
 #Models
-from ..models import PersonalInformation
+from ..models import FacultyPersonalInformation
 from ...auth.models import UserCredentials
 
 clerk_blueprint = Blueprint('clerk_blueprint', __name__)
@@ -30,7 +30,7 @@ def create_faculty_account():
         if request.method == 'GET':
             new_account_form = request.form
             
-            new_faculty_account = PersonalInformation(
+            new_faculty_account = FacultyPersonalInformation(
                 user_id = '2018-00002',
             )
             db.session.add(new_faculty_account)
@@ -39,7 +39,7 @@ def create_faculty_account():
         elif request.method == 'POST':
             new_account_form = request.form
             
-            new_faculty_account = PersonalInformation(
+            new_faculty_account = FacultyPersonalInformation(
                 user_id             = new_account_form['user_id'],
                 rank                = new_account_form['rank'],
                 classification      = new_account_form['classification'],
@@ -78,3 +78,27 @@ def create_faculty_account():
         print(e)
         return 'An error has occured.', 400
 
+@clerk_blueprint.route('/clerk/faculty_list', methods=['GET'])
+def clerk_faculty_list():
+    try:
+        faculty_list = []
+        faculty_records = FacultyPersonalInformation.query.all()
+
+        for record in faculty_records:
+            if record.middle_name is None:
+                faculty_name = '%s %s'.format(record.first_name, record.last_name)
+            else:
+                faculty_name = '%s %s %s'.format(record.first_name, record.middle_name, record.last_name)
+            info_dict = {
+                'faculty_name' : faculty_name,
+                'rank' : record.rank,
+                'classification' : record.classification,
+                'tenure' : record.tenure,
+                'status': record.status
+            }
+            faculty_list.append(info_dict)
+        
+        return faculty_list, 200
+    except Exception as e:
+        print(e)
+        return 'An error has occured.', 400

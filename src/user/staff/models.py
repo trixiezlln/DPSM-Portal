@@ -8,11 +8,11 @@ from sqlalchemy.schema import FetchedValue
 
 schema = 'public'
 
-class PersonalInformation(UserMixin, db.Model):
+class FacultyPersonalInformation(UserMixin, db.Model):
     __table_args__ = {
         'schema' : schema, 'extend_existing': True
         }
-    __tablename__ = 'personal_information'
+    __tablename__ = 'faculty_personal_information'
     user_id 					= db.Column(db.String(180), primary_key=True, nullable=True)
     rank                        = db.Column(db.String(180), nullable=True)
     classification              = db.Column(db.String(180), nullable=True)
