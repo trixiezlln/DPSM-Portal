@@ -17,6 +17,7 @@ login_manager = LoginManager()
 
 #Blueprint Imports
 from src.user.auth.routes import auth_blueprint
+from src.user.staff.clerk.routes import clerk_blueprint
 
 load_dotenv(override=True)
 
@@ -46,5 +47,6 @@ def create_app(config_filename=None):
 
     # Blueprints 
 	app.register_blueprint(auth_blueprint)
+	app.register_blueprint(clerk_blueprint)
 
 	return app

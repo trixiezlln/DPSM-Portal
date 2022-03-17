@@ -1,4 +1,4 @@
-from src import login_manager
+from src import login_manager, db
 from flask import Blueprint, render_template, redirect, url_for, flash, g
 import flask
 from flask import session
