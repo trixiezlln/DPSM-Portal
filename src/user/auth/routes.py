@@ -95,8 +95,8 @@ def google_sign_in_callback():
             #     return redirect('/user-dashboard')
             # else:
             #     return redirect('/admin-dashboard')
-        # else:
-        #     return "Faculty Account Does not Exist in Database. If you think this is a mistake, please contact the administrator"
+        else:
+            return "Faculty Account Does not Exist in Database. If you think this is a mistake, please contact the administrator"
         
         if 'Calangian' in session["name"]:
             session["name"] = session["name"] + ' De Guzman'
