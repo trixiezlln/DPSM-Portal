@@ -11,6 +11,7 @@ schema = 'public'
 class UserCredentials(UserMixin, db.Model):
     __table_args__ = {'schema' : schema, 'extend_existing': True}
     __tablename__ = 'user_credentials'
+    id                          = db.Column(db.Integer, autoincrement=True)
     user_id 					= db.Column(db.String(180), primary_key=True, nullable=True)
     email 					    = db.Column(db.String(180), nullable=True)
     role 					    = db.Column(db.String(180), nullable=True)

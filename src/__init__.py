@@ -11,14 +11,16 @@ from sqlalchemy.orm import sessionmaker
 from os import environ
 from dotenv import load_dotenv
 
+db = SQLAlchemy()
+bcrypt = Bcrypt()
+login_manager = LoginManager()
+
 #Blueprint Imports
 from src.user.auth.routes import auth_blueprint
 
 load_dotenv(override=True)
 
-db = SQLAlchemy()
-bcrypt = Bcrypt()
-login_manager = LoginManager()
+
 
 def create_app(config_filename=None):
 

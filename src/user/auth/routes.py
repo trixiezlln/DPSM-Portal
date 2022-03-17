@@ -1,3 +1,4 @@
+from src import login_manager
 from flask import Blueprint, render_template, redirect, url_for, flash, g
 import flask
 from flask import session
@@ -12,6 +13,7 @@ import requests
 import pip._vendor.cachecontrol as cacheControl
 import json
 
+
 #Google OAuth
 from google import auth
 import google
@@ -24,6 +26,9 @@ from os import environ
 from dotenv import load_dotenv
 load_dotenv(override=True)
 
+#Models
+from .models import UserCredentials
+
 '''GOOGLE OAUTH SETUP'''
 GOOGLE_CLIENT_ID = environ.get('GOOGLE_CLIENT_ID')
 client_secrets_file = environ.get('CLIENTS_SECRETS_FILE')
@@ -33,13 +38,18 @@ flow = Flow.from_client_secrets_file(
 	client_secrets_file = client_secrets_file,
 	scopes = ["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
 	# Heroku
-	redirect_uri = "https://cmsc-128-2.herokuapp.com/google_sign_in_callback")
+	#redirect_uri = "https://cmsc-128-2.herokuapp.com/google_sign_in_callback")
 	#Localhost
-	#redirect_uri = "http://127.0.0.1:5000/google_sign_in_callback")
+	redirect_uri = "http://127.0.0.1:5000/google_sign_in_callback")
 '''END'''
 
 
 auth_blueprint = Blueprint('auth_blueprint', __name__)
+
+login_manager.login_view = 'auth_blueprint.google_sign_in_callback'
+@login_manager.user_loader
+def load_user(user_id):
+	return UserCredentials.query.get(int(user_id))
 
 @auth_blueprint.route('/', methods=['GET'])
 def index():
@@ -76,22 +86,25 @@ def google_sign_in_callback():
         session["name"] = id_info.get("name")
         session["email"] = id_info.get("email")
         session["picture"] = id_info.get("picture")
-        #email = id_info.get("email")
         
-        # if user is not None:
-        # 	login_user(user)
-        # 	if user.is_admin == False:
-        # 		return redirect('/user-dashboard')
-        # 	else:
-        # 		return redirect('/admin-dashboard')
+        user = UserCredentials.query.filter_by(email=session["email"]).first()
+
+        if user is not None:
+            login_user(user)
+            # if user.is_admin == False:
+            #     return redirect('/user-dashboard')
+            # else:
+            #     return redirect('/admin-dashboard')
         # else:
-        # 	return "Faculty Account Does not Exist in Database. If you think this is a mistake, please contact the administrator"
+        #     return "Faculty Account Does not Exist in Database. If you think this is a mistake, please contact the administrator"
+        
         if 'Calangian' in session["name"]:
             session["name"] = session["name"] + ' De Guzman'
         return json.dumps({ 
             'status' : 'Google Sign In Successful',
             'name' : session["name"],
-            'email' : session["email"]
+            'email' : session["email"],
+            'user_id' : current_user.user_id
         }), 200
     except Exception as e:
         print(e)
