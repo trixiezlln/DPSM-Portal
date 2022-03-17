@@ -109,3 +109,8 @@ def google_sign_in_callback():
     except Exception as e:
         print(e)
         return e, 500
+
+@auth_blueprint.route('/logout')
+def logout():
+	logout_user()
+	return redirect(url_for('auth_blueprint.index'))
