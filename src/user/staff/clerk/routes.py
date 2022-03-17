@@ -1,3 +1,4 @@
+import email
 from src import login_manager, db
 from flask import Blueprint, render_template, redirect, url_for, flash, g
 import flask
@@ -39,7 +40,7 @@ def create_faculty_account():
             new_account_form = request.form
             
             new_faculty_account = PersonalInformation(
-                user_id = '2018-00001',
+                user_id             = new_account_form['user_id'],
                 rank                = new_account_form['rank'],
                 classification      = new_account_form['classification'],
                 status              = new_account_form['status'],
@@ -62,6 +63,15 @@ def create_faculty_account():
                 created_by          = current_user.email
             )
             db.session.add(new_faculty_account)
+
+            new_user_credentials = UserCredentials(
+                user_id         = new_account_form['user_id'],
+                email           = new_account_form['primary_email'],
+                role            = 'faculty',
+                date_created    = date.today()
+            )
+            db.session.add(new_user_credentials)
+
             db.session.commit()
             return 'Faculty Account Successfully Created.', 200
     except Exception as e:
