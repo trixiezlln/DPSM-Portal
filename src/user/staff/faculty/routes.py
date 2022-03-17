@@ -19,7 +19,7 @@ from ..models import EducationalAttainment, FacultyPersonalInformation
 from ...auth.models import UserCredentials
 
 #External Functions
-from functions.generate_educational_attaintment_id import generate_educational_attainment_id
+from .functions.generate_educational_attaintment_id import generate_educational_attainment_id
 
 faculty_blueprint = Blueprint('faculty_blueprint', __name__)
 
@@ -59,8 +59,8 @@ def add_educational_attainment():
         print(e)
         return 'An error has occured.', 500
 
-@faculty_blueprint.route('/faculty/update_educational_attainment/<str:id>', methods=['GET', 'PUT'])
-def add_educational_attainment(id):
+@faculty_blueprint.route('/faculty/update_educational_attainment/<string:id>', methods=['GET', 'PUT'])
+def update_educational_attainment(id):
     try:
         if request.method == 'GET':
             educational_attainment_record = EducationalAttainment.query.filter_by(id=id).first()
