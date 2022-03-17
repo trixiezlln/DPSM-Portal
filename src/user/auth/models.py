@@ -10,7 +10,8 @@ schema = 'public'
 
 class UserCredentials(UserMixin, db.Model):
     __table_args__ = {
-        'schema' : schema, 'extend_existing': True
+        'schema' : schema, 
+        'extend_existing': True
         }
     __tablename__ = 'user_credentials'
     id                          = db.Column(db.Integer, autoincrement=True)

@@ -10,8 +10,9 @@ schema = 'public'
 
 class FacultyPersonalInformation(UserMixin, db.Model):
     __table_args__ = {
-        'schema' : schema, 'extend_existing': True
-        }
+        'schema' : schema, 
+        'extend_existing': True
+    }
     __tablename__ = 'faculty_personal_information'
     user_id 					= db.Column(db.String(180), primary_key=True, nullable=True)
     rank                        = db.Column(db.String(180), nullable=True)
@@ -35,3 +36,19 @@ class FacultyPersonalInformation(UserMixin, db.Model):
     last_modified               = db.Column(TIMESTAMP, nullable=True)
     date_created                = db.Column(DATE, nullable=True)
     created_by                  = db.Column(db.String(180), nullable=True)
+
+class EducationalAttainment(UserMixin, db.Model):
+    __table_args__ = {
+        'schema' : schema, 
+        'extend_existing': True
+    }
+    __tablename__ = 'educational_attainment'
+    user_id = db.Column(db.String(180), primary_key=True, nullable=True)
+    school = db.Column(db.String(180), nullable=True)
+    degree = db.Column(db.String(180), nullable=True)
+    specialization = db.Column(db.String(180), nullable=True)
+    degree_type = db.Column(db.String(180), nullable=True)
+    start_date = db.Column(DATE, nullable=True)
+    end_date = db.Column(DATE, nullable=True)
+    last_modified = db.Column(TIMESTAMP, nullable=True)
+

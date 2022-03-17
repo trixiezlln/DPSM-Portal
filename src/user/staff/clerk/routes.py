@@ -74,6 +74,7 @@ def create_faculty_account():
 
             db.session.commit()
             return 'Faculty Account Successfully Created.', 200
+            #return render_template('.html')
     except Exception as e:
         print(e)
         return 'An error has occured.', 400
@@ -99,6 +100,10 @@ def clerk_faculty_list():
             faculty_list.append(info_dict)
         
         return faculty_list, 200
+        #return render_template(
+        # '.html',
+        # faculty_list
+        # )
     except Exception as e:
         print(e)
-        return 'An error has occured.', 400
+        return 'An error has occured.', 500
