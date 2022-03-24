@@ -53,7 +53,7 @@ def load_user(user_id):
 
 @auth_blueprint.route('/', methods=['GET'])
 def index():
-	return 'App Successfully Initialized. Pakyu.', 200
+	return 'App Successfully Initialized.', 200
 
 @auth_blueprint.route('/google_sign_in', methods=['GET'])
 def google_sign_in():
