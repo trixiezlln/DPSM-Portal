@@ -31,8 +31,8 @@ def load_user(user_id):
 def add_educational_attainment():
     try:
         if request.method == 'GET':
-            pass
-            #return render_template('.html')
+            #pass
+            return render_template('faculty/add_info.html')
         elif request.method == 'POST':
             educational_attainment_form = request.form
             educational_attainment_record = None
