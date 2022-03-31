@@ -2576,7 +2576,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #ffffff;
-  background-color: #007bff;
+  background-color: #014421 !important;
+  border: 0 !important;
   border-color: #007bff;
   box-shadow: none;
 }
@@ -10303,6 +10304,10 @@ body,
   max-width: 1250px;
 }
 
+.main-sidebar {
+  background-color: #7B1113 !important;
+}
+
 .layout-boxed .wrapper .main-sidebar {
   left: inherit;
 }
@@ -10318,6 +10323,10 @@ body,
 
 .layout-navbar-fixed.layout-fixed .wrapper .control-sidebar {
   top: calc(3.5rem + 1px);
+}
+
+.main-header {
+  border-bottom: 3px solid #F3AA2C !important;
 }
 
 .layout-navbar-fixed.layout-fixed .wrapper .main-header.text-sm ~ .control-sidebar {
@@ -31094,3 +31103,30 @@ a.text-muted:hover {
   color: #ffffff;
 }
 /*# sourceMappingURL=adminlte.css.map */
+
+
+
+
+.logged-btn {
+  background-color: unset !important;
+  color: black !important;
+  border: none !important;
+}
+
+
+.logo-upm {
+  background-image: url(../img/logo-upm.png);
+  height: 124px;
+  width: 124px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-left: 1rem;
+}
+
+
+
+@media(min-width:500px){
+  .content-wrapper{
+    padding: 1rem !important;
+  }
+}
