@@ -54,6 +54,21 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+/* Avenir Font */
+@font-face {
+  font-family: 'Avenir LT Std';
+  src: url('../fonts/AvenirLTStd-Roman.eot');
+  src: url('../fonts/AvenirLTStd-Roman.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/AvenirLTStd-Roman.woff2') format('woff2'),
+       url('../fonts/AvenirLTStd-Roman.woff') format('woff'),
+       url('../fonts/AvenirLTStd-Roman.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
@@ -31108,6 +31123,7 @@ a.text-muted:hover {
 
 
 .logged-btn {
+  font-family: 'Avenir LT Std';
   background-color: unset !important;
   color: black !important;
   border: none !important;
@@ -31129,4 +31145,10 @@ a.text-muted:hover {
   .content-wrapper{
     padding: 1rem !important;
   }
+}
+
+
+
+.main-sidebar .nav-item p {
+  font-family: 'Avenir LT Std';
 }
