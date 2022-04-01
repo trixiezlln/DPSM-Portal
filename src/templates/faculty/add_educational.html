@@ -1,0 +1,83 @@
+{% extends "layout.html" %} {% block add_info %}
+<head>
+    <title>Add Info</title>
+</head>
+    <section>
+        <h1>Educational Attainment</h1>
+        <form class="add-info-form" id="add-info-form">
+            <div class="row">
+                <div class="col-12">
+                    <div class="col col-12 container">
+                        <div class="row">
+                            <div class="col-12 custom-col-3 mb-3">
+                                <label class="col-form-label">Name of School or Institution<span class="required-field"></span></label>
+                                <input class="form-control" type="text" id="school" name="school">
+                                <span class = "validation-status"></span>
+                            </div>    
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 custom-col-3 mb-3">
+                                <label class="col-form-label">Degree/Certification<span class="required-field"></span></label>
+                                <input class="form-control" type="text" id="degree" name="degree">
+                                <span class = "validation-status"></span>
+                            </div>    
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-6 custom-col-1 mb-3">
+                                <label class="col-form-label">Type of Degree</label>
+                                <select class="degree_type-select form-select form-control degree_type" aria-label="" id="degree_type" name="degree_type" data-field="degree_type">
+                                    <option value="AA">Associate of Arts (AA)</option>
+                                    <option value="AS">Associate of Science (AS)</option>
+                                    <option value="BA">Bachelor of Arts (BA)</option>
+                                    <option value="BS">Bachelor of Science (BS)</option>
+                                    <option value="MA">Master of Arts (MA)</option>
+                                    <option value="MS">Master of Science (MS)</option>
+                                    <option value="PhD">Doctoral (PhD)</option>
+                                    <option value="MD">Doctor of Medicine (MD)</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                <label class="col-form-label">Major/Specialization<span class="required-field"></span></label>
+                                <input class="form-control" type="text" id="specialization" name="specialization">
+                                <span class = "validation-status"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                <label class="col-form-label">Start Date<span class="required-field"></span></label>
+                                <input class="form-control" type="date" id="start_date" name="start_date">
+                                <span class = "validation-status"></span>
+                            </div>   
+                            
+                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                <label class="col-form-label">End Date<span class="required-field"></span></label>
+                                <input class="form-control" type="date" id="end_date" name="end_date">
+                                <span class = "validation-status"></span>
+                            </div>  
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                <label class="col-form-label">Upload File as Proof<span class="required-field"></span></label>
+                                <input type="file" id="educ_file" name="educ_file">
+                                <span class = "validation-status"></span>
+                            </div>    
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-start mt-2">
+                <button class="btn btn-primary crud-bin" type="'submit">Save</button> 
+            </div>
+
+        </form>
+    
+    </section>
+
+{% endblock %}

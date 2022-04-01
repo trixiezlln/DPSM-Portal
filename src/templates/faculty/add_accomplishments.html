@@ -1,0 +1,79 @@
+{% extends "layout.html" %} {% block add_info %}
+<head>
+    <title>Add Info</title>
+</head>
+    <section>
+        <h1>Accomplishments</h1>
+        <form class="add-info-form" id="add-info-form">
+            <div class="row">
+                <div class="col-12">
+                    <div class="col col-12 container">
+                        <div class="row">
+                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                <label class="col-form-label">Position/Role<span class="required-field"></span></label>
+                                <input class="form-control" type="text" id="position" name="position">
+                                <span class = "validation-status"></span>
+                            </div> 
+            
+                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                <label class="col-form-label">Organization<span class="required-field"></span></label>
+                                <input class="form-control" type="text" id="organization" name="organization">
+                                <span class = "validation-status"></span>
+                            </div> 
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                <label class="col-form-label">Start Date<span class="required-field"></span></label>
+                                <input class="form-control" type="date" id="start_date" name="start_date">
+                                <span class = "validation-status"></span>
+                            </div>   
+                            
+                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                <label class="col-form-label">End Date<span class="required-field"></span></label>
+                                <input class="form-control" type="date" id="end_date" name="end_date">
+                                <span class = "validation-status"></span>
+                            </div>  
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-6 custom-col-1 mb-3">
+                                <label class="col-form-label">Type of Contribution</label>
+                                <select class="type_contribution-select form-select form-control type_contribution" aria-label="" id="type_contribution" name="type_contribution" data-field="type_contribution">
+                                    <option value="1">Accomplishments within UPM</option>
+                                    <option value="2">Contributions to Professions</option>
+                                    <option value="3">Contributions to Nation</option>
+                                    <option value="4">Contributions to World</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 custom-col-3 mb-3">
+                                <label class="col-form-label">Description<span class="required-field"></span></label>
+                                <textarea class="form-control" id="description" name="description" rows="4" cols="50"></textarea>
+                                <span class = "validation-status"></span>
+                            </div>   
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                <label class="col-form-label">Upload File as Proof<span class="required-field"></span></label>
+                                <input type="file" id="accomplishment_file" name="accomplishment_file">
+                                <span class = "validation-status"></span>
+                            </div>    
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-start mt-2">
+                <button class="btn btn-primary crud-bin" type="'submit">Save</button> 
+            </div>
+
+        </form>
+    
+    </section>
+
+{% endblock %}
