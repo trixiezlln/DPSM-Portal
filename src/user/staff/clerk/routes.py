@@ -28,14 +28,16 @@ def load_user(user_id):
 def create_faculty_account():
     try:
         if request.method == 'GET':
+            """    
             new_account_form = request.form
             
             new_faculty_account = FacultyPersonalInformation(
                 user_id = '2018-00002',
             )
             db.session.add(new_faculty_account)
-            db.session.commit()
-            return 'Faculty Account Successfully Created.', 200
+            db.session.commit() 
+            """   
+            return render_template('clerk/create_faculty_account.html')
         elif request.method == 'POST':
             new_account_form = request.form
             
@@ -81,6 +83,8 @@ def create_faculty_account():
 
 @clerk_blueprint.route('/clerk/faculty_list', methods=['GET'])
 def clerk_faculty_list():
+
+    """
     try:
         faculty_list = []
         faculty_records = FacultyPersonalInformation.query.all()
@@ -107,3 +111,9 @@ def clerk_faculty_list():
     except Exception as e:
         print(e)
         return 'An error has occured.', 500
+    """
+    return render_template('clerk/faculty_list.html')
+
+@clerk_blueprint.route('/clerk/faculty_service_record', methods=['GET'])
+def clerk_faculty_service_record():
+    return render_template('clerk/faculty_service_record.html')

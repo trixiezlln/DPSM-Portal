@@ -1,0 +1,222 @@
+{% extends "layout.html" %} {% block add_faculty_account %}
+<head>
+    <title>Create Faculty Account</title>
+</head>
+    <section>
+        <h1>Personal Information</h1>
+        <br>
+        <form class="create-faculty-account" id="create-faculty-account">
+            <div class="row">
+
+                <!-- faculty ID  -->
+                <div class="col-12">
+                    <h6 class="info-subhead mt-1">Faculty ID</h6>
+                    <div class="col col-12 container">
+                        <div class="row">
+                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                <input class="form-control" type="text" id="faculty_id" name="faculty_id" 
+                                pattern="(?<!\d)(?!000000000)\d{9}(?!\d)" placeholder="do not include &quot;-&quot;" required>
+                                <span class = "validation-status"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- faculty status -->
+                <div class="col-12">
+                    <hr>
+                    <h6 class="info-subhead mt-1">Faculty Status</h6>
+                    <div class="col col-12 container">
+                        <div class="row">
+                            <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                <label class="col-form-label">Rank</label>
+                                <select class="form-control faculty-status-rank" id="faculty_rank" name="faculty_rank">
+                                    <option selected value="">N/A</option>
+                                    <option value="instructor_one">Instructor 1</option>
+                                    <option value="instructor_two">Instructor 2</option>
+                                    <option value="assistant_professor_one">Assistant Professor 1</option>
+                                    <option value="assistant_professor_two">Assistant Professor 2</option>
+                                    <option value="professor_one">Professor 1</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                <label class="col-form-label">Classification</label>
+                                <select class="form-control faculty-status-classification" id="faculty_classification" name="faculty_classification">
+                                    <option selected value="">N/A</option>
+                                    <option value="full_time">Full-time</option>
+                                    <option value="part_time">Part-time</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                <label class="col-form-label">Tenure</label>
+                                <select class="form-control faculty-status-tenure" id="faculty_tenure" name="faculty_tenure">
+                                    <option selected value="">N/A</option>
+                                    <option value="temporary">Temporary</option>
+                                    <option value="permanent">Permanent</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                <label class="col-form-label">Status</label>
+                                <select class="form-control faculty-status-status" id="faculty_status" name="faculty_status">
+                                    <option selected value="">N/A</option>
+                                    <option value="acitve_service">Active Service</option>
+                                    <option value="leave_with_pay">On study leave with pay</option>
+                                    <option value="leave_no_pay">On study leave without pay</option>
+                                    <option value="sabbatical_leave">On sabbatical leave</option>
+                                    <option value="secondment">On secondment</option>
+                                    <option value="retired">Retired</option>
+                                    <option value="resigned">Resigned</option>
+                                    <option value="awol">AWOL</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- faculty basic information -->
+                <div class="col-12">
+                    <hr>
+                    <h6 class="info-subhead mt-1">Basic Information</h6>
+                    <div class="col col-12 container">
+                        <div class="row">
+                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                <label class="col-form-label">First Name</label>
+                                <input class="form-control" type="text" id="first_name" name="first_name">
+                                <span class = "validation-status"></span>
+                            </div>
+                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                <label class="col-form-label">Middle Name</label>
+                                <input class="form-control" type="text" id="middle_name" name="middle_name">
+                                <span class = "validation-status"></span>
+                            </div>
+                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                <label class="col-form-label">Last Name</label>
+                                <input class="form-control" type="text" id="last_name" name="last_name">
+                                <span class = "validation-status"></span>
+                            </div>
+                            <div class="col-12 col-lg-1 custom-col-1 mb-3">
+                                <label class="col-form-label">Suffix</label>
+                                <select class="form-control basic-info-suffix" id="suffix" name="suffix">
+                                    <option selected value="">N/A</option>
+                                    <option value="senior">Sr.</option>
+                                    <option value="junior">Jr.</option>
+                                    <option value="first">I</option>
+                                    <option value="second">II</option>
+                                    <option value="third">III</option>
+                                    <option value="fourth">IV</option>
+                                    <option value="fifth">V</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="col col-12 container">
+                        <div class="row">
+                            <div class="col-12 col-lg-12 custom-col-3 mb-3">
+                                <label class="col-form-label">Present Address</label>
+                                <input class="form-control" type="text" id="present_address" name="present_address">
+                                <span class = "validation-status"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col col-12 container">
+                        <div class="row">
+                            <div class="col-12 col-lg-12 custom-col-3 mb-3">
+                                <label class="col-form-label">Permanent Address</label>
+                                <input class="form-control" type="text" id="permanent_address" name="permanent_address">
+                                <span class = "validation-status"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="col col-12 container">
+                        <div class="row">
+                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                <label class="col-form-label">Date of Birth</label>
+                                <input class="form-control" type="date" id="date_of_birth" name="date_of_birth">
+                                <span class = "validation-status"></span>
+                            </div>
+                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                <label class="col-form-label">Place of Birth</label>
+                                <input class="form-control" type="text" id="place_of_birth" name="place_of_birth">
+                                <span class = "validation-status"></span>
+                            </div>
+                            
+                            <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                <label class="col-form-label">Religion</label>
+                                <select class="form-control basic-info-religion" id="religion" name="religion">
+                                    <option selected value="">N/A</option>
+                                    <option value="roman_catholic">Roman Catholic</option>
+                                    <option value="islam">Islam</option>
+                                    <option value="evangelical">Evangelical</option>
+                                    <option value="protestant">Protestant</option>
+                                    <option value="aglipay">Aglipayan</option>
+                                    <option value="seventh_day">Seventh-day-Adventist</option>
+                                    <option value="bible_baptist">Bible Baptist Church</option>
+                                    <option value="united_church">United Church of Christ in the Philippines</option>
+                                    <option value="jehovah">Jehovah's Witnesses</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                <label class="col-form-label">Civil Status</label>
+                                <select class="suffix-select form-select form-control suffix" aria-label="" id="civil_status" name="civil_status" data-field="suffix">
+                                    <option selected value="">N/A</option>
+                                    <option value="single">Single</option>
+                                    <option value="married">Married</option>
+                                    <option value="divorced">Divorced</option>
+                                    <option value="separated">Separated</option>
+                                    <option value="widowed">Widowed</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- contact details -->
+                <div class="col-12">
+                    <hr>
+                    <h6 class="info-subhead mt-1">Contact Details</h6>
+                    <div class="col-12 col-lg-12">
+                        <div class="row">
+                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                <label class="col-form-label">Telephone Number</label>
+                                <input class="form-control" type="text" id="landline" name="landline">
+                                <span class = "validation-status"></span>
+                            </div>
+                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                <label class="col-form-label">Mobile Number</label>
+                                <input class="form-control" type="text" id="mobile_number" name="mobile_number">
+                                <span class = "validation-status"></span>
+                            </div>
+
+                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                <label class="col-form-label">Primary Email</label>
+                                <input class="form-control" type="text" id="primary_email" name="primary_email">
+                                <span class = "validation-status"></span>
+                            </div>
+                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                <label class="col-form-label">Alternate Email</label>
+                                <input class="form-control" type="text" id="alternate_email" name="alternate_email">
+                                <span class = "validation-status"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+        <div class="d-flex justify-content-end mt-2">
+            <button class="btn btn-primary crud-btn" type="submit">Save</button> 
+        </div>
+    
+    </section>
+
+{% endblock %}

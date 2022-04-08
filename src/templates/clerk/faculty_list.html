@@ -1,0 +1,145 @@
+{% extends "layout.html" %} {% block add_faculty_account %}
+<!-- trigger the modal -->
+<p id="myBtn">Therese Mae Magcamit</p>
+
+<!-- modal -->
+<div id="myModal" class="modal">
+
+    <!-- modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" style="color:white;">Update Faculty Details</h5>
+            <span class="close">&times;</span>
+        </div>
+        <form class="update-faculty-details" id="update-faculty-details">
+            <div class="modal-body">
+                <div class="col col-12 container">
+                    <h5 class="faculty-name mt-1">Therese Mae Magcamit</h5>
+                    <div class="row">
+                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
+                            <label class="col-form-label">Rank</label>
+                            <select class="form-control faculty-status-rank" id="faculty_rank" name="faculty_rank">
+                                <option selected value="">N/A</option>
+                                <option value="instructor_one">Instructor 1</option>
+                                <option value="instructor_two">Instructor 2</option>
+                                <option value="assistant_professor_one">Assistant Professor 1</option>
+                                <option value="assistant_professor_two">Assistant Professor 2</option>
+                                <option value="professor_one">Professor 1</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
+                            <label class="col-form-label">Classification</label>
+                            <select class="form-control faculty-status-classification" id="faculty_classification" name="faculty_classification">
+                                <option selected value="">N/A</option>
+                                <option value="full_time">Full-time</option>
+                                <option value="part_time">Part-time</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-12 container">
+                    <div class="row">
+                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
+                            <label class="col-form-label">Tenure</label>
+                            <select class="form-control faculty-status-tenure" id="faculty_tenure" name="faculty_tenure">
+                                <option selected value="">N/A</option>
+                                <option value="temporary">Temporary</option>
+                                <option value="permanent">Permanent</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
+                            <label class="col-form-label">Status</label>
+                            <select class="form-control faculty-status-status" id="faculty_status" name="faculty_status">
+                                <option selected value="">N/A</option>
+                                <option value="acitve_service">Active Service</option>
+                                <option value="leave_with_pay">On study leave with pay</option>
+                                <option value="leave_no_pay">On study leave without pay</option>
+                                <option value="sabbatical_leave">On sabbatical leave</option>
+                                <option value="secondment">On secondment</option>
+                                <option value="retired">Retired</option>
+                                <option value="resigned">Resigned</option>
+                                <option value="awol">AWOL</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="d-flex justify-content-center mt-2">
+            <button class="btn btn-primary crud-btn" style="margin-right: 20px;" type="submit">Save</button> 
+            <button class="btn btn-secondary crud-btn" style="margin-left: 20px;" type="cancel">Cancel</button> 
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+    .modal {
+        display: none; /* Hidden by default */
+        position: absolute;
+        float: left;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 40%;
+        height: 80%; 
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 20% auto; /* 15% from the top and centered */
+      padding-bottom: 20px;
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+    }
+    
+    .modal-header {
+      background-color: #7B1113;
+    }
+    
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+</style>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function() {
+    modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+    modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        }
+    }
+</script>
+
+{% endblock %}

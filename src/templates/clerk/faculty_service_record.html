@@ -1,0 +1,200 @@
+{% extends "layout.html" %} {% block add_faculty_account %}
+
+<form class="update-faculty-details" id="update-faculty-details">
+    <h5 class="faculty-name mt-1" id="myBtn">Therese Mae Magcamit</h5>
+    <div class="col-12">
+        <hr>
+        <h6 class="info-subhead mt-1">Add Faculty Load</h6>
+        <div class="col col-12 container">
+            <div class="row">
+                <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                    <label class="col-form-label">Course Code</label>
+                    <input class="form-control" type="text" id="course_code" name="course_code" required>
+                </div>
+                <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                    <label class="col-form-label">Section</label>
+                    <input class="form-control" type="text" id="section" name="section" required>
+                </div>
+                <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                    <label class="col-form-label">Academic Year</label>
+                    <select class="form-control academic-year" id="academic_year" name="academic_year">
+                        <option selected value="">N/A</option>
+                        <option value="sixteen_seventeen">2016-2017</option>
+                        <option value="seventeen_eighteen">2017-2018</option>
+                        <option value="eighteen_nineteen">2018-2019</option>
+                        <option value="nineteen_twenty">2019-2020</option>
+                        <option value="twenty_twenty_one">2020-2021</option>
+                        <option value="twenty_one_twenty_two">2021-2022</option>
+                    </select>
+                </div>
+                <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                    <label class="col-form-label">Semester</label>
+                    <select class="form-control semester" id="semester" name="semester">
+                        <option selected value="">N/A</option>
+                        <option value="first_semester">1st Semester</option>
+                        <option value="second_semester">2nd Semester</option>
+                        <option value="mid_year">Mid Year</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="d-flex justify-content-end mt-2 mr-3">
+    <button class="btn btn-primary crud-btn" type="submit">Add</button> 
+</div>
+
+<!-- modal -->
+<div id="myModal" class="modal">
+
+    <!-- modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" style="color:white;">Update Course Details</h5>
+            <span class="close">&times;</span>
+        </div>
+        <form class="update-faculty-details" id="update-faculty-details">
+            <div class="modal-body">
+                <div class="col col-12 container">
+                    <h5 class="faculty-name mt-1">Therese Mae Magcamit</h5>
+                    <div class="row">
+                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
+                            <label class="col-form-label">Course Code</label>
+                            <input class="form-control" type="text" id="course_code" name="course_code" required>   
+                        </div>
+                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
+                            <label class="col-form-label">Section</label>
+                            <input class="form-control" type="text" id="section" name="section" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-12 container">
+                    <div class="row">
+                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
+                            <label class="col-form-label">Academic Year</label>
+                            <select class="form-control academic-year" id="academic_year" name="academic_year">
+                                <option selected value="">N/A</option>
+                                <option value="sixteen_seventeen">2016-2017</option>
+                                <option value="seventeen_eighteen">2017-2018</option>
+                                <option value="eighteen_nineteen">2018-2019</option>
+                                <option value="nineteen_twenty">2019-2020</option>
+                                <option value="twenty_twenty_one">2020-2021</option>
+                                <option value="twenty_one_twenty_two">2021-2022</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
+                            <label class="col-form-label">Semester</label>
+                            <select class="form-control semester" id="semester" name="semester">
+                                <option selected value="">N/A</option>
+                                <option value="first_semester">1st Semester</option>
+                                <option value="second_semester">2nd Semester</option>
+                                <option value="mid_year">Mid Year</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-12 container">
+                    <div class="row">
+                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
+                            <label class="col-form-label">Schedule</label>
+                            <input class="form-control" type="text" id="schedule" name="schedule" required>   
+                        </div>
+                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
+                            <label class="col-form-label">No. of Students</label>
+                            <input class="form-control" type="text" id="number_of_students" name="number_of_students" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-12 container">
+                    <div class="row">
+                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
+                            <label class="col-form-label">Syllabus</label>
+                            <button class="btn btn-secondary crud-btn form-control" style="width: 50%; margin-left: 50px;">Edit</button>  
+                        </div>
+                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
+                            <label class="col-form-label">SET</label>
+                            <input class="form-control" type="text" id="set_score" name="set_score" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="d-flex justify-content-center mt-2">
+            <button class="btn btn-primary crud-btn" style="margin-right: 20px;" type="submit">Save</button> 
+            <button class="btn btn-secondary crud-btn" style="margin-left: 20px;" type="cancel">Cancel</button> 
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+    .modal {
+        display: none; /* Hidden by default */
+        position: absolute;
+        float: left;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 40%;
+        height: 110%; 
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 20% auto; /* 15% from the top and centered */
+      padding-bottom: 20px;
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+    }
+    
+    .modal-header {
+      background-color: #7B1113;
+    }
+    
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+</style>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function() {
+    modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+    modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        }
+    }
+</script>
+
+{% endblock %}
