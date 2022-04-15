@@ -31160,9 +31160,9 @@ a.text-muted:hover {
   padding: 1rem;
   margin-top: 1rem;
   margin-bottom: 2rem;
-  background-color: #E8E8E8;
-  border-radius: 1rem;
-  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);
+  background-color: #eeeeee;
+  border-radius: 0.5rem;
+  box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 
@@ -31192,4 +31192,14 @@ a.text-muted:hover {
 .info-subhead {
   font-weight: bold;
   font-size: 20px;
+}
+
+.info-sub-section {
+  
+  padding: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  background-color: #eeeeee;
+  /* border-radius: 0.5rem; */
+  /* box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25); */
 }
