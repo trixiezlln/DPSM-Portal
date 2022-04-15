@@ -31194,6 +31194,7 @@ a.text-muted:hover {
   font-size: 20px;
 }
 
+<<<<<<< HEAD
 .info-sub-section {
   
   padding: 1rem;
@@ -31203,3 +31204,35 @@ a.text-muted:hover {
   /* border-radius: 0.5rem; */
   /* box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25); */
 }
+=======
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  top: 2.5rem;
+  border-radius: 0.5rem !important;
+  font-family: 'Avenir LT Std';
+}
+
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-item{
+  border-radius: 0.5rem !important;
+  padding: 0.75rem 1rem !important;
+}
+
+.dropdown-item:hover {
+  background: #F2F3F4 !important;
+}
+
+
+
+
+>>>>>>> b3280975a94f8f95ffd122277870f675f52622a1
