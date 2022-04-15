@@ -1,0 +1,285 @@
+{% extends "layout.html" %} {% block add_info %}
+<head>
+    <title>Add Info</title>
+</head>
+    <section>
+        <h1>Work Experience</h1>
+        <div class="info-section">
+
+            <!-- box header -->
+            <div class="d-flex justify-content-between my-3">
+                <h1 class="">Personal Information</h1>
+                <div>
+                    <a class="crud-icon add-btn"></a>
+                    <a class="crud-icon edit-btn"></a>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- box content -->
+            <form class="add-info-form" id="add-info-form">
+                <div class="row">
+                    <!-- rank tenure etc -->
+                    <div class="col-12">
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Faculty ID Number
+                                        <!--<<span class="required-field">*</span></label> -->
+                                    <input class="form-control" type="text" id="faculty_id_number" name="faculty_id_number">
+                                    <span class = "validation-status"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+    
+                    <!-- rank tenure etc -->
+                    <div class="col-12">
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                    <label class="col-form-label">Rank</label>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="rank" name="rank" data-field="suffix">
+                                        <option selected value="">N/A</option>
+                                        <option value="#">Instructor 1</option>
+                                        <option value="#">Instructor 2</option>
+                                        <option value="#">Assistant Professor 1</option>
+                                        <option value="#">Assistant Professor 2</option>
+                                        <option value="#">Professor 1</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                    <label class="col-form-label">Classification</label>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="classification" name="classification" data-field="suffix">
+                                        <option selected value="">N/A</option>
+                                        <option value="full-time">Full-time</option>
+                                        <option value="part-time">Part-time</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                    <label class="col-form-label">Tenure</label>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="tenure" name="tenure" data-field="suffix">
+                                        <option selected value="">N/A</option>
+                                        <option value="temporary">Temporary</option>
+                                        <option value="permanent">Permanent</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                    <label class="col-form-label">Status</label>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="status" name="status" data-field="suffix">
+                                        <option selected value="">N/A</option>
+                                        <option value="#">Active Service</option>
+                                        <option value="#">On study leave with pay</option>
+                                        <option value="#">On study leave without pay</option>
+                                        <option value="#">On sabbatical leave</option>
+                                        <option value="#">On secondment</option>
+                                        <option value="#">Retired</option>
+                                        <option value="#">Resigned</option>
+                                        <option value="#">AWOL</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- name -->
+                    <div class="col-12">
+                        <h6 class="info-subhead mt-1">Name</h6>
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">First Name</label>
+                                    <input class="form-control" type="text" id="first_name" name="first_name">
+                                    <span class = "validation-status"></span>
+                                </div>
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Middle Name</label>
+                                    <input class="form-control" type="text" id="middle_name" name="middle_name">
+                                    <span class = "validation-status"></span>
+                                </div>
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Last Name</label>
+                                    <input class="form-control" type="text" id="last_name" name="last_name">
+                                    <span class = "validation-status"></span>
+                                </div>
+                                <div class="col-12 col-lg-1 custom-col-1 mb-3">
+                                    <label class="col-form-label">Suffix</label>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="suffix" name="suffix" data-field="suffix">
+                                        <option selected value="">N/A</option>
+                                        <option value="SR">Sr.</option>
+                                        <option value="JR">Jr.</option>
+                                        <option value="I">I</option>
+                                        <option value="II">II</option>
+                                        <option value="III">III</option>
+                                        <option value="IV">IV</option>
+                                        <option value="V">V</option>
+                                        <option value="VI">VI</option>
+                                        <option value="VII">VII</option>
+                                        <option value="VIII">VIII</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- address -->
+                    <div class="col-12">
+                        <!-- <h6 class="info-subhead mt-1">Basic Information</h6> -->
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Present Address</label>
+                                    <input class="form-control" type="text" id="present_address" name="present_address">
+                                    <span class = "validation-status"></span>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Permanent Address</label>
+                                    <input class="form-control" type="text" id="permanent_address" name="permanent_address">
+                                    <span class = "validation-status"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    
+    
+                    <!-- other personal info -->
+                    <div class="col-12">
+                        <!-- <h6 class="info-subhead mt-1">Basic Information</h6> -->
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Date of Birth</label>
+                                    <input class="form-control" type="date" id="date_of_birth" name="date_of_birth">
+                                    <span class = "validation-status"></span>
+                                </div>
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Place of Birth</label>
+                                    <input class="form-control" type="text" id="place_of_birth" name="place_of_birth">
+                                    <span class = "validation-status"></span>
+                                </div>
+                                
+                                <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                    <label class="col-form-label">Religion</label>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="religion" name="religion" data-field="suffix">
+                                        <option selected value="">N/A</option>
+                                        <option value="SR">Sr.</option>
+                                        <option value="JR">Jr.</option>
+                                        <option value="I">I</option>
+                                        <option value="II">II</option>
+                                        <option value="III">III</option>
+                                        <option value="IV">IV</option>
+                                        <option value="V">V</option>
+                                        <option value="VI">VI</option>
+                                        <option value="VII">VII</option>
+                                        <option value="VIII">VIII</option>
+                                    </select>
+                                </div>
+    
+                                <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                    <label class="col-form-label">Civil Status</label>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="civil_status" name="civil_status" data-field="suffix">
+                                        <option selected value="">N/A</option>
+                                        <option value="#">Single</option>
+                                        <option value="#">Married</option>
+                                        <option value="#">Divorced</option>
+                                        <option value="#">Separated</option>
+                                        <option value="#">Widowed</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- contact number -->
+                    <div class="col-12">
+                        <h6 class="info-subhead mt-1">Contact Details</h6>
+                        <div class="col-12 col-lg-12">
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Telephone Number</label>
+                                    <input class="form-control" type="text" id="landline" name="landline">
+                                    <span class = "validation-status"></span>
+                                </div>
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Mobile Number</label>
+                                    <input class="form-control" type="text" id="mobile_number" name="mobile_number">
+                                    <span class = "validation-status"></span>
+                                </div>
+    
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Primary Email (UP Mail Required)</label>
+                                    <input class="form-control" type="text" id="primary_email" name="primary_email">
+                                    <span class = "validation-status"></span>
+                                </div>
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Alternate Email</label>
+                                    <input class="form-control" type="text" id="alternate_email" name="alternate_email">
+                                    <span class = "validation-status"></span>
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- emergency contact -->
+                    <div class="col-12">
+                        <h6 class="info-subhead mt-1">Emergency Contact</h6>
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Name of Contact Person</label>
+                                    <input class="form-control" type="text" id="emergency_contact_person" name="emergency_contact_person">
+                                    <span class = "validation-status"></span>
+                                </div>
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Contact Number</label>
+                                    <input class="form-control" type="text" id="emergency_contact_number" name="emergency_contact_number">
+                                    <span class = "validation-status"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+    
+                    <!-- dependents -->
+                    <div class="col-12">
+                        <h6 class="info-subhead mt-1">Dependents</h6>
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Name of Dependents</label>
+                                    <input class="form-control" type="text" id="dependent_name" name="dependent_name">
+                                    <span class = "validation-status"></span>
+                                </div>
+    
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Date of Birth</label>
+                                    <input class="form-control" type="text" id="dependent_birthdate " name="dependent_birthdate ">
+                                    <span class = "validation-status"></span>
+                                </div>
+                                
+                                <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                    <label class="col-form-label">Relationship to user</label>
+                                    <input class="form-control" type="text" id="dependent_relationship" name="dependent_relationship">
+                                    <span class = "validation-status"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+            </form>
+            
+        </div>
+    </section>
+
+{% endblock %}
+
