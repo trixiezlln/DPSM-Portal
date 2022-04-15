@@ -1,0 +1,60 @@
+{% extends "layout.html" %} {% block add_info %}
+<head>
+    <title>Add Info</title>
+</head>
+    <section>
+        <h1>Licensure Exam</h1>
+        <form class="add-info-form" id="add-info-form">
+            <div class="row">
+                <div class="col-12">
+                    <div class="col col-12 container">
+                        <div class="row">
+                            <div class="col-12 custom-col-3 mb-3">
+                                <label class="col-form-label">Name of Exam<span class="required-field"></span></label>
+                                <input class="form-control" type="text" id="name_exam" name="name_exam">
+                                <span class = "validation-status"></span>
+                            </div> 
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                <label class="col-form-label">Rank<span class="required-field"></span></label>
+                                <input class="form-control" type="text" id="rank" name="rank">
+                                <span class = "validation-status"></span>
+                            </div>
+                            
+                            <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                <label class="col-form-label">License Number<span class="required-field"></span></label>
+                                <input class="form-control" type="text" id="license_number" name="license_number">
+                                <span class = "validation-status"></span>
+                            </div>
+
+                            <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                <label class="col-form-label">Date<span class="required-field"></span></label>
+                                <input class="form-control" type="date" id="date" name="date">
+                                <span class = "validation-status"></span>
+                            </div>  
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                <label class="col-form-label">Upload File as Proof<span class="required-field"></span></label>
+                                <input type="file" id="licensure_file" name="licensure_file">
+                                <span class = "validation-status"></span>
+                            </div>    
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                <button class="btn btn-primary crud-btn" type="submit">Update</button> 
+                <button class="btn btn-reset crud-btn" type="reset">Reset</button> 
+            </div>
+
+        </form>
+    
+    </section>
+
+{% endblock %}

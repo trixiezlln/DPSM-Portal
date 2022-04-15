@@ -1,0 +1,83 @@
+{% extends "layout.html" %} {% block add_info %}
+<head>
+    <title>Add Info</title>
+</head>
+    <section>
+        <h1>Faculty Service Records (FSR) and SET</h1>
+        <form class="add-info-form" id="add-info-form">
+            <div class="row">
+                <div class="col-12">
+                    <div class="col col-12 container">
+                        <div class="row">
+                            <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                <label class="col-form-label">Course Code<span class="required-field"></span></label>
+                                <input class="form-control" type="text" id="course_code" name="course_code">
+                                <span class = "validation-status"></span>
+                            </div> 
+
+                            <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                <label class="col-form-label">Section<span class="required-field"></span></label>
+                                <input class="form-control" type="text" id="section" name="section">
+                                <span class = "validation-status"></span>
+                            </div> 
+
+                            <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                <label class="col-form-label">Semester<span class="required-field"></span></label>
+                                <select class="semester-select form-select form-control semester" aria-label="" id="semester" name="semester" data-field="semester">
+                                    <option value="1">1st Semester</option>
+                                    <option value="2">2nd Semester</option>
+                                    <option value="3">Midyear</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                <label class="col-form-label">School Year<span class="required-field"></span></label>
+                                <input class="form-control" type="text" id="sy" name="sy">
+                                <span class = "validation-status"></span>
+                            </div> 
+
+                            <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                <label class="col-form-label">Schedule<span class="required-field"></span></label>
+                                <input class="form-control" type="text" id="schedule" name="schedule">
+                                <span class = "validation-status"></span>
+                            </div> 
+
+                            <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                <label class="col-form-label">Number of Students<span class="required-field"></span></label>
+                                <input class="form-control" type="text" id="number_students" name="number_students">
+                                <span class = "validation-status"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 custom-col-3 mb-3">
+                                <label class="col-form-label">SET<span class="required-field"></span></label>
+                                <input class="form-control" type="text" id="set" name="set">
+                                <span class = "validation-status"></span>
+                            </div>    
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                <label class="col-form-label">Upload File as Proof<span class="required-field"></span></label>
+                                <input type="file" id="fsr_set_file" name="fsr_set_file">
+                                <span class = "validation-status"></span>
+                            </div>    
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                <button class="btn btn-primary crud-btn" type="submit">Update</button> 
+                <button class="btn btn-reset crud-btn" type="reset">Reset</button> 
+            </div>
+
+        </form>
+    
+    </section>
+
+{% endblock %}
