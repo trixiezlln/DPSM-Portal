@@ -2597,6 +2597,14 @@ fieldset:disabled a.btn {
   box-shadow: none;
 }
 
+.btn-reset {
+  color: #ffffff !important;;
+  background-color: #636363 !important;
+  border: 0 !important;
+  border-color: #007bff;
+  box-shadow: none;
+}
+
 .btn-primary:hover {
   color: #ffffff;
   background-color: #0069d9;
@@ -31188,13 +31196,17 @@ a.text-muted:hover {
   -webkit-mask-size: cover;
 }
 
+.delete-btn {
+  -webkit-mask: url(../img/icons/delete.svg);
+  -webkit-mask-size: cover;
+}
+
 
 .info-subhead {
   font-weight: bold;
   font-size: 20px;
 }
 
-<<<<<<< HEAD
 .info-sub-section {
   
   padding: 1rem;
@@ -31204,7 +31216,6 @@ a.text-muted:hover {
   /* border-radius: 0.5rem; */
   /* box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25); */
 }
-=======
 
 .dropdown-content {
   display: none;
@@ -31235,4 +31246,3 @@ a.text-muted:hover {
 
 
 
->>>>>>> b3280975a94f8f95ffd122277870f675f52622a1
