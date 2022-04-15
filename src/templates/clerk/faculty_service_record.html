@@ -1,48 +1,74 @@
 {% extends "layout.html" %} {% block add_faculty_account %}
 
-<form class="update-faculty-details" id="update-faculty-details">
-    <h5 class="faculty-name mt-1" id="myBtn">Therese Mae Magcamit</h5>
-    <div class="col-12">
-        <hr>
-        <h6 class="info-subhead mt-1">Add Faculty Load</h6>
-        <div class="col col-12 container">
-            <div class="row">
-                <div class="col-12 col-lg-3 custom-col-1 mb-3">
-                    <label class="col-form-label">Course Code</label>
-                    <input class="form-control" type="text" id="course_code" name="course_code" required>
-                </div>
-                <div class="col-12 col-lg-3 custom-col-1 mb-3">
-                    <label class="col-form-label">Section</label>
-                    <input class="form-control" type="text" id="section" name="section" required>
-                </div>
-                <div class="col-12 col-lg-3 custom-col-1 mb-3">
-                    <label class="col-form-label">Academic Year</label>
-                    <select class="form-control academic-year" id="academic_year" name="academic_year">
-                        <option selected value="">N/A</option>
-                        <option value="sixteen_seventeen">2016-2017</option>
-                        <option value="seventeen_eighteen">2017-2018</option>
-                        <option value="eighteen_nineteen">2018-2019</option>
-                        <option value="nineteen_twenty">2019-2020</option>
-                        <option value="twenty_twenty_one">2020-2021</option>
-                        <option value="twenty_one_twenty_two">2021-2022</option>
-                    </select>
-                </div>
-                <div class="col-12 col-lg-3 custom-col-1 mb-3">
-                    <label class="col-form-label">Semester</label>
-                    <select class="form-control semester" id="semester" name="semester">
-                        <option selected value="">N/A</option>
-                        <option value="first_semester">1st Semester</option>
-                        <option value="second_semester">2nd Semester</option>
-                        <option value="mid_year">Mid Year</option>
-                    </select>
-                </div>
+<h5 class="faculty-name mt-1" id="myBtn">Therese Mae Magcamit</h5>
+
+<table id="fsr_table">
+    <tr>
+        <th class="sortable">Course Code</th>
+        <th>Section</th>
+        <th class="sortable">Semester</th>
+        <th>Schedule</th>
+        <th>No. of Students</th>
+        <th>Syllabus</th>
+        <th>SET</th>
+    </tr>
+    <tr id="row1">
+        <td id="course_code_row1">CMSC 128.2</td>
+        <td id="section_row1">TFG</td>
+        <td id="semester_row1">1st Semester</td>
+        <td id="schedule_row1">MTh 10AM-12PM</td>
+        <td id="number_of_students_row1">15</td>
+        <td id="syllabus_row1">Button Here</td>
+        <td id="set_row1">1.5</td>
+    </tr>
+    <tr id="row2">
+        <td id="course_code_row2">CMSC 121</td>
+        <td id="section_row2">TFC</td>
+        <td id="semester_row2">2nd Semester</td>
+        <td id="schedule_row2">TF 10AM-12PM</td>
+        <td id="number_of_students_row2">25</td>
+        <td id="syllabus_row2">Button Here</td>
+        <td id="set_row2">2</td>
+    </tr>
+</table>
+
+<div class="col-12">
+    <hr>
+    <h6 class="info-subhead mt-1">Add Faculty Load</h6>
+    <div class="col col-12 container">
+        <div class="row">
+            <div class="col-12 col-lg-2 custom-col-1 mb-3">
+                <input class="form-control" type="text"  id="new_course_code" placeholder="Course Code" required>
+            </div>
+            <div class="col-12 col-lg-1 custom-col-1 mb-3">
+                <input class="form-control" type="text" id="new_section" placeholder="Section" >
+            </div>
+            <div class="col-12 col-lg-2 custom-col-1 mb-3">
+                <select class="form-control academic-year" id="new_semester" required>
+                    <option selected value="">Semester</option>
+                    <option value="1st Semester">1st Semester</option>
+                    <option value="2nd Semester">2nd Semester</option>
+                    <option value="Mid Year">Mid Year</option>
+                </select>
+            </div>
+            <div class="col-12 col-lg-2 custom-col-1 mb-3">
+                <input class="form-control" type="text" id="new_schedule" placeholder="Schedule" required>
+            </div>
+            <div class="col-12 col-lg-2 custom-col-1 mb-3">
+                <input class="form-control" type="text"  id="new_number_students" placeholder="No. of Students" required>
+            </div>
+            <div class="col-12 col-lg-2 custom-col-1 mb-3">
+                <input class="form-control" type="text"  id="new_syllabus" placeholder="Syllabus" required>
+            </div>
+            <div class="col-12 col-lg-1 custom-col-1 mb-3">
+                <input class="form-control" type="text"  id="new_set" placeholder="SET" required>
             </div>
         </div>
     </div>
-</form>
+</div>
 
 <div class="d-flex justify-content-end mt-2 mr-3">
-    <button class="btn btn-primary crud-btn" type="submit">Add</button> 
+    <button class="btn btn-primary crud-btn" onclick="add_row();">Add</button> 
 </div>
 
 <!-- modal -->
@@ -167,8 +193,32 @@
       text-decoration: none;
       cursor: pointer;
     }
+
+    table {
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+    th, td {
+    text-align: left;
+    padding: 8px;
+    }
+
+    tr:nth-child(odd) {
+        background-color: #bebdbd;
+    } 
+
+    th.sortable{
+        cursor: pointer;
+    }
+
+    th.sortable:hover{
+        background-color: white;
+    }
+
 </style>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
     // Get the modal
     var modal = document.getElementById("myModal");
@@ -195,6 +245,47 @@
         modal.style.display = "none";
         }
     }
+    
+    function add_row() {
+        var new_course_code=document.getElementById("new_course_code").value;
+        var new_section=document.getElementById("new_section").value;
+        var new_semester=document.getElementById("new_semester").value;
+        var new_schedule=document.getElementById("new_schedule").value;
+        var new_number_students=document.getElementById("new_number_students").value;
+        var new_syllabus=document.getElementById("new_syllabus").value;
+        var new_set=document.getElementById("new_set").value;
+        
+        var table=document.getElementById("fsr_table");
+        var table_len=(table.rows.length);
+        var row = table.insertRow(table_len).outerHTML="<tr id='row"+table_len+"'><td id='course_code_row"+table_len+"'>"+new_course_code+"</td><td id='section_row"+table_len+"'>"+new_section+"</td><td id='semester_row"+table_len+"'>"+new_semester+"</td><td id='schedule_row"+table_len+"'>"+new_schedule+"</td><td id='number_of_students_row"+table_len+"'>"+new_number_students+"</td><td id='syllabus_row"+table_len+"'>"+new_syllabus+"</td><td id='set_row"+table_len+"'>"+new_set+"</td></tr>";
+
+        document.getElementById("new_course_code").value="";
+        document.getElementById("new_section").value="";
+        document.getElementById("new_semester").value="";
+        document.getElementById("new_schedule").value="";
+        document.getElementById("new_number_students").value="";
+        document.getElementById("new_syllabus").value="";
+        document.getElementById("new_set").value="";
+    }
+
+    $('th.sortable').click(function(){
+        var table = $(this).parents('table').eq(0)
+        var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
+        this.asc = !this.asc
+        if (!this.asc){rows = rows.reverse()}
+        for (var i = 0; i < rows.length; i++){table.append(rows[i])}
+    })
+    
+    function comparer(index) {
+        return function(a, b) {
+            var valA = getCellValue(a, index), valB = getCellValue(b, index)
+            return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
+        }
+    }
+function getCellValue(row, index){ return $(row).children('td').eq(index).text() }
+
 </script>
+
+
 
 {% endblock %}
