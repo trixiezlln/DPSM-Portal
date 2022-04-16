@@ -1,8 +1,9 @@
 {% extends "layout.html" %} {% block add_faculty_account %}
 
-<h5 class="faculty-name mt-1" id="myBtn">Therese Mae Magcamit</h5>
+<h5>Therese Mae Magcamit</h5>
 
-<table id="fsr_table">
+<h4 class="header">A.Y. 2018-2020</h4>
+<table id="fsr_table" style="display:none;">
     <tr>
         <th class="sortable">Course Code</th>
         <th>Section</th>
@@ -11,6 +12,7 @@
         <th>No. of Students</th>
         <th>Syllabus</th>
         <th>SET</th>
+        <th>Action</th>
     </tr>
     <tr id="row1">
         <td id="course_code_row1">CMSC 128.2</td>
@@ -20,6 +22,10 @@
         <td id="number_of_students_row1">15</td>
         <td id="syllabus_row1">Button Here</td>
         <td id="set_row1">1.5</td>
+        <td id="action_button_row1">
+            <button class="btn btn-primary crud-btn" id="edit_button1" style="margin-right: 20px;" onclick="edit_row('1')">Edit</button>
+            <button class="btn btn-primary crud-btn" id="save_button1" style="margin-right: 20px; display:none;" onclick="save_row('1')">Save</button>
+        </td>
     </tr>
     <tr id="row2">
         <td id="course_code_row2">CMSC 121</td>
@@ -29,12 +35,16 @@
         <td id="number_of_students_row2">25</td>
         <td id="syllabus_row2">Button Here</td>
         <td id="set_row2">2</td>
+        <td id="action_button_row2">
+            <button class="btn btn-primary crud-btn" id="edit_button2" style="margin-right: 20px;" onclick="edit_row('2')">Edit</button>
+            <button class="btn btn-primary crud-btn" id="save_button2" style="margin-right: 20px; display:none;" onclick="save_row('2')">Save</button>
+        </td>
     </tr>
 </table>
 
 <div class="col-12">
     <hr>
-    <h6 class="info-subhead mt-1">Add Faculty Load</h6>
+    <h5>Add Faculty Load</h5>
     <div class="col col-12 container">
         <div class="row">
             <div class="col-12 col-lg-2 custom-col-1 mb-3">
@@ -44,7 +54,7 @@
                 <input class="form-control" type="text" id="new_section" placeholder="Section" >
             </div>
             <div class="col-12 col-lg-2 custom-col-1 mb-3">
-                <select class="form-control academic-year" id="new_semester" required>
+                <select class="form-control semester" id="new_semester" required>
                     <option selected value="">Semester</option>
                     <option value="1st Semester">1st Semester</option>
                     <option value="2nd Semester">2nd Semester</option>
@@ -71,141 +81,19 @@
     <button class="btn btn-primary crud-btn" onclick="add_row();">Add</button> 
 </div>
 
-<!-- modal -->
-<div id="myModal" class="modal">
-
-    <!-- modal content -->
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" style="color:white;">Update Course Details</h5>
-            <span class="close">&times;</span>
-        </div>
-        <form class="update-faculty-details" id="update-faculty-details">
-            <div class="modal-body">
-                <div class="col col-12 container">
-                    <h5 class="faculty-name mt-1">Therese Mae Magcamit</h5>
-                    <div class="row">
-                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
-                            <label class="col-form-label">Course Code</label>
-                            <input class="form-control" type="text" id="course_code" name="course_code" required>   
-                        </div>
-                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
-                            <label class="col-form-label">Section</label>
-                            <input class="form-control" type="text" id="section" name="section" required>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-12 container">
-                    <div class="row">
-                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
-                            <label class="col-form-label">Academic Year</label>
-                            <select class="form-control academic-year" id="academic_year" name="academic_year">
-                                <option selected value="">N/A</option>
-                                <option value="sixteen_seventeen">2016-2017</option>
-                                <option value="seventeen_eighteen">2017-2018</option>
-                                <option value="eighteen_nineteen">2018-2019</option>
-                                <option value="nineteen_twenty">2019-2020</option>
-                                <option value="twenty_twenty_one">2020-2021</option>
-                                <option value="twenty_one_twenty_two">2021-2022</option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
-                            <label class="col-form-label">Semester</label>
-                            <select class="form-control semester" id="semester" name="semester">
-                                <option selected value="">N/A</option>
-                                <option value="first_semester">1st Semester</option>
-                                <option value="second_semester">2nd Semester</option>
-                                <option value="mid_year">Mid Year</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-12 container">
-                    <div class="row">
-                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
-                            <label class="col-form-label">Schedule</label>
-                            <input class="form-control" type="text" id="schedule" name="schedule" required>   
-                        </div>
-                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
-                            <label class="col-form-label">No. of Students</label>
-                            <input class="form-control" type="text" id="number_of_students" name="number_of_students" required>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-12 container">
-                    <div class="row">
-                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
-                            <label class="col-form-label">Syllabus</label>
-                            <button class="btn btn-secondary crud-btn form-control" style="width: 50%; margin-left: 50px;">Edit</button>  
-                        </div>
-                        <div class="col-12 col-lg-6 custom-col-1 mb-3">
-                            <label class="col-form-label">SET</label>
-                            <input class="form-control" type="text" id="set_score" name="set_score" required>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-        <div class="d-flex justify-content-center mt-2">
-            <button class="btn btn-primary crud-btn" style="margin-right: 20px;" type="submit">Save</button> 
-            <button class="btn btn-secondary crud-btn" style="margin-left: 20px;" type="cancel">Cancel</button> 
-        </div>
-
-    </div>
-
-</div>
-
 <style>
-    .modal {
-        display: none; /* Hidden by default */
-        position: absolute;
-        float: left;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 40%;
-        height: 110%; 
-    }
-
-    .modal-content {
-      background-color: #fefefe;
-      margin: 20% auto; /* 15% from the top and centered */
-      padding-bottom: 20px;
-      border: 1px solid #888;
-      width: 80%; /* Could be more or less, depending on screen size */
-    }
-    
-    .modal-header {
-      background-color: #7B1113;
-    }
-    
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-    }
-    
-    .close:hover,
-    .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
     table {
-    border-collapse: collapse;
-    width: 100%;
+        border-collapse: collapse;
+        width: 100%;
     }
 
     th, td {
-    text-align: left;
-    padding: 8px;
+        text-align: left;
+        padding: 8px;
     }
 
     tr:nth-child(odd) {
-        background-color: #bebdbd;
+        background-color: #769888;
     } 
 
     th.sortable{
@@ -216,36 +104,73 @@
         background-color: white;
     }
 
+    .header {
+        padding-left: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        text-align: left;
+        margin-bottom: 0px;
+        background: #014421;
+        color: white;
+    }
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
+    function edit_row(no) {
+        document.getElementById("edit_button"+no).style.display="none";
+        document.getElementById("save_button"+no).style.display="block";
+            
+        var course_code=document.getElementById("course_code_row"+no);
+        var section=document.getElementById("section_row"+no);
+        var semester=document.getElementById("semester_row"+no);
+        var schedule=document.getElementById("schedule_row"+no);
+        var number_of_students=document.getElementById("number_of_students_row"+no);
+        var syllabus=document.getElementById("syllabus_row"+no);
+        var set=document.getElementById("set_row"+no);          
+        
+        var course_code_data=course_code.innerHTML;
+        var section_data=section.innerHTML;
+        var semester_data=semester.innerHTML;
+        var schedule_data=schedule.innerHTML;
+        var number_of_students_data=number_of_students.innerHTML;
+        var syllabus_data=syllabus.innerHTML;
+        var set_data=set.innerHTML;
 
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on the button, open the modal
-    btn.onclick = function() {
-    modal.style.display = "block";
+        course_code.innerHTML="<input style='width: 80%' type='text' id='course_code_text"+no+"' value='"+course_code_data+"'>";
+        section.innerHTML="<input type='text' style='width: 40%' id='section_text"+no+"' value='"+section_data+"'>";
+        semester.innerHTML="<select id='semester_text"+no+"' value='"+semester_data+"'>"+
+                                "<option value='1st Semester'>1st Semester</option>"+
+                                "<option value='2nd Semester'>2nd Semester</option>"+
+                                "<option value='Mid Year'>Mid Year</option>";
+        schedule.innerHTML="<input style='width: 100%' type='text' id='schedule_text"+no+"' value='"+schedule_data+"'>";
+        number_of_students.innerHTML="<input style='width: 20%' type='text' id='number_of_students_text"+no+"' value='"+number_of_students_data+"'>";
+        syllabus.innerHTML="<input style='width: 40%' type='text' id='syllabus_text"+no+"' value='"+syllabus_data+"'>";
+        set.innerHTML="<input style='width: 30%' type='text' id='set_text"+no+"' value='"+set_data+"'>";
     }
 
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-    modal.style.display = "none";
+    function save_row(no) {
+        var course_code_val=document.getElementById("course_code_text"+no).value;
+        var section_val=document.getElementById("section_text"+no).value;
+        var semester_val=document.getElementById("semester_text"+no).value;
+        var schedule_val=document.getElementById("schedule_text"+no).value;
+        var number_of_students_val=document.getElementById("number_of_students_text"+no).value;
+        var syllabus_val=document.getElementById("syllabus_text"+no).value;
+        var set_val=document.getElementById("set_text"+no).value;
+
+        document.getElementById("course_code_row"+no).innerHTML=course_code_val;
+        document.getElementById("section_row"+no).innerHTML=section_val;
+        document.getElementById("semester_row"+no).innerHTML=semester_val;
+        document.getElementById("schedule_row"+no).innerHTML=schedule_val;
+        document.getElementById("number_of_students_row"+no).innerHTML=number_of_students_val;
+        document.getElementById("syllabus_row"+no).innerHTML=syllabus_val;
+        document.getElementById("set_row"+no).innerHTML=set_val;
+
+        document.getElementById("edit_button"+no).style.display="block";
+        document.getElementById("save_button"+no).style.display="none";
     }
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-        }
-    }
-    
     function add_row() {
         var new_course_code=document.getElementById("new_course_code").value;
         var new_section=document.getElementById("new_section").value;
@@ -257,7 +182,19 @@
         
         var table=document.getElementById("fsr_table");
         var table_len=(table.rows.length);
-        var row = table.insertRow(table_len).outerHTML="<tr id='row"+table_len+"'><td id='course_code_row"+table_len+"'>"+new_course_code+"</td><td id='section_row"+table_len+"'>"+new_section+"</td><td id='semester_row"+table_len+"'>"+new_semester+"</td><td id='schedule_row"+table_len+"'>"+new_schedule+"</td><td id='number_of_students_row"+table_len+"'>"+new_number_students+"</td><td id='syllabus_row"+table_len+"'>"+new_syllabus+"</td><td id='set_row"+table_len+"'>"+new_set+"</td></tr>";
+        var row = table.insertRow(table_len).outerHTML=
+            "<tr id='row"+table_len+"'>"+
+            "<td id='course_code_row"+table_len+"'>"+new_course_code+"</td>"+
+            "<td id='section_row"+table_len+"'>"+new_section+"</td>"+
+            "<td id='semester_row"+table_len+"'>"+new_semester+"</td>"+
+            "<td id='schedule_row"+table_len+"'>"+new_schedule+"</td>"+
+            "<td id='number_of_students_row"+table_len+"'>"+new_number_students+"</td>"+
+            "<td id='syllabus_row"+table_len+"'>"+new_syllabus+"</td>"+
+            "<td id='set_row"+table_len+"'>"+new_set+"</td>"+
+            "<td id='action_button_row"+table_len+"'>"+
+                "<button class='btn btn-primary crud-btn' id='edit_button"+table_len+"' style='margin-right: 20px;' onclick='edit_row("+table_len+")'>Edit</button>"+
+                "<button class='btn btn-primary crud-btn' id='save_button"+table_len+"' style='margin-right: 20px; display:none;'' onclick='save_row("+table_len+")'>Save</button></td>"+
+            "</tr>";
 
         document.getElementById("new_course_code").value="";
         document.getElementById("new_section").value="";
@@ -282,8 +219,16 @@
             return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
         }
     }
-function getCellValue(row, index){ return $(row).children('td').eq(index).text() }
 
+    function getCellValue(row, index) { 
+        return $(row).children('td').eq(index).text()
+    }
+
+    $(document).ready(function(){
+        $("h4.header").click(function(){
+            $("table").toggle();
+        });
+    });
 </script>
 
 
