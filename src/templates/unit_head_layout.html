@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title></title>
+
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='fonts/AvenirLTStd-Roman.woff2') }}"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='fonts/AvenirLTStd-Roman.woff') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='fonts/AvenirLTStd-Roman.eot') }}">
+
+
+<link rel="stylesheet" href="{{ url_for('static', filename='plugins/fontawesome-free/css/all.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='plugins/toastr/toastr.min.css') }}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/adminlte.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/adminlte.min.css') }}">
+
+<script src="{{ url_for('static', filename='js/adminlte.js') }}"></script>
+
+
+
+
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+  <div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
+                class="fas fa-bars"></i></a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link"><i class="fa fa-home"></i></a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <!-- <a href="#" class="nav-link">Session: current_session</a> -->
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <!-- <a href="#" class="nav-link">Term: current_term </a> -->
+          </li>
+        </ul>
+  
+  
+  
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Notifications Dropdown Menu -->
+          <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+              <i class="far fa-user"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-user mr-2"></i> Profile
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-sign-out"></i> Sign out
+              </a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-widget="control-sidebar" data-slide="true"
+              href="#" role="button"><i class="fas fa-th-large"></i></a>
+          </li>
+          <li class="nav-item">
+            <div class="btn-group">
+              <button type="button" class="btn logged-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                user@gmail.com
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><button class="dropdown-item" type="button">Action</button></li>
+
+              </ul>
+            </div>
+          </li>
+          
+        </ul>
+      </nav>
+      <!-- /.navbar -->
+  
+      <!-- Main Sidebar Container -->
+      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <!-- <a href="#" class="brand-link">
+          <div class="logo-upm"></div>
+        </a> -->
+  
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <div class="logo-upm m-auto"></div>
+          <div><h3 class="brank-link text-center text-light mt-1 mb-4">DPSM Portal</h3></div>
+
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column"
+              data-widget="treeview" role="menu" data-accordion="false">
+              <li class="nav-item">
+                <a href="http://127.0.0.1:5000/unit_head/dashboard" class="nav-link">
+                  <i class="nav-icon fas fa-graduation-cap"></i>
+                  <p>
+                    Dashboard
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item" data-toggle="collapse" href="#collapseExample">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-graduation-cap"></i>
+                  <p>
+                    Basic Information
+                  </p>
+                </a>
+              </li>
+
+              <div class="collapse" id="collapseExample" style="padding-left: 7%;">
+                <ul class="nav nav-pills nav-sidebar flex-column"
+                  data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Basic Information Dropdown -->
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
+                      <p>
+                        Personal Information
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
+                      <p>
+                        Educational Attainment
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
+                      <p>
+                        Work Experience
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
+                      <p>
+                        Accomplishments
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
+                      <p>
+                        Publication
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
+                      <p>
+                        Research Grants
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
+                      <p>
+                        Licensure Exam
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
+                      <p>
+                        Trainings/Seminars
+                      </p>
+                    </a>
+                  </li>
+                  <!-- Basic Information Dropdown -->
+                </ul>
+              </div>
+
+              <li class="nav-item">
+                <a href="http://127.0.0.1:5000/unit_head/faculty_list" class="nav-link">
+                  <i class="nav-icon fas fa-graduation-cap"></i>
+                  <p>
+                    Faculty List
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="http://127.0.0.1:5000/unit_head/pending_approvals" class="nav-link">
+                  <i class="nav-icon fas fa-graduation-cap"></i>
+                  <p>
+                    Pending Approvals
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="http://127.0.0.1:5000/unit_head/role_assignment" class="nav-link">
+                  <i class="nav-icon fas fa-graduation-cap"></i>
+                  <p>
+                    Role Assignment
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+      </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+ 
+        
+      <section class="content-header">
+        <div class="container-fluid">
+
+        <!-- Faculty -->
+
+        <!-- Unit Head -->
+        {% block unit_head_pending_approvals %} {% endblock %}
+        {% block unit_head_role_assignment %} {% endblock %}
+        {% block unit_head_faculty_list %} {% endblock %}
+        {% block unit_head_dashboard %} {% endblock %}
+
+        <!-- Clerk -->
+        
+          
+        </div><!-- /.container-fluid -->
+      </section>
+
+
+    </div>
+    <!-- /.content-wrapper -->
+
+
+
+
+  </div>
+
+ 
+
+
+   <script src="{{ url_for('static', filename='plugins/jquery/jquery.min.js') }}"></script>
+   <script src="{{ url_for('static', filename='js/jquery.formset.js') }}"></script>
+   <script src="{{ url_for('static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+   <script src="{{ url_for('static', filename='plugins/toastr/toastr.min.js') }}"></script>
+   <script src="{{ url_for('static', filename='plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+   
+   <script src="{{ url_for('static', filename='js/demo.js') }}"></script>
+
+<!-- <script type='text/javascript'>
+
+(function (global, factory) {
+typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+typeof define === 'function' && define.amd ? define(['exports'], factory) :
+(global = global || self, factory(global.adminlte = {}));
+}(this, (function (exports) { 'use strict';
+
+
+  var Treeview = function ($) {
+    /**
+     * Constants
+     * ====================================================
+     */
+    var NAME = 'Treeview';
+    var DATA_KEY = 'lte.treeview';
+    var EVENT_KEY = "." + DATA_KEY;
+    var JQUERY_NO_CONFLICT = $.fn[NAME];
+    var Event = {
+      SELECTED: "selected" + EVENT_KEY,
+      EXPANDED: "expanded" + EVENT_KEY,
+      COLLAPSED: "collapsed" + EVENT_KEY,
+      LOAD_DATA_API: "load" + EVENT_KEY
+    };
+    var Selector = {
+      LI: '.nav-item',
+      LINK: '.nav-link',
+      TREEVIEW_MENU: '.nav-treeview',
+      OPEN: '.menu-open',
+      DATA_WIDGET: '[data-widget="treeview"]'
+    };
+    var ClassName = {
+      LI: 'nav-item',
+      LINK: 'nav-link',
+      TREEVIEW_MENU: 'nav-treeview',
+      OPEN: 'menu-open',
+      SIDEBAR_COLLAPSED: 'sidebar-collapse'
+    };
+    var Default = {
+      trigger: Selector.DATA_WIDGET + " " + Selector.LINK,
+      animationSpeed: 300,
+      accordion: true,
+      expandSidebar: false,
+      sidebarButtonSelector: '[data-widget="pushmenu"]'
+    };
+    /**
+     * Class Definition
+     * ====================================================
+     */
+
+    var Treeview = /*#__PURE__*/function () {
+      function Treeview(element, config) {
+        this._config = config;
+        this._element = element;
+      } // Public
+
+
+      var _proto = Treeview.prototype;
+
+      _proto.init = function init() {
+        this._setupListeners();
+      };
+
+      _proto.expand = function expand(treeviewMenu, parentLi) {
+        var _this = this;
+
+        var expandedEvent = $.Event(Event.EXPANDED);
+
+        if (this._config.accordion) {
+          var openMenuLi = parentLi.siblings(Selector.OPEN).first();
+          var openTreeview = openMenuLi.find(Selector.TREEVIEW_MENU).first();
+          this.collapse(openTreeview, openMenuLi);
+        }
+
+        treeviewMenu.stop().slideDown(this._config.animationSpeed, function () {
+          parentLi.addClass(ClassName.OPEN);
+          $(_this._element).trigger(expandedEvent);
+        });
+
+        if (this._config.expandSidebar) {
+          this._expandSidebar();
+        }
+      };
+
+      _proto.collapse = function collapse(treeviewMenu, parentLi) {
+        var _this2 = this;
+
+        var collapsedEvent = $.Event(Event.COLLAPSED);
+        treeviewMenu.stop().slideUp(this._config.animationSpeed, function () {
+          parentLi.removeClass(ClassName.OPEN);
+          $(_this2._element).trigger(collapsedEvent);
+          treeviewMenu.find(Selector.OPEN + " > " + Selector.TREEVIEW_MENU).slideUp();
+          treeviewMenu.find(Selector.OPEN).removeClass(ClassName.OPEN);
+        });
+      };
+
+      _proto.toggle = function toggle(event) {
+        var $relativeTarget = $(event.currentTarget);
+        var $parent = $relativeTarget.parent();
+        var treeviewMenu = $parent.find('> ' + Selector.TREEVIEW_MENU);
+
+        if (!treeviewMenu.is(Selector.TREEVIEW_MENU)) {
+          if (!$parent.is(Selector.LI)) {
+            treeviewMenu = $parent.parent().find('> ' + Selector.TREEVIEW_MENU);
+          }
+
+          if (!treeviewMenu.is(Selector.TREEVIEW_MENU)) {
+            return;
+          }
+        }
+
+        event.preventDefault();
+        var parentLi = $relativeTarget.parents(Selector.LI).first();
+        var isOpen = parentLi.hasClass(ClassName.OPEN);
+
+        if (isOpen) {
+          this.collapse($(treeviewMenu), parentLi);
+        } else {
+          this.expand($(treeviewMenu), parentLi);
+        }
+      } // Private
+      ;
+
+      _proto._setupListeners = function _setupListeners() {
+        var _this3 = this;
+
+        $(document).on('click', this._config.trigger, function (event) {
+          _this3.toggle(event);
+        });
+      };
+
+      _proto._expandSidebar = function _expandSidebar() {
+        if ($('body').hasClass(ClassName.SIDEBAR_COLLAPSED)) {
+          $(this._config.sidebarButtonSelector).PushMenu('expand');
+        }
+      } // Static
+      ;
+
+      Treeview._jQueryInterface = function _jQueryInterface(config) {
+        return this.each(function () {
+          var data = $(this).data(DATA_KEY);
+
+          var _options = $.extend({}, Default, $(this).data());
+
+          if (!data) {
+            data = new Treeview($(this), _options);
+            $(this).data(DATA_KEY, data);
+          }
+
+          if (config === 'init') {
+            data[config]();
+          }
+        });
+      };
+
+      return Treeview;
+    }();
+    /**
+     * Data API
+     * ====================================================
+     */
+
+
+    $(window).on(Event.LOAD_DATA_API, function () {
+      $(Selector.DATA_WIDGET).each(function () {
+        Treeview._jQueryInterface.call($(this), 'init');
+      });
+    });
+    /**
+     * jQuery API
+     * ====================================================
+     */
+
+    $.fn[NAME] = Treeview._jQueryInterface;
+    $.fn[NAME].Constructor = Treeview;
+
+    $.fn[NAME].noConflict = function () {
+      $.fn[NAME] = JQUERY_NO_CONFLICT;
+      return Treeview._jQueryInterface;
+    };
+
+    return Treeview;
+  }(jQuery);
+
+})));
+
+
+</script> -->
+
+<script src="{{ url_for('static', filename='js/adminlte.js') }}"></script>
+</body>
+
+</html>
