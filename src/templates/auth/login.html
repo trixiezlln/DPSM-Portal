@@ -19,8 +19,9 @@
             <div class="col-12 col-xl-6">
                 <div class="red-box">
                     <div class="login-msg">
-                        To exercise and safeguard academic freedom and uphold your right to quality education, the University of the Philippines needs to process your personal and sensitive personal information—that is, information that identifies you as an individual.                    </div>
-                    <a class="btn p-0 google-btn" role="button" href="/login"></a>
+                        To exercise and safeguard academic freedom and uphold your right to quality education, the University of the Philippines needs to process your personal and sensitive personal information—that is, information that identifies you as an individual.                    
+                    </div>
+                    <a class="btn p-0 google-btn" role="button" href="/google_sign_in"></a>
 
                     </div>
                 </div>
@@ -30,5 +31,19 @@
     </div>
 </main>
 
+<script>
+    function sign_in(){
+        console.log('tite')
+        $.ajax({
+            type: "GET",
+            url: "/google_sign_in",
+            success: function(response){
+            },
+            error: function(response){
+            },
+            contentType: 'application/json'
+        });
+    }
+</script>
 
 {% endblock %}

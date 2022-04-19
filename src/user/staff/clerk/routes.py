@@ -22,7 +22,7 @@ clerk_blueprint = Blueprint('clerk_blueprint', __name__)
 
 @login_manager.user_loader
 def load_user(user_id):
-	return UserCredentials.query.get(int(user_id))
+	return UserCredentials.query.get(user_id)
 
 @clerk_blueprint.route('/clerk/create_faculty_account', methods=['GET', 'POST'])
 def create_faculty_account():
@@ -84,35 +84,28 @@ def create_faculty_account():
 @clerk_blueprint.route('/clerk/faculty_list', methods=['GET'])
 def clerk_faculty_list():
 
-    """
     try:
         faculty_list = []
         faculty_records = FacultyPersonalInformation.query.all()
 
         for record in faculty_records:
             if record.middle_name is None:
-                faculty_name = '%s %s'.format(record.first_name, record.last_name)
+                faculty_name = "{} {}".format(record.first_name, record.last_name)
             else:
-                faculty_name = '%s %s %s'.format(record.first_name, record.middle_name, record.last_name)
-            info_dict = {
-                'faculty_name' : faculty_name,
-                'rank' : record.rank,
-                'classification' : record.classification,
-                'tenure' : record.tenure,
-                'status': record.status
-            }
+                faculty_name = "{} {} {}".format(record.first_name, record.middle_name, record.last_name)
+            info_dict = record.__dict__
+            info_dict['faculty_name'] = faculty_name
             faculty_list.append(info_dict)
         
-        return faculty_list, 200
-        #return render_template(
-        # '.html',
-        # faculty_list
-        # )
+        #return faculty_list, 200
+        return render_template(
+        'clerk/faculty_list.html',
+        faculty_list = faculty_list
+        )
     except Exception as e:
         print(e)
         return 'An error has occured.', 500
-    """
-    return render_template('clerk/faculty_list.html')
+    # return render_template('clerk/faculty_list.html')
 
 @clerk_blueprint.route('/clerk/faculty_service_record', methods=['GET'])
 def clerk_faculty_service_record():

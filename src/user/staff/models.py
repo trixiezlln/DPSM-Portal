@@ -43,7 +43,7 @@ class EducationalAttainment(UserMixin, db.Model):
         'extend_existing': True
     }
     __tablename__ = 'educational_attainment'
-    user_id = db.Column(db.String(180), primary_key=True, nullable=True)
+    user_id = db.Column(db.String(180), nullable=True)
     school = db.Column(db.String(180), nullable=True)
     degree = db.Column(db.String(180), nullable=True)
     specialization = db.Column(db.String(180), nullable=True)
@@ -51,4 +51,5 @@ class EducationalAttainment(UserMixin, db.Model):
     start_date = db.Column(DATE, nullable=True)
     end_date = db.Column(DATE, nullable=True)
     last_modified = db.Column(TIMESTAMP, nullable=True)
+    id = db.Column(db.String(180), primary_key=True, nullable=True) 
 

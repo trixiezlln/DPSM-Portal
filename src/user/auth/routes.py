@@ -49,11 +49,12 @@ auth_blueprint = Blueprint('auth_blueprint', __name__)
 login_manager.login_view = 'auth_blueprint.google_sign_in_callback'
 @login_manager.user_loader
 def load_user(user_id):
-	return UserCredentials.query.get(int(user_id))
+	return UserCredentials.query.get(user_id)
 
 @auth_blueprint.route('/', methods=['GET'])
 def index():
-	return 'App Successfully Initialized.', 200
+    return render_template('auth/login.html')
+	#return 'App Successfully Initialized.', 200
 
 @auth_blueprint.route('/google_sign_in', methods=['GET'])
 def google_sign_in():
@@ -91,15 +92,11 @@ def google_sign_in_callback():
 
         if user is not None:
             login_user(user)
-            # if user.is_admin == False:
-            #     return redirect('/user-dashboard')
-            # else:
-            #     return redirect('/admin-dashboard')
+            if user.role == 'clerk':
+                return redirect('/clerk/faculty_list')
         else:
-            return "Faculty Account Does not Exist in Database. If you think this is a mistake, please contact the administrator"
+            return "Faculty Account Does not Exist in Database. If you think this is a mistake, please contact the administrator."
         
-        if 'Calangian' in session["name"]:
-            session["name"] = session["name"] + ' De Guzman'
         return json.dumps({ 
             'status' : 'Google Sign In Successful',
             'name' : session["name"],
