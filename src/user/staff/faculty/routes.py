@@ -15,11 +15,12 @@ import pip._vendor.cachecontrol as cacheControl
 import json
 
 #Models
-from ..models import EducationalAttainment, FacultyPersonalInformation
+from ..models import WorkExperience, EducationalAttainment, FacultyPersonalInformation
 from ...auth.models import UserCredentials
 
 #External Functions
 from .functions.generate_educational_attaintment_id import generate_educational_attainment_id
+from .functions.generate_work_experience_id import generate_work_experience_id
 
 faculty_blueprint = Blueprint('faculty_blueprint', __name__)
 
@@ -83,4 +84,34 @@ def update_educational_attainment(id):
             return 'Educational Attainment Record Successfully Updated.', 200
     except Exception as e:
         print(e)
-        return 'An error has occured.', 500
+        return 'An error has occured.', 
+
+@faculty_blueprint.route('/faculty/add_work_experience', methods=['GET', 'POST'])
+def add_work_experience():
+    try:
+        if request.method == 'GET':
+            #pass
+            return render_template('faculty/add_info.html')
+        elif request.method == 'POST':
+            work_experience_form = request.form
+            work_experience_record = None
+            while work_experience_record is None:
+                id = generate_work_experience_id()
+                new_record = WorkExperience(
+                    id                  = id,
+                    user_id             = current_user.user_id,
+                    location            = work_experience_form['location'],
+                    name_employer       = work_experience_form['name_employer'],
+                    title               = work_experience_form['title'],
+                    description         = work_experience_form['description'],
+                    start_date          = work_experience_form['start_date'],
+                    end_date            = work_experience_form['end_date'],
+                    last_modified       = date.today()
+                )
+                db.session.add(new_record)
+                db.session.commit()
+                work_experience_record = WorkExperience.query.filter_by(id=id).first()
+            return 'Work Experience Record Successfully Added.', 200
+    except Exception as e:
+        print(e)
+        return e, 500

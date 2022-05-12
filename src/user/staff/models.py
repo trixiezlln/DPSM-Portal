@@ -53,3 +53,18 @@ class EducationalAttainment(UserMixin, db.Model):
     last_modified = db.Column(TIMESTAMP, nullable=True)
     id = db.Column(db.String(180), primary_key=True, nullable=True) 
 
+class WorkExperience(UserMixin, db.Model):
+    __table_args__ = {
+        'schema' : schema, 
+        'extend_existing': True
+    }
+    __tablename__ = 'work_experience'
+    user_id = db.Column(db.String(180), nullable=True)
+    name_employer = db.Column(db.String(180), nullable=True)
+    title = db.Column(db.String(180), nullable=True)
+    description = db.Column(db.String(180), nullable=True)
+    location = db.Column(db.String(180), nullable=True)
+    start_date = db.Column(DATE, nullable=True)
+    end_date = db.Column(DATE, nullable=True)
+    last_modified = db.Column(TIMESTAMP, nullable=True)
+    id = db.Column(db.String(180), primary_key=True, nullable=True) 
