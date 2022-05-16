@@ -9,6 +9,13 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+    <style>
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #014421;
+            color: #ffffff;
+        }
+    </style>
+
 </head>
 
 <section>
@@ -46,7 +53,10 @@
                         <div class="card">
                             <div id="headingOne">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="width: 100%; font-size: 0.8em;">Personal Information</button>
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="width: 100%; font-size: 0.8em;">
+                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        Personal Information
+                                    </button>
                                 </h5>
                             </div>
 
@@ -55,8 +65,8 @@
                                     {% block unit_head_personal_information %} 
                                     {% endblock %}  
                                     <div class="modal-footer">
-                                        <button type="button" class="btn" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +75,10 @@
                         <div class="card">
                             <div id="headingTwo">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="width: 100%; font-size: 0.8em;">Educational Attainment</button>
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="width: 100%; font-size: 0.8em;">
+                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        Educational Attainment
+                                    </button>
                                 </h5>
                             </div>
 
@@ -74,8 +87,8 @@
                                     {% block unit_head_educational_attainment %} 
                                     {% endblock %} 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
                                     </div> 
                                 </div>
                             </div>
@@ -84,7 +97,10 @@
                         <div class="card">
                             <div id="headingThree">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%; font-size: 0.8em;">Work Experience</button>
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%; font-size: 0.8em;">
+                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        Work Experience
+                                    </button>
                                 </h5>
                             </div>
 
@@ -93,8 +109,8 @@
                                     {% block unit_head_work_experience %} 
                                     {% endblock %} 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +119,10 @@
                         <div class="card">
                             <div id="headingFour">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="width: 100%; font-size: 0.8em;">Accomplishments</button>
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="width: 100%; font-size: 0.8em;">
+                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        Accomplishments
+                                    </button>
                                 </h5>
                             </div>
 
@@ -112,8 +131,8 @@
                                     {% block unit_head_accomplishments %} 
                                     {% endblock %} 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +141,10 @@
                         <div class="card">
                             <div id="headingFive">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="width: 100%; font-size: 0.8em;">Publications</button>
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="width: 100%; font-size: 0.8em;">
+                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        Publications
+                                    </button>
                                 </h5>
                             </div>
 
@@ -131,8 +153,8 @@
                                     {% block unit_head_publications %} 
                                     {% endblock %} 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +163,10 @@
                         <div class="card">
                             <div id="headingSix">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix" style="width: 100%; font-size: 0.8em;">Research Grants</button>
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix" style="width: 100%; font-size: 0.8em;">
+                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        Research Grants
+                                    </button>
                                 </h5>
                             </div>
 
@@ -150,8 +175,8 @@
                                     {% block unit_head_research_grants %} 
                                     {% endblock %}
                                     <div class="modal-footer">
-                                        <button type="button" class="btn" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
                                     </div>
                                 </div>
                             </div>
@@ -160,7 +185,10 @@
                         <div class="card">
                             <div id="headingSeven">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven" style="width: 100%; font-size: 0.8em;">Licensure Exam</button>
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven" style="width: 100%; font-size: 0.8em;">
+                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        Licensure Exam
+                                    </button>
                                 </h5>
                             </div>
 
@@ -169,8 +197,8 @@
                                     {% block unit_head_licensure_exams %} 
                                     {% endblock %}
                                     <div class="modal-footer">
-                                        <button type="button" class="btn" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +207,10 @@
                         <div class="card">
                             <div id="headingEight">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight" style="width: 100%; font-size: 0.8em;">Trainings/Seminars</button>
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight" style="width: 100%; font-size: 0.8em;">
+                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        Trainings/Seminars
+                                    </button>
                                 </h5>
                             </div>
 
@@ -188,8 +219,8 @@
                                     {% block unit_head_trainings_seminars %} 
                                     {% endblock %}
                                     <div class="modal-footer">
-                                        <button type="button" class="btn" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
                                     </div>
                                 </div>
                             </div>
@@ -205,7 +236,7 @@
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#7B1113; color: #ffffff;">
-                    Reject 
+                    Reject faculty change
                 </div>
                 <div class="modal-body">
                     Are you sure you want to reject this change?
@@ -214,29 +245,33 @@
                     <input type="text" name="reject" id="reject" style="width: 100%;">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn" style="color: #ffffff; background-color: #014421; font-size: 0.7vw;">Yes, reject</button>
-                    <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113; font-size: 0.7vw;">No, don't reject</button>
+                    <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" data-dismiss="modal" style="color: #ffffff; background-color: #014421; font-size: 0.7vw;">Yes, reject</button>
+                    <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113; font-size: 0.7vw;">No, don't reject</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade bd-example-modal-sm_approve" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-sm_approve" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal_approve">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#7B1113; color: #ffffff;">
-                    Approve 
+                    Approve faculty change
                 </div>
                 <div class="modal-body">
                     Are you sure you want to approve this change?
                     <br>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn" style="color: #ffffff; background-color: #014421; font-size: 0.7vw;">Yes, approve</button>
-                    <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113; font-size: 0.7vw">No, don't approve</button>
+                    <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" data-dismiss="modal" style="color: #ffffff; background-color: #014421; font-size: 0.7vw;">Yes, approve</button>
+                    <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113; font-size: 0.7vw">No, don't approve</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        $('.change_info:empty').remove();
+    </script>
 </section>
 {% endblock %}
