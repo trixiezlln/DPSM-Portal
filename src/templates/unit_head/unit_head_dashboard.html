@@ -326,4 +326,42 @@ $(document).ready(function(){
     }
 </script>
 
+<script>
+    var minDate, maxDate;
+ 
+    $.fn.dataTable.ext.search.push(
+        function( settings, data, dataIndex ) {
+            var min = minDate.val();
+            var max = maxDate.val();
+            var from_date = new Date( data[2] );
+            var to_date = new Date( data[3] );
+     
+            if (
+                ( min <= to_date   && from_date <= max )
+            ) {
+                return true;
+            }
+            return false;
+        }
+    );
+     
+    $(document).ready(function() {
+        // Create date inputs
+        minDate = new DateTime($('#min'), {
+            format: 'YYYY MM Do'
+        });
+        maxDate = new DateTime($('#max'), {
+            format: 'YYYY MM Do'
+        });
+     
+        // DataTables initialisation
+        var table = $('#myTable').DataTable();
+     
+        // Refilter the table
+        $('#filter').on('click', function () {
+            table.draw();
+        });
+    });
+</script>
+
 {% endblock %}
