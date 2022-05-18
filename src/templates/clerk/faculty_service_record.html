@@ -23,8 +23,8 @@
                 <td id="semester_row{{outer_loop.index}}_{{loop.index}}">{{record['semester']}}</td>
                 <td id="schedule_row{{outer_loop.index}}_{{loop.index}}">{{record['schedule']}}</td>
                 <td id="number_of_students_row{{outer_loop.index}}_{{loop.index}}">{{record['number_students']}}</td>
-                <td id="syllabus_row{{outer_loop.index}}_{{loop.index}}">Button Here</td>
-                <td id="set_row{{outer_loop.index}}_{{loop.index}}">{{record['fsr_score']}}</td>
+                <td id="syllabus_row{{outer_loop.index}}_{{loop.index}}"><input type="file" id="upload_syllabus"></td>
+                <td id="set_row{{outer_loop.index}}_{{loop.index}}">{{record['fsr_score']}}<br><input type="file" id="upload_proof_set"></td>
                 <td id="action_button_row{{outer_loop.index}}_{{loop.index}}">
                     <button class="btn btn-primary crud-btn" id="edit_button{{outer_loop.index}}_{{loop.index}}" style="margin-right: 20px;" onclick="edit_row('{{outer_loop.index}}_{{loop.index}}')">Edit</button>
                     <button class="btn btn-primary crud-btn" id="save_button{{outer_loop.index}}_{{loop.index}}" style="margin-right: 20px; display:none;" onclick="save_row('{{outer_loop.index}}_{{loop.index}}', {{record['id']}})">Save</button>
@@ -53,14 +53,14 @@
                     <option value="Mid Year">Mid Year</option>
                 </select>
             </div>
-            <div class="col-12 col-lg-2 custom-col-1 mb-3">
+            <div class="col-12 col-lg-1 custom-col-1 mb-3" style="padding-left: 2px;">
                 <input class="form-control" type="text" id="new_schedule" placeholder="Schedule" required>
             </div>
             <div class="col-12 col-lg-2 custom-col-1 mb-3">
                 <input class="form-control" type="text"  id="new_number_students" placeholder="No. of Students" required>
             </div>
-            <div class="col-12 col-lg-2 custom-col-1 mb-3">
-                <input class="form-control" type="text"  id="new_syllabus" placeholder="Syllabus" required>
+            <div class="col-12 col-lg-2 custom-col-1 mb-3" style="margin-right:12px;">
+                <input type="file" id="new_syllabus">
             </div>
             <div class="col-12 col-lg-1 custom-col-1 mb-3">
                 <input class="form-control" type="text"  id="new_set" placeholder="SET" required>
