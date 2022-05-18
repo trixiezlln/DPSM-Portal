@@ -16,6 +16,7 @@ import json
 
 #Models
 from ..models import FacultyPersonalInformation
+from ..models import FacultySETRecords
 from ...auth.models import UserCredentials
 
 clerk_blueprint = Blueprint('clerk_blueprint', __name__)
@@ -24,6 +25,7 @@ clerk_blueprint = Blueprint('clerk_blueprint', __name__)
 def load_user(user_id):
     print('tangina')
     return UserCredentials.query.get(user_id)
+
 import time
 @clerk_blueprint.route('/clerk/create_faculty_account', methods=['GET', 'POST'])
 def create_faculty_account():
@@ -100,20 +102,81 @@ def clerk_faculty_list():
         
         #return faculty_list, 200
         return render_template(
-        'clerk/faculty_list.html',
-        faculty_list = faculty_list
+            'clerk/faculty_list.html',
+            faculty_list = faculty_list
         )
     except Exception as e:
         print(e)
         return 'An error has occured.', 500
     # return render_template('clerk/faculty_list.html')
 
-@clerk_blueprint.route('/clerk/faculty_service_record', methods=['GET'])
-def clerk_faculty_service_record():
-    return render_template('clerk/faculty_service_record.html')
+@clerk_blueprint.route('/clerk/edit_information', methods=['POST'])
+def clerk_edit_information():
+    try:
+        edit_form = request.form 
+
+        faculty_information = FacultyPersonalInformation.query.filter_by(user_id=edit_form['user_id']).first()
+        print(faculty_information.__dict__)
+        faculty_information.rank = edit_form['faculty_rank']
+        faculty_information.classification = edit_form['faculty_classification']
+        faculty_information.tenure = edit_form['faculty_tenure']
+        faculty_information.status = edit_form['faculty_status']
+        print(faculty_information.__dict__)
+        db.session.commit()
+
+        return 'Faculty record successfully edited.'
+    except Exception as e:
+        print(e)
+        return 'An error has occured.', 500
+    # return render_template('clerk/faculty_list.html')
+
+from pprint import pprint
+@clerk_blueprint.route('/clerk/faculty_service_record/<user_id>', methods=['GET', 'PUT'])
+def clerk_faculty_service_record(user_id):
+    if request.method == 'GET':
+        fsr_set_record = FacultySETRecords.query.filter_by(id=user_id).all()
+        faculty_info = FacultyPersonalInformation.query.filter_by(user_id=user_id).first()
+
+        if faculty_info.middle_name is None:
+            faculty_name = "{} {}".format(faculty_info.first_name, faculty_info.last_name)
+        else:
+            faculty_name = "{} {} {}".format(faculty_info.first_name, faculty_info.middle_name, faculty_info.last_name)
 
 
-@clerk_blueprint.app_context_processor
-def inject():
-    print(current_user.__dict__)
-    return current_user.__dict__
+        fsr_dict = {} # Keys = initial school year, Value = list of records within that year
+
+        for record in fsr_set_record:
+            if record.sy in fsr_dict:
+                fsr_dict[record.sy].append(record.__dict__)
+            else:
+                fsr_dict[record.sy] = [record.__dict__]
+
+        pprint(fsr_dict)
+
+        return render_template(
+            'clerk/faculty_service_record.html', 
+            fsr_set_record = fsr_set_record,
+            fsr_dict = fsr_dict,
+            faculty_name = faculty_name
+        )
+    elif request.method == 'PUT':
+        fsr_set_record = FacultySETRecords.query.filter_by(id=id).first()
+        fsr_set_form = request.form
+
+        fsr_set_record.course_code = fsr_set_form['name_exam'],
+        fsr_set_record.section = fsr_set_form['section'],
+        fsr_set_record.semester = fsr_set_form['semester'],
+        fsr_set_record.sy = fsr_set_form['sy'],
+        fsr_set_record.numbeer_students = fsr_set_form['number_students'],
+        # fsr_set_record.course_code = fsr_set_form['name_exam'],
+        # licensure_record.file = licensure_form['upload_file'],
+        fsr_set_record.last_modified = date.today()
+        db.session.commit()
+
+        return 'FSR and SET Record Successfully Updated.', 200
+
+
+# @clerk_blueprint.app_context_processor
+# def inject():
+#     print(current_user.__dict__)
+#     return current_user.__dict__
