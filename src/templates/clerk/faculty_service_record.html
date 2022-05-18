@@ -37,16 +37,18 @@
 <div class="col-12">
     <hr>
     <h5>Add Faculty Load</h5>
+    <form id='add_fsr' name='add_fsr' method='POST'></form>
     <div class="col col-12 container">
         <div class="row">
             <div class="col-12 col-lg-2 custom-col-1 mb-3">
-                <input class="form-control" type="text"  id="new_course_code" placeholder="Course Code" required>
+                <input class="form-control" type="text"  id="new_course_code" name="new_course_code" placeholder="Course Code"  form='add_fsr'>
             </div>
             <div class="col-12 col-lg-1 custom-col-1 mb-3">
-                <input class="form-control" type="text" id="new_section" placeholder="Section" >
+                <input class="form-control" type="text" id="new_section" name="new_section" placeholder="Section" form='add_fsr'>
+                <input class="form-control" type="text" id="user_id" name="user_id" placeholder="Section" value='{{user_id}}' form='add_fsr' hidden>
             </div>
             <div class="col-12 col-lg-2 custom-col-1 mb-3">
-                <select class="form-control semester" id="new_semester" required>
+                <select class="form-control semester" id="new_semester" name="new_semester"  form='add_fsr'>
                     <option selected value="">Semester</option>
                     <option value="1st Semester">1st Semester</option>
                     <option value="2nd Semester">2nd Semester</option>
@@ -54,23 +56,50 @@
                 </select>
             </div>
             <div class="col-12 col-lg-1 custom-col-1 mb-3" style="padding-left: 2px;">
-                <input class="form-control" type="text" id="new_schedule" placeholder="Schedule" required>
+                <input class="form-control" type="text" id="new_schedule" name="new_schedule" placeholder="Schedule"  form='add_fsr'>
             </div>
             <div class="col-12 col-lg-2 custom-col-1 mb-3">
-                <input class="form-control" type="text"  id="new_number_students" placeholder="No. of Students" required>
+                <input class="form-control" type="text"  id="new_number_students" name="new_number_students" placeholder="No. of Students"  form='add_fsr'>
+            </div>
+            <div class="col-12 col-lg-2 custom-col-1 mb-3">
+                <select class="sy-select form-select form-control sy" aria-label="" id="new_sy" name="new_sy" data-field="sy" form='add_fsr'>
+                    <option value="2010 - 2011">2010 - 2011</option>
+                    <option value="2011 - 2012">2011 - 2012</option>
+                    <option value="2012 - 2013">2012 - 2013</option>
+                    <option value="2013 - 2014">2013 - 2014</option>
+                    <option value="2014 - 2015">2014 - 2015</option>
+                    <option value="2015 - 2016">2015 - 2016</option>
+                    <option value="2016 - 2017">2016 - 2017</option>
+                    <option value="2017 - 2018">2017 - 2018</option>
+                    <option value="2018 - 2019">2018 - 2019</option>
+                    <option value="2019 - 2020">2019 - 2020</option>
+                    <option value="2020 - 2021">2020 - 2021</option>
+                    <option value="2021 - 2022">2021 - 2022</option>
+                    <option value="2022 - 2023">2022 - 2023</option>
+                    <option value="2023 - 2024">2023 - 2024</option>
+                    <option value="2024 - 2025">2024 - 2025</option>
+                    <option value="2025 - 2026">2025 - 2026</option>
+                    <option value="2026 - 2027">2026 - 2027</option>
+                    <option value="2027 - 2028">2027 - 2028</option>
+                    <option value="2028 - 2029">2028 - 2029</option>
+                    <option value="2029 - 2030">2029 - 2030</option>
+                </select>
             </div>
             <div class="col-12 col-lg-2 custom-col-1 mb-3" style="margin-right:12px;">
-                <input type="file" id="new_syllabus">
+                <input type="file" id="new_syllabus" name="new_syllabus" form='add_fsr'>
+            </div>
+            <div class="col-12 col-lg-2 custom-col-1 mb-3" style="margin-right:12px;">
+                <input type="file" id="new_set_proof" name="new_set_proof" form='add_fsr'>
             </div>
             <div class="col-12 col-lg-1 custom-col-1 mb-3">
-                <input class="form-control" type="text"  id="new_set" placeholder="SET" required>
+                <input class="form-control" type="text"  id="new_set" name="new_set" placeholder="SET"  form='add_fsr'>
             </div>
         </div>
     </div>
 </div>
 
 <div class="d-flex justify-content-end mt-2 mr-3">
-    <button class="btn btn-primary crud-btn" onclick="add_row();">Add</button> 
+    <button type='submit' class="btn btn-primary crud-btn" onclick="add_row();" form='add_fsr'>Add</button> 
 </div>
 
 <style>

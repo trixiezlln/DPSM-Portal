@@ -90,6 +90,7 @@ function save_faculty_edit(rank_val, classification_val, tenure_val, status_val,
     });
 }
 
+/* CLERK EDIT FSR VALUES */
 function edit_fsr(
     course_code_val,
     section_val,
@@ -148,3 +149,47 @@ function edit_fsr(
         datatype: "multipart/form-data"
     });
 }
+
+/* CLERK ADD FACULTY RECORD */
+$("#add_fsr").submit(function(e) {
+    e.preventDefault();
+    var fsrData = new FormData(document.getElementById("add_fsr"));
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    $.ajax({
+        type: "POST",
+        url: "/clerk/faculty_service_record/"+fsrData.get('user_id'),
+        processData: false,
+        contentType: false,
+        data: fsrData,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }) 
+        },
+        error: function(error){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+
+})
