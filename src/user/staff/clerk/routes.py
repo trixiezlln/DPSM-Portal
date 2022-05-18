@@ -213,12 +213,23 @@ def clerk_faculty_service_record(user_id):
                 _, syllabus_f_ext = os.path.splitext(new_syllabus.filename)
                 _, set_proof_f_ext = os.path.splitext(new_set_proof.filename)
                 
-
                 syllabus_img = Image.open(new_syllabus)
                 set_proof_image = Image.open(new_set_proof)
 
-                syllabus_filename = '{}_{}_{}_{}.{}'.format('FSR_SYLLABUS', fsr_form['new_sy'], fsr_form['new_semester'], fsr_form['new_section'], syllabus_f_ext)
-                set_proof_filename = '{}_{}_{}_{}.{}'.format('FSR_SET_PROOF', fsr_form['new_sy'], fsr_form['new_semester'], fsr_form['new_section'], set_proof_f_ext)
+                syllabus_filename = '{}_{}_{}_{}.{}'.format(
+                    'FSR_SYLLABUS', 
+                    fsr_form['new_sy'], 
+                    fsr_form['new_semester'], 
+                    fsr_form['new_section'], 
+                    syllabus_f_ext
+                )
+                set_proof_filename = '{}_{}_{}_{}.{}'.format(
+                    'FSR_SET_PROOF', 
+                    fsr_form['new_sy'], 
+                    fsr_form['new_semester'], 
+                    fsr_form['new_section'], 
+                    set_proof_f_ext
+                )
 
                 SYLLABUS_PATH = os.path.join(CURR_FSR_SYLLABUS_DIR, syllabus_filename)
                 SET_PROOF_PATH = os.path.join(CURR_FSR_IMGS_DIR, set_proof_filename)
