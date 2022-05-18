@@ -116,8 +116,9 @@
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column"
               data-widget="treeview" role="menu" data-accordion="false">
-              <li class="nav-item">
-                <a href="landing.html" class="nav-link">
+
+              <li class="nav-item" data-toggle="collapse" href="#collapseExample">
+                <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-graduation-cap"></i>
                   <p>
                     Basic Information
@@ -125,142 +126,95 @@
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-graduation-cap"></i>
-                  <p>
-                    Personal Information
-                  </p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-graduation-cap"></i>
-                  <p>
-                    Educational Attainment
-                  </p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-graduation-cap"></i>
-                  <p>
-                    Work Experience
-                  </p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-graduation-cap"></i>
-                  <p>
-                    Accomplishment
-                  </p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-graduation-cap"></i>
-                  <p>
-                    Publication
-                  </p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-graduation-cap"></i>
-                  <p>
-                    Research Grant
-                  </p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-graduation-cap"></i>
-                  <p>
-                    Licensure Exam
-                  </p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-graduation-cap"></i>
-                  <p>
-                    Training/Seminar
-                  </p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-graduation-cap"></i>
-                  <p>
-                    FSR and SET
-                  </p>
-                </a>
-              </li>
-              
-              <!-- <li class="nav-header">Others</li>
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-copy"></i>
-                  <p>
-                    Management
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
+              <div class="collapse" id="collapseExample" style="padding-left: 7%;">
+                <ul class="nav nav-pills nav-sidebar flex-column"
+                  data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Basic Information Dropdown -->
                   <li class="nav-item">
                     <a href="#" class="nav-link">
-                      <i class="nav-icon fas fa-bars"></i>
+                      <i class="nav-icon fas fa-graduation-cap"></i>
                       <p>
-                        Sessions
+                        Personal Information
                       </p>
                     </a>
                   </li>
+
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="nav-icon fas fa-bars"></i>
+                    <a href="http://127.0.0.1:5000/faculty/add_educational_attainment" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
                       <p>
-                        Terms
-                        <i class="right"></i>
+                        Educational Attainment
                       </p>
                     </a>
                   </li>
+
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="nav-icon fas fa-bars"></i>
+                    <a href="http://127.0.0.1:5000/faculty/add_work_experience" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
                       <p>
-                        Subjects
+                        Work Experience
                       </p>
                     </a>
                   </li>
+
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="nav-icon fas fa-bars"></i>
+                    <a href="http://127.0.0.1:5000/faculty/add_accomplishment" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
                       <p>
-                        Classes
+                        Accomplishments
                       </p>
                     </a>
                   </li>
+
+                  <li class="nav-item">
+                    <a href="http://127.0.0.1:5000/faculty/add_publication" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
+                      <p>
+                        Publication
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="http://127.0.0.1:5000/faculty/add_research_grant" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
+                      <p>
+                        Research Grants
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="http://127.0.0.1:5000/faculty/add_licensure" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
+                      <p>
+                        Licensure Exam
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="http://127.0.0.1:5000/faculty/add_training" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
+                      <p>
+                        Trainings/Seminars
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="http://127.0.0.1:5000/faculty/add_fsr_set" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
+                      <p>
+                        FSR/SET
+                      </p>
+                    </a>
+                  </li>
+                  <!-- Basic Information Dropdown -->
                 </ul>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-cog"></i>
-                  <p>
-                    Settings
-                  </p>
-                </a>
-              </li> -->
-  
-  
+              </div>
+
+
             </ul>
           </nav>
           <!-- /.sidebar-menu -->
@@ -279,6 +233,7 @@
         {% block view_info %} {% endblock %}
         {% block add_info %} {% endblock %}
         {% block landing %} {% endblock %}
+        {% block add_educational %} {% endblock %}
         <!-- Unit Head -->
         
 
