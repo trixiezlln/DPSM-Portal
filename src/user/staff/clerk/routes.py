@@ -130,7 +130,7 @@ def clerk_edit_information():
         return 'An error has occured.', 500
     # return render_template('clerk/faculty_list.html')
 
-@clerk_blueprint.route('/clerk/faculty_service_record/<user_id>', methods=['GET', 'POST'])
+@clerk_blueprint.route('/clerk/faculty_service_record/<user_id>', methods=['GET', 'PUT'])
 def clerk_faculty_service_record(user_id):
     if request.method == 'GET':
         fsr_set_record = FacultySETRecords.query.filter_by(id=user_id).all()

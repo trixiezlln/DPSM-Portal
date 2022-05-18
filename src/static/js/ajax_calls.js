@@ -89,3 +89,62 @@ function save_faculty_edit(rank_val, classification_val, tenure_val, status_val,
         datatype: "multipart/form-data"
     });
 }
+
+function edit_fsr(
+    course_code_val,
+    section_val,
+    semester_val,
+    schedule_val,
+    number_of_students_val,
+    syllabus_val,
+    set_val,
+) {
+    alert('pasok')
+    var fsrData = new FormData();
+
+    facultyData.append('course_code_val', course_code_val);
+    facultyData.append('section_val', section_val);
+    facultyData.append('semester_val', semester_val);
+    facultyData.append('schedule_val', schedule_val);
+    facultyData.append('number_of_students_val', number_of_students_val);
+    facultyData.append('syllabus_val', syllabus_val);
+    facultyData.append('set_val', set_val);
+
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    $.ajax({
+        type: "PUT",
+        url: "/clerk/edit_information",
+        processData: false,
+        contentType: false,
+        data: facultyData,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }) 
+        },
+        error: function(error) {
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+}
