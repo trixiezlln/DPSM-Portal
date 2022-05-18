@@ -1,0 +1,415 @@
+{% extends "department_chair/department_chair_pending_approvals.html" %} 
+{% block department_chair_personal_information %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Faculty ID Number</label>
+            <p id="faculty_id_number"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-3">
+			<label class="col-form-label">Rank</label>
+            <p id="rank"></p>
+		</div>
+		<div class="col-sm-3">
+			<label class="col-form-label">Classification</label>
+            <p id="classification"></p>
+		</div>
+		<div class="col-sm-3">
+			<label class="col-form-label">Tenure</label>
+            <p id="tenure"></p>
+		</div>
+		<div class="col-sm-3">
+			<label class="col-form-label">Status</label>
+            <p id="status"></p>
+		</div>
+	</div>
+
+	<h6 class="info-subhead mt-1">Name</h6>
+	<div class="row">
+		
+		<div class="col-sm-3">
+			<label class="col-form-label">First Name</label>
+            <p id="first_name"></p>
+		</div>
+		<div class="col-sm-3">
+			<label class="col-form-label">Middle Name</label>
+            <p id="middle_name"></p>
+		</div>
+		<div class="col-sm-3">
+			<label class="col-form-label">Lastname</label>
+            <p id="last_name"></p>
+		</div>
+		<div class="col-sm-3">
+			<label class="col-form-label">Suffix</label>
+            <p id="suffix"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Present Address</label>
+            <p id="present_address"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Permanent Address</label>
+            <p id="permanent_address"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-3">
+			<label class="col-form-label">Date of Birth</label>
+            <p id="date_of_birth"></p>
+		</div>
+		<div class="col-sm-3">
+			<label class="col-form-label">Place of Birth</label>
+            <p id="place_of_birth"></p>
+		</div>
+		<div class="col-sm-3">
+			<label class="col-form-label">Religion</label>
+            <p id="religion"></p>
+		</div>
+		<div class="col-sm-3">
+			<label class="col-form-label">Civil Status</label>
+            <p id="civil_status"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-3">
+			<label class="col-form-label">Telephone Number</label>
+            <p id="landline"></p>
+		</div>
+		<div class="col-sm-3">
+			<label class="col-form-label">Mobile Number</label>
+            <p id="mobile_number"></p>
+		</div>
+		<div class="col-sm-3">
+			<label class="col-form-label">Primary Email (UP Mail Required)</label>
+            <p id="primary_email"></p>
+		</div>
+		<div class="col-sm-3">
+			<label class="col-form-label">Alternate Email</label>
+            <p id="alternate_email"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-6">
+			<label class="col-form-label">Name of Contact Person</label>
+            <p id="emergency_contact_person"></p>
+		</div>
+		<div class="col-sm-6">
+			<label class="col-form-label">Contact Number</label>
+            <p id="emergency_contact_number"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-4">
+			<label class="col-form-label">Name of Dependents</label>
+            <p id="dependent_name"></p>
+		</div>
+		<div class="col-sm-4">
+			<label class="col-form-label">Date of Birth</label>
+            <p id="dependent_birthdate"></p>
+		</div>
+		<div class="col-sm-4">
+			<label class="col-form-label">Relationship to user</label>
+            <p id="dependent_relationship"></p>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block department_chair_educational_attainment %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Name of School or Institution</label>
+            <p id="school"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Degree/Certification</label>
+            <p id="degree"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Type of Degree</label>
+            <p id="degree_type"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Major/Specialization</label>
+            <p id="specialization"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-6">
+			<label class="col-form-label">Start Date</label>
+            <p id="start_date"></p>
+		</div>
+		<div class="col-sm-6">
+			<label class="col-form-label">End Date</label>
+            <p id="end_date"></p>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block department_chair_work_experience %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Name of Employer</label>
+            <p id="name_employer"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Title/Position</label>
+            <p id="title"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Description</label>
+            <p id="description"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-6">
+			<label class="col-form-label">Start Date</label>
+            <p id="start_date"></p>
+		</div>
+		<div class="col-sm-6">
+			<label class="col-form-label">End Date</label>
+            <p id="end_date"></p>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block department_chair_accomplishments %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Position/Role</label>
+            <p id="position"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Organization</label>
+            <p id="organization"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Type of Contribution</label>
+            <p id="type_contribution"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Description</label>
+            <p id="description"></p>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block department_chair_publications %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Publication Name</label>
+            <p id="publication"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Citation</label>
+            <p id="citation"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">URL</label>
+            <p id="url"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-6">
+			<label class="col-form-label">DPSM Profs</label>
+            <p id="coauthors_dpsm"></p>
+		</div>
+		<div class="col-sm-6">
+			<label class="col-form-label">Non-DPSM Profs</label>
+            <p id="coauthors_nondpsm"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Publication Date</label>
+            <p id="date_published"></p>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block department_chair_research_grants %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Name of Research Project</label>
+            <p id="name_research"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Sponsor</label>
+            <p id="sponsor"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Amount Granted</label>
+            <p id="amount_granted"></p>
+		</div>
+	</div>
+
+	<h6>Projected Start and End Date</h6>
+
+	<div class="row">
+		<div class="col-sm-6">
+			<label class="col-form-label">Start Date</label>
+            <p id="projected_start"></p>
+		</div>
+		<div class="col-sm-6">
+			<label class="col-form-label">End Date</label>
+            <p id="projected_end"></p>
+		</div>
+	</div>
+
+	<h6>Actual Start and End Date</h6>
+
+	<div class="row">
+		<div class="col-sm-6">
+			<label class="col-form-label">Start Date</label>
+            <p id="actual_start"></p>
+		</div>
+		<div class="col-sm-6">
+			<label class="col-form-label">End Date</label>
+            <p id="actual_end"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Research Progress</label>
+            <p id="research_progress"></p>
+		</div>
+	</div>
+
+	<h6>Co-Authors</h6>
+	
+	<div class="row">
+		<div class="col-sm-6">
+			<label class="col-form-label">DPSM Profs</label>
+            <p id="coresearchers_dpsm"></p>
+		</div>
+		<div class="col-sm-6">
+			<label class="col-form-label">Non-DPSM Profs</label>
+            <p id="coresearchers_nondpsm"></p>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+
+{% block department_chair_licensure_exams %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Name of Exam</label>
+            <p id="name_exam"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-4">
+			<label class="col-form-label">Rank</label>
+            <p id="rank"></p>
+		</div>
+		<div class="col-sm-4">
+			<label class="col-form-label">License Number</label>
+            <p id="license_number"></p>
+		</div>
+		<div class="col-sm-4">
+			<label class="col-form-label">Date</label>
+            <p id="date"></p>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block department_chair_trainings_seminars %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6">
+			<label class="col-form-label">Name of Training/Seminar</label>
+            <p id="name_training"></p>
+		</div>
+		<div class="col-sm-6">
+			<label class="col-form-label">Role</label>
+            <p id="role"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<label class="col-form-label">Remarks</label>
+            <p id="remarks"></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-6">
+			<label class="col-form-label">Start Date</label>
+            <p id="start_date"></p>
+		</div>
+		<div class="col-sm-6">
+			<label class="col-form-label">End Date</label>
+            <p id="end_date"></p>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
