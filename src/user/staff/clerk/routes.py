@@ -130,6 +130,7 @@ def clerk_edit_information():
         return 'An error has occured.', 500
     # return render_template('clerk/faculty_list.html')
 
+from pprint import pprint
 @clerk_blueprint.route('/clerk/faculty_service_record/<user_id>', methods=['GET', 'PUT'])
 def clerk_faculty_service_record(user_id):
     if request.method == 'GET':
@@ -150,7 +151,7 @@ def clerk_faculty_service_record(user_id):
             else:
                 fsr_dict[record.sy] = [record.__dict__]
 
-        print(fsr_dict)
+        pprint(fsr_dict)
 
         return render_template(
             'clerk/faculty_service_record.html', 
