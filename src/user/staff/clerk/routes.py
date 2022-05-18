@@ -24,7 +24,7 @@ clerk_blueprint = Blueprint('clerk_blueprint', __name__)
 def load_user(user_id):
     print('tangina')
     return UserCredentials.query.get(user_id)
-
+import time
 @clerk_blueprint.route('/clerk/create_faculty_account', methods=['GET', 'POST'])
 def create_faculty_account():
     try:
@@ -41,13 +41,16 @@ def create_faculty_account():
             return render_template('clerk/create_faculty_account.html')
         elif request.method == 'POST':
             new_account_form = request.form
-            
+
+            if UserCredentials.query.filter_by(user_id=new_account_form['faculty_id']).first() is not None:
+                return 'User with entered Faculty ID already exists. Please check and try again.', 400        
+    
             new_faculty_account = FacultyPersonalInformation(
-                user_id             = new_account_form['user_id'],
-                rank                = new_account_form['rank'],
-                classification      = new_account_form['classification'],
-                status              = new_account_form['status'],
-                tenure              = new_account_form['tenure'],
+                user_id             = new_account_form['faculty_id'],
+                rank                = new_account_form['faculty_rank'],
+                classification      = new_account_form['faculty_classification'],
+                status              = new_account_form['faculty_status'],
+                tenure              = new_account_form['faculty_tenure'],
                 first_name          = new_account_form['first_name'],
                 middle_name         = new_account_form['middle_name'],
                 last_name           = new_account_form['last_name'],
@@ -63,24 +66,22 @@ def create_faculty_account():
                 primary_email       = new_account_form['primary_email'],
                 alternate_email     = new_account_form['alternate_email'],
                 date_created        = date.today(),
-                created_by          = current_user.email
+                # created_by          = current_user.email
             )
             db.session.add(new_faculty_account)
-
+            
             new_user_credentials = UserCredentials(
-                user_id         = new_account_form['user_id'],
+                user_id         = new_account_form['faculty_id'],
                 email           = new_account_form['primary_email'],
                 role            = 'faculty',
                 date_created    = date.today()
             )
             db.session.add(new_user_credentials)
-
             db.session.commit()
             return 'Faculty Account Successfully Created.', 200
-            #return render_template('.html')
     except Exception as e:
         print(e)
-        return 'An error has occured.', 400
+        return 'Error creating faculty record. Please try again.', 400
 
 @clerk_blueprint.route('/clerk/faculty_list', methods=['GET'])
 def clerk_faculty_list():

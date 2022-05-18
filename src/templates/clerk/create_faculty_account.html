@@ -1,11 +1,12 @@
 {% extends "layout.html" %} {% block add_faculty_account %}
 <head>
     <title>Create Faculty Account</title>
+    <script src="{{ url_for('static', filename='js/ajax_calls.js') }}"></script>
 </head>
     <section>
         <h1>Personal Information</h1>
         <br>
-        <form class="create-faculty-account" id="create-faculty-account">
+        <form class="create-faculty-account" id="create-faculty-account" name="create-faculty-account">
             <div class="row">
 
                 <!-- faculty ID  -->
@@ -32,41 +33,41 @@
                                 <label class="col-form-label">Rank</label>
                                 <select class="form-control faculty-status-rank" id="faculty_rank" name="faculty_rank">
                                     <option selected value="">N/A</option>
-                                    <option value="instructor_one">Instructor 1</option>
-                                    <option value="instructor_two">Instructor 2</option>
-                                    <option value="assistant_professor_one">Assistant Professor 1</option>
-                                    <option value="assistant_professor_two">Assistant Professor 2</option>
-                                    <option value="professor_one">Professor 1</option>
+                                    <option value="Instructor 1">Instructor 1</option>
+                                    <option value="Instructor 2">Instructor 2</option>
+                                    <option value="Assistant Professor 1">Assistant Professor 1</option>
+                                    <option value="Assistant Professor 2">Assistant Professor 2</option>
+                                    <option value="Professor 1">Professor 1</option>
                                 </select>
                             </div>
                             <div class="col-12 col-lg-3 custom-col-1 mb-3">
                                 <label class="col-form-label">Classification</label>
                                 <select class="form-control faculty-status-classification" id="faculty_classification" name="faculty_classification">
                                     <option selected value="">N/A</option>
-                                    <option value="full_time">Full-time</option>
-                                    <option value="part_time">Part-time</option>
+                                    <option value="Full-time">Full-time</option>
+                                    <option value="Part-time">Part-time</option>
                                 </select>
                             </div>
                             <div class="col-12 col-lg-3 custom-col-1 mb-3">
                                 <label class="col-form-label">Tenure</label>
                                 <select class="form-control faculty-status-tenure" id="faculty_tenure" name="faculty_tenure">
                                     <option selected value="">N/A</option>
-                                    <option value="temporary">Temporary</option>
-                                    <option value="permanent">Permanent</option>
+                                    <option value="Temporary">Temporary</option>
+                                    <option value="Permanent">Permanent</option>
                                 </select>
                             </div>
                             <div class="col-12 col-lg-3 custom-col-1 mb-3">
                                 <label class="col-form-label">Status</label>
                                 <select class="form-control faculty-status-status" id="faculty_status" name="faculty_status">
                                     <option selected value="">N/A</option>
-                                    <option value="acitve_service">Active Service</option>
-                                    <option value="leave_with_pay">On study leave with pay</option>
-                                    <option value="leave_no_pay">On study leave without pay</option>
-                                    <option value="sabbatical_leave">On sabbatical leave</option>
-                                    <option value="secondment">On secondment</option>
-                                    <option value="retired">Retired</option>
-                                    <option value="resigned">Resigned</option>
-                                    <option value="awol">AWOL</option>
+                                    <option value="Active Service">Active Service</option>
+                                    <option value="On study leave with pay">On study leave with pay</option>
+                                    <option value="On study leave without pay">On study leave without pay</option>
+                                    <option value="On sabbatical leave">On sabbatical leave</option>
+                                    <option value="On secondment">On secondment</option>
+                                    <option value="Retired">Retired</option>
+                                    <option value="Resigned">Resigned</option>
+                                    <option value="AWOL">AWOL</option>
                                 </select>
                             </div>
                         </div>
@@ -98,13 +99,13 @@
                                 <label class="col-form-label">Suffix</label>
                                 <select class="form-control basic-info-suffix" id="suffix" name="suffix">
                                     <option selected value="">N/A</option>
-                                    <option value="senior">Sr.</option>
-                                    <option value="junior">Jr.</option>
-                                    <option value="first">I</option>
-                                    <option value="second">II</option>
-                                    <option value="third">III</option>
-                                    <option value="fourth">IV</option>
-                                    <option value="fifth">V</option>
+                                    <option value="Sr.">Sr.</option>
+                                    <option value="Jr.">Jr.</option>
+                                    <option value="I">I</option>
+                                    <option value="II">II</option>
+                                    <option value="III">III</option>
+                                    <option value="IV">IV</option>
+                                    <option value="V">V</option>
                                 </select>
                             </div>
                         </div>
@@ -151,15 +152,15 @@
                                 <label class="col-form-label">Religion</label>
                                 <select class="form-control basic-info-religion" id="religion" name="religion">
                                     <option selected value="">N/A</option>
-                                    <option value="roman_catholic">Roman Catholic</option>
-                                    <option value="islam">Islam</option>
-                                    <option value="evangelical">Evangelical</option>
-                                    <option value="protestant">Protestant</option>
-                                    <option value="aglipay">Aglipayan</option>
-                                    <option value="seventh_day">Seventh-day-Adventist</option>
-                                    <option value="bible_baptist">Bible Baptist Church</option>
-                                    <option value="united_church">United Church of Christ in the Philippines</option>
-                                    <option value="jehovah">Jehovah's Witnesses</option>
+                                    <option value="Roman Catholic">Roman Catholic</option>
+                                    <option value="Islam">Islam</option>
+                                    <option value="Evangelical">Evangelical</option>
+                                    <option value="Protestant">Protestant</option>
+                                    <option value="Aglipayan">Aglipayan</option>
+                                    <option value="Seventh-day-Adventist">Seventh-day-Adventist</option>
+                                    <option value="Bible Baptist Church">Bible Baptist Church</option>
+                                    <option value="United Church of Christ in the Philippines">United Church of Christ in the Philippines</option>
+                                    <option value="Jehovah's Witnesses">Jehovah's Witnesses</option>
                                 </select>
                             </div>
 
@@ -167,11 +168,11 @@
                                 <label class="col-form-label">Civil Status</label>
                                 <select class="suffix-select form-select form-control suffix" aria-label="" id="civil_status" name="civil_status" data-field="suffix">
                                     <option selected value="">N/A</option>
-                                    <option value="single">Single</option>
-                                    <option value="married">Married</option>
-                                    <option value="divorced">Divorced</option>
-                                    <option value="separated">Separated</option>
-                                    <option value="widowed">Widowed</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Divorced">Divorced</option>
+                                    <option value="Separated">Separated</option>
+                                    <option value="Widowed">Widowed</option>
                                 </select>
                             </div>
                         </div>
@@ -211,12 +212,13 @@
                 </div>
 
             </div>
+            <div class="d-flex justify-content-end mt-2">
+                <button class="btn btn-primary crud-btn" type="submit">Save</button> 
+            </div>
         </form>
 
-        <div class="d-flex justify-content-end mt-2">
-            <button class="btn btn-primary crud-btn" type="submit">Save</button> 
-        </div>
+        
     
     </section>
-
+<script src="{{ url_for('static', filename='js/ajax_calls.js') }}"></script>
 {% endblock %}

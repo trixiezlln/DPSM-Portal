@@ -38,7 +38,7 @@ class FacultyPersonalInformation(UserMixin, db.Model):
     created_by                  = db.Column(db.String(180), nullable=True)
 
     # Many licensure exams, trainings/seminars, FSR 
-    licensure                   = db.relationship('LicensureExams', backref='licensure')
+    # licensure                   = db.relationship('LicensureExams', backref='licensure')
 
 class EducationalAttainment(UserMixin, db.Model):
     __table_args__ = {
