@@ -196,8 +196,6 @@ def clerk_faculty_service_record(user_id):
                     sy                      = fsr_form['new_sy'],
                     schedule                = fsr_form['new_schedule'],
                     number_students         = fsr_form['new_number_students'],
-                    # fsr_file              = fsr_set_form['upload_file'],
-                    # set                   = licensure_form['upload_file'],
                 )
 
                 db.session.add(new_fsr_record)
