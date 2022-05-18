@@ -187,7 +187,7 @@ def clerk_faculty_service_record(user_id):
             try:
                 fsr_form = request.form
                 fsr_files = request.files
-                pprint(fsr_form)
+
                 new_fsr_record = FacultySETRecords(
                     id                      = fsr_form['user_id'],
                     course_code             = fsr_form['new_course_code'],
