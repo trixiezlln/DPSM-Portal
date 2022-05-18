@@ -22,7 +22,8 @@ clerk_blueprint = Blueprint('clerk_blueprint', __name__)
 
 @login_manager.user_loader
 def load_user(user_id):
-	return UserCredentials.query.get(user_id)
+    print('tangina')
+    return UserCredentials.query.get(user_id)
 
 @clerk_blueprint.route('/clerk/create_faculty_account', methods=['GET', 'POST'])
 def create_faculty_account():
@@ -83,7 +84,6 @@ def create_faculty_account():
 
 @clerk_blueprint.route('/clerk/faculty_list', methods=['GET'])
 def clerk_faculty_list():
-
     try:
         faculty_list = []
         faculty_records = FacultyPersonalInformation.query.all()
@@ -110,3 +110,9 @@ def clerk_faculty_list():
 @clerk_blueprint.route('/clerk/faculty_service_record', methods=['GET'])
 def clerk_faculty_service_record():
     return render_template('clerk/faculty_service_record.html')
+
+
+@clerk_blueprint.app_context_processor
+def inject():
+    print(current_user.__dict__)
+    return current_user.__dict__
