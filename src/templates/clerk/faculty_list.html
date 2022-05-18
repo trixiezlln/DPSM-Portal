@@ -10,14 +10,18 @@
     </tr>
     {% for faculty in faculty_list %}
         <tr id="row{{loop.index}}">
-            <td id="name_row{{loop.index}}">{{faculty['faculty_name']}}</td>
+            <td id="name_row{{loop.index}}">
+                <a href="{{ url_for('clerk_blueprint.clerk_faculty_service_record', user_id = faculty['user_id']) }}">
+                    {{faculty['faculty_name']}}
+                </a>
+            </td>
             <td id="rank_row{{loop.index}}">{{faculty['rank']}}</td>
             <td id="classification_row{{loop.index}}">{{faculty['classification']}}</td>
             <td id="tenure_row{{loop.index}}">{{faculty['tenure']}}</td>
             <td id="status_row{{loop.index}}">{{faculty['status']}}</td>
             <td>
                 <button class="btn btn-primary crud-btn" id="edit_button{{loop.index}}" style="margin-right: 20px;" onclick="edit_row('{{loop.index}}')">Edit</button>
-                <button class="btn btn-primary crud-btn" id="save_button{{loop.index}}" style="margin-right: 20px; display:none;" onclick="save_row('{{loop.index}}')">Save</button>
+                <button class="btn btn-primary crud-btn" id="save_button{{loop.index}}" style="margin-right: 20px; display:none;" onclick="save_row('{{loop.index}}', {{faculty['user_id']}})">Save</button>
             </td>
         </tr>
     {% endfor %}
@@ -38,6 +42,7 @@
     }
 </style>
 
+<script src="{{ url_for('static', filename='js/ajax_calls.js') }}"></script>
 <script>
     
     function edit_row(no) {
@@ -78,7 +83,7 @@
                                 "<option value='AWOL'>AWOL</option>";
     }
 
-    function save_row(no) {
+    function save_row(no, user_id) {
         var rank_val=document.getElementById("rank_text"+no).value;
         var classification_val=document.getElementById("classification_text"+no).value;
         var tenure_val=document.getElementById("tenure_text"+no).value;
@@ -90,8 +95,12 @@
         document.getElementById("tenure_row"+no).innerHTML=tenure_val;
         document.getElementById("status_row"+no).innerHTML=status_val;
 
+        
+
         document.getElementById("edit_button"+no).style.display="block";
         document.getElementById("save_button"+no).style.display="none";
+
+        save_faculty_edit(rank_val, classification_val, tenure_val, status_val, user_id);
     }
 
 </script>

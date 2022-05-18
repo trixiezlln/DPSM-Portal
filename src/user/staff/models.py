@@ -172,7 +172,8 @@ class FacultySETRecords(UserMixin, db.Model):
         'extend_existing': True
     }
     __tablename__ = 'faculty_set_records'
-    id                          = db.Column(db.String(180), primary_key=True, nullable=True)
+    seq_id                      = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
+    id                          = db.Column(db.String(180), nullable=True)
     course_code                 = db.Column(db.String(180), nullable=True)
     section                     = db.Column(db.String(180), nullable=True)
     semester                    = db.Column(db.String(180), nullable=True)

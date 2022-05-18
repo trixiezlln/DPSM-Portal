@@ -1,47 +1,39 @@
 {% extends "layout.html" %} {% block add_faculty_account %}
 
-<h5>Therese Mae Magcamit</h5>
+<h5>{{faculty_name}}</h5>
 
-<h4 class="header">A.Y. 2018-2020</h4>
-<table id="fsr_table" style="display:none;">
-    <tr>
-        <th class="sortable">Course Code</th>
-        <th>Section</th>
-        <th class="sortable">Semester</th>
-        <th>Schedule</th>
-        <th>No. of Students</th>
-        <th>Syllabus</th>
-        <th>SET</th>
-        <th>Action</th>
-    </tr>
-    <tr id="row1">
-        <td id="course_code_row1">CMSC 128.2</td>
-        <td id="section_row1">TFG</td>
-        <td id="semester_row1">1st Semester</td>
-        <td id="schedule_row1">MTh 10AM-12PM</td>
-        <td id="number_of_students_row1">15</td>
-        <td id="syllabus_row1">Button Here</td>
-        <td id="set_row1">1.5</td>
-        <td id="action_button_row1">
-            <button class="btn btn-primary crud-btn" id="edit_button1" style="margin-right: 20px;" onclick="edit_row('1')">Edit</button>
-            <button class="btn btn-primary crud-btn" id="save_button1" style="margin-right: 20px; display:none;" onclick="save_row('1')">Save</button>
-        </td>
-    </tr>
-    <tr id="row2">
-        <td id="course_code_row2">CMSC 121</td>
-        <td id="section_row2">TFC</td>
-        <td id="semester_row2">2nd Semester</td>
-        <td id="schedule_row2">TF 10AM-12PM</td>
-        <td id="number_of_students_row2">25</td>
-        <td id="syllabus_row2">Button Here</td>
-        <td id="set_row2">2</td>
-        <td id="action_button_row2">
-            <button class="btn btn-primary crud-btn" id="edit_button2" style="margin-right: 20px;" onclick="edit_row('2')">Edit</button>
-            <button class="btn btn-primary crud-btn" id="save_button2" style="margin-right: 20px; display:none;" onclick="save_row('2')">Save</button>
-        </td>
-    </tr>
-</table>
-
+{% for sy, fsr_record in fsr_dict.items() %}
+    {% set outer_loop = loop %}
+    <h4 class="header header{{outer_loop.index}}" onclick='header_click("{{outer_loop.index}}")'>A.Y. {{sy}}</h4>
+    {% for record in fsr_record %}
+        <table id="fsr_table{{outer_loop.index}}" style="display:none;">
+            <tr>
+                <th class="sortable">Course Code</th>
+                <th>Section</th>
+                <th class="sortable">Semester</th>
+                <th>Schedule</th>
+                <th>No. of Students</th>
+                <th>Syllabus</th>
+                <th>SET</th>
+                <th>Action</th>
+            </tr>
+            <tr id="row{{outer_loop.index}}_{{outer_loop.index}}_{{loop.index}}">
+                <td id="course_code_row{{outer_loop.index}}_{{loop.index}}">{{record['course_code']}}</td>
+                <td id="section_row{{outer_loop.index}}_{{loop.index}}">{{record['section']}}</td>
+                <td id="semester_row{{outer_loop.index}}_{{loop.index}}">{{record['semester']}}</td>
+                <td id="schedule_row{{outer_loop.index}}_{{loop.index}}">{{record['schedule']}}</td>
+                <td id="number_of_students_row{{outer_loop.index}}_{{loop.index}}">{{record['number_students']}}</td>
+                <td id="syllabus_row{{outer_loop.index}}_{{loop.index}}">Button Here</td>
+                <td id="set_row{{outer_loop.index}}_{{loop.index}}">{{record['fsr_score']}}</td>
+                <td id="action_button_row{{outer_loop.index}}_{{loop.index}}">
+                    <button class="btn btn-primary crud-btn" id="edit_button{{outer_loop.index}}_{{loop.index}}" style="margin-right: 20px;" onclick="edit_row('{{outer_loop.index}}_{{loop.index}}')">Edit</button>
+                    <button class="btn btn-primary crud-btn" id="save_button{{outer_loop.index}}_{{loop.index}}" style="margin-right: 20px; display:none;" onclick="save_row('{{outer_loop.index}}_{{loop.index}}')">Save</button>
+                </td>
+            </tr>
+        </table>
+    {% endfor %}
+    <br>
+{% endfor %}
 <div class="col-12">
     <hr>
     <h5>Add Faculty Load</h5>
@@ -224,11 +216,16 @@
         return $(row).children('td').eq(index).text()
     }
 
-    $(document).ready(function(){
-        $("h4.header").click(function(){
-            $("table").toggle();
-        });
-    });
+    //$(document).ready(function(){
+    //    $("h4.header").click(function(){
+    //        $("table").toggle();
+    //    });
+    //});
+
+    function header_click(index){
+        curr_table = "#fsr_table" + index
+        $(curr_table).toggle();
+    }
 </script>
 
 
