@@ -10,14 +10,18 @@
     </tr>
     {% for faculty in faculty_list %}
         <tr id="row{{loop.index}}">
-            <td id="name_row{{loop.index}}">{{faculty['faculty_name']}}</td>
+            <td id="name_row{{loop.index}}">
+                <a href="{{ url_for('clerk_blueprint.clerk_faculty_service_record', user_id = faculty['user_id']) }}">
+                    {{faculty['faculty_name']}}
+                </a>
+            </td>
             <td id="rank_row{{loop.index}}">{{faculty['rank']}}</td>
             <td id="classification_row{{loop.index}}">{{faculty['classification']}}</td>
             <td id="tenure_row{{loop.index}}">{{faculty['tenure']}}</td>
             <td id="status_row{{loop.index}}">{{faculty['status']}}</td>
             <td>
                 <button class="btn btn-primary crud-btn" id="edit_button{{loop.index}}" style="margin-right: 20px;" onclick="edit_row('{{loop.index}}')">Edit</button>
-                <button class="btn btn-primary crud-btn" id="save_button{{loop.index}}" style="margin-right: 20px; display:none;" onclick="save_row('{{loop.index}}')">Save</button>
+                <button class="btn btn-primary crud-btn" id="save_button{{loop.index}}" style="margin-right: 20px; display:none;" onclick="save_row('{{loop.index}}', {{faculty['user_id']}})">Save</button>
             </td>
         </tr>
     {% endfor %}
@@ -38,6 +42,7 @@
     }
 </style>
 
+<script src="{{ url_for('static', filename='js/ajax_calls.js') }}"></script>
 <script>
     
     function edit_row(no) {
@@ -58,9 +63,40 @@
         rank.innerHTML="<select class='form-control faculty-status-rank' id='rank_text"+no+"' value='"+rank_data+"'>"+
                             "<option value='Instructor 1'>Instructor 1</option>"+
                             "<option value='Instructor 2'>Instructor 2</option>"+
+                            "<option value='Instructor 3'>Instructor 3</option>"+
+                            "<option value='Instructor 4'>Instructor 4</option>"+
+                            "<option value='Instructor 5'>Instructor 5</option>"+
+                            "<option value='Instructor 6'>Instructor 6</option>"+
+                            "<option value='Instructor 7'>Instructor 7</option>"+
+                            "<option value='Teaching Associate'>Teaching Associate</option>"+
+                            "<option value='Teaching Fellow'>Teaching Fellow</option>"+
                             "<option value='Assistant Professor 1'>Assistant Professor 1</option>"+
                             "<option value='Assistant Professor 2'>Assistant Professor 2</option>"+
-                            "<option value='Professor 1'>Professor 1</option></select>";
+                            "<option value='Assistant Professor 3'>Assistant Professor 3</option>"+
+                            "<option value='Assistant Professor 4'>Assistant Professor 4</option>"+
+                            "<option value='Assistant Professor 5'>Assistant Professor 5</option>"+
+                            "<option value='Assistant Professor 6'>Assistant Professor 6</option>"+
+                            "<option value='Assistant Professor 7'>Assistant Professor 7</option>"+
+                            "<option value='Associate Professor 1'>Associate Professor 1</option>"+
+                            "<option value='Associate Professor 2'>Associate Professor 2</option>"+
+                            "<option value='Associate Professor 3'>Associate Professor 3</option>"+
+                            "<option value='Associate Professor 4'>Associate Professor 4</option>"+
+                            "<option value='Associate Professor 5'>Associate Professor 5</option>"+
+                            "<option value='Associate Professor 6'>Associate Professor 6</option>"+
+                            "<option value='Associate Professor 7'>Associate Professor 7</option>"+
+                            "<option value='Professor 1'>Professor 1</option>"+
+                            "<option value='Professor 2'>Professor 2</option>"+
+                            "<option value='Professor 3'>Professor 3</option>"+
+                            "<option value='Professor 4'>Professor 4</option>"+
+                            "<option value='Professor 5'>Professor 5</option>"+
+                            "<option value='Professor 6'>Professor 6</option>"+
+                            "<option value='Professor 7'>Professor 7</option>"+
+                            "<option value='Professor 8'>Professor 8</option>"+
+                            "<option value='Professor 9'>Professor 9</option>"+
+                            "<option value='Professor 10'>Professor 10</option>"+
+                            "<option value='Professor 11'>Professor 11</option>"+
+                            "<option value='Professor 12'>Professor 12</option>"+
+                            "<option value='University Professor'>University Professor</option></select>";
         classification.innerHTML="<select class='form-control faculty-status-classification' id='classification_text"+no+"' value='"+classification_data+"'>"+
                                         "<option value='Full-time'>Full-time</option>"+
                                         "<option value='Part-time'>Part-time</option>";
@@ -78,7 +114,7 @@
                                 "<option value='AWOL'>AWOL</option>";
     }
 
-    function save_row(no) {
+    function save_row(no, user_id) {
         var rank_val=document.getElementById("rank_text"+no).value;
         var classification_val=document.getElementById("classification_text"+no).value;
         var tenure_val=document.getElementById("tenure_text"+no).value;
@@ -90,8 +126,12 @@
         document.getElementById("tenure_row"+no).innerHTML=tenure_val;
         document.getElementById("status_row"+no).innerHTML=status_val;
 
+        
+
         document.getElementById("edit_button"+no).style.display="block";
         document.getElementById("save_button"+no).style.display="none";
+
+        save_faculty_edit(rank_val, classification_val, tenure_val, status_val, user_id);
     }
 
 </script>

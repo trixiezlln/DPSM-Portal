@@ -19,6 +19,7 @@ login_manager = LoginManager()
 from src.user.auth.routes import auth_blueprint
 from src.user.staff.clerk.routes import clerk_blueprint
 from src.user.staff.faculty.routes import faculty_blueprint
+from src.user.staff.unit_head.routes import unit_head_blueprint
 
 load_dotenv(override=True)
 
@@ -50,6 +51,7 @@ def create_app(config_filename=None):
 	app.register_blueprint(auth_blueprint)
 	app.register_blueprint(clerk_blueprint)
 	app.register_blueprint(faculty_blueprint)
+	app.register_blueprint(unit_head_blueprint)
 	
 
 	return app
