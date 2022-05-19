@@ -39,7 +39,15 @@ def department_chair_role_assignment():
 @dept_chair_blueprint.route('/department_chair/faculty_list', methods=['GET', 'POST'])
 def department_chair_faculty_list():
     try:
-        department_faculty_list = FacultyPersonalInformation.query.order_by(FacultyPersonalInformation.last_name.desc()).all()
+        department_faculty_list = (FacultyPersonalInformation
+            .query
+            .order_by(
+                FacultyPersonalInformation
+                .last_name
+                .asc()
+            )
+            .all()
+        )
 
         cu_list = []
         pgu_list = []

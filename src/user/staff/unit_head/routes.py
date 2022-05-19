@@ -30,7 +30,19 @@ def load_user(user_id):
 
 @unit_head_blueprint.route('/unit_head/faculty_list', methods=['GET', 'POST'])
 def load_unit_head_faculty_list():
-    unit_faculty_list = FacultyPersonalInformation.query.filter_by(unit=current_user.unit).all()
+    unit_faculty_list = (FacultyPersonalInformation
+        .query
+        .filter_by(
+            unit=current_user.unit
+        )
+        .order_by(
+            FacultyPersonalInformation
+            .last_name
+            .asc()
+        )
+        .all()
+    )
+
     return render_template(
         'unit_head/unit_head_faculty_list.html',
         unit_faculty_list = unit_faculty_list
