@@ -69,9 +69,9 @@
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Location<span class="required-field"></span></label>
                                 <select class="location-select form-select form-control location" aria-label="" id="location" name="location" data-field="location">
+                                    <option selected value={{work_experience['location']}}>{{work_experience['location']}}</option>
                                     <option value="Outside">Outside UP Manila</option>
-                                    <option value="Within">Within UP Manila</option>
-                                    
+                                    <option value="Within">Within UP Manila</option>    
                                 </select>
                             </div>
                         </div>
@@ -79,13 +79,13 @@
                         <div class="row">
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Name of Employer<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="name_employer" name="name_employer">
+                                <input class="form-control" type="text" id="name_employer" name="name_employer" value={{work_experience['name_employer']}}>
                                 <span class = "validation-status"></span>
                             </div>  
 
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Title/Position<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="title" name="title">
+                                <input class="form-control" type="text" id="title" name="title" value={{work_experience['title']}}>
                                 <span class = "validation-status"></span>
                             </div>  
                         </div>
@@ -93,13 +93,13 @@
                         <div class="row">
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Start Date<span class="required-field"></span></label>
-                                <input class="form-control" type="date" id="start_date" name="start_date">
+                                <input class="form-control" type="date" id="start_date" name="start_date" value={{work_experience['start_date']}}>
                                 <span class = "validation-status"></span>
                             </div>   
                             
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">End Date<span class="required-field"></span></label>
-                                <input class="form-control" type="date" id="end_date" name="end_date">
+                                <input class="form-control" type="date" id="end_date" name="end_date" value={{work_experience['end_date']}}>
                                 <span class = "validation-status"></span>
                             </div>  
                         </div>
@@ -107,7 +107,7 @@
                         <div class="row">
                             <div class="col-12 custom-col-3 mb-3">
                                 <label class="col-form-label">Description<span class="required-field"></span></label>
-                                <textarea class="form-control" id="description" name="description" rows="4" cols="50"></textarea>
+                                <textarea class="form-control" id="description" name="description" rows="4" cols="50" value={{work_experience['description']}}></textarea>
                                 <span class = "validation-status"></span>
                             </div>   
                         </div>
@@ -115,7 +115,7 @@
                         <div class="row">
                             <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                 <label class="col-form-label">Upload File as Proof<span class="required-field"></span></label>
-                                <input type="file" id="work_file" name="work_file">
+                                <input type="file" id="work_file" name="work_file" value={{work_experience['work_file']}}>
                                 <span class = "validation-status"></span>
                             </div>    
                         </div>

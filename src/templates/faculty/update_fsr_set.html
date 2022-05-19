@@ -67,19 +67,19 @@
                         <div class="row">
                             <div class="col-12 col-lg-4 custom-col-3 mb-3">
                                 <label class="col-form-label">Course Code<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="course_code" name="course_code">
+                                <input class="form-control" type="text" id="course_code" name="course_code" value={{fsr_set_record['course_code']}}>
                                 <span class = "validation-status"></span>
                             </div> 
 
                             <div class="col-12 col-lg-4 custom-col-3 mb-3">
                                 <label class="col-form-label">Section<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="section" name="section">
+                                <input class="form-control" type="text" id="section" name="section" value={{fsr_set_record['section']}}>
                                 <span class = "validation-status"></span>
                             </div> 
 
                             <div class="col-12 col-lg-4 custom-col-3 mb-3">
                                 <label class="col-form-label">Semester<span class="required-field"></span></label>
-                                <select class="semester-select form-select form-control semester" aria-label="" id="semester" name="semester" data-field="semester">
+                                <select class="semester-select form-select form-control semester" aria-label="" id="semester" name="semester" data-field="semester" value={{fsr_set_record['semester']}}>
                                     <option value="1">1st Semester</option>
                                     <option value="2">2nd Semester</option>
                                     <option value="3">Midyear</option>
@@ -90,19 +90,19 @@
                         <div class="row">
                             <div class="col-12 col-lg-4 custom-col-3 mb-3">
                                 <label class="col-form-label">School Year<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="sy" name="sy">
+                                <input class="form-control" type="text" id="sy" name="sy" value={{fsr_set_record['sy']}}>
                                 <span class = "validation-status"></span>
                             </div> 
 
                             <div class="col-12 col-lg-4 custom-col-3 mb-3">
                                 <label class="col-form-label">Schedule<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="schedule" name="schedule">
+                                <input class="form-control" type="text" id="schedule" name="schedule" value={{fsr_set_record['schedule']}}>
                                 <span class = "validation-status"></span>
                             </div> 
 
                             <div class="col-12 col-lg-4 custom-col-3 mb-3">
                                 <label class="col-form-label">Number of Students<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="number_students" name="number_students">
+                                <input class="form-control" type="text" id="number_students" name="number_students" value={{fsr_set_record['number_students']}}>
                                 <span class = "validation-status"></span>
                             </div>
                         </div>
@@ -110,7 +110,7 @@
                         <div class="row">
                             <div class="col-12 custom-col-3 mb-3">
                                 <label class="col-form-label">SET<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="set" name="set">
+                                <input class="form-control" type="text" id="set" name="set" value={{fsr_set_record['set']}}>
                                 <span class = "validation-status"></span>
                             </div>    
                         </div>
@@ -118,7 +118,7 @@
                         <div class="row">
                             <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                 <label class="col-form-label">Upload File as Proof<span class="required-field"></span></label>
-                                <input type="file" id="fsr_set_file" name="fsr_set_file">
+                                <input type="file" id="fsr_set_file" name="fsr_set_file" value={{fsr_set_record['fsr_set_file]}}>
                                 <span class = "validation-status"></span>
                             </div>    
                         </div>

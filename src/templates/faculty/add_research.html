@@ -127,16 +127,10 @@
                                 <label class="col-form-label">Co-researchers (DPSM Faculty)<span class="required-field"></span></label>
                                 <select class="coresearchers_dpsm-select form-select form-control coresearchers_dpsm" aria-label="" id="coresearchers_dpsm" name="coresearchers_dpsm" data-field="coresearchers_dpsm">
                                     <option selected value="">N/A</option>
-                                    <option value="SR">Sr.</option>
-                                    <option value="JR">Jr.</option>
-                                    <option value="I">I</option>
-                                    <option value="II">II</option>
-                                    <option value="III">III</option>
-                                    <option value="IV">IV</option>
-                                    <option value="V">V</option>
-                                    <option value="VI">VI</option>
-                                    <option value="VII">VII</option>
-                                    <option value="VIII">VIII</option>
+                                    {% for faculty in faculty_list %}
+                                    <option value={{faculty}}>{{faculty}}</option>
+                                    {% endfor %}
+                                    
                                 </select>
                             </div> 
                             
