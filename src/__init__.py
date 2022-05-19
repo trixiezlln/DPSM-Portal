@@ -20,7 +20,7 @@ from src.user.auth.routes import auth_blueprint
 from src.user.staff.clerk.routes import clerk_blueprint
 from src.user.staff.faculty.routes import faculty_blueprint
 from src.user.staff.unit_head.routes import unit_head_blueprint
-
+from src.user.staff.dept_chair.routes import dept_chair_blueprint
 load_dotenv(override=True)
 
 
@@ -52,6 +52,8 @@ def create_app(config_filename=None):
 	app.register_blueprint(clerk_blueprint)
 	app.register_blueprint(faculty_blueprint)
 	app.register_blueprint(unit_head_blueprint)
+	app.register_blueprint(dept_chair_blueprint)
+	
 	
 
 	return app

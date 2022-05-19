@@ -19,14 +19,12 @@
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/adminlte.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/adminlte.min.css') }}">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <script src="{{ url_for('static', filename='js/adminlte.js') }}"></script>
 
-
-
-
 </head>
+
+
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
   <div class="wrapper">
@@ -49,8 +47,7 @@
           </li>
         </ul>
   
-  
-  
+
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
           <!-- Notifications Dropdown Menu -->
@@ -105,7 +102,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column"
               data-widget="treeview" role="menu" data-accordion="false">
               <li class="nav-item">
-                <a href="http://127.0.0.1:5000/unit_head/dashboard" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-graduation-cap"></i>
                   <p>
                     Dashboard
@@ -202,7 +199,7 @@
               </div>
 
               <li class="nav-item">
-                <a href="http://127.0.0.1:5000/unit_head/faculty_list" class="nav-link">
+                <a href="http://127.0.0.1:5000/department_chair/faculty_list" class="nav-link">
                   <i class="nav-icon fas fa-graduation-cap"></i>
                   <p>
                     Faculty List
@@ -211,7 +208,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="http://127.0.0.1:5000/unit_head/pending_approvals" class="nav-link">
+                <a href="http://127.0.0.1:5000/department_chair/pending_approvals" class="nav-link">
                   <i class="nav-icon fas fa-graduation-cap"></i>
                   <p>
                     Pending Approvals
@@ -220,7 +217,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="http://127.0.0.1:5000/unit_head/role_assignment" class="nav-link">
+                <a href="http://127.0.0.1:5000/department_chair/role_assignment" class="nav-link">
                   <i class="nav-icon fas fa-graduation-cap"></i>
                   <p>
                     Role Assignment
@@ -242,12 +239,20 @@
         <div class="container-fluid">
 
         <!-- Faculty -->
+        {% block view_info %} {% endblock %}
+        {% block add_info %} {% endblock %}
 
         <!-- Unit Head -->
         {% block unit_head_pending_approvals %} {% endblock %}
         {% block unit_head_role_assignment %} {% endblock %}
         {% block unit_head_faculty_list %} {% endblock %}
-        {% block unit_head_dashboard %} {% endblock %}
+
+        <!-- Dept Chair -->
+        {% block department_chair_pending_approvals %} {% endblock %}
+        {% block department_chair_role_assignment %} {% endblock %}
+        {% block department_chair_faculty_list %} {% endblock %}
+        {% block department_chair_dashboard %} {% endblock %}
+
 
         <!-- Clerk -->
         
@@ -468,3 +473,6 @@ typeof define === 'function' && define.amd ? define(['exports'], factory) :
 </body>
 
 </html>
+
+
+

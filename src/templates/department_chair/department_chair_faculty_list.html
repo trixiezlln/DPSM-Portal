@@ -65,9 +65,9 @@
         <br>
 
 
-        <div id="MCSU" class="tabcontent">
+        <div id="MCSU" class="tabcontent" name="MCSU">
           <div class="table-responsive-sm">
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover" id="mcsu_table" name="mcsu_table">
               <thead>
                 <tr>
                   <th scope="col">Name</th>
@@ -78,43 +78,23 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="clickable" onclick="window.location='#'">
-                  <th scope="row">Baes, Gregorio</th>
-                  <td>Lecturer II</td>
-                  <td>Part-time</td>
-                  <td></td>
-                  <td>Active Service</td>
-                </tr>
-                <tr class="clickable" onclick="window.location='#'">
-                  <th scope="row">Basco-Uy, Therese Anne G.</th>
-                  <td>Assistant Professor IV</td>
-                  <td>Full-time</td>
-                  <td>Temporary</td>
-                  <td>Active Service</td>
-                </tr>
-                <tr class="clickable" onclick="window.location='#'">
-                  <th scope="row">Billones, Liza T.</th>
-                  <td>Assistant Professor IV</td>
-                  <td>Full-time</td>
-                  <td>Temporary</td>
-                  <td>Active Service</td>
-                </tr>
-                <tr class="clickable" onclick="window.location='#'">
-                  <th scope="row">Cabalo, Francis B.</th>
-                  <td>Lecturer I</td>
-                  <td>Part-time</td>
-                  <td></td>
-                  <td>Active Service</td>
-                </tr>
-
+                {% for mcsu in mcsu_list %}
+                  <tr class="clickable" onclick="window.location='#'">
+                    <th scope="row">{{mcsu.last_name}}, {{mcsu.first_name}}</th>
+                    <td>{{mcsu.rank}}</td>
+                    <td>{{mcsu.classification}}</td>
+                    <td>{{mcsu.tenure}}</td>
+                    <td>{{mcsu.status}}</td>
+                  </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>
         </div>
 
-        <div id="Chem" class="tabcontent" style="display:block;">
+        <div id="Chem" class="tabcontent" style="display:block;" name="Chem">
           <div class="table-responsive-sm">
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover" id="cu_table" name="cu_table">
               <thead>
                 <tr>
                   <th scope="col">Name</th>
@@ -125,43 +105,23 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="clickable" onclick="window.location='#'">
-                  <th scope="row">Billones, Junie B.</th>
-                  <td>Professor VIII</td>
-                  <td>Full-time</td>
-                  <td></td>
-                  <td>Active Service</td>
-                </tr>
-                <tr class="clickable" onclick="window.location='#'">
-                  <th scope="row">Carrillo, Maria Constancia O.</th>
-                  <td>Professor VI</td>
-                  <td>Full-time</td>
-                  <td></td>
-                  <td>Active Service</td>
-                </tr>
-                <tr class="clickable" onclick="window.location='#'">
-                  <th scope="row">Cleofas, Mark Jeremiah B.</th>
-                  <td>Assistant Professor I</td>
-                  <td>Full-time</td>
-                  <td>Temporary</td>
-                  <td>Active Service</td>
-                </tr>
-                <tr class="clickable" onclick="window.location='#'">
-                  <th scope="row">Cruz, Fatima Joy C.</th>
-                  <td>Assistant Professor II</td>
-                  <td>Full-time</td>
-                  <td></td>
-                  <td>Active Service</td>
-                </tr>
-
+                {% for cu in cu_list %}
+                  <tr class="clickable" onclick="window.location='#'">
+                    <th scope="row">{{cu.last_name}}, {{cu.first_name}}</th>
+                    <td>{{cu.rank}}</td>
+                    <td>{{cu.classification}}</td>
+                    <td>{{cu.tenure}}</td>
+                    <td>{{cu.status}}</td>
+                  </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>
         </div>
 
-        <div id="Physics" class="tabcontent">
+        <div id="Physics" class="tabcontent" name="Physics">
           <div class="table-responsive-sm">
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover" id="pgu_table" id="pgu_table">
               <thead>
                 <tr>
                   <th scope="col">Name</th>
@@ -172,35 +132,15 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="clickable" onclick="window.location='#'">
-                  <th scope="row">Bagunu, Ramon Jose C.</th>
-                  <td>Instructor I</td>
-                  <td>Full-time</td>
-                  <td>Temporary</td>
-                  <td>Active Service</td>
-                </tr>
-                <tr class="clickable" onclick="window.location='#'">
-                  <th scope="row">Bustillo, John Paul O. </th>
-                  <td>Assistant Professor IV</td>
-                  <td>Full-time</td>
-                  <td></td>
-                  <td>Active Service</td>
-                </tr>
-                <tr class="clickable" onclick="window.location='#'">
-                  <th scope="row">Cometa, Adam Jesson P.</th>
-                  <td>Assistant Professor I</td>
-                  <td>Full-time</td>
-                  <td>Temporary</td>
-                  <td>Active Service</td>
-                </tr>
-                <tr class="clickable" onclick="window.location='#'">
-                  <th scope="row">De Luna, Marie Josephine M.</th>
-                  <td>Professor V</td>
-                  <td>Full-Time</td>
-                  <td></td>
-                  <td>Active Service</td>
-                </tr>
-
+                {% for pgu in pgu_list %}
+                  <tr class="clickable" onclick="window.location='#'">
+                    <th scope="row">{{pgu.last_name}}, {{pgu.first_name}}</th>
+                    <td>{{pgu.rank}}</td>
+                    <td>{{pgu.classification}}</td>
+                    <td>{{pgu.tenure}}</td>
+                    <td>{{pgu.status}}</td>
+                  </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>          
@@ -238,5 +178,31 @@
 
 
     </script>
+    
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
+  <script>
+    $(document).ready( function () {
+      $('#mcsu_table').DataTable({
+          searching: true, 
+          paging: true,
+          info: true,
+          ordering: true,
+      });
 
+      $('#cu_table').DataTable({
+          searching: true, 
+          paging: true,
+          info: true,
+          ordering: true,
+      });
+
+      $('#pgu_table').DataTable({
+        searching: true, 
+        paging: true,
+        info: true,
+        ordering: true,
+      });
+    });
+  </script>
 {% endblock %}

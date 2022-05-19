@@ -17,6 +17,7 @@ import json
 #Models
 from ..models import EducationalAttainment, FacultyPersonalInformation
 from ...auth.models import UserCredentials
+from ..models import UnitHeadNominations
 
 #External Functions
 # from .functions.generate_educational_attaintment_id import generate_educational_attainment_id
@@ -29,11 +30,76 @@ def load_user(user_id):
 
 @unit_head_blueprint.route('/unit_head/faculty_list', methods=['GET', 'POST'])
 def load_unit_head_faculty_list():
-    return render_template('unit_head/unit_head_faculty_list.html')
+    unit_faculty_list = FacultyPersonalInformation.query.filter_by(unit=current_user.unit).all()
+    return render_template(
+        'unit_head/unit_head_faculty_list.html',
+        unit_faculty_list = unit_faculty_list
+    )
 
-@unit_head_blueprint.route('/unit_head/role_assignment', methods=['GET', 'POST'])
+@unit_head_blueprint.route('/unit_head/role_assignment', methods=['GET', 'POST', 'DELETE'])
 def load_unit_head_role_assignment():
-    return render_template('unit_head/unit_head_role_assignment.html')
+    if request.method == 'GET':
+        try:
+            unit_faculty_list = FacultyPersonalInformation.query.filter_by(unit=current_user.unit).all()
+            unit_head_nominations = (UnitHeadNominations.query
+                .filter_by(curr_unit_head=current_user.user_id)
+                .order_by(UnitHeadNominations.id.desc())
+                .all()
+            )
+
+            for nominee in unit_head_nominations:
+                curr_faculty = FacultyPersonalInformation.query.filter_by(user_id=nominee.nominated_unit_head).first()
+                nominee.nominee_info = curr_faculty.__dict__
+
+            return render_template(
+                'unit_head/unit_head_role_assignment.html',
+                unit_faculty_list = unit_faculty_list,
+                unit_head_nominations = unit_head_nominations
+            )
+        except Exception as e:
+            print(e)
+            return 'Error loading Unit Head Role Assignment Page. Please try again.', 400
+    elif request.method == 'POST':
+        try:
+
+            unit_head_nominations = UnitHeadNominations.query.filter_by(curr_unit_head=current_user.user_id).all()
+            for nomination in unit_head_nominations:
+                if nomination.status is True:
+                    return "Failed to nominate new Unit Head. Existing pending approval was found. \
+                    Please wait for the Department Chair's feedback.", 400
+
+            new_unit_head_form = request.form
+            
+            new_unit_head = UnitHeadNominations(
+                curr_unit_head              = current_user.user_id,
+                nominated_unit_head         = new_unit_head_form['new_unit_head'],
+                approval_status             = 'Pending',
+            )
+
+            db.session.add(new_unit_head)
+            db.session.commit()
+
+            return 'New Unit Head successfully nominated.', 200
+        except Exception as e:
+            print(e)
+            return 'Error nominating new Unit Head. Please try again.', 400
+    elif request.method == 'DELETE':
+        try:
+            new_unit_head_form = request.form
+            
+            unit_head_nomination = UnitHeadNominations.query.filter_by(
+                curr_unit_head=current_user.user_id, 
+                nominated_unit_head=new_unit_head_form['nominated_unit_head'],
+                status = True
+            ).first()
+
+            db.session.delete(unit_head_nomination)
+            db.session.commit()
+
+            return 'Unit Head nominee successfully deleted.', 200
+        except Exception as e:
+            print(e)
+            return 'Error deleting Unit Head nominee. Please try again.', 400
 
 @unit_head_blueprint.route('/unit_head/pending_approvals', methods=['GET', 'POST'])
 def load_unit_head_pending_approvals():

@@ -19,3 +19,4 @@ class UserCredentials(UserMixin, db.Model):
     email 					    = db.Column(db.String(180), nullable=True)
     role 					    = db.Column(db.String(180), nullable=True)
     date_created				= db.Column(TIMESTAMP, nullable=True)
+    unit 					    = db.Column(db.String(180), nullable=True)
