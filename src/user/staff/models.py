@@ -1,3 +1,4 @@
+from stat import FILE_ATTRIBUTE_SPARSE_FILE
 from src import db
 from flask_login import UserMixin
 from flask import current_app as app
@@ -141,7 +142,7 @@ class LicensureExams(UserMixin, db.Model):
     date                        = db.Column(DATE, nullable=True)
     licensure_file              = db.Column(db.LargeBinary)
     last_modified               = db.Column(TIMESTAMP, nullable=True)
-    licensure_exam_id           = db.Column(db.String(180), db.ForeignKey('facultypersonalinformation.user_id'))
+    # licensure_exam_id           = db.Column(db.String(180), db.ForeignKey('facultypersonalinformation.user_id'))
 
     def __repr__(self):
         return f'<Licensure Exam Name {self.name_exam}>'
@@ -158,10 +159,10 @@ class TrainingSeminar(UserMixin, db.Model):
     remarks                     = db.Column(db.String(180), nullable=True)
     start_date                  = db.Column(DATE, nullable=True)
     end_date                    = db.Column(DATE, nullable=True)
-    # training_file               = db.Column()# file format)
+    training_file               = db.Column(db.LargeBinary)
     last_modified               = db.Column(TIMESTAMP, nullable=True)
 
-    training_seminar_id           = db.Column(db.String(180), db.ForeignKey('facultypersonalinformation.user_id'))
+    # training_seminar_id           = db.Column(db.String(180), db.ForeignKey('facultypersonalinformation.user_id'))
 
     def __repr__(self):
         return f'<Training/Seminar Exam Name {self.name_training}>'
@@ -177,13 +178,13 @@ class FacultySETRecords(UserMixin, db.Model):
     course_code                 = db.Column(db.String(180), nullable=True)
     section                     = db.Column(db.String(180), nullable=True)
     semester                    = db.Column(db.String(180), nullable=True)
-    sy                          = db.Column(DATE, nullable=True)
-    schedule                    = db.Column(DATE, nullable=True)
+    sy                          = db.Column(db.String(180), nullable=True)
+    schedule                    = db.Column(db.String(180), nullable=True)
     number_students             = db.Column(db.String(180), nullable=True)
     fsr_score                   = db.Column(db.String(180), nullable=True) 
+    fsr_file                    = db.Column(db.LargeBinary)
     set_score                   = db.Column(db.String(180), nullable=True)
     last_modified               = db.Column(TIMESTAMP, nullable=True)
-
 
     def __repr__(self):
         return f'<FSR ID {self.id}>'
