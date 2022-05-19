@@ -67,7 +67,7 @@
                         <div class="row">
                             <div class="col-12 custom-col-3 mb-3">
                                 <label class="col-form-label">Name of Research Project<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="name_research" name="name_research">
+                                <input class="form-control" type="text" id="name_research" name="name_research" value={{research_grant_record['name_research']}}>
                                 <span class = "validation-status"></span>
                             </div>  
                         </div>
@@ -75,13 +75,13 @@
                         <div class="row">
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Sponsor<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="sponsor" name="sponsor">
+                                <input class="form-control" type="text" id="sponsor" name="sponsor" value={{research_grant_record['sponsor']}}>
                                 <span class = "validation-status"></span>
                             </div> 
                             
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Amount Granted<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="amount_granted" name="amount_granted">
+                                <input class="form-control" type="text" id="amount_granted" name="amount_granted" value={{research_grant_record['amount_granted']}}>
                                 <span class = "validation-status"></span>
                             </div> 
                         </div>
@@ -89,13 +89,13 @@
                         <div class="row">
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Projected Start Date<span class="required-field"></span></label>
-                                <input class="form-control" type="date" id="projected_start" name="projected_start">
+                                <input class="form-control" type="date" id="projected_start" name="projected_start" value={{research_grant_record['projected_start']}}>
                                 <span class = "validation-status"></span>
                             </div>   
                             
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Projected End Date<span class="required-field"></span></label>
-                                <input class="form-control" type="date" id="projected_end" name="projected_end">
+                                <input class="form-control" type="date" id="projected_end" name="projected_end" value={{research_grant_record['projected_end']}}>
                                 <span class = "validation-status"></span>
                             </div>  
                         </div>
@@ -103,13 +103,13 @@
                         <div class="row">
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Actual Start Date<span class="required-field"></span></label>
-                                <input class="form-control" type="date" id="actual_start" name="actual_start">
+                                <input class="form-control" type="date" id="actual_start" name="actual_start" value={{research_grant_record['actual_start]}}>
                                 <span class = "validation-status"></span>
                             </div>   
                             
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Actual End Date<span class="required-field"></span></label>
-                                <input class="form-control" type="date" id="actual_end" name="actual_end">
+                                <input class="form-control" type="date" id="actual_end" name="actual_end" value={{research_grant_record['actual_end]}}>
                                 <span class = "validation-status"></span>
                             </div>  
                         </div>
@@ -117,7 +117,7 @@
                         <div class="row">
                             <div class="col-12 custom-col-3 mb-3">
                                 <label class="col-form-label">Research Progress<span class="required-field"></span></label>
-                                <textarea class="form-control" id="research_progress" name="research_progress" rows="4" cols="50"></textarea>
+                                <textarea class="form-control" id="research_progress" name="research_progress" rows="4" cols="50" value={{research_grant_record['research_progress']}}></textarea>
                                 <span class = "validation-status"></span>
                             </div>   
                         </div>
@@ -126,23 +126,17 @@
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Co-researchers (DPSM Faculty)<span class="required-field"></span></label>
                                 <select class="coresearchers_dpsm-select form-select form-control coresearchers_dpsm" aria-label="" id="coresearchers_dpsm" name="coresearchers_dpsm" data-field="coresearchers_dpsm">
-                                    <option selected value="">N/A</option>
-                                    <option value="SR">Sr.</option>
-                                    <option value="JR">Jr.</option>
-                                    <option value="I">I</option>
-                                    <option value="II">II</option>
-                                    <option value="III">III</option>
-                                    <option value="IV">IV</option>
-                                    <option value="V">V</option>
-                                    <option value="VI">VI</option>
-                                    <option value="VII">VII</option>
-                                    <option value="VIII">VIII</option>
+                                    <option selected value={{research_grant_record['coresearchers_dpsm']}}>{{research_grant_record['coresearchers_dpsm']}}</option>
+                                    <option value="N/A">N/A</option>
+                                    {% for faculty in faculty_list %}
+                                    <option value={{faculty}}>{{faculty}}</option>
+                                    {% endfor %}
                                 </select>
                             </div> 
                             
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Co-researchers (non-DPSM Faculty)<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="amount_granted" name="amount_granted">
+                                <input class="form-control" type="text" id="amount_granted" name="amount_granted" {{research_grant_record['coresearchers_nondpsm']}}>
                                 <span class = "validation-status"></span>
                             </div> 
                         </div>
@@ -151,7 +145,7 @@
                         <div class="row">
                             <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                 <label class="col-form-label">Upload File as Proof<span class="required-field"></span></label>
-                                <input type="file" id="accomplishment_file" name="accomplishment_file">
+                                <input type="file" id="accomplishment_file" name="accomplishment_file" {{research_grant_record['research_file']}}>
                                 <span class = "validation-status"></span>
                             </div>    
                         </div>

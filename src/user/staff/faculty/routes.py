@@ -29,6 +29,47 @@ faculty_blueprint = Blueprint('faculty_blueprint', __name__)
 def load_user(user_id):
 	return UserCredentials.query.get(user_id)
 
+@faculty_blueprint.route('/faculty/faculty_landing_page', methods = ['GET', 'POST'])
+def view_info():
+    try:
+        if request.method == 'GET':
+            return render_template('faculty/faculty_landing_page.html')
+        elif request.method == 'POST':
+            pass
+    except Exception as e:
+        print(e)
+        return e, 500
+
+
+# # edit personal information
+# @faculty_blueprint.route('faculty/update_info/<string:id>', methods = ['GET', 'POST'])
+# def update_personal_info():
+#     try:
+#         if request.method == 'GET':
+#             faculty_info_record = FacultyPersonalInformation.query.filter_by(id=id).first()
+#             #return render_template(
+#             # '.html',
+#             # educational_attainment_record
+#             # )
+#         elif request.method == 'PUT':
+#             faculty_info_record = EducationalAttainment.query.filter_by(id=id).first()
+#             faculty_info_form = request.form
+
+#             faculty_info_record.school = faculty_info_form['school'],
+#             faculty_info_record.degree = faculty_info_form['degree'],
+#             faculty_info_record.specialization = educational_attainment_form['specialization'],
+#             faculty_info_record.degree_type = educational_attainment_form['degree_type'],
+#             faculty_info_record.start_date = educational_attainment_form['start_date'],
+#             faculty_info_record.end_date = educational_attainment_form['end_date'],
+#             faculty_info_record.last_modified = date.today()
+#             db.session.commit()
+
+#             return 'Educational Attainment Record Successfully Updated.', 200
+#     except Exception as e:
+#         print(e)
+#         return 'An error has occured.', 500
+
+
 @faculty_blueprint.route('/faculty/add_educational_attainment', methods=['GET', 'POST'])
 def add_educational_attainment():
     try:
@@ -63,11 +104,11 @@ def add_educational_attainment():
 def update_educational_attainment(id):
     try:
         if request.method == 'GET':
-            educational_attainment_record = EducationalAttainment.query.filter_by(id=id).first()
-            #return render_template(
-            # '.html',
-            # educational_attainment_record
-            # )
+            educational_attainment_record = EducationalAttainment.query.filter_by(id=id)
+            return render_template(
+            'update_educational.html',
+            educational_attainment_record
+            )
         elif request.method == 'PUT':
             educational_attainment_record = EducationalAttainment.query.filter_by(id=id).first()
             educational_attainment_form = request.form
@@ -122,10 +163,10 @@ def update_work_experience(id):
     try:
         if request.method == 'GET':
             work_experience_record = WorkExperience.query.filter_by(id=id).first()
-            #return render_template(
-            # '.html',
-            # educational_attainment_record
-            # )
+            return render_template(
+            'update_work.html',
+            work_experience_record
+            )
         elif request.method == 'PUT':
             work_experience_record = WorkExperience.query.filter_by(id=id).first()
             work_experience_form = request.form
@@ -181,10 +222,10 @@ def update_accomplishment(id):
     try:
         if request.method == 'GET':
             accomplishment_record = Accomplishment.query.filter_by(id=id).first()
-            #return render_template(
-            # '.html',
-            # educational_attainment_record
-            # )
+            return render_template(
+            'update_accomplishment.html',
+            accomplishment_record
+            )
         elif request.method == 'PUT':
             accomplishment_record = Accomplishment.query.filter_by(id=id).first()
             accomplishment_form = request.form
@@ -208,8 +249,19 @@ def update_accomplishment(id):
 def add_publication():
     try:
         if request.method == 'GET':
-            #pass
-            return render_template('faculty/add_publication.html')
+            faculty_list = []
+            faculty_records = FacultyPersonalInformation.query.all()
+
+            for record in faculty_records:
+                if record.middle_name is None:
+                    faculty_name = "{} {}".format(record.first_name, record.last_name)
+                else:
+                    faculty_name = "{} {} {}".format(record.first_name, record.middle_name, record.last_name)
+                # info_dict = record.__dict__
+                # info_dict['faculty_name'] = faculty_name
+                faculty_list.append(faculty_name)
+
+            return render_template('faculty/add_publication.html', faculty_list)
         elif request.method == 'POST':
             publication_form = request.form
             publication_record = None
@@ -240,10 +292,22 @@ def update_publication(id):
     try:
         if request.method == 'GET':
             publication_record = Publication.query.filter_by(id=id).first()
-            #return render_template(
-            # '.html',
-            # educational_attainment_record
-            # )
+
+            faculty_list = []
+            faculty_records = FacultyPersonalInformation.query.all()
+
+            for record in faculty_records:
+                if record.middle_name is None:
+                    faculty_name = "{} {}".format(record.first_name, record.last_name)
+                else:
+                    faculty_name = "{} {} {}".format(record.first_name, record.middle_name, record.last_name)
+                faculty_list.append(faculty_name)
+
+            return render_template(
+                '.html',
+                publication_record,
+                faculty_list
+            )
         elif request.method == 'PUT':
             publication_record = Publication.query.filter_by(id=id).first()
             publication_form = request.form
@@ -267,8 +331,19 @@ def update_publication(id):
 def add_research_grant():
     try:
         if request.method == 'GET':
-            #pass
-            return render_template('faculty/add_research.html')
+            faculty_list = []
+            faculty_records = FacultyPersonalInformation.query.all()
+
+            for record in faculty_records:
+                if record.middle_name is None:
+                    faculty_name = "{} {}".format(record.first_name, record.last_name)
+                else:
+                    faculty_name = "{} {} {}".format(record.first_name, record.middle_name, record.last_name)
+                # info_dict = record.__dict__
+                # info_dict['faculty_name'] = faculty_name
+                faculty_list.append(faculty_name)
+
+            return render_template('faculty/add_research.html', faculty_list)
         elif request.method == 'POST':
             research_grant_form = request.form
             research_grant_record = None
@@ -303,10 +378,21 @@ def update_research_grant(id):
     try:
         if request.method == 'GET':
             research_grant_record = ResearchGrant.query.filter_by(id=id).first()
-            #return render_template(
-            # '.html',
-            # educational_attainment_record
-            # )
+
+            faculty_list = []
+            faculty_records = FacultyPersonalInformation.query.all()
+
+            for record in faculty_records:
+                if record.middle_name is None:
+                    faculty_name = "{} {}".format(record.first_name, record.last_name)
+                else:
+                    faculty_name = "{} {} {}".format(record.first_name, record.middle_name, record.last_name)
+                # info_dict = record.__dict__
+                # info_dict['faculty_name'] = faculty_name
+                faculty_list.append(faculty_name)
+
+            render_template('update_research.html', research_grant_record, faculty_list)
+
         elif request.method == 'PUT':
             research_grant_record = ResearchGrant.query.filter_by(id=id).first()
             research_grant_form = request.form
@@ -343,12 +429,12 @@ def add_licensure():
                 id = generate_id("le")
                 new_record = LicensureExams(
                     id                  = id,
-                    user_id             = current_user.user_id,
+                    # user_id             = 1,
                     name_exam           = licensure_form['name_exam'],
                     rank                = licensure_form['rank'],
                     license_number      = licensure_form['license_number'],
                     date                = licensure_form['date'],
-                    licensure_file      = licensure_form['upload_file'].read(),
+                    licensure_file      = request.files['licensure_file'].read(),
                     last_modified       = date.today()
                 )
                 db.session.add(new_record)
@@ -364,10 +450,10 @@ def update_licensure_exam(id):
     try:
         if request.method == 'GET':
             licensure_record = LicensureExams.query.filter_by(id=id).first()
-            #return render_template(
-            # '.html',
-            # educational_attainment_record
-            # )
+            return render_template(
+            'update_licensure.html',
+            licensure_record
+            )
         elif request.method == 'PUT':
             licensure_record = LicensureExams.query.filter_by(id=id).first()
             licensure_form = request.form
@@ -376,7 +462,7 @@ def update_licensure_exam(id):
             licensure_record.rank = licensure_form['rank'],
             licensure_record.license_numbeer = licensure_form['license_number'],
             licensure_record.date = licensure_form['date'],
-            # licensure_record.file = licensure_form['upload_file'],
+            licensure_record.licensure_file = licensure_form['licensure_file'].read(),
             licensure_record.last_modified = date.today()
             db.session.commit()
 
@@ -404,7 +490,7 @@ def add_training():
                     remarks             = training_form['remarks'],
                     start_date          = training_form['start_date'],
                     end_date            = training_form['end_date'],
-                    # proof               = licensure_form['upload_file'],
+                    accomplishment_file = training_form['accomplishment_file'].read(),
                     last_modified       = date.today()
                 )
                 db.session.add(new_record)
@@ -420,10 +506,10 @@ def update_training(id):
     try:
         if request.method == 'GET':
             training_record = TrainingSeminar.query.filter_by(id=id).first()
-            #return render_template(
-            # '.html',
-            # educational_attainment_record
-            # )
+            return render_template(
+            'update_training.html',
+            training_record
+            )
         elif request.method == 'PUT':
             training_record = TrainingSeminar.query.filter_by(id=id).first()
             training_form = request.form
@@ -433,7 +519,7 @@ def update_training(id):
             training_record.remarks = training_form['remarks'],
             training_record.start_date = training_form['start_date'],
             training_record.end_date = training_form['end_date'],
-            # licensure_record.file = licensure_form['upload_file'],
+            training_record.accomplishment_file = training_form['accomplishment_file'].read(),
             training_record.last_modified = date.today()
             db.session.commit()
 
@@ -453,17 +539,18 @@ def add_fsr_set():
             fsr_set_record = None
             while fsr_set_record is None:
                 id = generate_id("fsr")
-                new_record = LicensureExams(
+                new_record = FacultySETRecords(
                     id                  = id,
                     user_id             = current_user.user_id,
                     course_code         = fsr_set_form['course_code'],
                     section             = fsr_set_form['section'],
                     semester            = fsr_set_form['semester'],
                     sy                  = fsr_set_form['sy'],
-                    scheduler           = fsr_set_form['schedule'],
+                    schedule            = fsr_set_form['schedule'],
                     number_students     = fsr_set_form['number_students'],
-                    # fsr_file           = fsr_set_form['upload_file'],
-                    # set               = licensure_form['upload_file'],
+                    fsr_rating          = fsr_set_form['fsr'],
+                    fsr_set_file        = fsr_set_form['fsr_set_file'].read(),
+                    set_rating          = fsr_set_form['set'],
                     last_modified       = date.today()
                 )
                 db.session.add(new_record)
@@ -479,10 +566,10 @@ def update_fsr_set(id):
     try:
         if request.method == 'GET':
             fsr_set_record = FacultySETRecords.query.filter_by(id=id).first()
-            #return render_template(
-            # '.html',
-            # educational_attainment_record
-            # )
+            return render_template(
+            'update_fsr_set.html',
+            fsr_set_record
+            )
         elif request.method == 'PUT':
             fsr_set_record = FacultySETRecords.query.filter_by(id=id).first()
             fsr_set_form = request.form
@@ -492,8 +579,7 @@ def update_fsr_set(id):
             fsr_set_record.semester = fsr_set_form['semester'],
             fsr_set_record.sy = fsr_set_form['sy'],
             fsr_set_record.numbeer_students = fsr_set_form['number_students'],
-            # fsr_set_record.course_code = fsr_set_form['name_exam'],
-            # licensure_record.file = licensure_form['upload_file'],
+            fsr_set_record.fsr_set_file = fsr_set_form['fsr_set_file'].read(),
             fsr_set_record.last_modified = date.today()
             db.session.commit()
 
