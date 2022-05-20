@@ -97,7 +97,7 @@ def create_faculty_account():
 def clerk_faculty_list():
     try:
         faculty_list = []
-        faculty_records = FacultyPersonalInformation.query.all()
+        faculty_records = FacultyPersonalInformation.query.order_by(FacultyPersonalInformation.last_name.asc()).all()
 
         for record in faculty_records:
             if record.middle_name is None:
