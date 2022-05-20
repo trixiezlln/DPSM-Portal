@@ -203,3 +203,4 @@ class UnitHeadNominations(UserMixin, db.Model):
     approval_status             = db.Column(db.String(180), nullable=True)
     approver_remarks            = db.Column(db.String(180), nullable=True)
     status                      = db.Column(db.Boolean, nullable=True, default=True)
+    unit                        = db.Column(db.String(180), nullable=True)

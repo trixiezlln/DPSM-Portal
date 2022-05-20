@@ -285,3 +285,159 @@ function delete_unit_head_nominee(curr_unit_head, nominated_unit_head){
         datatype: "multipart/form-data"
     });
 }
+
+/* DEPT HEAD: Approve Unit Head */
+function approve_unit_head_nominee(){
+    var new_unit_head_data = new FormData();
+
+    new_unit_head_data.append('curr_unit_head', $('#accept_modal_curr_unit_head').val());
+    new_unit_head_data.append('nominated_unit_head', $('#accept_modal_nominated_unit_head').val());
+    
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    $.ajax({
+        type: "POST",
+        url: "/department_chair/role_assignment",
+        processData: false,
+        contentType: false,
+        data: new_unit_head_data,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }).then(function(then){
+                location.reload();
+            })
+        },
+        error: function(error){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+}
+
+/* DEPT HEAD: Reject Unit Head */
+function reject_unit_head_nominee(){
+    var new_unit_head_data = new FormData();
+
+    new_unit_head_data.append('curr_unit_head', $('#delete_modal_curr_unit_head').val());
+    new_unit_head_data.append('nominated_unit_head', $('#delete_modal_nominated_unit_head').val());
+    new_unit_head_data.append('approver_remarks', $('#remarks').val());
+    
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    $.ajax({
+        type: "DELETE",
+        url: "/department_chair/role_assignment",
+        processData: false,
+        contentType: false,
+        data: new_unit_head_data,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }).then(function(then){
+                location.reload();
+            })
+        },
+        error: function(error){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+}
+
+function unit_head_info_modal(curr_unit_head, nominated_unit_head, modal){
+    if(modal == 'accept'){
+        $('#accept_modal_curr_unit_head').val(curr_unit_head)
+        $('#accept_modal_nominated_unit_head').val(nominated_unit_head)
+        $('#acceptModal').modal('toggle');
+    } else if(modal == 'reject'){
+        $('#delete_modal_curr_unit_head').val(curr_unit_head)
+        $('#delete_modal_nominated_unit_head').val(nominated_unit_head)
+        $('#rejectModal').modal('toggle');
+    }
+}
+
+/* DEPT HEAD: Assign New Department Head */
+function assign_dept_head(){
+    var new_dept_head_data = new FormData();
+
+    new_dept_head_data.append('new_dept_head', $('#select_department_chair').val());
+    
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    $.ajax({
+        type: "PUT",
+        url: "/department_chair/role_assignment",
+        processData: false,
+        contentType: false,
+        data: new_dept_head_data,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }).then(function(then){
+                location.reload();
+            })
+        },
+        error: function(error){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+}

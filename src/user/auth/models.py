@@ -20,3 +20,5 @@ class UserCredentials(UserMixin, db.Model):
     role 					    = db.Column(db.String(180), nullable=True)
     date_created				= db.Column(TIMESTAMP, nullable=True)
     unit 					    = db.Column(db.String(180), nullable=True)
+    is_unit_head                = db.Column(db.Boolean, default=False)
+    is_dept_head                = db.Column(db.Boolean, default=False)
