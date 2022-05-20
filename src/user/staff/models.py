@@ -184,6 +184,8 @@ class FacultySETRecords(UserMixin, db.Model):
     fsr_file                    = db.Column(db.LargeBinary)
     set_score                   = db.Column(db.String(180), nullable=True)
     last_modified               = db.Column(TIMESTAMP, nullable=True)
+    syllabus_f_ext              = db.Column(db.String(180), nullable=True)
+    set_f_ext                   = db.Column(db.String(180), nullable=True)
 
     def __repr__(self):
         return f'<FSR ID {self.id}>'
@@ -203,4 +205,14 @@ class UnitHeadNominations(UserMixin, db.Model):
     approval_status             = db.Column(db.String(180), nullable=True)
     approver_remarks            = db.Column(db.String(180), nullable=True)
     status                      = db.Column(db.Boolean, nullable=True, default=True)
+    unit                        = db.Column(db.String(180), nullable=True)
 
+class ClerkPeronsalInformation(UserMixin, db.Model):
+    __table_args__ = {
+        'schema':schema,
+        'extend_existing': True
+    }
+    __tablename__ = 'clerk_personal_information'
+    id                          = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
+    name                        = db.Column(db.String(180), nullable=True)
+    user_id                     = db.Column(db.String(180), nullable=True)

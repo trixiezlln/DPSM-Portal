@@ -73,8 +73,9 @@ def load_unit_head_role_assignment():
             return 'Error loading Unit Head Role Assignment Page. Please try again.', 400
     elif request.method == 'POST':
         try:
-
+            
             unit_head_nominations = UnitHeadNominations.query.filter_by(curr_unit_head=current_user.user_id).all()
+            
             for nomination in unit_head_nominations:
                 if nomination.status is True:
                     return "Failed to nominate new Unit Head. Existing pending approval was found. \
@@ -85,6 +86,7 @@ def load_unit_head_role_assignment():
             new_unit_head = UnitHeadNominations(
                 curr_unit_head              = current_user.user_id,
                 nominated_unit_head         = new_unit_head_form['new_unit_head'],
+                unit                        = current_user.unit,
                 approval_status             = 'Pending',
             )
 
