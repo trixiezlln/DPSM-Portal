@@ -26,10 +26,19 @@
                 <!-- faculty status -->
                 <div class="col-12">
                     <hr>
-                    <h6 class="info-subhead mt-1">Faculty Status</h6>
+                    <h6 class="info-subhead mt-1">Faculty Information</h6>
                     <div class="col col-12 container">
                         <div class="row">
-                            <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                            <div class="col-12 col-lg-4 custom-col-1 mb-3">
+                                <label class="col-form-label">Unit</label>
+                                <select class="form-control faculty-status-unit" id="faculty_unit" name="faculty_unit">
+                                    <option selected value="">N/A</option>
+                                    <option value="mcsu">Mathematics and Computer Science Unit</option>
+                                    <option value="pgu">Physics and Geology Unit</option>
+                                    <option value="cu">Chemistry Unit</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-lg-2 custom-col-1 mb-3">
                                 <label class="col-form-label">Rank</label>
                                 <select class="form-control faculty-status-rank" id="faculty_rank" name="faculty_rank">
                                     <option selected value="">N/A</option>
@@ -40,7 +49,7 @@
                                     <option value="Professor 1">Professor 1</option>
                                 </select>
                             </div>
-                            <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                            <div class="col-12 col-lg-2 custom-col-1 mb-3">
                                 <label class="col-form-label">Classification</label>
                                 <select class="form-control faculty-status-classification" id="faculty_classification" name="faculty_classification">
                                     <option selected value="">N/A</option>
@@ -48,7 +57,7 @@
                                     <option value="Part-time">Part-time</option>
                                 </select>
                             </div>
-                            <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                            <div class="col-12 col-lg-2 custom-col-1 mb-3">
                                 <label class="col-form-label">Tenure</label>
                                 <select class="form-control faculty-status-tenure" id="faculty_tenure" name="faculty_tenure">
                                     <option selected value="">N/A</option>
@@ -56,7 +65,7 @@
                                     <option value="Permanent">Permanent</option>
                                 </select>
                             </div>
-                            <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                            <div class="col-12 col-lg-2 custom-col-1 mb-3">
                                 <label class="col-form-label">Status</label>
                                 <select class="form-control faculty-status-status" id="faculty_status" name="faculty_status">
                                     <option selected value="">N/A</option>
