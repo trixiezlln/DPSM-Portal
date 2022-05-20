@@ -185,6 +185,8 @@ class FacultySETRecords(UserMixin, db.Model):
     fsr_file                    = db.Column(db.LargeBinary)
     set_score                   = db.Column(db.String(180), nullable=True)
     last_modified               = db.Column(TIMESTAMP, nullable=True)
+    syllabus_f_ext              = db.Column(db.String(180), nullable=True)
+    set_f_ext                   = db.Column(db.String(180), nullable=True)
 
     def __repr__(self):
         return f'<FSR ID {self.id}>'

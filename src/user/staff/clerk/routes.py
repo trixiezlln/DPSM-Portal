@@ -21,6 +21,12 @@ from ...auth.models import UserCredentials
 
 clerk_blueprint = Blueprint('clerk_blueprint', __name__)
 
+FSR_IMGS_DIR = r'src\static\img\fsr_imgs'
+FSR_SYLLABUS_DIR = r'src\static\img\fsr_syllabus'
+
+RENDER_FSR_IMGS_DIR = r'static\img\fsr_imgs'
+RENDER_FSR_SYLLABUS_DIR = r'static\img\fsr_syllabus'
+
 @login_manager.user_loader
 def load_user(user_id):
     print('tangina')
@@ -68,6 +74,7 @@ def create_faculty_account():
                 primary_email       = new_account_form['primary_email'],
                 alternate_email     = new_account_form['alternate_email'],
                 date_created        = date.today(),
+                unit                = new_account_form['faculty_unit']
                 # created_by          = current_user.email
             )
             db.session.add(new_faculty_account)
@@ -76,7 +83,8 @@ def create_faculty_account():
                 user_id         = new_account_form['faculty_id'],
                 email           = new_account_form['primary_email'],
                 role            = 'faculty',
-                date_created    = date.today()
+                date_created    = date.today(),
+                unit                = new_account_form['faculty_unit']
             )
             db.session.add(new_user_credentials)
             db.session.commit()
@@ -110,7 +118,7 @@ def clerk_faculty_list():
         return 'An error has occured.', 500
     # return render_template('clerk/faculty_list.html')
 
-@clerk_blueprint.route('/clerk/edit_information', methods=['POST'])
+@clerk_blueprint.route('/clerk/edit_information', methods=['PUT'])
 def clerk_edit_information():
     try:
         edit_form = request.form 
@@ -134,8 +142,7 @@ from pprint import pprint
 from PIL import Image
 @clerk_blueprint.route('/clerk/faculty_service_record/<user_id>', methods=['GET', 'PUT', 'POST'])
 def clerk_faculty_service_record(user_id):
-    FSR_IMGS_DIR = r'src\static\img\fsr_imgs'
-    FSR_SYLLABUS_DIR = r'src\static\img\fsr_syllabus'
+    
     try:
         if request.method == 'GET':
             try:
@@ -188,19 +195,6 @@ def clerk_faculty_service_record(user_id):
                 fsr_form = request.form
                 fsr_files = request.files
 
-                new_fsr_record = FacultySETRecords(
-                    id                      = fsr_form['user_id'],
-                    course_code             = fsr_form['new_course_code'],
-                    section                 = fsr_form['new_section'],
-                    semester                = fsr_form['new_semester'],
-                    sy                      = fsr_form['new_sy'],
-                    schedule                = fsr_form['new_schedule'],
-                    number_students         = fsr_form['new_number_students'],
-                )
-
-                db.session.add(new_fsr_record)
-                db.session.commit()
-
                 CURR_FSR_SYLLABUS_DIR = os.path.join(FSR_SYLLABUS_DIR, fsr_form['user_id'])
                 CURR_FSR_IMGS_DIR = os.path.join(FSR_IMGS_DIR, fsr_form['user_id'])
 
@@ -221,14 +215,14 @@ def clerk_faculty_service_record(user_id):
                     fsr_form['new_sy'], 
                     fsr_form['new_semester'], 
                     fsr_form['new_section'], 
-                    syllabus_f_ext
+                    syllabus_f_ext[1:]
                 )
                 set_proof_filename = '{}_{}_{}_{}.{}'.format(
                     'FSR_SET_PROOF', 
                     fsr_form['new_sy'], 
                     fsr_form['new_semester'], 
                     fsr_form['new_section'], 
-                    set_proof_f_ext
+                    set_proof_f_ext[1:]
                 )
 
                 SYLLABUS_PATH = os.path.join(CURR_FSR_SYLLABUS_DIR, syllabus_filename)
@@ -236,6 +230,21 @@ def clerk_faculty_service_record(user_id):
 
                 syllabus_img.save(SYLLABUS_PATH)
                 set_proof_image.save(SET_PROOF_PATH)
+
+                new_fsr_record = FacultySETRecords(
+                    id                      = fsr_form['user_id'],
+                    course_code             = fsr_form['new_course_code'],
+                    section                 = fsr_form['new_section'],
+                    semester                = fsr_form['new_semester'],
+                    sy                      = fsr_form['new_sy'],
+                    schedule                = fsr_form['new_schedule'],
+                    number_students         = fsr_form['new_number_students'],
+                    syllabus_f_ext          = syllabus_f_ext[1:],
+                    set_f_ext               = set_proof_f_ext[1:]
+                )
+
+                db.session.add(new_fsr_record)
+                db.session.commit()
 
                 return 'Faculty Service Record successfully added.', 200
             except Exception as e:
@@ -245,6 +254,37 @@ def clerk_faculty_service_record(user_id):
         print(e)
         return 'An error has occured. Please try again.', 500
 
+@clerk_blueprint.route('/clerk/faculty_service_record/<user_id>/show_syllabus/<filename>', methods=['GET', 'PUT', 'POST'])
+def clerk_faculty_service_record_show_syllabus(user_id, filename):
+    try:
+        CURR_FSR_SYLLABUS_DIR = os.path.join(RENDER_FSR_SYLLABUS_DIR, user_id)
+        SYLLABUS_PATH = os.path.join(CURR_FSR_SYLLABUS_DIR, filename)
+        _, syllabus_f_ext = os.path.splitext(filename)
+        response = json.dumps({
+				'syllabus_file':str(SYLLABUS_PATH),
+				'file_ext':syllabus_f_ext
+		})
+
+        return response, 200
+    except Exception as e:
+        print(e)
+        return 'Error displaying syllabus. Please try again.', 400
+
+@clerk_blueprint.route('/clerk/faculty_service_record/<user_id>/show_set_proof/<filename>', methods=['GET', 'PUT', 'POST'])
+def clerk_faculty_service_record_show_set_proof(user_id, filename):
+    try:
+        CURR_FSR_SET_DIR = os.path.join(RENDER_FSR_IMGS_DIR, user_id)
+        SET_PATH = os.path.join(CURR_FSR_SET_DIR, filename)
+        _, syllabus_f_ext = os.path.splitext(filename)
+        response = json.dumps({
+				'syllabus_file':str(SET_PATH),
+				'file_ext':syllabus_f_ext
+		})
+
+        return response, 200
+    except Exception as e:
+        print(e)
+        return 'Error displaying syllabus. Please try again.', 400
 
 # @clerk_blueprint.app_context_processor
 # def inject():

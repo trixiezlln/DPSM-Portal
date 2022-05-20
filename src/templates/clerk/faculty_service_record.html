@@ -23,11 +23,31 @@
                 <td id="semester_row{{outer_loop.index}}_{{loop.index}}">{{record['semester']}}</td>
                 <td id="schedule_row{{outer_loop.index}}_{{loop.index}}">{{record['schedule']}}</td>
                 <td id="number_of_students_row{{outer_loop.index}}_{{loop.index}}">{{record['number_students']}}</td>
-                <td id="syllabus_row{{outer_loop.index}}_{{loop.index}}"><button type="button" class="btn btn-secondary crud-btn" id="view_syllabus">View Syllabus</button></td>
+                <td id="syllabus_row{{outer_loop.index}}_{{loop.index}}">
+                    <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_syllabus_img' name='view_syllabus_img' hidden></a>
+                    <button type="button" class="btn btn-secondary crud-btn" id="view_syllabus" onclick="show_syllabus(
+                        '{{record['id']}}',
+                        '{{sy}}',
+                        '{{record['semester']}}',
+                        '{{record['section']}}',
+                        '{{record['syllabus_f_ext']}}'
+                    )">
+                        View Syllabus
+                    </button>
+                </td>
                 <td id="set_row{{outer_loop.index}}_{{loop.index}}">
                     {{record['fsr_score']}}
                     <br>
-                    <button class="btn btn-secondary crud-btn" type="button" id="view_set">View SET Proof</button>
+                    <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_syllabus_img' name='view_syllabus_img' hidden></a>
+                    <button type="button" class="btn btn-secondary crud-btn" id="view_set" name="view_set" onclick="show_set_proof(
+                        '{{record['id']}}',
+                        '{{sy}}',
+                        '{{record['semester']}}',
+                        '{{record['section']}}',
+                        '{{record['syllabus_f_ext']}}'
+                    )">
+                        View SET Proof
+                    </button>
                 </td>
                 <td id="action_button_row{{outer_loop.index}}_{{loop.index}}">
                     <button class="btn btn-primary crud-btn" id="edit_button{{outer_loop.index}}_{{loop.index}}" style="margin-right: 20px;" onclick="edit_row('{{outer_loop.index}}_{{loop.index}}')">Edit</button>
@@ -143,7 +163,29 @@
 <script src="{{ url_for('static', filename='js/ajax_calls.js') }}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Core CSS file -->
+<link href="{{ url_for('static', filename='css/photoviewer.css') }}" rel="stylesheet">
+<!-- Core JS file -->
+<script src="{{ url_for('static', filename='js/photoviewer.js') }}"></script>
+
 <script>
+    // initialize manually with a list of links
+    $('[data-gallery=photoviewer]').click(function (e) {
+        e.preventDefault();
+        var items = [],
+            options = {
+            index: $(this).index(),
+            };
+    
+    $('[data-gallery=photoviewer]').each(function () {
+        items.push({
+        src: $(this).attr('href'),
+        title: $(this).attr('data-title')
+        });
+    });
+    new PhotoViewer(items, options);
+    });
+
     function edit_row(no) {
         document.getElementById("edit_button"+no).style.display="none";
         document.getElementById("save_button"+no).style.display="block";

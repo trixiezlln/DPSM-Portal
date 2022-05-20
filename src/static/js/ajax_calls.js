@@ -178,6 +178,8 @@ $("#add_fsr").submit(function(e) {
                 icon: 'success',
                 title: 'Success',
                 text: success.responseText
+            }).then(function(then){
+                location.reload();
             }) 
         },
         error: function(error){
@@ -541,3 +543,63 @@ function delete_clerk_modal(clerk_user_id){
     $('#clerk_id').val(clerk_user_id)
     $('#deleteModal').modal('toggle');
 }
+
+/* Show Syllabus Image */
+function show_syllabus(user_id, sy, semester, section, f_ext) {
+    filename = "FSR_SYLLABUS_" + sy + "_" + semester + "_" + section + "." + f_ext
+    $.ajax({
+        type: "GET",
+        url: "/clerk/faculty_service_record/"+user_id+"/show_syllabus/"+filename,
+        success: function(response){
+            var data = JSON.parse(response);
+            var file_ext = data['file_ext'];
+
+            if (file_ext === 'pdf'){
+                window.open(data['syllabus_file'], '_blank');
+            } else {
+                var img_loc = "../../../"+data['syllabus_file']
+                $('#view_syllabus_img').attr("href", img_loc);
+                $('#view_syllabus_img').click();
+            };
+        },
+        error: function(error){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+    });
+};
+
+/* Show SET Proof Image */
+function show_set_proof(user_id, sy, semester, section, f_ext) {
+    filename = "FSR_SET_PROOF_" + sy + "_" + semester + "_" + section + "." + f_ext
+    $.ajax({
+        type: "GET",
+        url: "/clerk/faculty_service_record/"+user_id+"/show_set_proof/"+filename,
+        success: function(response){
+            var data = JSON.parse(response);
+            var file_ext = data['file_ext'];
+
+            if (file_ext === 'pdf'){
+                window.open(data['syllabus_file'], '_blank');
+            } else {
+                var img_loc = "../../../"+data['syllabus_file']
+                $('#view_syllabus_img').attr("href", img_loc);
+                $('#view_syllabus_img').click();
+            };
+        },
+        error: function(error){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+    });
+};
