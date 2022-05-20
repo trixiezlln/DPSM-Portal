@@ -23,8 +23,12 @@
                 <td id="semester_row{{outer_loop.index}}_{{loop.index}}">{{record['semester']}}</td>
                 <td id="schedule_row{{outer_loop.index}}_{{loop.index}}">{{record['schedule']}}</td>
                 <td id="number_of_students_row{{outer_loop.index}}_{{loop.index}}">{{record['number_students']}}</td>
-                <td id="syllabus_row{{outer_loop.index}}_{{loop.index}}"><input type="file" id="upload_syllabus"></td>
-                <td id="set_row{{outer_loop.index}}_{{loop.index}}">{{record['fsr_score']}}<br><input type="file" id="upload_proof_set"></td>
+                <td id="syllabus_row{{outer_loop.index}}_{{loop.index}}"><button type="button" class="btn btn-secondary crud-btn" id="view_syllabus">View Syllabus</button></td>
+                <td id="set_row{{outer_loop.index}}_{{loop.index}}">
+                    {{record['fsr_score']}}
+                    <br>
+                    <button class="btn btn-secondary crud-btn" type="button" id="view_set">View SET Proof</button>
+                </td>
                 <td id="action_button_row{{outer_loop.index}}_{{loop.index}}">
                     <button class="btn btn-primary crud-btn" id="edit_button{{outer_loop.index}}_{{loop.index}}" style="margin-right: 20px;" onclick="edit_row('{{outer_loop.index}}_{{loop.index}}')">Edit</button>
                     <button class="btn btn-primary crud-btn" id="save_button{{outer_loop.index}}_{{loop.index}}" style="margin-right: 20px; display:none;" onclick="save_row('{{outer_loop.index}}_{{loop.index}}', {{record['id']}})">Save</button>
@@ -168,8 +172,8 @@
                                 "<option value='Mid Year'>Mid Year</option>";
         schedule.innerHTML="<input style='width: 100%' type='text' id='schedule_text"+no+"' value='"+schedule_data+"'>";
         number_of_students.innerHTML="<input style='width: 20%' type='text' id='number_of_students_text"+no+"' value='"+number_of_students_data+"'>";
-        syllabus.innerHTML="<input style='width: 40%' type='text' id='syllabus_text"+no+"' value='"+syllabus_data+"'>";
-        set.innerHTML="<input style='width: 30%' type='text' id='set_text"+no+"' value='"+set_data+"'>";
+        syllabus.innerHTML="<input style='width: 55%' type='file' id='syllabus_text"+no+"' value='"+syllabus_data+"'>";
+        set.innerHTML="<input style='width: 55%' type='file' id='set_text"+no+"' value='"+set_data+"'>";
     }
 
     function save_row(no, user_id) {
