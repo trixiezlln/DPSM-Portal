@@ -52,7 +52,9 @@ def create_faculty_account():
 
             if UserCredentials.query.filter_by(user_id=new_account_form['faculty_id']).first() is not None:
                 return 'User with entered Faculty ID already exists. Please check and try again.', 400        
-    
+
+            print(new_account_form)
+
             new_faculty_account = FacultyPersonalInformation(
                 user_id             = new_account_form['faculty_id'],
                 rank                = new_account_form['faculty_rank'],
@@ -77,6 +79,7 @@ def create_faculty_account():
                 unit                = new_account_form['faculty_unit']
                 # created_by          = current_user.email
             )
+
             db.session.add(new_faculty_account)
             
             new_user_credentials = UserCredentials(

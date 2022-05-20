@@ -26,6 +26,8 @@ $("#create-faculty-account").submit(function(e) {
                 icon: 'success',
                 title: 'Success',
                 text: success.responseText
+            }).then(function(then){
+                location.reload();
             }) 
         },
         error: function(error) {
