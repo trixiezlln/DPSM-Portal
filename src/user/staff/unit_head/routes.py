@@ -15,7 +15,7 @@ import pip._vendor.cachecontrol as cacheControl
 import json
 
 #Models
-from ..models import EducationalAttainment, FacultyPersonalInformation
+from ..models import EducationalAttainment, FacultyPersonalInformation, LicensureExams, TrainingSeminar, Accomplishment, ResearchGrant, Publication
 from ...auth.models import UserCredentials
 from ..models import UnitHeadNominations
 
@@ -117,9 +117,82 @@ def load_unit_head_role_assignment():
 def load_unit_head_pending_approvals():
     return render_template('unit_head/unit_head_updated_information.html')
 
+# @unit_head_blueprint.route('/unit_head/dashboard', methods=['GET', 'POST'])
+# def load_unit_head_dashboard():
+#     return render_template('unit_head/unit_head_dashboard.html')
+# return render_template('unit_head/unit_head_faculty_list.html')
+
+# @unit_head_blueprint.route('/unit_head/role_assignment', methods=['GET', 'POST'])
+# def load_unit_head_role_assignment():
+#     return render_template('unit_head/unit_head_role_assignment.html')
+
+# @unit_head_blueprint.route('/unit_head/pending_approvals', methods=['GET', 'POST'])
+# def load_unit_head_pending_approvals():
+#     return render_template('unit_head/unit_head_updated_information.html')
+
 @unit_head_blueprint.route('/unit_head/dashboard', methods=['GET', 'POST'])
 def load_unit_head_dashboard():
-    return render_template('unit_head/unit_head_dashboard.html')
+    acc_data_mcsu = db.session.query(db.func.count(Publication.id), db.func.count(Accomplishment.id), db.func.count(TrainingSeminar.id), db.func.count(LicensureExams.id), db.func.count(ResearchGrant.id))\
+        .filter(Publication.user_id == FacultyPersonalInformation.user_id)\
+        .filter(Accomplishment.user_id == FacultyPersonalInformation.user_id)\
+        .filter(TrainingSeminar.user_id == FacultyPersonalInformation.user_id)\
+        .filter(LicensureExams.user_id == FacultyPersonalInformation.user_id)\
+        .filter(ResearchGrant.user_id == FacultyPersonalInformation.user_id)\
+        .filter(FacultyPersonalInformation.unit == "mcsu")\
+        .all()
+
+    accomplishment_count = []
+    for total_count in acc_data_mcsu:
+        accomplishment_count.append(total_count)
+    
+    acc_data_physics = db.session.query(db.func.count(Publication.id), db.func.count(Accomplishment.id), db.func.count(TrainingSeminar.id), db.func.count(LicensureExams.id), db.func.count(ResearchGrant.id))\
+        .filter(Publication.user_id == FacultyPersonalInformation.user_id)\
+        .filter(Accomplishment.user_id == FacultyPersonalInformation.user_id)\
+        .filter(TrainingSeminar.user_id == FacultyPersonalInformation.user_id)\
+        .filter(LicensureExams.user_id == FacultyPersonalInformation.user_id)\
+        .filter(ResearchGrant.user_id == FacultyPersonalInformation.user_id)\
+        .filter(FacultyPersonalInformation.unit == "physics")\
+        .all()
+
+    accomplishment_count = []
+    for total_count in acc_data_mcsu:
+        accomplishment_count.append(total_count)
+
+    acc_data_chemistry = db.session.query(db.func.count(Publication.id), db.func.count(Accomplishment.id), db.func.count(TrainingSeminar.id), db.func.count(LicensureExams.id), db.func.count(ResearchGrant.id))\
+        .filter(Publication.user_id == FacultyPersonalInformation.user_id)\
+        .filter(Accomplishment.user_id == FacultyPersonalInformation.user_id)\
+        .filter(TrainingSeminar.user_id == FacultyPersonalInformation.user_id)\
+        .filter(LicensureExams.user_id == FacultyPersonalInformation.user_id)\
+        .filter(ResearchGrant.user_id == FacultyPersonalInformation.user_id)\
+        .filter(FacultyPersonalInformation.unit == "chemistry")\
+        .all()
+
+    count_mcsu = []
+    count_physics = []
+    count_chemistry = []
+    for total_count in acc_data_mcsu:
+        count_mcsu.append(total_count)
+        
+    for total_count in acc_data_mcsu:
+        count_physics.append(total_count)
+
+    for total_count in acc_data_mcsu:
+        count_chemistry.append(total_count)
+    try:
+        if request.method == 'GET':
+            return render_template('unit_head/unit_head_dashboard.html', 
+                acc_data_mcsu = json.dumps(count_mcsu),
+                acc_data_physics = json.dumps(count_physics),
+                acc_data_chemistry = json.dumps(count_chemistry)
+            )
+        elif request.method == 'POST':
+            pass
+
+    except Exception as e:
+        print(e)
+        return 'An error has occured.', 500
+
+
 
 @unit_head_blueprint.route('/unit_head/department_chair_role_assignment', methods=['GET', 'POST'])
 def load_department_chair_role_assignment():

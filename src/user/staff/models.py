@@ -37,9 +37,7 @@ class FacultyPersonalInformation(UserMixin, db.Model):
     last_modified               = db.Column(TIMESTAMP, nullable=True)
     date_created                = db.Column(DATE, nullable=True)
     created_by                  = db.Column(db.String(180), nullable=True)
-    unit 					= db.Column(db.String(180), nullable=True)
-    # Many licensure exams, trainings/seminars, FSR 
-    # licensure                   = db.relationship('LicensureExams', backref='licensure')
+    unit 					    = db.Column(db.String(180), nullable=True)
 
 class EducationalAttainment(UserMixin, db.Model):
     __table_args__ = {
@@ -135,6 +133,7 @@ class LicensureExams(UserMixin, db.Model):
         'extend_existing': True
     }
     __tablename__ = 'licensure_exams'
+    user_id                     = db.Column(db.String(180), nullable=True)
     id                          = db.Column(db.String(180), primary_key=True, nullable=True)
     name_exam                   = db.Column(db.String(180), nullable=True)
     rank                        = db.Column(db.String(180), nullable=True)
@@ -142,8 +141,7 @@ class LicensureExams(UserMixin, db.Model):
     date                        = db.Column(DATE, nullable=True)
     licensure_file              = db.Column(db.LargeBinary)
     last_modified               = db.Column(TIMESTAMP, nullable=True)
-    # licensure_exam_id           = db.Column(db.String(180), db.ForeignKey('facultypersonalinformation.user_id'))
-
+    
     def __repr__(self):
         return f'<Licensure Exam Name {self.name_exam}>'
 
@@ -153,6 +151,7 @@ class TrainingSeminar(UserMixin, db.Model):
         'extend_existing': True
     }
     __tablename__ = 'training_seminar'
+    user_id                     = db.Column(db.String(180), nullable=True)
     id                          = db.Column(db.String(180), primary_key=True, nullable=True)
     name_training               = db.Column(db.String(180), nullable=True)
     role                        = db.Column(db.String(180), nullable=True)
@@ -191,6 +190,7 @@ class FacultySETRecords(UserMixin, db.Model):
 
 
 
+
 class UnitHeadNominations(UserMixin, db.Model):
     __table_args__ = {
         'schema':schema,
@@ -203,3 +203,4 @@ class UnitHeadNominations(UserMixin, db.Model):
     approval_status             = db.Column(db.String(180), nullable=True)
     approver_remarks            = db.Column(db.String(180), nullable=True)
     status                      = db.Column(db.Boolean, nullable=True, default=True)
+

@@ -429,7 +429,7 @@ def add_licensure():
                 id = generate_id("le")
                 new_record = LicensureExams(
                     id                  = id,
-                    # user_id             = 1,
+                    user_id             = current_user.user_id,
                     name_exam           = licensure_form['name_exam'],
                     rank                = licensure_form['rank'],
                     license_number      = licensure_form['license_number'],
