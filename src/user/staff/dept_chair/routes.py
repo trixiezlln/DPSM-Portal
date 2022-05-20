@@ -17,7 +17,7 @@ import pip._vendor.cachecontrol as cacheControl
 import json
 
 #Models
-from ..models import EducationalAttainment, FacultyPersonalInformation
+from ..models import EducationalAttainment, FacultyPersonalInformation, ClerkPeronsalInformation
 from ...auth.models import UserCredentials
 from ..models import UnitHeadNominations
 
@@ -71,12 +71,25 @@ def department_chair_role_assignment():
             )
             ### END ###
 
+            ### CLERK LIST ###
+            clerk_list = (ClerkPeronsalInformation
+                .query
+                .order_by(
+                    ClerkPeronsalInformation
+                    .name
+                    .asc()
+                )
+                .all()
+            )
+            ### END ###
+
             return render_template(
                 'department_chair/department_chair_role_assignment.html',
                 chem_nominee = chem_nominee,
                 mcsu_nominee = mcsu_nominee,
                 pgu_nominee = pgu_nominee,
-                department_faculty_list = department_faculty_list
+                department_faculty_list = department_faculty_list,
+                clerk_list = clerk_list
             ) 
         except Exception as e:
             print(e)
@@ -152,6 +165,47 @@ def department_chair_role_assignment():
         except Exception as e:
             print(e)
             return 'Error assigning new Department Head. Please try again.', 400
+
+@dept_chair_blueprint.route('/department_chair/role_assignment/clerk', methods=['GET', 'POST', 'DELETE', 'PUT'])
+def department_chair_role_assignment_clerk():
+    if request.method == 'POST':
+        try:
+            new_clerk_form = request.form
+            print(new_clerk_form)
+            new_clerk_record = UserCredentials(
+                user_id = new_clerk_form['employee_id'],
+                email = new_clerk_form['email_address'],
+                role = 'clerk',
+                date_created = date.today()
+            )
+
+            new_clerk_info = ClerkPeronsalInformation(
+                user_id = new_clerk_form['employee_id'],
+                name = new_clerk_form['name']
+            )
+
+            db.session.add(new_clerk_info)
+            db.session.add(new_clerk_record)
+            db.session.commit()
+
+            return 'New clerk account successfully added.', 200
+        except Exception as e:
+            print(e)
+            return 'Error adding new clerk account. Please try again.', 400
+    if request.method == 'DELETE':
+        try:
+            clerk_data = request.form
+
+            clerk_info = ClerkPeronsalInformation.query.filter_by(user_id=clerk_data['clerk_id']).first()
+            clerk_record = UserCredentials.query.filter_by(user_id=clerk_data['clerk_id']).first()
+
+            db.session.delete(clerk_info)
+            db.session.delete(clerk_record)
+            db.session.commit()
+            return 'Clerk account successfully deleted.', 200
+        except Exception as e:
+            print(e)
+            return 'Error deleting clerk account. Please try again.', 400
 
 @dept_chair_blueprint.route('/department_chair/faculty_list', methods=['GET', 'POST'])
 def department_chair_faculty_list():

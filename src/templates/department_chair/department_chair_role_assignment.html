@@ -194,20 +194,19 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">Baes, Gregorio</th>
-                  <td><button data-toggle="modal" class="btn btn-secondary" style="background-color: #7B1113; border-color: #7B1113;" data-target="#deleteModal">Delete</button></td>
-                </tr>
-                <tr>
-                  <th scope="row">Basco-Uy, Therese Anne G.</th>
-                  <td><button data-toggle="modal" class="btn btn-secondary" style="background-color: #7B1113; border-color: #7B1113;" data-target="#deleteModal">Delete</button>
-                </tr>
+                {% for clerk in clerk_list %}
+                  <tr>
+                    <th scope="row">{{clerk.name}}</th>
+                    <td><button type="button" class="btn btn-secondary" style="background-color: #7B1113; border-color: #7B1113;" onclick="delete_clerk_modal('{{clerk.user_id}}')">Delete</button></td>
+                  </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>
 
           <!-- Clerk Assignment - Delete Modal -->
         <div class="modal fade" id="deleteModal" role="dialog">
+          <input type="text" id="clerk_id" name="clerk_id" hidden/>
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header" style="background-color:#7B1113; color: #ffffff;">
@@ -221,7 +220,7 @@
               </div>
               <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" style="background-color: #7B1113; border-color: #7B1113;" data-dismiss="modal">No, don't delete</button>
-                    <button type="button" class="btn btn-primary">Yes, delete</button>
+                    <button type="button" class="btn btn-primary" onclick="delete_clerk()">Yes, delete</button>
                 </div>
             </div>
           </div>
@@ -231,26 +230,32 @@
 
           <br>
           <hr>
-          <form class="add-info-form" id="add-info-form">
+          <form method="POST" class="add-info-form" id="add_info_forms" name="add_info_forms" >
             <div class="row">
               <div class="col-12">
                 <div class="col col-12 container">
 
                   <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                    <label class="col-form-label">Employee ID<span class="required-field"></span></label>
+                    <input class="form-control" type="text" id="employee_id" name="employee_id" form="add_info_forms">
+                    <span class = "validation-status"></span>
+                  </div>
+
+                  <div class="col-12 col-lg-6 custom-col-3 mb-3">
                     <label class="col-form-label">Name<span class="required-field"></span></label>
-                    <input class="form-control" type="text" id="name" name="name">
+                    <input class="form-control" type="text" id="name" name="name" form="add_info_forms">
                     <span class = "validation-status"></span>
                   </div>
 
                   <div class="col-12 col-lg-6 custom-col-3 mb-3">
                     <label class="col-form-label">UP Email Address<span class="required-field"></span></label>
-                    <input class="form-control" type="text" id="email_address" name="email_address">
+                    <input class="form-control" type="text" id="email_address" name="email_address" form="add_info_forms">
                     <span class = "validation-status"></span>
                   </div>
 
                   <div class="col-12 col-lg-6 custom-col-3 mb-3">
                     <div class="d-flex justify-content-start mt-2">
-                      <button class="btn btn-primary crud-bin" type="submit">Add Clerk</button> 
+                      <button class="btn btn-primary crud-bin" type="submit" form="add_info_forms">Add Clerk</button> 
                     </div>
                   </div>
                 </div>

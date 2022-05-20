@@ -441,3 +441,103 @@ function assign_dept_head(){
         datatype: "multipart/form-data"
     });
 }
+
+/* DEPT HEAD: ADD CLERK ACCOUNT */
+$("#add_info_forms").submit(function(e) {
+    e.preventDefault();
+    var new_clerk_data = new FormData();
+
+    var new_clerk_data = new FormData(document.getElementById("add_info_forms"));
+
+    console.log(new_clerk_data)
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    $.ajax({
+        type: "POST",
+        url: "/department_chair/role_assignment/clerk",
+        processData: false,
+        contentType: false,
+        data: new_clerk_data,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }) 
+        },
+        error: function(error){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+
+})
+
+/* DEPT HEAD: Delete Clerk Account */
+function delete_clerk(){
+    var clerk_data = new FormData();
+
+    clerk_data.append('clerk_id', $('#clerk_id').val());
+    
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    $.ajax({
+        type: "DELETE",
+        url: "/department_chair/role_assignment/clerk",
+        processData: false,
+        contentType: false,
+        data: clerk_data,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }).then(function(then){
+                location.reload();
+            })
+        },
+        error: function(error){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+}
+
+function delete_clerk_modal(clerk_user_id){
+    $('#clerk_id').val(clerk_user_id)
+    $('#deleteModal').modal('toggle');
+}

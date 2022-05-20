@@ -204,3 +204,13 @@ class UnitHeadNominations(UserMixin, db.Model):
     approver_remarks            = db.Column(db.String(180), nullable=True)
     status                      = db.Column(db.Boolean, nullable=True, default=True)
     unit                        = db.Column(db.String(180), nullable=True)
+
+class ClerkPeronsalInformation(UserMixin, db.Model):
+    __table_args__ = {
+        'schema':schema,
+        'extend_existing': True
+    }
+    __tablename__ = 'clerk_personal_information'
+    id                          = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
+    name                        = db.Column(db.String(180), nullable=True)
+    user_id                     = db.Column(db.String(180), nullable=True)
