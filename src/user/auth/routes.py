@@ -99,7 +99,7 @@ def google_sign_in_callback():
                 elif user.is_dept_head is True:
                     return redirect(url_for('dept_chair_blueprint.load_dept_head_dashboard'))
                 else:
-                    return redirect(url_for('faculty_blueprint.load_faculty_dashboard'))
+                    return redirect(url_for('faculty_blueprint.view_info'))
         else:
             return 'Faculty Account Does not Exist in Database. If you think this is a mistake, please contact the administrator.'
         
