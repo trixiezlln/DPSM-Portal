@@ -15,7 +15,7 @@ import pip._vendor.cachecontrol as cacheControl
 import json
 
 #Models
-from ..models import EducationalAttainment, FacultyPersonalInformation, LicensureExams, TrainingSeminar, Accomplishment, ResearchGrant, Publication
+from ..models import EducationalAttainment, FacultyPersonalInformation, LicensureExams, TrainingSeminar, Accomplishment, ResearchGrant, Publication, WorkExperience, FacultySETRecords
 from ...auth.models import UserCredentials
 from ..models import UnitHeadNominations
 
@@ -27,6 +27,30 @@ unit_head_blueprint = Blueprint('unit_head_blueprint', __name__)
 @login_manager.user_loader
 def load_user(user_id):
 	return UserCredentials.query.get(int(user_id))
+
+@unit_head_blueprint.route('/unit_head/view_faculty_info/<user_id>', methods=['GET', 'POST'])
+def unit_head_view_faculty_info(user_id):
+    faculty_personal_information = FacultyPersonalInformation.query.filter_by(user_id=user_id).first()
+    faculty_educational_attaiment = EducationalAttainment.query.filter_by(user_id=user_id).first()
+    faculty_work_experience = WorkExperience.query.filter_by(user_id=user_id).first()
+    faculty_accomplishments = Accomplishment.query.filter_by(user_id=user_id).first()
+    faculty_publications = Publication.query.filter_by(user_id=user_id).first()
+    faculty_research_grants = ResearchGrant.query.filter_by(user_id=user_id).first()
+    faculty_licensure_exams = LicensureExams.query.filter_by(user_id=user_id).first()
+    faculty_trainings = TrainingSeminar.query.filter_by(user_id=user_id).first()
+    faculty_service_records = FacultySETRecords.query.filter_by(user_id=user_id).first()
+    return render_template(
+        'faculty/view_info.html',
+        faculty_personal_information = faculty_personal_information,
+        faculty_educational_attaiment = faculty_educational_attaiment,
+        faculty_work_experience = faculty_work_experience,
+        faculty_accomplishments = faculty_accomplishments,
+        faculty_publications = faculty_publications,
+        faculty_research_grants = faculty_research_grants,
+        faculty_licensure_exams = faculty_licensure_exams,
+        faculty_trainings = faculty_trainings,
+        faculty_service_records = faculty_service_records
+    )
 
 @unit_head_blueprint.route('/unit_head/faculty_list', methods=['GET', 'POST'])
 def load_unit_head_faculty_list():
