@@ -373,6 +373,7 @@ function reject_unit_head_nominee(){
             })
         },
         error: function(error){
+            alert('Error')
             Swal.fire({
                 allowEscapeKey: false,
                 allowOutsideClick: false,
@@ -415,8 +416,8 @@ function assign_dept_head(){
         },
     });
     $.ajax({
-        type: "PUT",
-        url: "/department_chair/role_assignment",
+        type: "POST",
+        url: "/department_chair/role_assignment/dept_head",
         processData: false,
         contentType: false,
         data: new_dept_head_data,
@@ -428,7 +429,7 @@ function assign_dept_head(){
                 title: 'Success',
                 text: success.responseText
             }).then(function(then){
-                location.reload();
+                location.href = '/';
             })
         },
         error: function(error){

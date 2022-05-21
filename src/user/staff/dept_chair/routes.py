@@ -153,25 +153,29 @@ def department_chair_role_assignment():
         except Exception as e:
             print(e)
             return 'Error rejecting Unit Head nominee. Please try again.', 400
-    elif request.method == 'PUT':
-        try:
-            new_dept_head_form = request.form 
+    
 
-            curr_dept_head = UserCredentials.query.filter_by(user_id=current_user.user_id).first()
-            curr_dept_head.is_dept_head = False
+@dept_chair_blueprint.route('/department_chair/role_assignment/dept_head', methods=['POST'])
+def department_chair_role_assignment_dept_head():
+    try:
+        new_dept_head_form = request.form 
 
-            new_dept_head = UserCredentials.query.filter_by(user_id=new_dept_head_form['new_dept_head']).first()
+        curr_dept_head = UserCredentials.query.filter_by(user_id=current_user.user_id).first()
+        curr_dept_head.is_dept_head = False
 
-            if new_dept_head.is_unit_head is True:
-                return 'Error assigning new Department Head. Faculty is currently a Unit Head.', 400
-            else:
-                new_dept_head.is_dept_head = True
-                db.session.commit()
+        new_dept_head = UserCredentials.query.filter_by(user_id=new_dept_head_form['new_dept_head']).first()
 
-            return 'New Department Head successfully assigned.', 200
-        except Exception as e:
-            print(e)
-            return 'Error assigning new Department Head. Please try again.', 400
+        if new_dept_head.is_unit_head is True:
+            print('Error assigning new Department Head. Faculty is currently a Unit Head.')
+            return 'Error assigning new Department Head. Faculty is currently a Unit Head.', 400
+        else:
+            new_dept_head.is_dept_head = True
+            db.session.commit()
+            logout_user()
+            return redirect(url_for('auth_blueprint.logout'))
+    except Exception as e:
+        print(e)
+        return 'Error assigning new Department Head. Please try again.', 400
 
 @dept_chair_blueprint.route('/department_chair/role_assignment/clerk', methods=['GET', 'POST', 'DELETE', 'PUT'])
 def department_chair_role_assignment_clerk():
