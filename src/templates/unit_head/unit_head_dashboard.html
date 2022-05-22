@@ -91,8 +91,13 @@
         </div>
 
         <script>
-            let accomplishmentChart = document.getElementById('accomplishmentChart').getContext('2d');
 
+            let accomplishmentChart = document.getElementById('accomplishmentChart').getContext('2d');
+            
+            let acc_count_mcsu = JSON.parse({{ acc_data_mcsu | tojson }});
+            let acc_count_physics = JSON.parse({{ acc_data_physics | tojson }});
+            let acc_count_chemistry = JSON.parse({{ acc_data_chemistry | tojson }});
+            
             let countChart = new Chart(accomplishmentChart, {
                 type:'bar', 
                 data:{
@@ -100,11 +105,7 @@
                     datasets:[{
                         label:'MCSU',
                         data:[
-                            11,
-                            5,
-                            10,
-                            14,
-                            7
+                            acc_count_mcsu
                         ],
                         backgroundColor: [
                             'rgba(205, 72, 141, 0.8)',
@@ -117,11 +118,7 @@
                     {
                         label:'Chemistry',
                         data:[
-                            20,
-                            11,
-                            25,
-                            34,
-                            17
+                            acc_count_chemistry
                         ],
                         backgroundColor: [
                             'rgba(20, 222, 55, 0.8)',
@@ -134,11 +131,7 @@
                     {
                         label:'Physics/Geology',
                         data:[
-                            11,
-                            5,
-                            10,
-                            14,
-                            7
+                            acc_count_physics
                         ],
                         backgroundColor: [
                             'rgba(20, 161, 222, 0.8)',

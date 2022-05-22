@@ -1,10 +1,1811 @@
-{% extends "layout.html" %} {% block view_info %}
+{% extends "layout.html" %} {% block add_info %}
 <head>
-    <title>View Info</title>
-</head>
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+
+    <style type="text/css">
+  
+
+      /* CSS - Tabs */
+    .tab {
+      overflow: hidden;
+      border-bottom: 1px solid #ccc;
+      /*background-color: #f1f1f1;*/
+    }
+
+    /* Style the buttons that are used to open the tab content */
+    .tab button {
+      background-color: inherit;
+      float: center;
+      border: 1px solid #ccc;
+      outline: none;
+      width: 49.8%;
+      /*border-top-left-radius: 9px;
+      border-top-right-radius: 9px;*/
+      cursor: pointer;
+      padding: 14px 16px;
+      transition: 0.3s;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+      background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+      background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+      display: none;
+      padding: 6px 12px;
+      /*border: 1px solid #ccc;*/
+      border-top: none;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+      background-color: #014421;
+      color: #ffffff;
+    }
+
+    </style>
+</head>
     <section>
-        <span>Hello faculty</span>
+        <h1>Basic Information</h1>
+        <div class="info-section">
+
+            <!-- box header -->
+            <div class="d-flex justify-content-between my-3">
+                <h4 class="">Personal Information</h4>
+                <div>
+                    <a class="crud-icon add-btn"></a>
+                    
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- box content -->
+            <!-- box content -->
+            <div class="info-sub-section">
+                <div class="d-flex justify-content-between my-3">
+                    <h1 class=""></h1>
+                    <div>
+                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon delete-btn"></a>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <!-- rank tenure etc -->
+                    <div class="col-12">
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Faculty ID Number
+                                        <!--<<span class="required-field">*</span></label> -->
+                                    <input class="form-control" type="text" id="faculty_id_number" name="faculty_id_number" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+    
+                    <!-- rank tenure etc -->
+                    <div class="col-12">
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                    <label class="col-form-label">Rank</label>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="rank" name="rank" data-field="suffix" disabled>
+                                        <option selected value="">N/A</option>
+                                        <option value="#">Instructor 1</option>
+                                        <option value="#">Instructor 2</option>
+                                        <option value="#">Assistant Professor 1</option>
+                                        <option value="#">Assistant Professor 2</option>
+                                        <option value="#">Professor 1</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                    <label class="col-form-label">Classification</label>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="classification" name="classification" data-field="suffix" disabled>
+                                        <option selected value="">N/A</option>
+                                        <option value="full-time">Full-time</option>
+                                        <option value="part-time">Part-time</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                    <label class="col-form-label">Tenure</label>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="tenure" name="tenure" data-field="suffix" disabled>
+                                        <option selected value="">N/A</option>
+                                        <option value="temporary">Temporary</option>
+                                        <option value="permanent">Permanent</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                    <label class="col-form-label">Status</label>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="status" name="status" data-field="suffix" disabled>
+                                        <option selected value="">N/A</option>
+                                        <option value="#">Active Service</option>
+                                        <option value="#">On study leave with pay</option>
+                                        <option value="#">On study leave without pay</option>
+                                        <option value="#">On sabbatical leave</option>
+                                        <option value="#">On secondment</option>
+                                        <option value="#">Retired</option>
+                                        <option value="#">Resigned</option>
+                                        <option value="#">AWOL</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- name -->
+                    <div class="col-12">
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">First Name</label>
+                                    <input class="form-control" type="text" id="first_name" name="first_name" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Middle Name</label>
+                                    <input class="form-control" type="text" id="middle_name" name="middle_name" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Last Name</label>
+                                    <input class="form-control" type="text" id="last_name" name="last_name" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+                                <div class="col-12 col-lg-1 custom-col-1 mb-3">
+                                    <label class="col-form-label">Suffix</label>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="suffix" name="suffix" data-field="suffix" disabled>
+                                        <option selected value="">N/A</option>
+                                        <option value="SR">Sr.</option>
+                                        <option value="JR">Jr.</option>
+                                        <option value="I">I</option>
+                                        <option value="II">II</option>
+                                        <option value="III">III</option>
+                                        <option value="IV">IV</option>
+                                        <option value="V">V</option>
+                                        <option value="VI">VI</option>
+                                        <option value="VII">VII</option>
+                                        <option value="VIII">VIII</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- address -->
+                    <div class="col-12">
+                        <!-- <h6 class="info-subhead mt-1">Basic Information</h6> -->
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Present Address</label>
+                                    <input class="form-control" type="text" id="present_address" name="present_address" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Permanent Address</label>
+                                    <input class="form-control" type="text" id="permanent_address" name="permanent_address" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    
+    
+                    <!-- other personal info -->
+                    <div class="col-12">
+                        <!-- <h6 class="info-subhead mt-1">Basic Information</h6> -->
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Date of Birth</label>
+                                    <input class="form-control" type="date" id="date_of_birth" name="date_of_birth" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Place of Birth</label>
+                                    <input class="form-control" type="text" id="place_of_birth" name="place_of_birth" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+                                
+                                <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                    <label class="col-form-label">Religion</label>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="religion" name="religion" data-field="suffix" disabled>
+                                        <option selected value="">N/A</option>
+                                        <option value="SR">Sr.</option>
+                                        <option value="JR">Jr.</option>
+                                        <option value="I">I</option>
+                                        <option value="II">II</option>
+                                        <option value="III">III</option>
+                                        <option value="IV">IV</option>
+                                        <option value="V">V</option>
+                                        <option value="VI">VI</option>
+                                        <option value="VII">VII</option>
+                                        <option value="VIII">VIII</option>
+                                    </select>
+                                </div>
+    
+                                <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                    <label class="col-form-label">Civil Status</label>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="civil_status" name="civil_status" data-field="suffix" disabled>
+                                        <option selected value="">N/A</option>
+                                        <option value="#">Single</option>
+                                        <option value="#">Married</option>
+                                        <option value="#">Divorced</option>
+                                        <option value="#">Separated</option>
+                                        <option value="#">Widowed</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- contact number -->
+                    <div class="col-12">
+                        <!-- <h6 class="info-subhead mt-1">Contact Details</h6> -->
+                        <div class="col-12 col-lg-12">
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Telephone Number</label>
+                                    <input class="form-control" type="text" id="landline" name="landline" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Mobile Number</label>
+                                    <input class="form-control" type="text" id="mobile_number" name="mobile_number" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+    
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Primary Email (UP Mail Required)</label>
+                                    <input class="form-control" type="text" id="primary_email" name="primary_email" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Alternate Email</label>
+                                    <input class="form-control" type="text" id="alternate_email" name="alternate_email" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- emergency contact -->
+                    <div class="col-12">
+                        <!-- <h6 class="info-subhead mt-1">Emergency Contact</h6> -->
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Name of Emergency Contact Person</label>
+                                    <input class="form-control" type="text" id="emergency_contact_person" name="emergency_contact_person" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Emergency Contact Number</label>
+                                    <input class="form-control" type="text" id="emergency_contact_number" name="emergency_contact_number" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+    
+                    <!-- dependents -->
+                    <div class="col-12">
+                        <!-- <h6 class="info-subhead mt-1">Dependents</h6> -->
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Name of Dependents</label>
+                                    <input class="form-control" type="text" id="dependent_name" name="dependent_name" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+    
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Date of Birth</label>
+                                    <input class="form-control" type="text" id="dependent_birthdate " name="dependent_birthdate" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+                                
+                                <div class="col-12 col-lg-3 custom-col-1 mb-3">
+                                    <label class="col-form-label">Relationship to user</label>
+                                    <input class="form-control" type="text" id="dependent_relationship" name="dependent_relationship" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            
+
+        </div>
+
+        <div class="info-section">
+
+            <!-- box header -->
+            <div class="d-flex justify-content-between my-3">
+                <h4 class="">Educational Attainment</h4>
+                <div>
+                    <a class="crud-icon add-btn"></a>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- box content -->
+            <div class="info-sub-section">
+                <div class="d-flex justify-content-between my-3">
+                    <h1 class=""></h1>
+                    <div>
+                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon delete-btn"></a>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Name of School or Institution<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="school" name="school">
+                                    <span class = "validation-status"></span>
+                                </div>     
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Degree/Certification<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="degree" name="degree">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-1 mb-3">
+                                    <label class="col-form-label">Type of Degree</label>
+                                    <select class="degree_type-select form-select form-control degree_type" aria-label="" id="degree_type" name="degree_type" data-field="degree_type">
+                                        <option value="AA">Associate of Arts (AA)</option>
+                                        <option value="AS">Associate of Science (AS)</option>
+                                        <option value="BA">Bachelor of Arts (BA)</option>
+                                        <option value="BS">Bachelor of Science (BS)</option>
+                                        <option value="MA">Master of Arts (MA)</option>
+                                        <option value="MS">Master of Science (MS)</option>
+                                        <option value="PhD">Doctoral (PhD)</option>
+                                        <option value="MD">Doctor of Medicine (MD)</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Major/Specialization<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="specialization" name="specialization">
+                                    <span class = "validation-status"></span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Start Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="start_date" name="start_date">
+                                    <span class = "validation-status"></span>
+                                </div>   
+                                
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">End Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="end_date" name="end_date">
+                                    <span class = "validation-status"></span>
+                                </div>  
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                    <input type="file" id="educ_file" name="educ_file">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+
+                        </div>
+                    </div>
+                </div>           
+            </div>
+
+            <hr>
+
+            <!-- box content -->
+            <div class="info-sub-section">
+                <div class="d-flex justify-content-between my-3">
+                    <h1 class=""></h1>
+                    <div>
+                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon delete-btn"></a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Name of School or Institution<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="school" name="school">
+                                    <span class = "validation-status"></span>
+                                </div>     
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Degree/Certification<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="degree" name="degree">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-1 mb-3">
+                                    <label class="col-form-label">Type of Degree</label>
+                                    <select class="degree_type-select form-select form-control degree_type" aria-label="" id="degree_type" name="degree_type" data-field="degree_type">
+                                        <option value="AA">Associate of Arts (AA)</option>
+                                        <option value="AS">Associate of Science (AS)</option>
+                                        <option value="BA">Bachelor of Arts (BA)</option>
+                                        <option value="BS">Bachelor of Science (BS)</option>
+                                        <option value="MA">Master of Arts (MA)</option>
+                                        <option value="MS">Master of Science (MS)</option>
+                                        <option value="PhD">Doctoral (PhD)</option>
+                                        <option value="MD">Doctor of Medicine (MD)</option>
+                                    </select>
+                                </div>
+    
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Major/Specialization<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="specialization" name="specialization">
+                                    <span class = "validation-status"></span>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Start Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="start_date" name="start_date">
+                                    <span class = "validation-status"></span>
+                                </div>   
+                                
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">End Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="end_date" name="end_date">
+                                    <span class = "validation-status"></span>
+                                </div>  
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                    <input type="file" id="educ_file" name="educ_file">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="info-section">
+
+            <!-- box header -->
+            <div class="d-flex justify-content-between my-3">
+                <h4 class="">Work Experience</h4>
+                <div>
+                    <a class="crud-icon add-btn"></a>
+                </div>
+            </div>
+
+            <hr>
+            
+            <!-- box content -->
+            <div class="info-sub-section">
+                <div class="d-flex justify-content-between my-3">
+                    <h1 class=""></h1>
+                    <div>
+                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon delete-btn"></a>
+                    </div>
+                </div>
+               
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col col-12 container">
+
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Location<span class="required-field"></span></label>
+                                    <select class="location-select form-select form-control location" aria-label="" id="location" name="location" data-field="location">
+                                        <option value="Outside">Outside UP Manila</option>
+                                        <option value="Within">Within UP Manila</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Name of Employer<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="name_employer" name="name_employer">
+                                    <span class = "validation-status"></span>
+                                </div>  
+
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Title/Position<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="title" name="title">
+                                    <span class = "validation-status"></span>
+                                </div>  
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Start Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="start_date" name="start_date">
+                                    <span class = "validation-status"></span>
+                                </div>   
+                                
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">End Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="end_date" name="end_date">
+                                    <span class = "validation-status"></span>
+                                </div>  
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Description<span class="required-field"></span></label>
+                                    <textarea class="form-control" id="description" name="description" rows="4" cols="50"></textarea>
+                                    <span class = "validation-status"></span>
+                                </div>   
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                    <input type="file" id="work_file" name="work_file">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- box content -->
+            <div class="info-sub-section">
+            <div class="d-flex justify-content-between my-3">
+                <h1 class=""></h1>
+                <div>
+                    <a class="crud-icon edit-btn"></a>
+                    <a class="crud-icon delete-btn"></a>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="col col-12 container">
+
+                        <div class="row">
+                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                <label class="col-form-label">Location<span class="required-field"></span></label>
+                                <select class="location-select form-select form-control location" aria-label="" id="location" name="location" data-field="location">
+                                    <option value="Outside">Outside UP Manila</option>
+                                    <option value="Within">Within UP Manila</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                <label class="col-form-label">Name of Employer<span class="required-field"></span></label>
+                                <input class="form-control" type="text" id="name_employer" name="name_employer">
+                                <span class = "validation-status"></span>
+                            </div>  
+
+                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                <label class="col-form-label">Title/Position<span class="required-field"></span></label>
+                                <input class="form-control" type="text" id="title" name="title">
+                                <span class = "validation-status"></span>
+                            </div>  
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                <label class="col-form-label">Start Date<span class="required-field"></span></label>
+                                <input class="form-control" type="date" id="start_date" name="start_date">
+                                <span class = "validation-status"></span>
+                            </div>   
+                            
+                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                <label class="col-form-label">End Date<span class="required-field"></span></label>
+                                <input class="form-control" type="date" id="end_date" name="end_date">
+                                <span class = "validation-status"></span>
+                            </div>  
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 custom-col-3 mb-3">
+                                <label class="col-form-label">Description<span class="required-field"></span></label>
+                                <textarea class="form-control" id="description" name="description" rows="4" cols="50"></textarea>
+                                <span class = "validation-status"></span>
+                            </div>   
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                <input type="file" id="work_file" name="work_file">
+                                <span class = "validation-status"></span>
+                            </div>    
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+       
+        </div>
+
+        <div class="info-section">
+
+            <!-- box header -->
+            <div class="d-flex justify-content-between my-3">
+                <h4 class="">Accomplishment</h4>
+                <div>
+                    <a class="crud-icon add-btn"></a>
+                </div>
+            </div>
+
+            <hr>
+            
+            <!-- box content -->
+            <div class="info-sub-section">
+                <div class="d-flex justify-content-between my-3">
+                    <h1 class=""></h1>
+                    <div>
+                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon delete-btn"></a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Position/Role<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="position" name="position">
+                                    <span class = "validation-status"></span>
+                                </div> 
+                
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Organization<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="organization" name="organization">
+                                    <span class = "validation-status"></span>
+                                </div> 
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Start Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="start_date" name="start_date">
+                                    <span class = "validation-status"></span>
+                                </div>   
+                                
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">End Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="end_date" name="end_date">
+                                    <span class = "validation-status"></span>
+                                </div>  
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-1 mb-3">
+                                    <label class="col-form-label">Type of Contribution</label>
+                                    <select class="type_contribution-select form-select form-control type_contribution" aria-label="" id="type_contribution" name="type_contribution" data-field="type_contribution">
+                                        <option value="1">Accomplishments within UPM</option>
+                                        <option value="2">Contributions to Professions</option>
+                                        <option value="3">Contributions to Nation</option>
+                                        <option value="4">Contributions to World</option>
+                                    </select>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Description<span class="required-field"></span></label>
+                                    <textarea class="form-control" id="description" name="description" rows="4" cols="50"></textarea>
+                                    <span class = "validation-status"></span>
+                                </div>   
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                    <input type="file" id="accomplishment_file" name="accomplishment_file">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- box content -->
+            <div class="info-sub-section">
+            <div class="d-flex justify-content-between my-3">
+                <h1 class=""></h1>
+                <div>
+                    <a class="crud-icon edit-btn"></a>
+                    <a class="crud-icon delete-btn"></a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="col col-12 container">
+                        <div class="row">
+                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                <label class="col-form-label">Position/Role<span class="required-field"></span></label>
+                                <input class="form-control" type="text" id="position" name="position">
+                                <span class = "validation-status"></span>
+                            </div> 
+            
+                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                <label class="col-form-label">Organization<span class="required-field"></span></label>
+                                <input class="form-control" type="text" id="organization" name="organization">
+                                <span class = "validation-status"></span>
+                            </div> 
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                <label class="col-form-label">Start Date<span class="required-field"></span></label>
+                                <input class="form-control" type="date" id="start_date" name="start_date">
+                                <span class = "validation-status"></span>
+                            </div>   
+                            
+                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                <label class="col-form-label">End Date<span class="required-field"></span></label>
+                                <input class="form-control" type="date" id="end_date" name="end_date">
+                                <span class = "validation-status"></span>
+                            </div>  
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-6 custom-col-1 mb-3">
+                                <label class="col-form-label">Type of Contribution</label>
+                                <select class="type_contribution-select form-select form-control type_contribution" aria-label="" id="type_contribution" name="type_contribution" data-field="type_contribution">
+                                    <option value="1">Accomplishments within UPM</option>
+                                    <option value="2">Contributions to Professions</option>
+                                    <option value="3">Contributions to Nation</option>
+                                    <option value="4">Contributions to World</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 custom-col-3 mb-3">
+                                <label class="col-form-label">Description<span class="required-field"></span></label>
+                                <textarea class="form-control" id="description" name="description" rows="4" cols="50"></textarea>
+                                <span class = "validation-status"></span>
+                            </div>   
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                <input type="file" id="accomplishment_file" name="accomplishment_file">
+                                <span class = "validation-status"></span>
+                            </div>    
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+
+            <!-- box header -->
+            <div class="d-flex justify-content-between my-3">
+                <h4 class="">Publication</h4>
+                <div>
+                    <a class="crud-icon add-btn"></a>
+                </div>
+            </div>
+
+            <hr>
+            
+            <!-- box content -->
+            <div class="info-sub-section">
+                <div class="d-flex justify-content-between my-3">
+                    <h1 class=""></h1>
+                    <div>
+                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon delete-btn"></a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Publication Name<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="publication" name="publication">
+                                    <span class = "validation-status"></span>
+                                </div> 
+        
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Citation<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="citation" name="citation">
+                                    <span class = "validation-status"></span>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">URL<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="url" name="url">
+                                    <span class = "validation-status"></span>
+                                </div>
+    
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Date Published<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="date_published" name="date_published">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Co-authors (DPSM Faculty)<span class="required-field"></span></label>
+                                    <select class="coauthors_dpsm-select form-select form-control coauthors_dpsm" aria-label="" id="coauthors_dpsm" name="coauthors_dpsm" data-field="coauthors_dpsm">
+                                        <option selected value="">N/A</option>
+                                        <option value="SR">Sr.</option>
+                                        <option value="JR">Jr.</option>
+                                        <option value="I">I</option>
+                                        <option value="II">II</option>
+                                        <option value="III">III</option>
+                                        <option value="IV">IV</option>
+                                        <option value="V">V</option>
+                                        <option value="VI">VI</option>
+                                        <option value="VII">VII</option>
+                                        <option value="VIII">VIII</option>
+                                    </select>
+                                </div> 
+                                
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Co-authors (non-DPSM Faculty)<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="coauthors_nondpsm" name="coauthors_nondpsm">
+                                    <span class = "validation-status"></span>
+                                </div> 
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                    <input type="file" id="publication_file" name="publication_file">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <hr>
+            
+            <!-- box content -->
+            <div class="info-sub-section">
+                <div class="d-flex justify-content-between my-3">
+                    <h1 class=""></h1>
+                    <div>
+                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon delete-btn"></a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Publication Name<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="publication" name="publication">
+                                    <span class = "validation-status"></span>
+                                </div> 
+        
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Citation<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="citation" name="citation">
+                                    <span class = "validation-status"></span>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">URL<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="url" name="url">
+                                    <span class = "validation-status"></span>
+                                </div>
+    
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Date Published<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="date_published" name="date_published">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Co-authors (DPSM Faculty)<span class="required-field"></span></label>
+                                    <select class="coauthors_dpsm-select form-select form-control coauthors_dpsm" aria-label="" id="coauthors_dpsm" name="coauthors_dpsm" data-field="coauthors_dpsm">
+                                        <option selected value="">N/A</option>
+                                        <option value="SR">Sr.</option>
+                                        <option value="JR">Jr.</option>
+                                        <option value="I">I</option>
+                                        <option value="II">II</option>
+                                        <option value="III">III</option>
+                                        <option value="IV">IV</option>
+                                        <option value="V">V</option>
+                                        <option value="VI">VI</option>
+                                        <option value="VII">VII</option>
+                                        <option value="VIII">VIII</option>
+                                    </select>
+                                </div> 
+                                
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Co-authors (non-DPSM Faculty)<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="coauthors_nondpsm" name="coauthors_nondpsm">
+                                    <span class = "validation-status"></span>
+                                </div> 
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                    <input type="file" id="publication_file" name="publication_file">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="info-section">
+
+            <!-- box header -->
+            <div class="d-flex justify-content-between my-3">
+                <h4 class="">Research Grant</h4>
+                <div>
+                    <a class="crud-icon add-btn"></a>
+                </div>
+            </div>
+
+            <hr>
+            
+            <!-- box content -->
+            <div class="info-sub-section">
+                <div class="d-flex justify-content-between my-3">
+                    <h1 class=""></h1>
+                    <div>
+                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon delete-btn"></a>
+                    </div>
+                </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="col col-12 container">
+                                <div class="row">
+                                    <div class="col-12 custom-col-3 mb-3">
+                                        <label class="col-form-label">Name of Research Project<span class="required-field"></span></label>
+                                        <input class="form-control" type="text" id="name_research" name="name_research">
+                                        <span class = "validation-status"></span>
+                                    </div>  
+                                </div>
+        
+                                <div class="row">
+                                    <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                        <label class="col-form-label">Sponsor<span class="required-field"></span></label>
+                                        <input class="form-control" type="text" id="sponsor" name="sponsor">
+                                        <span class = "validation-status"></span>
+                                    </div> 
+                                    
+                                    <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                        <label class="col-form-label">Amount Granted<span class="required-field"></span></label>
+                                        <input class="form-control" type="text" id="amount_granted" name="amount_granted">
+                                        <span class = "validation-status"></span>
+                                    </div> 
+                                </div>
+        
+                                <div class="row">
+                                    <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                        <label class="col-form-label">Projected Start Date<span class="required-field"></span></label>
+                                        <input class="form-control" type="date" id="projected_start" name="projected_start">
+                                        <span class = "validation-status"></span>
+                                    </div>   
+                                    
+                                    <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                        <label class="col-form-label">Projected End Date<span class="required-field"></span></label>
+                                        <input class="form-control" type="date" id="projected_end" name="projected_end">
+                                        <span class = "validation-status"></span>
+                                    </div>  
+                                </div>
+        
+                                <div class="row">
+                                    <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                        <label class="col-form-label">Actual Start Date<span class="required-field"></span></label>
+                                        <input class="form-control" type="date" id="actual_start" name="actual_start">
+                                        <span class = "validation-status"></span>
+                                    </div>   
+                                    
+                                    <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                        <label class="col-form-label">Actual End Date<span class="required-field"></span></label>
+                                        <input class="form-control" type="date" id="actual_end" name="actual_end">
+                                        <span class = "validation-status"></span>
+                                    </div>  
+                                </div>
+        
+                                <div class="row">
+                                    <div class="col-12 custom-col-3 mb-3">
+                                        <label class="col-form-label">Research Progress<span class="required-field"></span></label>
+                                        <textarea class="form-control" id="research_progress" name="research_progress" rows="4" cols="50"></textarea>
+                                        <span class = "validation-status"></span>
+                                    </div>   
+                                </div>
+        
+                                <div class="row">
+                                    <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                        <label class="col-form-label">Co-researchers (DPSM Faculty)<span class="required-field"></span></label>
+                                        <select class="coresearchers_dpsm-select form-select form-control coresearchers_dpsm" aria-label="" id="coresearchers_dpsm" name="coresearchers_dpsm" data-field="coresearchers_dpsm">
+                                            <option selected value="">N/A</option>
+                                            <option value="SR">Sr.</option>
+                                            <option value="JR">Jr.</option>
+                                            <option value="I">I</option>
+                                            <option value="II">II</option>
+                                            <option value="III">III</option>
+                                            <option value="IV">IV</option>
+                                            <option value="V">V</option>
+                                            <option value="VI">VI</option>
+                                            <option value="VII">VII</option>
+                                            <option value="VIII">VIII</option>
+                                        </select>
+                                    </div> 
+                                    
+                                    <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                        <label class="col-form-label">Co-researchers (non-DPSM Faculty)<span class="required-field"></span></label>
+                                        <input class="form-control" type="text" id="amount_granted" name="amount_granted">
+                                        <span class = "validation-status"></span>
+                                    </div> 
+                                </div>
+        
+        
+                                <div class="row">
+                                    <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                        <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                        <input type="file" id="accomplishment_file" name="accomplishment_file">
+                                        <span class = "validation-status"></span>
+                                    </div>    
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <hr>
+            
+            <!-- box content -->
+            <div class="info-sub-section">
+                <div class="d-flex justify-content-between my-3">
+                    <h1 class=""></h1>
+                    <div>
+                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon delete-btn"></a>
+                    </div>
+                </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="col col-12 container">
+                                <div class="row">
+                                    <div class="col-12 custom-col-3 mb-3">
+                                        <label class="col-form-label">Name of Research Project<span class="required-field"></span></label>
+                                        <input class="form-control" type="text" id="name_research" name="name_research">
+                                        <span class = "validation-status"></span>
+                                    </div>  
+                                </div>
+        
+                                <div class="row">
+                                    <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                        <label class="col-form-label">Sponsor<span class="required-field"></span></label>
+                                        <input class="form-control" type="text" id="sponsor" name="sponsor">
+                                        <span class = "validation-status"></span>
+                                    </div> 
+                                    
+                                    <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                        <label class="col-form-label">Amount Granted<span class="required-field"></span></label>
+                                        <input class="form-control" type="text" id="amount_granted" name="amount_granted">
+                                        <span class = "validation-status"></span>
+                                    </div> 
+                                </div>
+        
+                                <div class="row">
+                                    <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                        <label class="col-form-label">Projected Start Date<span class="required-field"></span></label>
+                                        <input class="form-control" type="date" id="projected_start" name="projected_start">
+                                        <span class = "validation-status"></span>
+                                    </div>   
+                                    
+                                    <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                        <label class="col-form-label">Projected End Date<span class="required-field"></span></label>
+                                        <input class="form-control" type="date" id="projected_end" name="projected_end">
+                                        <span class = "validation-status"></span>
+                                    </div>  
+                                </div>
+        
+                                <div class="row">
+                                    <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                        <label class="col-form-label">Actual Start Date<span class="required-field"></span></label>
+                                        <input class="form-control" type="date" id="actual_start" name="actual_start">
+                                        <span class = "validation-status"></span>
+                                    </div>   
+                                    
+                                    <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                        <label class="col-form-label">Actual End Date<span class="required-field"></span></label>
+                                        <input class="form-control" type="date" id="actual_end" name="actual_end">
+                                        <span class = "validation-status"></span>
+                                    </div>  
+                                </div>
+        
+                                <div class="row">
+                                    <div class="col-12 custom-col-3 mb-3">
+                                        <label class="col-form-label">Research Progress<span class="required-field"></span></label>
+                                        <textarea class="form-control" id="research_progress" name="research_progress" rows="4" cols="50"></textarea>
+                                        <span class = "validation-status"></span>
+                                    </div>   
+                                </div>
+        
+                                <div class="row">
+                                    <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                        <label class="col-form-label">Co-researchers (DPSM Faculty)<span class="required-field"></span></label>
+                                        <select class="coresearchers_dpsm-select form-select form-control coresearchers_dpsm" aria-label="" id="coresearchers_dpsm" name="coresearchers_dpsm" data-field="coresearchers_dpsm">
+                                            <option selected value="">N/A</option>
+                                            <option value="SR">Sr.</option>
+                                            <option value="JR">Jr.</option>
+                                            <option value="I">I</option>
+                                            <option value="II">II</option>
+                                            <option value="III">III</option>
+                                            <option value="IV">IV</option>
+                                            <option value="V">V</option>
+                                            <option value="VI">VI</option>
+                                            <option value="VII">VII</option>
+                                            <option value="VIII">VIII</option>
+                                        </select>
+                                    </div> 
+                                    
+                                    <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                        <label class="col-form-label">Co-researchers (non-DPSM Faculty)<span class="required-field"></span></label>
+                                        <input class="form-control" type="text" id="amount_granted" name="amount_granted">
+                                        <span class = "validation-status"></span>
+                                    </div> 
+                                </div>
+        
+        
+                                <div class="row">
+                                    <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                        <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                        <input type="file" id="accomplishment_file" name="accomplishment_file">
+                                        <span class = "validation-status"></span>
+                                    </div>    
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+
+            <!-- box header -->
+            <div class="d-flex justify-content-between my-3">
+                <h4 class="">Licensure Exam</h4>
+                <div>
+                    <a class="crud-icon add-btn"></a>
+                </div>
+            </div>
+
+            <hr>
+            
+            <!-- box content -->
+            <div class="info-sub-section">
+                <div class="d-flex justify-content-between my-3">
+                    <h1 class=""></h1>
+                    <div>
+                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon delete-btn"></a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Name of Research Project<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="name_research" name="name_research">
+                                    <span class = "validation-status"></span>
+                                </div>  
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Sponsor<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="sponsor" name="sponsor">
+                                    <span class = "validation-status"></span>
+                                </div> 
+                                
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Amount Granted<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="amount_granted" name="amount_granted">
+                                    <span class = "validation-status"></span>
+                                </div> 
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Projected Start Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="projected_start" name="projected_start">
+                                    <span class = "validation-status"></span>
+                                </div>   
+                                
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Projected End Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="projected_end" name="projected_end">
+                                    <span class = "validation-status"></span>
+                                </div>  
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Actual Start Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="actual_start" name="actual_start">
+                                    <span class = "validation-status"></span>
+                                </div>   
+                                
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Actual End Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="actual_end" name="actual_end">
+                                    <span class = "validation-status"></span>
+                                </div>  
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Research Progress<span class="required-field"></span></label>
+                                    <textarea class="form-control" id="research_progress" name="research_progress" rows="4" cols="50"></textarea>
+                                    <span class = "validation-status"></span>
+                                </div>   
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Co-researchers (DPSM Faculty)<span class="required-field"></span></label>
+                                    <select class="coresearchers_dpsm-select form-select form-control coresearchers_dpsm" aria-label="" id="coresearchers_dpsm" name="coresearchers_dpsm" data-field="coresearchers_dpsm">
+                                        <option selected value="">N/A</option>
+                                        <option value="SR">Sr.</option>
+                                        <option value="JR">Jr.</option>
+                                        <option value="I">I</option>
+                                        <option value="II">II</option>
+                                        <option value="III">III</option>
+                                        <option value="IV">IV</option>
+                                        <option value="V">V</option>
+                                        <option value="VI">VI</option>
+                                        <option value="VII">VII</option>
+                                        <option value="VIII">VIII</option>
+                                    </select>
+                                </div> 
+                                
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Co-researchers (non-DPSM Faculty)<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="amount_granted" name="amount_granted">
+                                    <span class = "validation-status"></span>
+                                </div> 
+                            </div>
+    
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                    <input type="file" id="accomplishment_file" name="accomplishment_file">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+
+            <hr>
+            
+            <!-- box content -->
+            <div class="info-sub-section">
+                <div class="d-flex justify-content-between my-3">
+                    <h1 class=""></h1>
+                    <div>
+                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon delete-btn"></a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Name of Research Project<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="name_research" name="name_research">
+                                    <span class = "validation-status"></span>
+                                </div>  
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Sponsor<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="sponsor" name="sponsor">
+                                    <span class = "validation-status"></span>
+                                </div> 
+                                
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Amount Granted<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="amount_granted" name="amount_granted">
+                                    <span class = "validation-status"></span>
+                                </div> 
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Projected Start Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="projected_start" name="projected_start">
+                                    <span class = "validation-status"></span>
+                                </div>   
+                                
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Projected End Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="projected_end" name="projected_end">
+                                    <span class = "validation-status"></span>
+                                </div>  
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Actual Start Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="actual_start" name="actual_start">
+                                    <span class = "validation-status"></span>
+                                </div>   
+                                
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Actual End Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="actual_end" name="actual_end">
+                                    <span class = "validation-status"></span>
+                                </div>  
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Research Progress<span class="required-field"></span></label>
+                                    <textarea class="form-control" id="research_progress" name="research_progress" rows="4" cols="50"></textarea>
+                                    <span class = "validation-status"></span>
+                                </div>   
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Co-researchers (DPSM Faculty)<span class="required-field"></span></label>
+                                    <select class="coresearchers_dpsm-select form-select form-control coresearchers_dpsm" aria-label="" id="coresearchers_dpsm" name="coresearchers_dpsm" data-field="coresearchers_dpsm">
+                                        <option selected value="">N/A</option>
+                                        <option value="SR">Sr.</option>
+                                        <option value="JR">Jr.</option>
+                                        <option value="I">I</option>
+                                        <option value="II">II</option>
+                                        <option value="III">III</option>
+                                        <option value="IV">IV</option>
+                                        <option value="V">V</option>
+                                        <option value="VI">VI</option>
+                                        <option value="VII">VII</option>
+                                        <option value="VIII">VIII</option>
+                                    </select>
+                                </div> 
+                                
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Co-researchers (non-DPSM Faculty)<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="amount_granted" name="amount_granted">
+                                    <span class = "validation-status"></span>
+                                </div> 
+                            </div>
+    
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                    <input type="file" id="accomplishment_file" name="accomplishment_file">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+        
+            </div>         
+        </div>
+
+        <div class="info-section">
+
+            <!-- box header -->
+            <div class="d-flex justify-content-between my-3">
+                <h4 class="">Training/Seminar</h4>
+                <div>
+                    <a class="crud-icon add-btn"></a>
+                </div>
+            </div>
+
+            <hr>
+            
+            <!-- box content -->
+            <div class="info-sub-section">
+                <div class="d-flex justify-content-between my-3">
+                    <h1 class=""></h1>
+                    <div>
+                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon delete-btn"></a>
+                    </div>
+                </div>
+        
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Name of Training/Seminar<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="name_training" name="name_training">
+                                    <span class = "validation-status"></span>
+                                </div>  
+    
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Role<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="role" name="role">
+                                    <span class = "validation-status"></span>
+                                </div> 
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Remarks<span class="required-field"></span></label>
+                                    <textarea class="form-control" id="remarks" name="remarks" rows="4" cols="50"></textarea>
+                                    <span class = "validation-status"></span>
+                                </div>   
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Start Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="start_date" name="start_date">
+                                    <span class = "validation-status"></span>
+                                </div>   
+                                
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">End Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="end_date" name="end_date">
+                                    <span class = "validation-status"></span>
+                                </div>  
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                    <input type="file" id="accomplishment_file" name="accomplishment_file">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            
+            <!-- box content -->
+            <div class="info-sub-section">
+                <div class="d-flex justify-content-between my-3">
+                    <h1 class=""></h1>
+                    <div>
+                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon delete-btn"></a>
+                    </div>
+                </div>
+        
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Name of Training/Seminar<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="name_training" name="name_training">
+                                    <span class = "validation-status"></span>
+                                </div>  
+    
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Role<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="role" name="role">
+                                    <span class = "validation-status"></span>
+                                </div> 
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Remarks<span class="required-field"></span></label>
+                                    <textarea class="form-control" id="remarks" name="remarks" rows="4" cols="50"></textarea>
+                                    <span class = "validation-status"></span>
+                                </div>   
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Start Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="start_date" name="start_date">
+                                    <span class = "validation-status"></span>
+                                </div>   
+                                
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">End Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="end_date" name="end_date">
+                                    <span class = "validation-status"></span>
+                                </div>  
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                    <input type="file" id="accomplishment_file" name="accomplishment_file">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+
+            <!-- box header -->
+            <div class="d-flex justify-content-between my-3">
+                <h4 class="">Faculty Service Record (FSR) and SET</h4>
+                <div>
+                    <a class="crud-icon add-btn"></a>
+                </div>
+            </div>
+
+            <hr>
+            
+            <!-- box content -->
+            <div class="info-sub-section">
+                <div class="d-flex justify-content-between my-3">
+                    <h1 class=""></h1>
+                    <div>
+                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon delete-btn"></a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                    <label class="col-form-label">Course Code<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="course_code" name="course_code">
+                                    <span class = "validation-status"></span>
+                                </div> 
+    
+                                <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                    <label class="col-form-label">Section<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="section" name="section">
+                                    <span class = "validation-status"></span>
+                                </div> 
+    
+                                <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                    <label class="col-form-label">Semester<span class="required-field"></span></label>
+                                    <select class="semester-select form-select form-control semester" aria-label="" id="semester" name="semester" data-field="semester">
+                                        <option value="1">1st Semester</option>
+                                        <option value="2">2nd Semester</option>
+                                        <option value="3">Midyear</option>
+                                    </select>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                    <label class="col-form-label">School Year<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="sy" name="sy">
+                                    <span class = "validation-status"></span>
+                                </div> 
+    
+                                <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                    <label class="col-form-label">Schedule<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="schedule" name="schedule">
+                                    <span class = "validation-status"></span>
+                                </div> 
+    
+                                <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                    <label class="col-form-label">Number of Students<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="number_students" name="number_students">
+                                    <span class = "validation-status"></span>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">SET<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="set" name="set">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                    <input type="file" id="fsr_set_file" name="fsr_set_file">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            
+            <!-- box content -->
+            <div class="info-sub-section">
+                <div class="d-flex justify-content-between my-3">
+                    <h1 class=""></h1>
+                    <div>
+                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon delete-btn"></a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                    <label class="col-form-label">Course Code<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="course_code" name="course_code">
+                                    <span class = "validation-status"></span>
+                                </div> 
+    
+                                <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                    <label class="col-form-label">Section<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="section" name="section">
+                                    <span class = "validation-status"></span>
+                                </div> 
+    
+                                <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                    <label class="col-form-label">Semester<span class="required-field"></span></label>
+                                    <select class="semester-select form-select form-control semester" aria-label="" id="semester" name="semester" data-field="semester">
+                                        <option value="1">1st Semester</option>
+                                        <option value="2">2nd Semester</option>
+                                        <option value="3">Midyear</option>
+                                    </select>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                    <label class="col-form-label">School Year<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="sy" name="sy">
+                                    <span class = "validation-status"></span>
+                                </div> 
+    
+                                <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                    <label class="col-form-label">Schedule<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="schedule" name="schedule">
+                                    <span class = "validation-status"></span>
+                                </div> 
+    
+                                <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                    <label class="col-form-label">Number of Students<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="number_students" name="number_students">
+                                    <span class = "validation-status"></span>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">SET<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="set" name="set">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                    <input type="file" id="fsr_set_file" name="fsr_set_file">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
 
 {% endblock %}
+

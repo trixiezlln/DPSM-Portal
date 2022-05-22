@@ -13,6 +13,7 @@ from datetime import timedelta, date
 import requests
 import pip._vendor.cachecontrol as cacheControl
 import json
+from src.user.auth.functions.role_authenticator import role_authenticator_decorator
 
 #Models
 from ..models import FacultyPersonalInformation
@@ -34,6 +35,7 @@ def load_user(user_id):
 
 import time
 @clerk_blueprint.route('/clerk/create_faculty_account', methods=['GET', 'POST'])
+# @role_authenticator_decorator(['clerk'], None)
 def create_faculty_account():
     try:
         if request.method == 'GET':
