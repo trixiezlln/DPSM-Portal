@@ -141,6 +141,7 @@ class LicensureExams(UserMixin, db.Model):
     date                        = db.Column(DATE, nullable=True)
     licensure_file              = db.Column(db.LargeBinary)
     last_modified               = db.Column(TIMESTAMP, nullable=True)
+    status                      = db.Column(db.Boolean, nullable=True)
     
     def __repr__(self):
         return f'<Licensure Exam Name {self.name_exam}>'
@@ -160,8 +161,7 @@ class TrainingSeminar(UserMixin, db.Model):
     end_date                    = db.Column(DATE, nullable=True)
     training_file               = db.Column(db.LargeBinary)
     last_modified               = db.Column(TIMESTAMP, nullable=True)
-
-    # training_seminar_id           = db.Column(db.String(180), db.ForeignKey('facultypersonalinformation.user_id'))
+    status                      = db.Column(db.Boolean, nullable=True)
 
     def __repr__(self):
         return f'<Training/Seminar Exam Name {self.name_training}>'
@@ -186,12 +186,10 @@ class FacultySETRecords(UserMixin, db.Model):
     last_modified               = db.Column(TIMESTAMP, nullable=True)
     syllabus_f_ext              = db.Column(db.String(180), nullable=True)
     set_f_ext                   = db.Column(db.String(180), nullable=True)
+    status                      = db.Column(db.Boolean, nullable=True)
 
     def __repr__(self):
         return f'<FSR ID {self.id}>'
-
-
-
 
 class UnitHeadNominations(UserMixin, db.Model):
     __table_args__ = {
