@@ -25,9 +25,6 @@ clerk_blueprint = Blueprint('clerk_blueprint', __name__)
 FSR_IMGS_DIR = r'src\static\img\fsr_imgs'
 FSR_SYLLABUS_DIR = r'src\static\img\fsr_syllabus'
 
-RENDER_FSR_IMGS_DIR = r'static\img\fsr_imgs'
-RENDER_FSR_SYLLABUS_DIR = r'static\img\fsr_syllabus'
-
 @login_manager.user_loader
 def load_user(user_id):
     print('tangina')

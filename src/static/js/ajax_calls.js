@@ -608,3 +608,410 @@ function show_set_proof(user_id, sy, semester, section, f_ext) {
         },
     });
 };
+
+
+/* Add Personal Info */ 
+$("#add_personal_form").submit(function(e) {
+    e.preventDefault();
+    var facultyData = new FormData(document.getElementById("add_personal_form"));
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    $.ajax({
+        type: "POST",
+        url: "/faculty/add_personal_info",
+        processData: false,
+        contentType: false,
+        data: facultyData,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }).then(function(then){
+                location.href="/faculty/faculty_landing_page";
+            }) 
+        },
+        error: function(error) {
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+});
+
+/* Add Educ Info */ 
+$("#add_educ_form").submit(function(e) {
+    e.preventDefault();
+    var facultyData = new FormData(document.getElementById("add_educ_form"));
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+
+    $.ajax({
+        type: "POST",
+        url: "/faculty/add_educational_attainment",
+        processData: false,
+        contentType: false,
+        data: facultyData,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }).then(function(then){
+                location.href="/faculty/faculty_landing_page";
+            }) 
+        },
+        error: function(error) {
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+});
+
+/* Add Work Exp Info */ 
+$("#add_work_form").submit(function(e) {
+    e.preventDefault();
+    var facultyData = new FormData(document.getElementById("add_work_form"));
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    $.ajax({
+        type: "POST",
+        url: "/faculty/add_work_experience",
+        processData: false,
+        contentType: false,
+        data: facultyData,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }).then(function(then){
+                location.href="/faculty/faculty_landing_page";
+            }) 
+        },
+        error: function(error) {
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+});
+
+/* Add Accomplishment Info */ 
+$("#add_acc_form").submit(function(e) {
+    e.preventDefault();
+    var facultyData = new FormData(document.getElementById("add_acc_form"));
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    $.ajax({
+        type: "POST",
+        url: "/faculty/add_accomplishment",
+        processData: false,
+        contentType: false,
+        data: facultyData,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }).then(function(then){
+                location.href="/faculty/faculty_landing_page";
+            }) 
+        },
+        error: function(error) {
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+});
+
+/* Add Publication Info */ 
+$("#add_pub_form").submit(function(e) {
+    e.preventDefault();
+    var facultyData = new FormData(document.getElementById("add_pub_form"));
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    $.ajax({
+        type: "POST",
+        url: "/faculty/add_publication",
+        processData: false,
+        contentType: false,
+        data: facultyData,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }).then(function(then){
+                location.href="/faculty/faculty_landing_page";
+            }) 
+        },
+        error: function(error) {
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+});
+
+/* Add Licensure Exam Info */ 
+$("#add_lic_form").submit(function(e) {
+    e.preventDefault();
+    var facultyData = new FormData(document.getElementById("add_lic_form"));
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    $.ajax({
+        type: "POST",
+        url: "/faculty/add_licensure",
+        processData: false,
+        contentType: false,
+        data: facultyData,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }).then(function(then){
+                location.href="/faculty/faculty_landing_page";
+            }) 
+        },
+        error: function(error) {
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+});
+
+/* Add Research Grant Info */ 
+$("#add_rg_form").submit(function(e) {
+    e.preventDefault();
+    var facultyData = new FormData(document.getElementById("add_rg_form"));
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    $.ajax({
+        type: "POST",
+        url: "/faculty/add_research_grant",
+        processData: false,
+        contentType: false,
+        data: facultyData,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }).then(function(then){
+                location.href="/faculty/faculty_landing_page";
+            }) 
+        },
+        error: function(error) {
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+});
+
+/* Add Training/Seminar Info */ 
+$("#add_ts_form").submit(function(e) {
+    e.preventDefault();
+    var facultyData = new FormData(document.getElementById("add_ts_form"));
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    $.ajax({
+        type: "POST",
+        url: "/faculty/add_training_or_seminar",
+        processData: false,
+        contentType: false,
+        data: facultyData,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }).then(function(then){
+                location.href="/faculty/faculty_landing_page";
+            }) 
+        },
+        error: function(error) {
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+});
+
+/* Add FSR/SET Info */ 
+$("#add_fsr_form").submit(function(e) {
+    e.preventDefault();
+    var facultyData = new FormData(document.getElementById("add_fsr_form"));
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    $.ajax({
+        type: "POST",
+        url: "/faculty/add_fsr_set",
+        processData: false,
+        contentType: false,
+        data: facultyData,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }).then(function(then){
+                location.href="/faculty/faculty_landing_page";
+            }) 
+        },
+        error: function(error) {
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+});
