@@ -31,14 +31,14 @@ def load_user(user_id):
 @unit_head_blueprint.route('/unit_head/view_faculty_info/<user_id>', methods=['GET', 'POST'])
 def unit_head_view_faculty_info(user_id):
     faculty_personal_information = FacultyPersonalInformation.query.filter_by(user_id=user_id).first()
-    faculty_educational_attaiment = EducationalAttainment.query.filter_by(user_id=user_id).first()
-    faculty_work_experience = WorkExperience.query.filter_by(user_id=user_id).first()
-    faculty_accomplishments = Accomplishment.query.filter_by(user_id=user_id).first()
-    faculty_publications = Publication.query.filter_by(user_id=user_id).first()
-    faculty_research_grants = ResearchGrant.query.filter_by(user_id=user_id).first()
-    faculty_licensure_exams = LicensureExams.query.filter_by(user_id=user_id).first()
-    faculty_trainings = TrainingSeminar.query.filter_by(user_id=user_id).first()
-    faculty_service_records = FacultySETRecords.query.filter_by(user_id=user_id).first()
+    faculty_educational_attaiment = EducationalAttainment.query.filter_by(user_id=user_id).all()
+    faculty_work_experience = WorkExperience.query.filter_by(user_id=user_id).all()
+    faculty_accomplishments = Accomplishment.query.filter_by(user_id=user_id).all()
+    faculty_publications = Publication.query.filter_by(user_id=user_id).all()
+    faculty_research_grants = ResearchGrant.query.filter_by(user_id=user_id).all()
+    faculty_licensure_exams = LicensureExams.query.filter_by(user_id=user_id).all()
+    faculty_trainings = TrainingSeminar.query.filter_by(user_id=user_id).all()
+    # faculty_service_records = FacultySETRecords.query.filter_by(id=user_id).first()
     return render_template(
         'faculty/view_info.html',
         faculty_personal_information = faculty_personal_information,
@@ -49,7 +49,6 @@ def unit_head_view_faculty_info(user_id):
         faculty_research_grants = faculty_research_grants,
         faculty_licensure_exams = faculty_licensure_exams,
         faculty_trainings = faculty_trainings,
-        faculty_service_records = faculty_service_records
     )
 
 @unit_head_blueprint.route('/unit_head/faculty_list', methods=['GET', 'POST'])

@@ -18,6 +18,7 @@ import json
 
 #Models
 from ..models import EducationalAttainment, FacultyPersonalInformation, ClerkPeronsalInformation
+from ..models import EducationalAttainment, FacultyPersonalInformation, LicensureExams, TrainingSeminar, Accomplishment, ResearchGrant, Publication, WorkExperience, FacultySETRecords
 from ...auth.models import UserCredentials
 from ..models import UnitHeadNominations
 
@@ -33,6 +34,29 @@ def load_user(user_id):
 @dept_chair_blueprint.route('/department_chair/dashboard', methods=['GET', 'POST'])
 def load_dept_head_dashboard():
     return render_template('department_chair/department_chair_dashboard.html')
+
+@dept_chair_blueprint.route('/department_chair/view_faculty_info/<user_id>', methods=['GET', 'POST'])
+def dept_head_view_faculty_info(user_id):
+    faculty_personal_information = FacultyPersonalInformation.query.filter_by(user_id=user_id).first()
+    faculty_educational_attaiment = EducationalAttainment.query.filter_by(user_id=user_id).all()
+    faculty_work_experience = WorkExperience.query.filter_by(user_id=user_id).all()
+    faculty_accomplishments = Accomplishment.query.filter_by(user_id=user_id).all()
+    faculty_publications = Publication.query.filter_by(user_id=user_id).all()
+    faculty_research_grants = ResearchGrant.query.filter_by(user_id=user_id).all()
+    faculty_licensure_exams = LicensureExams.query.filter_by(user_id=user_id).all()
+    faculty_trainings = TrainingSeminar.query.filter_by(user_id=user_id).all()
+    # faculty_service_records = FacultySETRecords.query.filter_by(id=user_id).first()
+    return render_template(
+        'faculty/view_info.html',
+        faculty_personal_information = faculty_personal_information,
+        faculty_educational_attaiment = faculty_educational_attaiment,
+        faculty_work_experience = faculty_work_experience,
+        faculty_accomplishments = faculty_accomplishments,
+        faculty_publications = faculty_publications,
+        faculty_research_grants = faculty_research_grants,
+        faculty_licensure_exams = faculty_licensure_exams,
+        faculty_trainings = faculty_trainings,
+    )
 
 @dept_chair_blueprint.route('/department_chair/pending_approvals', methods=['GET', 'POST'])
 def department_chair_pending_approvals():

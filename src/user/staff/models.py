@@ -197,7 +197,7 @@ class FacultySETRecords(UserMixin, db.Model):
     last_modified               = db.Column(TIMESTAMP, nullable=True)
     syllabus_f_ext              = db.Column(db.String(180), nullable=True)
     set_f_ext                   = db.Column(db.String(180), nullable=True)
-    status                      = db.Column(db.Boolean, nullable=True)
+    # status                      = db.Column(db.Boolean, nullable=True)
 
     def __repr__(self):
         return f'<FSR ID {self.id}>'
