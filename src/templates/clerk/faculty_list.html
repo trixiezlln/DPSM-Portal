@@ -116,6 +116,11 @@
                                 "<option value='Retired'>Retired</option>"+
                                 "<option value='Resigned'>Resigned</option>"+
                                 "<option value='AWOL'>AWOL</option>";
+
+        $('#rank_text'+no).val(rank_data);
+        $('#classification_text'+no).val(classification_data);
+        $('#tenure_text'+no).val(tenure_data);
+        $('#status_text'+no).val(status_data);
     }
 
     function save_row(no, user_id) {
