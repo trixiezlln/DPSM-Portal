@@ -42,7 +42,14 @@ def load_user(user_id):
 def view_info():
     try:
         if request.method == 'GET':
-            return render_template('faculty/faculty_landing_page.html')
+            licensure_record = db.session.query(LicensureExams).filter_by(user_id=current_user.user_id)
+            training_record = db.session.query(TrainingSeminar).filter_by(user_id=current_user.user_id)
+            # fsr_record = db.session.query(FacultySETRecords).filter_by(user_id=current_user.user_id)
+            for rec in training_record:
+                print(f"Returning this: {rec.date}")
+            return render_template('faculty/faculty_landing_page.html',\
+                licensure_record=licensure_record, training_record=training_record)
+
         elif request.method == 'POST':
             pass
     except Exception as e:
@@ -596,18 +603,37 @@ def add_licensure():
         print(e)
         return e, 500
 
-@faculty_blueprint.route('/faculty/update_licensure_exam/<string:id>', methods=['GET', 'PUT'])
+@faculty_blueprint.route('/faculty/update_licensure_exam/<string:id>', methods=['GET', 'POST'])
 def update_licensure_exam(id):
     try:
         if request.method == 'GET':
-            licensure_record = LicensureExams.query.filter_by(id=id).first()
-            return render_template(
-            'update_licensure.html',
-            licensure_record
-            )
-        elif request.method == 'PUT':
-            licensure_record = LicensureExams.query.filter_by(id=id).first()
+            licensure_record = db.session.query(LicensureExams).filter_by(id=id).all()
+            print(licensure_record)
+            return render_template('faculty/update_licensure.html', licensure_record=licensure_record)
+        elif request.method == 'POST':
+            licensure_record = db.session.query(LicensureExams).filter_by(id=id).first()
+            print("POST {licensure_record}")
             licensure_form = request.form
+            licensure_files = request.files
+
+            CURR_LIC_PROOF_DIR = os.path.join(LIC_PROOF_DIR, current_user.user_id)
+
+            os.makedirs(CURR_LIC_PROOF_DIR, exist_ok=True)
+
+            lic_proof = licensure_files['licensure_proof']
+            _, lic_proof_ext = os.path.splitext(lic_proof.filename)
+            lic_proof_img = Image.open(lic_proof)
+
+            lic_proof_filename = '{}_{}_{}.{}'.format(
+                'LICENSURE_PROOF', 
+                current_user.user_id, 
+                date.today(), 
+                lic_proof_ext[1:]
+            )
+
+            LIC_PROOF_PATH = os.path.join(CURR_LIC_PROOF_DIR, lic_proof_filename)
+            lic_proof_img.save(LIC_PROOF_PATH)
+
 
             licensure_record.name_exam = licensure_form['name_exam'],
             licensure_record.rank = licensure_form['rank'],
@@ -615,6 +641,8 @@ def update_licensure_exam(id):
             licensure_record.date = licensure_form['date'],
             licensure_record.licensure_file = licensure_form['licensure_file'].read(),
             licensure_record.last_modified = date.today()
+            licensure_record.info_status         = False,
+            licensure_record.proof_ext           = lic_proof_ext[1:]
             db.session.commit()
 
             return 'Licensure Exam Record Successfully Updated.', 200
@@ -622,7 +650,7 @@ def update_licensure_exam(id):
         print(e)
         return 'An error has occured.', 500
 
-@faculty_blueprint.route('/faculty/add_training_or_seminar', methods=['GET', 'POST'])
+@faculty_blueprint.route('/faculty/add_training', methods=['GET', 'POST'])
 def add_training():
     try:
         if request.method == 'GET':
