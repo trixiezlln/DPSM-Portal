@@ -33,6 +33,18 @@ def load_user(user_id):
 
 @dept_chair_blueprint.route('/department_chair/dashboard', methods=['GET', 'POST'])
 def load_dept_head_dashboard():
+
+    units = ['mcsu', 'cu', 'pgu']
+    accomplishments = [Publication, Accomplishment, TrainingSeminar, LicensureExams, ResearchGrant,]
+
+    total_count = {}
+    for unit in units:
+        unit_count = []
+        for acc in accomplishments:
+            record = db.session.query(acc.id, UserCredentials.unit).join(UserCredentials, acc.user_id==UserCredentials.user_id).filter(UserCredentials.unit==unit).count()
+            unit_count.append(record)
+        total_count[unit] = unit_count
+
     faculty_accomplishments = (Accomplishment
         .query
         .join(FacultyPersonalInformation, Accomplishment.user_id == FacultyPersonalInformation.user_id)
@@ -63,6 +75,9 @@ def load_dept_head_dashboard():
         
         if request.method == 'GET':
             return render_template('department_chair/department_chair_dashboard.html', 
+                acc_data_mcsu = total_count['mcsu'],
+                acc_data_physics = total_count['cu'],
+                acc_data_chemistry = total_count['pgu'],
                 faculty_accomplishments = faculty_accomplishments,
                 faculty_publications = faculty_publications,
                 faculty_research_grants = faculty_research_grants,
