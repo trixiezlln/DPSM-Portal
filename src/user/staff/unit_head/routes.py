@@ -198,17 +198,49 @@ def load_unit_head_dashboard():
     for total_count in acc_data_mcsu:
         count_mcsu.append(total_count)
         
-    for total_count in acc_data_mcsu:
+    for total_count in acc_data_physics:
         count_physics.append(total_count)
 
-    for total_count in acc_data_mcsu:
+    for total_count in acc_data_chemistry:
         count_chemistry.append(total_count)
+
+    faculty_accomplishments = (Accomplishment
+        .query
+        .join(FacultyPersonalInformation, Accomplishment.user_id == FacultyPersonalInformation.user_id)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    faculty_publications = (Publication
+        .query
+        .join(FacultyPersonalInformation, Publication.user_id == FacultyPersonalInformation.user_id)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    faculty_research_grants = (ResearchGrant
+        .query
+        .join(FacultyPersonalInformation, ResearchGrant.user_id == FacultyPersonalInformation.user_id)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    faculty_licensure_exams = (LicensureExams
+        .query
+        .join(FacultyPersonalInformation, LicensureExams.user_id == FacultyPersonalInformation.user_id)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    faculty_trainings = (TrainingSeminar
+        .query
+        .join(FacultyPersonalInformation, FacultyPersonalInformation.user_id == TrainingSeminar.user_id)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    print(len(faculty_trainings))
     try:
         if request.method == 'GET':
             return render_template('unit_head/unit_head_dashboard.html', 
                 acc_data_mcsu = json.dumps(count_mcsu),
                 acc_data_physics = json.dumps(count_physics),
-                acc_data_chemistry = json.dumps(count_chemistry)
+                acc_data_chemistry = json.dumps(count_chemistry),
+                faculty_accomplishments = faculty_accomplishments,
+                faculty_publications = faculty_publications,
+                faculty_research_grants = faculty_research_grants,
+                faculty_licensure_exams = faculty_licensure_exams,
+                faculty_trainings = faculty_trainings
             )
         elif request.method == 'POST':
             pass
