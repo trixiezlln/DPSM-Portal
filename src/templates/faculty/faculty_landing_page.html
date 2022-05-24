@@ -65,7 +65,7 @@
             <div class="d-flex justify-content-between my-3">
                 <h4 class="">Personal Information</h4>
                 <div>
-                    <a class="crud-icon add-btn"></a>
+                    <!-- <a class="crud-icon add-btn"></a> -->
                     
                 </div>
             </div>
@@ -74,6 +74,7 @@
 
             <!-- box content -->
             <!-- box content -->
+            
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
@@ -357,6 +358,7 @@
             <hr>
 
             <!-- box content -->
+
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
@@ -435,7 +437,7 @@
             </div>
 
             <hr>
-
+            
             <!-- box content -->
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
@@ -1266,18 +1268,20 @@
             <div class="d-flex justify-content-between my-3">
                 <h4 class="">Licensure Exam</h4>
                 <div>
-                    <a class="crud-icon add-btn"></a>
+                    <a class="crud-icon add-btn" href="add_licensure"></a>
                 </div>
             </div>
 
             <hr>
             
-            <!-- box content -->
+             <!-- box content -->
+             
+            {% for lrec in licensure_record %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
                     <div>
-                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon edit-btn" href="/faculty/update_licensure_exam/{{ lrec.id }}"></a>
                         <a class="crud-icon delete-btn"></a>
                     </div>
                 </div>
@@ -1287,92 +1291,36 @@
                         <div class="col col-12 container">
                             <div class="row">
                                 <div class="col-12 custom-col-3 mb-3">
-                                    <label class="col-form-label">Name of Research Project<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="name_research" name="name_research">
+                                    <label class="col-form-label"><span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="name_exam" name="name_exam" value = "{{ lrec.name_exam }}" disabled>
+                                    <span class = "validation-status"></span>
+                                </div> 
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                    <label class="col-form-label">Rank<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="rank" name="rank" value = "{{ lrec.rank }}" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+                                
+                                <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                    <label class="col-form-label">License Number<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="license_number" name="license_number" value="{{ lrec.license_number }}" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>
+    
+                                <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                                    <label class="col-form-label">Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="date" name="date" value="{{ lrec.date }}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>  
                             </div>
-    
-                            <div class="row">
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Sponsor<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="sponsor" name="sponsor">
-                                    <span class = "validation-status"></span>
-                                </div> 
-                                
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Amount Granted<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="amount_granted" name="amount_granted">
-                                    <span class = "validation-status"></span>
-                                </div> 
-                            </div>
-    
-                            <div class="row">
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Projected Start Date<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="projected_start" name="projected_start">
-                                    <span class = "validation-status"></span>
-                                </div>   
-                                
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Projected End Date<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="projected_end" name="projected_end">
-                                    <span class = "validation-status"></span>
-                                </div>  
-                            </div>
-    
-                            <div class="row">
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Actual Start Date<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="actual_start" name="actual_start">
-                                    <span class = "validation-status"></span>
-                                </div>   
-                                
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Actual End Date<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="actual_end" name="actual_end">
-                                    <span class = "validation-status"></span>
-                                </div>  
-                            </div>
-    
-                            <div class="row">
-                                <div class="col-12 custom-col-3 mb-3">
-                                    <label class="col-form-label">Research Progress<span class="required-field"></span></label>
-                                    <textarea class="form-control" id="research_progress" name="research_progress" rows="4" cols="50"></textarea>
-                                    <span class = "validation-status"></span>
-                                </div>   
-                            </div>
-    
-                            <div class="row">
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Co-researchers (DPSM Faculty)<span class="required-field"></span></label>
-                                    <select class="coresearchers_dpsm-select form-select form-control coresearchers_dpsm" aria-label="" id="coresearchers_dpsm" name="coresearchers_dpsm" data-field="coresearchers_dpsm">
-                                        <option selected value="">N/A</option>
-                                        <option value="SR">Sr.</option>
-                                        <option value="JR">Jr.</option>
-                                        <option value="I">I</option>
-                                        <option value="II">II</option>
-                                        <option value="III">III</option>
-                                        <option value="IV">IV</option>
-                                        <option value="V">V</option>
-                                        <option value="VI">VI</option>
-                                        <option value="VII">VII</option>
-                                        <option value="VIII">VIII</option>
-                                    </select>
-                                </div> 
-                                
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Co-researchers (non-DPSM Faculty)<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="amount_granted" name="amount_granted">
-                                    <span class = "validation-status"></span>
-                                </div> 
-                            </div>
-    
     
                             <div class="row">
                                 <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
-                                    <input type="file" id="accomplishment_file" name="accomplishment_file">
+                                    <label class="col-form-label">Uploaded Proof<span class="required-field"></span></label>
+                                    <input type="text" id="licensure_proof" name="licensure_proof" value="{{ lrec.proof_ext }}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>    
                             </div>
@@ -1380,122 +1328,13 @@
                         </div>
                     </div>
                 </div>
-        
-            </div>
-
-            <hr>
+                <hr>
             
-            <!-- box content -->
-            <div class="info-sub-section">
-                <div class="d-flex justify-content-between my-3">
-                    <h1 class=""></h1>
-                    <div>
-                        <a class="crud-icon edit-btn"></a>
-                        <a class="crud-icon delete-btn"></a>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="col col-12 container">
-                            <div class="row">
-                                <div class="col-12 custom-col-3 mb-3">
-                                    <label class="col-form-label">Name of Research Project<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="name_research" name="name_research">
-                                    <span class = "validation-status"></span>
-                                </div>  
-                            </div>
-    
-                            <div class="row">
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Sponsor<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="sponsor" name="sponsor">
-                                    <span class = "validation-status"></span>
-                                </div> 
-                                
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Amount Granted<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="amount_granted" name="amount_granted">
-                                    <span class = "validation-status"></span>
-                                </div> 
-                            </div>
-    
-                            <div class="row">
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Projected Start Date<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="projected_start" name="projected_start">
-                                    <span class = "validation-status"></span>
-                                </div>   
-                                
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Projected End Date<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="projected_end" name="projected_end">
-                                    <span class = "validation-status"></span>
-                                </div>  
-                            </div>
-    
-                            <div class="row">
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Actual Start Date<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="actual_start" name="actual_start">
-                                    <span class = "validation-status"></span>
-                                </div>   
-                                
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Actual End Date<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="actual_end" name="actual_end">
-                                    <span class = "validation-status"></span>
-                                </div>  
-                            </div>
-    
-                            <div class="row">
-                                <div class="col-12 custom-col-3 mb-3">
-                                    <label class="col-form-label">Research Progress<span class="required-field"></span></label>
-                                    <textarea class="form-control" id="research_progress" name="research_progress" rows="4" cols="50"></textarea>
-                                    <span class = "validation-status"></span>
-                                </div>   
-                            </div>
-    
-                            <div class="row">
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Co-researchers (DPSM Faculty)<span class="required-field"></span></label>
-                                    <select class="coresearchers_dpsm-select form-select form-control coresearchers_dpsm" aria-label="" id="coresearchers_dpsm" name="coresearchers_dpsm" data-field="coresearchers_dpsm">
-                                        <option selected value="">N/A</option>
-                                        <option value="SR">Sr.</option>
-                                        <option value="JR">Jr.</option>
-                                        <option value="I">I</option>
-                                        <option value="II">II</option>
-                                        <option value="III">III</option>
-                                        <option value="IV">IV</option>
-                                        <option value="V">V</option>
-                                        <option value="VI">VI</option>
-                                        <option value="VII">VII</option>
-                                        <option value="VIII">VIII</option>
-                                    </select>
-                                </div> 
-                                
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Co-researchers (non-DPSM Faculty)<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="amount_granted" name="amount_granted">
-                                    <span class = "validation-status"></span>
-                                </div> 
-                            </div>
-    
-    
-                            <div class="row">
-                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
-                                    <input type="file" id="accomplishment_file" name="accomplishment_file">
-                                    <span class = "validation-status"></span>
-                                </div>    
-                            </div>
-    
-                        </div>
-                    </div>
-                </div>
-        
-            </div>         
+            </div>
+            {% endfor %}
+                 
         </div>
+
 
         <div class="info-section">
 
@@ -1503,18 +1342,21 @@
             <div class="d-flex justify-content-between my-3">
                 <h4 class="">Training/Seminar</h4>
                 <div>
-                    <a class="crud-icon add-btn"></a>
+                    <a class="crud-icon add-btn" href="add_training"></a>
                 </div>
             </div>
 
             <hr>
             
             <!-- box content -->
+
+            {% for trec in training_record %}
+
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
                     <div>
-                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon edit-btn" href="/faculty/update_training/{{ trec.id }}"></a>
                         <a class="crud-icon delete-btn"></a>
                     </div>
                 </div>
@@ -1525,13 +1367,13 @@
                             <div class="row">
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">Name of Training/Seminar<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="name_training" name="name_training">
+                                    <input class="form-control" type="text" id="name_training" name="name_training" value="{{ trec.name_training }}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>  
     
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">Role<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="role" name="role">
+                                    <input class="form-control" type="text" id="role" name="role" value="{{ trec.role }}" disabled>
                                     <span class = "validation-status"></span>
                                 </div> 
                             </div>
@@ -1539,7 +1381,7 @@
                             <div class="row">
                                 <div class="col-12 custom-col-3 mb-3">
                                     <label class="col-form-label">Remarks<span class="required-field"></span></label>
-                                    <textarea class="form-control" id="remarks" name="remarks" rows="4" cols="50"></textarea>
+                                    <textarea class="form-control" id="remarks" name="remarks" rows="4" cols="50" value="{{ trec.remarks }}" disabled></textarea>
                                     <span class = "validation-status"></span>
                                 </div>   
                             </div>
@@ -1547,13 +1389,13 @@
                             <div class="row">
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">Start Date<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="start_date" name="start_date">
+                                    <input class="form-control" type="date" id="start_date" name="start_date" value="{{ trec.start_date }}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>   
                                 
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">End Date<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="end_date" name="end_date">
+                                    <input class="form-control" type="date" id="end_date" name="end_date" value="{{ trec.end_date }}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>  
                             </div>
@@ -1561,7 +1403,7 @@
                             <div class="row">
                                 <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                     <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
-                                    <input type="file" id="accomplishment_file" name="accomplishment_file">
+                                    <input type="file" id="accomplishment_file" name="accomplishment_file" value="{{ trec.proof_ext }}}">
                                     <span class = "validation-status"></span>
                                 </div>    
                             </div>
@@ -1570,70 +1412,8 @@
                     </div>
                 </div>
             </div>
-
             <hr>
-            
-            <!-- box content -->
-            <div class="info-sub-section">
-                <div class="d-flex justify-content-between my-3">
-                    <h1 class=""></h1>
-                    <div>
-                        <a class="crud-icon edit-btn"></a>
-                        <a class="crud-icon delete-btn"></a>
-                    </div>
-                </div>
-        
-                <div class="row">
-                    <div class="col-12">
-                        <div class="col col-12 container">
-                            <div class="row">
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Name of Training/Seminar<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="name_training" name="name_training">
-                                    <span class = "validation-status"></span>
-                                </div>  
-    
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Role<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="role" name="role">
-                                    <span class = "validation-status"></span>
-                                </div> 
-                            </div>
-    
-                            <div class="row">
-                                <div class="col-12 custom-col-3 mb-3">
-                                    <label class="col-form-label">Remarks<span class="required-field"></span></label>
-                                    <textarea class="form-control" id="remarks" name="remarks" rows="4" cols="50"></textarea>
-                                    <span class = "validation-status"></span>
-                                </div>   
-                            </div>
-    
-                            <div class="row">
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Start Date<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="start_date" name="start_date">
-                                    <span class = "validation-status"></span>
-                                </div>   
-                                
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">End Date<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="end_date" name="end_date">
-                                    <span class = "validation-status"></span>
-                                </div>  
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
-                                    <input type="file" id="accomplishment_file" name="accomplishment_file">
-                                    <span class = "validation-status"></span>
-                                </div>    
-                            </div>
-    
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
 
         <div class="info-section">
