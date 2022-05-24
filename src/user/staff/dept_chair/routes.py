@@ -33,7 +33,48 @@ def load_user(user_id):
 
 @dept_chair_blueprint.route('/department_chair/dashboard', methods=['GET', 'POST'])
 def load_dept_head_dashboard():
-    return render_template('department_chair/department_chair_dashboard.html')
+    faculty_accomplishments = (Accomplishment
+        .query
+        .join(FacultyPersonalInformation, Accomplishment.user_id == FacultyPersonalInformation.user_id)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    faculty_publications = (Publication
+        .query
+        .join(FacultyPersonalInformation, Publication.user_id == FacultyPersonalInformation.user_id)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    faculty_research_grants = (ResearchGrant
+        .query
+        .join(FacultyPersonalInformation, ResearchGrant.user_id == FacultyPersonalInformation.user_id)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    faculty_licensure_exams = (LicensureExams
+        .query
+        .join(FacultyPersonalInformation, LicensureExams.user_id == FacultyPersonalInformation.user_id)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    faculty_trainings = (TrainingSeminar
+        .query
+        .join(FacultyPersonalInformation, FacultyPersonalInformation.user_id == TrainingSeminar.user_id)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    print(len(faculty_trainings))
+    try:
+        
+        if request.method == 'GET':
+            return render_template('department_chair/department_chair_dashboard.html', 
+                faculty_accomplishments = faculty_accomplishments,
+                faculty_publications = faculty_publications,
+                faculty_research_grants = faculty_research_grants,
+                faculty_licensure_exams = faculty_licensure_exams,
+                faculty_trainings = faculty_trainings
+            )
+        elif request.method == 'POST':
+            pass
+
+    except Exception as e:
+        print(e)
+        return 'An error has occured.', 500
 
 @dept_chair_blueprint.route('/department_chair/view_faculty_info/<user_id>', methods=['GET', 'POST'])
 def dept_head_view_faculty_info(user_id):

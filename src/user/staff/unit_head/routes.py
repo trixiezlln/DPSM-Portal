@@ -196,26 +196,31 @@ def load_unit_head_dashboard():
     faculty_accomplishments = (Accomplishment
         .query
         .join(FacultyPersonalInformation, Accomplishment.user_id == FacultyPersonalInformation.user_id)
+        .filter(FacultyPersonalInformation.unit == current_user.unit)
         .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
     ).all()
     faculty_publications = (Publication
         .query
         .join(FacultyPersonalInformation, Publication.user_id == FacultyPersonalInformation.user_id)
+        .filter(FacultyPersonalInformation.unit == current_user.unit)
         .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
     ).all()
     faculty_research_grants = (ResearchGrant
         .query
         .join(FacultyPersonalInformation, ResearchGrant.user_id == FacultyPersonalInformation.user_id)
+        .filter(FacultyPersonalInformation.unit == current_user.unit)
         .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
     ).all()
     faculty_licensure_exams = (LicensureExams
         .query
         .join(FacultyPersonalInformation, LicensureExams.user_id == FacultyPersonalInformation.user_id)
+        .filter(FacultyPersonalInformation.unit == current_user.unit)
         .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
     ).all()
     faculty_trainings = (TrainingSeminar
         .query
         .join(FacultyPersonalInformation, FacultyPersonalInformation.user_id == TrainingSeminar.user_id)
+        .filter(FacultyPersonalInformation.unit == current_user.unit)
         .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
     ).all()
     print(len(faculty_trainings))

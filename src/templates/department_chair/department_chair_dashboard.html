@@ -10,6 +10,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    
+
     <style type="text/css">
   
 
@@ -215,79 +227,65 @@
                     </tr>
                 </thead>
                 <tbody id="myTable">
-                    <tr class="clickable" onclick="window.location='#'">
-                        <th scope="row" id="MCSU">Baes, Gregorio</th>
-                        <td><span id="">Test Publication</span></td>
-                        <td><span id="">Research Grant</span></td>
-                        <td><span id="start_date">2020-02-01</span></td>
-                        <td><span id="end_date">2022-01-31</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row" id="MCSU">Basco, Therese Anne</th>
-                        <td><span id="">Journal</span></td>
-                        <td><span id="">Public Service</span></td>
-                        <td><span id="start_date">2019-10-23</span></td>
-                        <td><span id="end_date">2021-01-30</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row" id="MCSU">Chua, Richard Bryann</th>
-                        <td><span id="">Trainor - AUN</span></td>
-                        <td><span id="">Training/Seminar</span></td>
-                        <td><span id="start_date">2021-01-30</span></td>
-                        <td><span id="end_date">2021-12-15</span></td>
-                    </tr>
+                    {% if faculty_accomplishments is not none %}
+                        {% for accomplishment in faculty_accomplishments %}
+                        <tr class="clickable" onclick="window.location='#'">
+                            <th scope="row">{{accomplishment[2]}}, {{accomplishment[1]}}</th>
+                            <td><span id="">{{accomplishment[0]['type_contribution']}}</span></td>
+                            <td><span id="">Accomplishment</span></td>
+                            <td><span id="start_date">{{accomplishment[0]['start_date']}}</span></td>
+                            <td><span id="end_date">{{accomplishment[0]['end_date']}}</span></td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
 
-                    <tr>
-                        <th scope="row" id="Chemistry">Billones, Junie B.</th>
-                        <td><span id="">Trainor - AUN</span></td>
-                        <td><span id="">Training/Seminar</span></td>
-                        <td><span id="start_date">2020-02-10</span></td>
-                        <td><span id="end_date">2020-04-15</span></td>
-                    </tr>
+                    {% if faculty_publications is not none %}
+                        {% for publication in faculty_publications %}
+                        <tr class="clickable" onclick="window.location='#'">
+                            <th scope="row">{{publication[2]}}, {{publication[1]}}</th>
+                            <td><span id="">{{publication[0]['publication']}}</span></td>
+                            <td><span id="">Publication</span></td>
+                            <td><span id="start_date">{{publication[0]['date_published']}}</span></td>
+                            <td><span id="end_date">{{publication[0]['end_date']}}</span></td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
 
-                    <tr>
-                        <th scope="row" id="Chemistry">Carrillo, Maria Constancia O.</th>
-                        <td><span id="">Journal</span></td>
-                        <td><span id="">Public Service</span></td>
-                        <td><span id="start_date">2019-08-22</span></td>
-                        <td><span id="end_date">2020-01-15</span></td>
-                    </tr>
+                    {% if faculty_research_grants is not none %}
+                        {% for grant in faculty_research_grants %}
+                        <tr class="clickable" onclick="window.location='#'">
+                            <th scope="row">{{grant[2]}}, {{grant[1]}}</th>
+                            <td><span id="">{{grant[0]['name_research']}}</span></td>
+                            <td><span id="">Research Grant</span></td>
+                            <td><span id="start_date">{{grant[0]['actual_start']}}</span></td>
+                            <td><span id="end_date">{{grant[0]['actual_end']}}</span></td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
 
-                    <tr>
-                        <th scope="row" class="Chemistry">Cleofas, Mark Jeremiah B.</th>
-                        <td><span id="">Test Publication</span></td>
-                        <td><span id="">Research Grant</span></td>
-                        <td><span id="start_date">2020-02-01</span></td>
-                        <td><span id="end_date">2022-01-31</span></td>
-                    </tr>
+                    {% if faculty_licensure_exams is not none %}
+                        {% for licensure in faculty_licensure_exams %}
+                        <tr class="clickable" onclick="window.location='#'">
+                            <th scope="row">{{licensure[2]}}, {{licensure[1]}}</th>
+                            <td><span id="">{{licensure[0]['name_exam']}}</span></td>
+                            <td><span id="">Licensure Exam</span></td>
+                            <td><span id="start_date">{{licensure[0]['date']}}</span></td>
+                            <td><span id="end_date">{{licensure[0]['actual_end']}}</span></td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
 
-                    <tr>
-                        <th scope="row" id="Physics">Bagunu, Ramon Jose C.</th>
-                        <td><span id="">Trainor - AUN</span></td>
-                        <td><span id="">Training/Seminar</span></td>
-                        <td><span id="start_date">2021-01-30</span></td>
-                        <td><span id="end_date">2021-12-15</span></td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row" id="Physics">Bustillo, John Paul O.</th>
-                        <td><span id="">Trainor - AUN</span></td>
-                        <td><span id="">Training/Seminar</span></td>
-                        <td><span id="start_date">2021-01-30</span></td>
-                        <td><span id="end_date">2021-12-15</span></td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row" id="Physics">Cometa, Adam Jesson P.</th>
-                        <td><span id="">Trainor - AUN</span></td>
-                        <td><span id="">Training/Seminar</span></td>
-                        <td><span id="start_date">2022-01-10</span></td>
-                        <td><span id="end_date">2022-03-14</span></td>
-                    </tr>
-
-
-
-
+                    {% if faculty_trainings is not none %}
+                        {% for training in faculty_trainings %}
+                        <tr class="clickable" onclick="window.location='#'">
+                            <th scope="row">{{training[2]}}, {{training[1]}}</th>
+                            <td><span id="">{{training[0]['name_training']}}</span></td>
+                            <td><span id="">Training/Seminar</span></td>
+                            <td><span id="start_date">{{training[0]['start_date']}}</span></td>
+                            <td><span id="end_date">{{training[0]['end_date']}}</span></td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
                 </tbody>
             </table>
         </div>
@@ -354,9 +352,17 @@ $(document).ready(function(){
 </script>
 
 <script>
-    $(document).ready(function(){
-        $('#accomplishemt_table').DataTable({searching: false, paging: false, info: false, select:true});
-    });
+    $(document).ready(function() {
+        $('#accomplishemt_table').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ]
+        } );
+    } );
 </script>
 
 <script>
