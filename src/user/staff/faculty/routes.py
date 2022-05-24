@@ -44,9 +44,6 @@ def view_info():
         if request.method == 'GET':
             licensure_record = db.session.query(LicensureExams).filter_by(user_id=current_user.user_id)
             training_record = db.session.query(TrainingSeminar).filter_by(user_id=current_user.user_id)
-            # fsr_record = db.session.query(FacultySETRecords).filter_by(user_id=current_user.user_id)
-            for rec in training_record:
-                print(f"Returning this: {rec.date}")
             return render_template('faculty/faculty_landing_page.html',\
                 licensure_record=licensure_record, training_record=training_record)
 
@@ -610,9 +607,8 @@ def update_licensure_exam(id):
             licensure_record = db.session.query(LicensureExams).filter_by(id=id).all()
             print(licensure_record)
             return render_template('faculty/update_licensure.html', licensure_record=licensure_record)
+
         elif request.method == 'POST':
-            licensure_record = db.session.query(LicensureExams).filter_by(id=id).first()
-            print("POST {licensure_record}")
             licensure_form = request.form
             licensure_files = request.files
 
@@ -634,21 +630,25 @@ def update_licensure_exam(id):
             LIC_PROOF_PATH = os.path.join(CURR_LIC_PROOF_DIR, lic_proof_filename)
             lic_proof_img.save(LIC_PROOF_PATH)
 
-
-            licensure_record.name_exam = licensure_form['name_exam'],
-            licensure_record.rank = licensure_form['rank'],
-            licensure_record.license_numbeer = licensure_form['license_number'],
-            licensure_record.date = licensure_form['date'],
-            licensure_record.licensure_file = licensure_form['licensure_file'].read(),
-            licensure_record.last_modified = date.today()
-            licensure_record.info_status         = False,
-            licensure_record.proof_ext           = lic_proof_ext[1:]
+            new_record = LicensureExams(
+                id                  = id,
+                user_id             = current_user.user_id,
+                name_exam           = licensure_form['name_exam'],
+                rank                = licensure_form['rank'],
+                license_number      = licensure_form['license_number'],
+                date                = licensure_form['date'],
+                info_status         = False,
+                proof_ext           = lic_proof_ext[1:],
+                last_modified       = date.today()
+            )
+            db.session.query(LicensureExams).add(new_record)
             db.session.commit()
+            print("added and committed")
 
-            return 'Licensure Exam Record Successfully Updated.', 200
+            return 'Licensure Exam Successfully Added.', 200
     except Exception as e:
         print(e)
-        return 'An error has occured.', 500
+        return e, 500
 
 @faculty_blueprint.route('/faculty/add_training', methods=['GET', 'POST'])
 def add_training():
@@ -704,28 +704,50 @@ def add_training():
 def update_training(id):
     try:
         if request.method == 'GET':
-            training_record = TrainingSeminar.query.filter_by(id=id).first()
-            return render_template(
-            'update_training.html',
-            training_record
-            )
+            training_record = db.session.query(TrainingSeminar).filter_by(id=id).all()
+            return render_template('faculty/update_training.html', training_record=training_record)
+
         elif request.method == 'PUT':
-            training_record = TrainingSeminar.query.filter_by(id=id).first()
             training_form = request.form
+            training_files = request.files
 
-            training_record.name_training = training_form['name_training'],
-            training_record.role = training_form['role'],
-            training_record.remarks = training_form['remarks'],
-            training_record.start_date = training_form['start_date'],
-            training_record.end_date = training_form['end_date'],
-            training_record.accomplishment_file = training_form['accomplishment_file'].read(),
-            training_record.last_modified = date.today()
+            CURR_TS_PROOF_DIR = os.path.join(TS_PROOF_DIR, current_user.user_id)
+
+            os.makedirs(CURR_TS_PROOF_DIR, exist_ok=True)
+
+            ts_proof = training_files['training_proof']
+            _, ts_proof_ext = os.path.splitext(ts_proof.filename)
+            ts_proof_img = Image.open(ts_proof)
+
+            ts_proof_filename = '{}_{}_{}.{}'.format(
+                'TRAINING_SEMINAR_PROOF', 
+                current_user.user_id, 
+                date.today(), 
+                ts_proof_ext[1:]
+            )
+
+            TS_PROOF_PATH = os.path.join(CURR_TS_PROOF_DIR, ts_proof_filename)
+            ts_proof_img.save(TS_PROOF_PATH)
+
+            new_record = TrainingSeminar(
+                id                  = id,
+                user_id             = current_user.user_id,
+                name_training       = training_form['name_training'],
+                role                = training_form['role'],
+                remarks             = training_form['remarks'],
+                start_date          = training_form['start_date'],
+                end_date            = training_form['end_date'],
+                info_status         = False,
+                proof_ext           = ts_proof_ext[1:],
+                last_modified       = date.today()
+            )
+            db.session.add(new_record)
             db.session.commit()
-
-            return 'Training/Seminar Record Successfully Updated.', 200
+                
+            return 'Training/Seminar Successfully Added.', 200
     except Exception as e:
         print(e)
-        return 'An error has occured.', 500
+        return e, 500
 
 @faculty_blueprint.route('/faculty/add_fsr_set', methods=['GET', 'POST'])
 def add_fsr_set():
