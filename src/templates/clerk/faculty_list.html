@@ -11,8 +11,8 @@
     {% for faculty in faculty_list %}
         <tr id="row{{loop.index}}">
             <td id="name_row{{loop.index}}">
-                <a href="{{ url_for('clerk_blueprint.clerk_faculty_service_record', user_id = faculty['user_id']) }}">
-                    {{faculty['faculty_name']}}
+                <a href="{{ url_for('clerk_blueprint.clerk_faculty_service_record', user_id = faculty['user_id']) }}" style="color:maroon">
+                    <b>{{faculty['faculty_name']}}</b>
                 </a>
             </td>
             <td id="rank_row{{loop.index}}">{{faculty['rank']}}</td>

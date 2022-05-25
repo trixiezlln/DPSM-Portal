@@ -12,9 +12,9 @@
                 <th class="sortable">Semester</th>
                 <th>Schedule</th>
                 <th>No. of Students</th>
-                <th>Syllabus</th>
+                <!--<th>Syllabus</th>-->
                 <th>SET Score</th>
-                <th>SET Proof</th>
+                <!--<th>SET Proof</th>-->
                 <th>Action</th>
             </tr>
             {% for record in fsr_record %}
@@ -24,7 +24,7 @@
                 <td id="semester_row{{outer_loop.index}}_{{loop.index}}">{{record['semester']}}</td>
                 <td id="schedule_row{{outer_loop.index}}_{{loop.index}}">{{record['schedule']}}</td>
                 <td id="number_of_students_row{{outer_loop.index}}_{{loop.index}}">{{record['number_students']}}</td>
-                <td id="syllabus_row{{outer_loop.index}}_{{loop.index}}">
+                <!--<td id="syllabus_row{{outer_loop.index}}_{{loop.index}}">
                     <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_syllabus_img' name='view_syllabus_img' hidden></a>
                     <button type="button" class="btn btn-secondary crud-btn" id="view_syllabus" onclick="show_syllabus(
                         '{{record['id']}}',
@@ -35,9 +35,10 @@
                     )">
                         View Syllabus
                     </button>
-                </td>
+                </td>-->
+                <!--<td id="syllabus_row{{outer_loop.index}}_{{loop.index}}">{{record['syllabus']}}</td>-->
                 <td id="set_score{{outer_loop.index}}_{{loop.index}}">{{record['set_score']}}</td>
-                <td id="set_row{{outer_loop.index}}_{{loop.index}}">
+                <!--<td id="set_row{{outer_loop.index}}_{{loop.index}}">
                     <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_syllabus_img' name='view_syllabus_img' hidden></a>
                     <button type="button" class="btn btn-secondary crud-btn" id="view_set" name="view_set" onclick="show_set_proof(
                         '{{record['id']}}',
@@ -48,7 +49,7 @@
                     )">
                         View SET Proof
                     </button>
-                </td>
+                </td>-->
                 <td id="action_button_row{{outer_loop.index}}_{{loop.index}}">
                     <button class="btn btn-primary crud-btn" id="edit_button{{outer_loop.index}}_{{loop.index}}" style="margin-right: 20px;" onclick="edit_row('{{outer_loop.index}}_{{loop.index}}')">Edit</button>
                     <button class="btn btn-primary crud-btn" id="save_button{{outer_loop.index}}_{{loop.index}}" style="margin-right: 20px; display:none;" onclick="save_row('{{outer_loop.index}}_{{loop.index}}', {{record['id']}})">Save</button>
@@ -87,6 +88,7 @@
             </div>
             <div class="col-12 col-lg-2 custom-col-1 mb-3">
                 <select class="sy-select form-select form-control sy" aria-label="" id="new_sy" name="new_sy" data-field="sy" form='add_fsr'>
+                    <option selected value="">Academic Year</option>
                     <option value="2010 - 2011">2010 - 2011</option>
                     <option value="2011 - 2012">2011 - 2012</option>
                     <option value="2012 - 2013">2012 - 2013</option>
@@ -109,14 +111,15 @@
                     <option value="2029 - 2030">2029 - 2030</option>
                 </select>
             </div>
-            <div class="col-12 col-lg-2 custom-col-1 mb-3" style="margin-right:12px;">
-                <input type="file" id="new_syllabus" name="new_syllabus" form='add_fsr'>
-            </div>
-            <div class="col-12 col-lg-2 custom-col-1 mb-3" style="margin-right:12px;">
+            <!--<div class="col-12 col-lg-2 custom-col-1 mb-3" style="margin-right:12px;">
                 <input type="file" id="new_set_proof" name="new_set_proof" form='add_fsr'>
+            </div>-->
+            <div class="col-12 col-lg-2 custom-col-1 mb-3">
+                <input class="form-control" type="text"  id="new_set" name="new_set" placeholder="SET Score"  form='add_fsr'>
             </div>
-            <div class="col-12 col-lg-1 custom-col-1 mb-3">
-                <input class="form-control" type="text"  id="new_set" name="new_set" placeholder="SET"  form='add_fsr'>
+            <div class="col-12 col-lg-2 custom-col-1 mb-3" style="margin-right:12px;">
+                <label class="col-form-label">Syllabus</label>
+                <input type="file" id="new_syllabus" name="new_syllabus" form='add_fsr'>
             </div>
         </div>
     </div>
@@ -195,8 +198,8 @@
         var semester=document.getElementById("semester_row"+no);
         var schedule=document.getElementById("schedule_row"+no);
         var number_of_students=document.getElementById("number_of_students_row"+no);
-        var syllabus=document.getElementById("syllabus_row"+no);
-        var set=document.getElementById("set_row"+no);         
+        // var syllabus=document.getElementById("syllabus_row"+no);
+        // var set=document.getElementById("set_row"+no);         
         var set=document.getElementById("set_score"+no);      
         
         var course_code_data=course_code.innerHTML;
@@ -204,7 +207,7 @@
         var semester_data=semester.innerHTML;
         var schedule_data=schedule.innerHTML;
         var number_of_students_data=number_of_students.innerHTML;
-        var syllabus_data=syllabus.innerHTML;
+        // var syllabus_data=syllabus.innerHTML;
         var set_data=set.innerHTML;
 
         course_code.innerHTML="<input style='width: 80%' type='text' id='course_code_text"+no+"' value='"+course_code_data+"'>";
@@ -215,8 +218,8 @@
                                 "<option value='Mid Year'>Mid Year</option>";
         schedule.innerHTML="<input style='width: 100%' type='text' id='schedule_text"+no+"' value='"+schedule_data+"'>";
         number_of_students.innerHTML="<input style='width: 20%' type='text' id='number_of_students_text"+no+"' value='"+number_of_students_data+"'>";
-        syllabus.innerHTML="<input style='width: 55%' type='file' id='syllabus_text"+no+"' value='"+syllabus_data+"'>";
-        set.innerHTML="<input style='width: 55%' type='file' id='set_text"+no+"' value='"+set_data+"'>";
+        //syllabus.innerHTML="<input style='width: 55%' type='file' id='syllabus_text"+no+"' value='"+syllabus_data+"'>";
+        set.innerHTML="<input style='width: 20%' type='text' id='set_text"+no+"' value='"+set_data+"'>";
     }
 
     function save_row(no, user_id) {
@@ -225,17 +228,17 @@
         var semester_val=document.getElementById("semester_text"+no).value;
         var schedule_val=document.getElementById("schedule_text"+no).value;
         var number_of_students_val=document.getElementById("number_of_students_text"+no).value;
-        var syllabus_val=document.getElementById("syllabus_text"+no).value;
+        // var syllabus_val=document.getElementById("syllabus_text"+no).value;
         var set_val=document.getElementById("set_text"+no).value;
-        var set=document.getElementById("set_text"+no).value;
+        // var set=document.getElementById("set_text"+no).value;
 
         document.getElementById("course_code_row"+no).innerHTML=course_code_val;
         document.getElementById("section_row"+no).innerHTML=section_val;
         document.getElementById("semester_row"+no).innerHTML=semester_val;
         document.getElementById("schedule_row"+no).innerHTML=schedule_val;
         document.getElementById("number_of_students_row"+no).innerHTML=number_of_students_val;
-        document.getElementById("syllabus_row"+no).innerHTML=syllabus_val;
-        document.getElementById("set_row"+no).innerHTML=set_val;
+        // document.getElementById("syllabus_row"+no).innerHTML=syllabus_val;
+        // document.getElementById("set_row"+no).innerHTML=set_val;
         document.getElementById("set_score"+no).innerHTML=set_val;
         
         document.getElementById("edit_button"+no).style.display="block";
@@ -247,9 +250,9 @@
             semester_val,
             schedule_val,
             number_of_students_val,
-            syllabus_val,
+            // syllabus_val,
             set_score,
-            set_val,
+            // set_val,
             user_id
         )
     }
