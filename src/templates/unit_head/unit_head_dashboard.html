@@ -125,45 +125,21 @@
 
             let accomplishmentChart = document.getElementById('accomplishmentChart').getContext('2d');
             
-            let acc_count_mcsu = {{ acc_data_mcsu }};
-            let acc_count_physics = {{ acc_data_physics }};
-            let acc_count_chemistry = {{acc_data_chemistry}};
-            
+            let unit_count = {{ unit_count }};
+
             let countChart = new Chart(accomplishmentChart, {
                 type:'bar', 
                 data:{
                     labels:['Publication', 'Public Service', 'Trainings/Seminars', 'Licensure Exams', 'Research Grants'],
                     datasets:[{
                         label:'MCSU',
-                        data: acc_count_mcsu,
+                        data: unit_count,
                         backgroundColor: [
                             'rgba(205, 72, 141, 0.8)',
                             'rgba(205, 72, 141, 0.8)',
                             'rgba(205, 72, 141, 0.8)',
                             'rgba(205, 72, 141, 0.8)',
                             'rgba(205, 72, 141, 0.8)'
-                        ]
-                    },
-                    {
-                        label:'Chemistry',
-                        data: acc_count_chemistry,
-                        backgroundColor: [
-                            'rgba(20, 222, 55, 0.8)',
-                            'rgba(20, 222, 55, 0.8)',
-                            'rgba(20, 222, 55, 0.8)',
-                            'rgba(20, 222, 55, 0.8)',
-                            'rgba(20, 222, 55, 0.8)'
-                        ]
-                    },
-                    {
-                        label:'Physics/Geology',
-                        data: acc_count_physics,
-                        backgroundColor: [
-                            'rgba(20, 161, 222, 0.8)',
-                            'rgba(20, 161, 222, 0.8)',
-                            'rgba(20, 161, 222, 0.8)',
-                            'rgba(20, 161, 222, 0.8)',
-                            'rgba(20, 161, 222, 0.8)'
                         ]
                     }],
                 },

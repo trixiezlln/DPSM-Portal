@@ -213,37 +213,14 @@ def load_unit_head_dashboard():
     accomplishments = [Publication, Accomplishment, TrainingSeminar, LicensureExams, ResearchGrant,]
 
     total_count = {}
-    for unit in units:
-        unit_count = []
-        for acc in accomplishments:
-            record = db.session.query(acc.id, UserCredentials.unit).join(UserCredentials, acc.user_id==UserCredentials.user_id).filter(UserCredentials.unit==unit).count()
-            unit_count.append(record)
-        total_count[unit] = unit_count
+  
+    unit_count = []
+    for acc in accomplishments:
+        record = db.session.query(acc.id, UserCredentials.unit).join(UserCredentials, acc.user_id==UserCredentials.user_id).filter(UserCredentials.unit==current_user.unit).count()
+        unit_count.append(record)
+    
+    print(unit_count)
 
-    # accomplishment_count = []
-    # for total_count in acc_data_mcsu:
-    #     accomplishment_count.append(total_count)
-
-    acc_data_chemistry = db.session.query(db.func.count(Publication.id), db.func.count(Accomplishment.id), db.func.count(TrainingSeminar.id), db.func.count(LicensureExams.id), db.func.count(ResearchGrant.id))\
-        .filter(Publication.user_id == FacultyPersonalInformation.user_id)\
-        .filter(Accomplishment.user_id == FacultyPersonalInformation.user_id)\
-        .filter(TrainingSeminar.user_id == FacultyPersonalInformation.user_id)\
-        .filter(LicensureExams.user_id == FacultyPersonalInformation.user_id)\
-        .filter(ResearchGrant.user_id == FacultyPersonalInformation.user_id)\
-        .filter(FacultyPersonalInformation.unit == "chemistry")\
-        .all()
-
-    # count_mcsu = []
-    # count_physics = []
-    # count_chemistry = []
-    # for total_count in acc_data_mcsu:
-    #     count_mcsu.append(total_count)
-        
-    # for total_count in acc_data_physics:
-    #     count_physics.append(total_count)
-
-    # for total_count in acc_data_chemistry:
-    #     count_chemistry.append(total_count)
 
     faculty_accomplishments = (Accomplishment
         .query
@@ -280,9 +257,7 @@ def load_unit_head_dashboard():
         
         if request.method == 'GET':
             return render_template('unit_head/unit_head_dashboard.html', 
-                acc_data_mcsu = total_count['mcsu'],
-                acc_data_physics = total_count['cu'],
-                acc_data_chemistry = total_count['pgu'],
+                unit_count = unit_count,
                 faculty_accomplishments = faculty_accomplishments,
                 faculty_publications = faculty_publications,
                 faculty_research_grants = faculty_research_grants,
@@ -295,56 +270,6 @@ def load_unit_head_dashboard():
     except Exception as e:
         print(e)
         return 'An error has occured.', 500
-
-
-
-# acc_data_mcsu = db.session.query(db.func.count(Publication.id), db.func.count(Accomplishment.id), db.func.count(TrainingSeminar.id), db.func.count(LicensureExams.id), db.func.count(ResearchGrant.id))\
-    #     .filter(Publication.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(Accomplishment.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(TrainingSeminar.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(LicensureExams.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(ResearchGrant.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(FacultyPersonalInformation.unit == "mcsu")\
-    #     .all()
-
-    # print(acc_data_mcsu)
-    # accomplishment_count = []
-    # for total_count in acc_data_mcsu:
-    #     accomplishment_count.append(total_count)
-    
-    # acc_data_physics = db.session.query(db.func.count(Publication.id), db.func.count(Accomplishment.id), db.func.count(TrainingSeminar.id), db.func.count(LicensureExams.id), db.func.count(ResearchGrant.id))\
-    #     .filter(Publication.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(Accomplishment.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(TrainingSeminar.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(LicensureExams.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(ResearchGrant.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(FacultyPersonalInformation.unit == "physics")\
-    #     .all()
-
-    # accomplishment_count = []
-    # for total_count in acc_data_mcsu:
-    #     accomplishment_count.append(total_count)
-
-    # acc_data_chemistry = db.session.query(db.func.count(Publication.id), db.func.count(Accomplishment.id), db.func.count(TrainingSeminar.id), db.func.count(LicensureExams.id), db.func.count(ResearchGrant.id))\
-    #     .filter(Publication.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(Accomplishment.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(TrainingSeminar.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(LicensureExams.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(ResearchGrant.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(FacultyPersonalInformation.unit == "chemistry")\
-    #     .all()
-
-    # count_mcsu = []
-    # count_physics = []
-    # count_chemistry = []
-    # for total_count in acc_data_mcsu:
-    #     count_mcsu.append(total_count)
-        
-    # for total_count in acc_data_physics:
-    #     count_physics.append(total_count)
-
-    # for total_count in acc_data_chemistry:
-    #     count_chemistry.append(total_count)
 
 
 
