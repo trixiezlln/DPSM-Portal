@@ -1,7 +1,7 @@
 {% extends "department_chair_layout.html" %} {% block department_chair_dashboard %}
 
 <head>
-    <title>Unit Head - Dashboard</title>
+    <title>Department Chair - Dashboard</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -64,6 +64,10 @@
       border-top: none;
     }
 
+    #filter{
+        height: 37px;
+    }
+
  
     </style>
 
@@ -74,28 +78,7 @@
 <section>
     <h1 align="center">Accomplishment Count</h1>
     <br>
-    <div class="row " >
-        <div class="col-sm-6 ">
-            <label class="col-form-label" style = "color: black;">Department Unit</label>
-                            <select class="department-select form-select form-control select_department_chair" aria-label="" name="select_department" data-field="select_department" id = "filterByDepartment" onchange="searchFilter()">
-                                <option value="" selected>All  </option>
-                                <option value="Chemistry">Chemistry  </option>
-                                <option value="MCSU">MCSU</option>
-                                <option value="Physics">Physics/Geology</option>
-                            </select>
-        </div>
-        <br>
-        <div class="col-sm-6" style = "position: relative; top: 38px;">
-            <div class="input-group float-right" >
-                <label>From:</label>
-                <input class="form-control" type="date" id="min" name="min">
-                <label>To:</label>
-                <input class="form-control" type="date" id="max" name="max">
-                <button type="button" class="btn btn-primary float-right">Filter</button>
-            </div>
-        </div>
-    </div>
-    
+
     <br>
 
     <div class="tab">
@@ -103,9 +86,27 @@
         <button class="tablinks" onclick="openTab(event, 'full_list')">Full List</button>
     </div>
 
+    
+
     <!-- Unit Head Assignment -->
     <!-- Graphs -->
-    <div id="overview" class="tabcontent" style="display:block;">
+    <div id="overview" class="tabcontent" style="display:block; ">
+
+        <div class="float-right mt-4 mb-4">
+            <div class="input-group float-right">
+                <label style="line-height: 35px; ">From:&nbsp;</label>
+                <input class="form-control" type="date" id="min" name="min">
+                <label style="line-height: 35px; ">&nbsp;To:&nbsp;</label>
+                <input class="form-control" type="date" id="max" name="max">&nbsp;
+                <button type="button" class="btn btn-primary float-right" id="filter">Filter</button>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        
         <div>
             <canvas id="accomplishmentChart"></canvas>
         </div>
@@ -171,10 +172,25 @@
         
     </div>
 
+
     <div id="full_list" class="tabcontent">
-        <button type="button" class="btn btn-primary float-right">Download XLS</button>
-        <br><br>
         
+        <div class="col-sm-6 float-right"  >
+            <label class="col-form-label" style = "color: black;">Department Unit</label>
+            <br>
+                            <select class="department-select form-select form-control select_department_chair" aria-label="" name="select_department" data-field="select_department" id = "filterByDepartment" onchange="searchFilter()">
+
+                                <option value="" selected>All  </option>
+                                <option value="Chemistry">Chemistry  </option>
+                                <option value="MCSU">MCSU</option>
+                                <option value="Physics">Physics/Geology</option>
+                            </select>
+        </div>
+        <br>
+        
+ 
+    
+
         <div class="table-responsive">
             <table class="table table-striped table-hover dt-bootstrap4 no-footer" id="accomplishemt_table" style="font-size: 1vw; width: 100%;">
                 <thead>
@@ -198,7 +214,6 @@
                                 <option value="Publication">Publication</option>
                                 <option value="Research Grant">Research Grant</option>
                                 <option value="Public Service">Public Service</option>
-                                <option value="Licensure Exam">Licensure Exam</option>
                                 <option value="Training/Seminar">Training/Seminar</option>
                             </select>
                         </th>
@@ -339,6 +354,7 @@ $(document).ready(function(){
 <script>
     $(document).ready(function() {
         $('#accomplishemt_table').DataTable( {
+            searching: false,
             dom: 'Bfrtip',
             buttons: [
                 'copyHtml5',
