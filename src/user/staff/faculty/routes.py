@@ -42,10 +42,17 @@ def load_user(user_id):
 def view_info():
     try:
         if request.method == 'GET':
+            educ_record = db.session.query(EducationalAttainment).filter_by(user_id=current_user.user_id)
+            work_record = db.session.query(WorkExperience).filter_by(user_id=current_user.user_id)
+            accomplishment_record = db.session.query(Accomplishment).filter_by(user_id=current_user.user_id)
+            publication_record = db.session.query(Publication).filter_by(user_id=current_user.user_id)
+            research_record = db.session.query(ResearchGrant).filter_by(user_id=current_user.user_id)
             licensure_record = db.session.query(LicensureExams).filter_by(user_id=current_user.user_id)
             training_record = db.session.query(TrainingSeminar).filter_by(user_id=current_user.user_id)
             return render_template('faculty/faculty_landing_page.html',\
-                licensure_record=licensure_record, training_record=training_record)
+                licensure_record=licensure_record, training_record=training_record, research_record=research_record,
+                    publication_record=publication_record, accomplishment_record=accomplishment_record,
+                    work_record=work_record, educ_record=educ_record)
 
         elif request.method == 'POST':
             pass
@@ -158,33 +165,55 @@ def add_educational_attainment():
         print(e)
         return e, 500
 
-@faculty_blueprint.route('/faculty/update_educational_attainment/<string:id>', methods=['GET', 'PUT'])
+@faculty_blueprint.route('/faculty/update_educational_attainment/<string:id>', methods=['GET', 'POST'])
 def update_educational_attainment(id):
     try:
         if request.method == 'GET':
-            educational_attainment_record = EducationalAttainment.query.filter_by(id=id).first()
+            educational_attainment_record = EducationalAttainment.query.filter_by(id=id)
             print(educational_attainment_record.__dict__)
-            return render_template(
-            'faculty/update_educational.html',
-            educational_attainment_record=educational_attainment_record
-            )
-        elif request.method == 'PUT':
-            educational_attainment_record = EducationalAttainment.query.filter_by(id=id).first()
+            return render_template('faculty/update_educational.html', educ_record=educational_attainment_record)
+        elif request.method == 'POST':
             educational_attainment_form = request.form
+            educational_attainment_files = request.files
 
-            educational_attainment_record.school = educational_attainment_form['school'],
-            educational_attainment_record.degree = educational_attainment_form['degree'],
-            educational_attainment_record.specialization = educational_attainment_form['specialization'],
-            educational_attainment_record.degree_type = educational_attainment_form['degree_type'],
-            educational_attainment_record.start_date = educational_attainment_form['start_date'],
-            educational_attainment_record.end_date = educational_attainment_form['end_date'],
-            educational_attainment_record.last_modified = date.today()
+            CURR_EDUC_PROOF_DIR = os.path.join(EDUC_PROOF_DIR, current_user.user_id)
+
+            os.makedirs(CURR_EDUC_PROOF_DIR, exist_ok=True)
+
+            educ_proof = educational_attainment_files['educ_proof']
+            _, educ_proof_ext = os.path.splitext(educ_proof.filename)
+            educ_proof_img = Image.open(educ_proof)
+
+            educ_proof_filename = '{}_{}_{}.{}'.format(
+                'EDUC_PROOF', 
+                current_user.user_id, 
+                date.today(), 
+                educ_proof_ext[1:]
+            )
+
+            EDUC_PROOF_PATH = os.path.join(CURR_EDUC_PROOF_DIR, educ_proof_filename)
+            educ_proof_img.save(EDUC_PROOF_PATH)
+
+            id = generate_id("ea")
+            new_record = EducationalAttainment(
+                id                  = id,
+                user_id             = current_user.user_id,
+                school              = educational_attainment_form['school'],
+                degree              = educational_attainment_form['degree'],
+                specialization      = educational_attainment_form['specialization'],
+                degree_type         = educational_attainment_form['degree_type'],
+                info_status         = False,
+                proof_ext           = educ_proof_ext[1:],
+                start_date          = educational_attainment_form['start_date'],
+                end_date            = educational_attainment_form['end_date'],
+                last_modified       = date.today()
+            )
+            db.session.add(new_record)
             db.session.commit()
-
-            return 'Educational Attainment Record Successfully Updated.', 200
+            return 'Educational Attainment Record Successfully Added.', 200
     except Exception as e:
         print(e)
-        return 'An error has occured.', 500
+        return e, 500
 
 @faculty_blueprint.route('/faculty/add_work_experience', methods=['GET', 'POST'])
 def add_work_experience():
@@ -236,33 +265,59 @@ def add_work_experience():
         print(e)
         return e, 500
 
-@faculty_blueprint.route('/faculty/update_work_experience/<string:id>', methods=['GET', 'PUT'])
+@faculty_blueprint.route('/faculty/update_work_experience/<string:id>', methods=['GET', 'POST'])
 def update_work_experience(id):
     try:
         if request.method == 'GET':
-            work_experience_record = WorkExperience.query.filter_by(id=id).first()
+            work_experience_record = WorkExperience.query.filter_by(id=id)
             return render_template(
-            'update_work.html',
-            work_experience_record
+            'faculty/update_work.html',
+            work_record=work_experience_record
             )
-        elif request.method == 'PUT':
-            work_experience_record = WorkExperience.query.filter_by(id=id).first()
+        elif request.method == 'POST':
             work_experience_form = request.form
+            work_experience_files = request.files
 
-            work_experience_record.location = work_experience_form['location'],
-            work_experience_record.name_employer = work_experience_form['name_employer'],
-            work_experience_record.title = work_experience_form['title'],
-            work_experience_record.description = work_experience_form['description'],
-            # work_experience_record.work_file = work_experience_form['work_file'],
-            work_experience_record.start_date = work_experience_form['start_date'],
-            work_experience_record.end_date = work_experience_form['end_date'],
-            work_experience_record.last_modified = date.today()
+            CURR_WORK_PROOF_DIR = os.path.join(WORK_PROOF_DIR, current_user.user_id)
+
+            os.makedirs(CURR_WORK_PROOF_DIR, exist_ok=True)
+
+            work_proof = work_experience_files['work_proof']
+            _, work_proof_ext = os.path.splitext(work_proof.filename)
+            work_proof_img = Image.open(work_proof)
+
+            work_proof_filename = '{}_{}_{}.{}'.format(
+                'WORK_PROOF', 
+                current_user.user_id, 
+                date.today(), 
+                work_proof_ext[1:]
+            )
+
+            WORK_PROOF_PATH = os.path.join(CURR_WORK_PROOF_DIR, work_proof_filename)
+            work_proof_img.save(WORK_PROOF_PATH)
+
+            id = generate_id("we")
+            new_record = WorkExperience(
+                id                  = id,
+                user_id             = current_user.user_id,
+                name_employer       = work_experience_form['name_employer'],
+                location            = work_experience_form['location'],
+                title               = work_experience_form['title'],
+                description         = work_experience_form['description'],
+                info_status         = False,
+                proof_ext           = work_proof_ext[1:],
+                start_date          = work_experience_form['start_date'],
+                end_date            = work_experience_form['end_date'],
+                last_modified       = date.today()
+            )
+            db.session.add(new_record)
             db.session.commit()
 
-            return 'Educational Attainment Record Successfully Updated.', 200
+            return 'Work Experience Successfully Added.', 200
     except Exception as e:
         print(e)
-        return 'An error has occured.', 500
+        return e, 500
+
 
 @faculty_blueprint.route('/faculty/add_accomplishment', methods=['GET', 'POST'])
 def add_accomplishment():
@@ -314,33 +369,55 @@ def add_accomplishment():
         print(e)
         return e, 500
 
-@faculty_blueprint.route('/faculty/update_accomplishment/<string:id>', methods=['GET', 'PUT'])
+@faculty_blueprint.route('/faculty/update_accomplishment/<string:id>', methods=['GET', 'POST'])
 def update_accomplishment(id):
     try:
         if request.method == 'GET':
-            accomplishment_record = Accomplishment.query.filter_by(id=id).first()
-            return render_template(
-            'update_accomplishment.html',
-            accomplishment_record
-            )
-        elif request.method == 'PUT':
-            accomplishment_record = Accomplishment.query.filter_by(id=id).first()
+            accomplishment_record = db.session.query(Accomplishment).filter_by(id=id)
+            print(accomplishment_record)
+            return render_template('faculty/update_accomplishment.html', accomplishment_record = accomplishment_record)
+        elif request.method == 'POST':
             accomplishment_form = request.form
+            accomplishment_files = request.files
 
-            accomplishment_record.position = accomplishment_form['position'],
-            accomplishment_record.organization = accomplishment_form['organization'],
-            accomplishment_record.type_contribution = accomplishment_form['type_contribution'],
-            accomplishment_record.description = accomplishment_form['description'],
-            # accomplishment_record.accomplishment_file = accomplishment_form['accomplishment_file'],
-            accomplishment_record.start_date = accomplishment_form['start_date'],
-            accomplishment_record.end_date = accomplishment_form['end_date'],
-            accomplishment_record.last_modified = date.today()
+            CURR_ACC_PROOF_DIR = os.path.join(ACC_PROOF_DIR, current_user.user_id)
+
+            os.makedirs(CURR_ACC_PROOF_DIR, exist_ok=True)
+
+            acc_proof = accomplishment_files['accomplishment_proof']
+            _, acc_proof_ext = os.path.splitext(acc_proof.filename)
+            acc_proof_img = Image.open(acc_proof)
+
+            acc_proof_filename = '{}_{}_{}.{}'.format(
+                'ACCOMPLISHMENT_PROOF', 
+                current_user.user_id, 
+                date.today(), 
+                acc_proof_ext[1:]
+            )
+
+            ACC_PROOF_PATH = os.path.join(CURR_ACC_PROOF_DIR, acc_proof_filename)
+            acc_proof_img.save(ACC_PROOF_PATH)
+
+            new_record = Accomplishment(
+                id                  = id,
+                user_id             = current_user.user_id,
+                position            = accomplishment_form['position'],
+                organization        = accomplishment_form['organization'],
+                type_contribution   = accomplishment_form['type_contribution'],
+                description         = accomplishment_form['description'],
+                info_status         = False,
+                proof_ext           = acc_proof_ext[1:], 
+                start_date          = accomplishment_form['start_date'],
+                end_date            = accomplishment_form['end_date'],
+                last_modified       = date.today()
+            )
+            db.session.add(new_record)
             db.session.commit()
+            return 'Accomplishment Successfully Added.', 200
 
-            return 'Accomplishment Record Successfully Updated.', 200
     except Exception as e:
         print(e)
-        return 'An error has occured.', 500
+        return e, 500
 
 @faculty_blueprint.route('/faculty/add_publication', methods=['GET', 'POST'])
 def add_publication():
@@ -403,11 +480,11 @@ def add_publication():
         print(e)
         return e, 500
 
-@faculty_blueprint.route('/faculty/update_publication/<string:id>', methods=['GET', 'PUT'])
+@faculty_blueprint.route('/faculty/update_publication/<string:id>', methods=['GET', 'POST'])
 def update_publication(id):
     try:
         if request.method == 'GET':
-            publication_record = Publication.query.filter_by(id=id).first()
+            publication_record = Publication.query.filter_by(id=id)
 
             faculty_list = []
             faculty_records = FacultyPersonalInformation.query.all()
@@ -420,28 +497,53 @@ def update_publication(id):
                 faculty_list.append(faculty_name)
 
             return render_template(
-                '.html',
-                publication_record,
-                faculty_list
+                'faculty/update_publication.html',
+                publication_record = publication_record,
+                faculty_list = faculty_list
             )
-        elif request.method == 'PUT':
-            publication_record = Publication.query.filter_by(id=id).first()
+        elif request.method == 'POST':
             publication_form = request.form
+            publication_files = request.files
 
-            publication_record.publication = publication_form['publication'],
-            publication_record.citation = publication_form['citation'],
-            publication_record.url = publication_form['url'],
-            publication_record.coauthors_dpsm = publication_form['coauthors_dpsm'],
-            publication_record.coauthors_nondpsm = publication_form['coauthors_nondpsm'],
-            # publication_record.publication_file = publication_form['publication_file'],
-            publication_record.date_published = publication_form['date_published'],
-            publication_record.last_modified = date.today()
+            CURR_PUB_PROOF_DIR = os.path.join(PUB_PROOF_DIR, current_user.user_id)
+
+            os.makedirs(CURR_PUB_PROOF_DIR, exist_ok=True)
+
+            pub_proof = publication_files['publication_proof']
+            _, pub_proof_ext = os.path.splitext(pub_proof.filename)
+            pub_proof_img = Image.open(pub_proof)
+
+            pub_proof_filename = '{}_{}_{}.{}'.format(
+                'PUBLICATION_PROOF', 
+                current_user.user_id, 
+                date.today(), 
+                pub_proof_ext[1:]
+            )
+
+            PUB_PROOF_PATH = os.path.join(CURR_PUB_PROOF_DIR, pub_proof_filename)
+            pub_proof_img.save(PUB_PROOF_PATH)
+
+            new_record = Publication(
+                id                  = id,
+                user_id             = current_user.user_id,
+                publication         = publication_form['publication'],
+                citation            = publication_form['citation'],
+                url                 = publication_form['url'],
+                coauthors_dpsm      = publication_form['coauthors_dpsm'],
+                coauthors_nondpsm   = publication_form['coauthors_nondpsm'],
+                date_published      = publication_form['date_published'],
+                info_status         = False,
+                proof_ext           = pub_proof_ext[1:],
+                last_modified       = date.today()
+            )
+            db.session.add(new_record)
             db.session.commit()
-
-            return 'Publication Record Successfully Updated.', 200
+                
+            return 'Publication Successfully Added.', 200
     except Exception as e:
         print(e)
-        return 'An error has occured.', 500
+        return e, 500
+
 
 @faculty_blueprint.route('/faculty/add_research_grant', methods=['GET', 'POST'])
 def add_research_grant():
@@ -509,16 +611,17 @@ def add_research_grant():
         print(e)
         return e, 500
 
-@faculty_blueprint.route('/faculty/update_research_grant/<string:id>', methods=['GET', 'PUT'])
+@faculty_blueprint.route('/faculty/update_research_grant/<string:id>', methods=['GET', 'POST'])
 def update_research_grant(id):
     try:
         if request.method == 'GET':
-            research_grant_record = ResearchGrant.query.filter_by(id=id).first()
+            research_grant_record = ResearchGrant.query.filter_by(id=id)
 
             faculty_list = []
             faculty_records = FacultyPersonalInformation.query.all()
 
             for record in faculty_records:
+                print(record)
                 if record.middle_name is None:
                     faculty_name = "{} {}".format(record.first_name, record.last_name)
                 else:
@@ -527,30 +630,54 @@ def update_research_grant(id):
                 # info_dict['faculty_name'] = faculty_name
                 faculty_list.append(faculty_name)
 
-            render_template('update_research.html', research_grant_record, faculty_list)
+            return render_template('faculty/update_research.html', research_record=research_grant_record, faculty_list=faculty_list)
 
-        elif request.method == 'PUT':
-            research_grant_record = ResearchGrant.query.filter_by(id=id).first()
+        elif request.method == 'POST':
             research_grant_form = request.form
+            research_grant_files = request.files
 
-            research_grant_record.name_research = research_grant_form['name_research'],
-            research_grant_record.sponsor = research_grant_form['sponsor'],
-            research_grant_record.amount_granted = research_grant_form['amount_granted'],
-            research_grant_record.research_progress = research_grant_form['research_progress'],
-            research_grant_record.coresearchers_dpsm = research_grant_form['coresearchers_dpsm'],
-            research_grant_record.coresearchers_nondpsm = research_grant_form['coresearchers_nondpsm'],
-            # research_grant_record.research_file = research_grant_form['research_file'],
-            research_grant_record.projected_start = research_grant_form['projected_start'],
-            research_grant_record.projected_end = research_grant_form['projected_end'],
-            research_grant_record.actual_start = research_grant_form['actual_start'],
-            research_grant_record.actual_end = research_grant_form['actual_end'],
-            research_grant_record.last_modified = date.today()
+            CURR_RG_PROOF_DIR = os.path.join(RG_PROOF_DIR, current_user.user_id)
+
+            os.makedirs(CURR_RG_PROOF_DIR, exist_ok=True)
+
+            rg_proof = research_grant_files['research_proof']
+            _, rg_proof_ext = os.path.splitext(rg_proof.filename)
+            rg_proof_img = Image.open(rg_proof)
+
+            rg_proof_filename = '{}_{}_{}.{}'.format(
+                'RESEARCH_GRANT_PROOF', 
+                current_user.user_id, 
+                date.today(), 
+                rg_proof_ext[1:]
+            )
+
+            RG_PROOF_PATH = os.path.join(CURR_RG_PROOF_DIR, rg_proof_filename)
+            rg_proof_img.save(RG_PROOF_PATH)
+
+            new_record = ResearchGrant(
+                id                  = id,
+                user_id             = current_user.user_id,
+                name_research       = research_grant_form['name_research'],
+                sponsor             = research_grant_form['sponsor'],
+                progress      = research_grant_form['research_progress'],
+                amount_granted      = research_grant_form['amount_granted'],
+                coresearchers_dpsm      = research_grant_form['coresearchers_dpsm'],
+                coresearchers_nondpsm   = research_grant_form['coresearchers_nondpsm'],
+                projected_start     = research_grant_form['projected_start'],
+                projected_end       = research_grant_form['projected_end'],
+                actual_start        = research_grant_form['actual_start'],
+                actual_end          = research_grant_form['actual_end'],
+                info_status         = False,
+                proof_ext           = rg_proof_ext[1:],
+                last_modified       = date.today()
+            )
+            db.session.add(new_record)
             db.session.commit()
 
-            return 'Publication Record Successfully Updated.', 200
+            return 'Research Grant Successfully Added.', 200
     except Exception as e:
         print(e)
-        return 'An error has occured.', 500
+        return e, 500
 
 @faculty_blueprint.route('/faculty/add_licensure', methods=['GET', 'POST'])
 def add_licensure():
