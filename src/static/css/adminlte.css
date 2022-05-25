@@ -31317,6 +31317,16 @@ a.text-muted:hover {
   -webkit-mask: url(../img/icons/sidebar/create-faculty-account.svg);
 }
 
+
+.main-sidebar .nav-link {
+  padding: 0.5rem 0.5rem;
+}
+
+.main-sidebar .collapse.show {
+  padding-left: 0% !important;
+}
+
+
 .info-subhead {
   font-weight: bold;
   font-size: 20px;
