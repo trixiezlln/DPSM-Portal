@@ -105,13 +105,13 @@ function edit_fsr(
     alert('pasok')
     var fsrData = new FormData();
 
-    facultyData.append('course_code_val', course_code_val);
-    facultyData.append('section_val', section_val);
-    facultyData.append('semester_val', semester_val);
-    facultyData.append('schedule_val', schedule_val);
-    facultyData.append('number_of_students_val', number_of_students_val);
-    facultyData.append('syllabus_val', syllabus_val);
-    facultyData.append('set_val', set_val);
+    fsrData.append('course_code_val', course_code_val);
+    fsrData.append('section_val', section_val);
+    fsrData.append('semester_val', semester_val);
+    fsrData.append('schedule_val', schedule_val);
+    fsrData.append('number_of_students_val', number_of_students_val);
+    fsrData.append('syllabus_val', syllabus_val);
+    fsrData.append('set_val', set_val);
 
     Swal.fire({
         title: '<h2>Please Wait</h2>',
@@ -971,47 +971,3 @@ $("#add_ts_form").submit(function(e) {
     });
 });
 
-/* Add FSR/SET Info */ 
-$("#add_fsr_form").submit(function(e) {
-    e.preventDefault();
-    var facultyData = new FormData(document.getElementById("add_fsr_form"));
-    Swal.fire({
-        title: '<h2>Please Wait</h2>',
-        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
-        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        showConfirmButton: false,
-        onBeforeOpen: () => {
-            Swal.showLoading()
-        },
-    });
-    $.ajax({
-        type: "POST",
-        url: "/faculty/add_fsr_set",
-        processData: false,
-        contentType: false,
-        data: facultyData,
-        success: function(success){
-            Swal.fire({
-                allowEscapeKey: false,
-                allowOutsideClick: false,
-                icon: 'success',
-                title: 'Success',
-                text: success.responseText
-            }).then(function(then){
-                location.href="/faculty/faculty_landing_page";
-            }) 
-        },
-        error: function(error) {
-            Swal.fire({
-                allowEscapeKey: false,
-                allowOutsideClick: false,
-                icon: 'warning',
-                title: 'Warning',
-                text: error.responseText
-            })
-        },
-        datatype: "multipart/form-data"
-    });
-});
