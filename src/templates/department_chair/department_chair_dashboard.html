@@ -181,17 +181,14 @@
 
 
     <div id="full_list" class="tabcontent">
+        <div class="btn-export float-right"></div>
         
-        
-        
- 
-    
-
         <div class="table-responsive">
             <table class="table table-striped table-hover dt-bootstrap4 no-footer" id="accomplishemt_table" style="font-size: 1vw; width: 100%;">
                 <thead>
                     <tr>
                         <th scope="col">Name of Faculty</th>
+                        <th scope="col">Department Unit</th>
                         <th scope="col">Accomplishment</th>
                         <th scope="col">Accomplishment Type</th>
                         <th scope="col">Start Date</th>
@@ -201,6 +198,16 @@
                         <th>
                             <input class="form-control" type="text" id="faculty_name" name="" style="font-size: 1vw;">
                         </th>
+
+                        <th>
+                            <select class="suffix-select form-select form-control suffix" aria-label="" id="department_unit" name="" data-field="suffix" onchange="filter_unit()" style="font-size: 1vw;">
+                                <option selected value="">All</option>
+                                <option value="Publication">Chemistry</option>
+                                <option value="Research Grant">MCSU</option>
+                                <option value="Public Service">Physics/Geology</option>
+                            </select>
+                        </th>
+
                         <th>
                             <input class="form-control" type="text" id="accomplishment" name="" style="font-size: 1vw;">
                         </th>
@@ -223,6 +230,17 @@
                     </tr>
                 </thead>
                 <tbody id="myTable">
+
+                    {% if faculty_unit is not none %}
+                        {% for unit in faculty_unit %}
+                        <tr class="clickable" onclick="window.location='#'">
+                            <th scope="row">{{unit[2]}}, {{unit[1]}}</th>
+                            <td><span id="">{{unit[0]['faculty_unit']}}</span></td>
+                            <td><span id="">Department Unit</span></td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+
                     {% if faculty_accomplishments is not none %}
                         {% for accomplishment in faculty_accomplishments %}
                         <tr class="clickable" onclick="window.location='#'">
@@ -373,6 +391,27 @@ $(document).ready(function(){
     function filter_accomplishments() {
         var input, filter, table, tr, td, i;
         input = document.getElementById("accomplishment_type");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("accomplishemt_table");
+        tr = table.getElementsByTagName("tr");
+        
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }       
+        }
+    }
+</script>
+
+<script>
+    function filter_unit() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("department_unit");
         filter = input.value.toUpperCase();
         table = document.getElementById("accomplishemt_table");
         tr = table.getElementsByTagName("tr");
