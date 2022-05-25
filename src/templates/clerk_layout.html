@@ -25,21 +25,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
 
-  
-  <style>
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: rgba(0, 0, 0, 0.15);
-        border-radius: 1rem;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: rgba(0, 0, 0, 0.33);
-    }
-</style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -52,46 +37,99 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
                 class="fas fa-bars"></i></a>
           </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link"><i class="fa fa-home"></i></a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <!-- <a href="#" class="nav-link">Session: current_session</a> -->
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <!-- <a href="#" class="nav-link">Term: current_term </a> -->
+          </li>
         </ul>
-
+  
+  
+  
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
+          <!-- Notifications Dropdown Menu -->
           <li class="nav-item dropdown">
-            <div class="btn-group">           
+            <a class="nav-link" data-toggle="dropdown" href="#">
+              <i class="far fa-user"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-user mr-2"></i> Profile
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-sign-out"></i> Sign out
+              </a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-widget="control-sidebar" data-slide="true"
+              href="#" role="button"><i class="fas fa-th-large"></i></a>
+          </li>
+          <li class="nav-item dropdown">
+          
+
+            <div class="btn-group">
+
+            
               <button type="button" class="btn logged-btn nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 {{current_user.email}}
               </button>
 
               <div class="dropdown-content">
-                <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out"></i> Logout</a>
+                <a class="dropdown-item" href="/logout">Logout</a>
+                
               </div>
+
+
+
+
+              <!-- <ul class="dropdown-menu dropdown-menu-end">
+                <li><button class="dropdown-item" type="button">Action</button></li>
+
+              </ul> -->
             </div>
           </li>
+          
         </ul>
       </nav>
-
+      <!-- /.navbar -->
+  
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <!-- <a href="#" class="brand-link">
+          <div class="logo-upm"></div>
+        </a> -->
+  
         <!-- Sidebar -->
         <div class="sidebar">
-          <div class="logo-upm"></div>
-          <div>
-            <h3 class="brank-link text-center text-light mt-1 mb-4">DPSM Portal</h3>
-            <h3 class="brank-link-alt text-center text-light mt-1 mb-4">Menu</h3>
-          </div>
+          <div class="logo-upm m-auto"></div>
+          <div><h3 class="brank-link text-center text-light mt-1 mb-4">DPSM Portal</h3></div>
 
           <!-- Sidebar Menu -->
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column"
               data-widget="treeview" role="menu" data-accordion="false">
-              <li class="nav-item" data-toggle="collapse" href="#collapseExample">
-                <a href="#" class="nav-link d-flex align-items-center">
-                  <i class ="sidebar-icon basic-information"></i>
-                  <p style="font-weight: bolder;display: flex;align-items: center;">
-                    Basic Information
-                    <i class ="sidebar-icon dropdown"></i>
+
+              <li class="nav-item">
+                <a href="http://127.0.0.1:5000/clerk/faculty_list" class="nav-link">
+                  <p>
+                    Faculty List
                   </p>
-                  
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="http://127.0.0.1:5000/clerk/create_faculty_account" class="nav-link">
+                  <p>
+                    Create Faculty Account
+                  </p>
                 </a>
               </li>
 
@@ -100,8 +138,8 @@
                   data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Basic Information Dropdown -->
                   <li class="nav-item">
-                    <a href="#" class="nav-link d-flex align-items-center">
-                      <i class="sidebar-icon personal-information"></i>
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
                       <p>
                         Personal Information
                       </p>
@@ -109,8 +147,8 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="http://127.0.0.1:5000/faculty/add_educational_attainment" class="nav-link d-flex align-items-center">
-                      <i class="sidebar-icon educational-attainment"></i>
+                    <a href="http://127.0.0.1:5000/faculty/add_educational_attainment" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
                       <p>
                         Educational Attainment
                       </p>
@@ -118,8 +156,8 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="http://127.0.0.1:5000/faculty/add_work_experience" class="nav-link d-flex align-items-center">
-                      <i class="sidebar-icon work-experience"></i>
+                    <a href="http://127.0.0.1:5000/faculty/add_work_experience" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
                       <p>
                         Work Experience
                       </p>
@@ -127,8 +165,8 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="http://127.0.0.1:5000/faculty/add_accomplishment" class="nav-link d-flex align-items-center">
-                      <i class="sidebar-icon accomplishments"></i>
+                    <a href="http://127.0.0.1:5000/faculty/add_accomplishment" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
                       <p>
                         Accomplishments
                       </p>
@@ -136,8 +174,8 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="http://127.0.0.1:5000/faculty/add_publication" class="nav-link d-flex align-items-center">
-                      <i class="sidebar-icon publications"></i>
+                    <a href="http://127.0.0.1:5000/faculty/add_publication" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
                       <p>
                         Publication
                       </p>
@@ -145,8 +183,8 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="http://127.0.0.1:5000/faculty/add_research_grant" class="nav-link d-flex align-items-center">
-                      <i class="sidebar-icon research-grants"></i>
+                    <a href="http://127.0.0.1:5000/faculty/add_research_grant" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
                       <p>
                         Research Grants
                       </p>
@@ -154,8 +192,8 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="http://127.0.0.1:5000/faculty/add_licensure" class="nav-link d-flex align-items-center">
-                      <i class="sidebar-icon licensure-exams"></i>
+                    <a href="http://127.0.0.1:5000/faculty/add_licensure" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
                       <p>
                         Licensure Exam
                       </p>
@@ -163,8 +201,8 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="http://127.0.0.1:5000/faculty/add_training" class="nav-link d-flex align-items-center">
-                      <i class="sidebar-icon trainings-seminars"></i>
+                    <a href="http://127.0.0.1:5000/faculty/add_training" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
                       <p>
                         Trainings/Seminars
                       </p>
@@ -172,36 +210,53 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="http://127.0.0.1:5000/faculty/add_fsr_set" class="nav-link d-flex align-items-center">
-                      <i class="sidebar-icon fsr-set"></i>
+                    <a href="http://127.0.0.1:5000/faculty/add_fsr_set" class="nav-link">
+                      <i class="nav-icon fas fa-graduation-cap"></i>
                       <p>
                         FSR/SET
                       </p>
                     </a>
                   </li>
+                  <!-- Basic Information Dropdown -->
                 </ul>
               </div>
+
+
             </ul>
           </nav>
+          <!-- /.sidebar-menu -->
         </div>
+        <!-- /.sidebar -->
       </aside>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+ 
+        
       <section class="content-header">
         <div class="container-fluid">
 
         <!-- Faculty -->
-        {% block view_info %} {% endblock %}
-        {% block add_info %} {% endblock %}
-        {% block landing %} {% endblock %}
-        {% block add_educational %} {% endblock %}
+
         <!-- Unit Head -->
+
         <!-- Dept Chair -->
+
         <!-- Clerk -->
-        </div>
+        {% block create_faculty_account %} {% endblock %}
+        {% block faculty_list %} {% endblock %}
+        {% block faculty_service_record %} {% endblock %}
+          
+        </div><!-- /.container-fluid -->
       </section>
+
+
     </div>
+    <!-- /.content-wrapper -->
+
+
+
+
   </div>
 
  

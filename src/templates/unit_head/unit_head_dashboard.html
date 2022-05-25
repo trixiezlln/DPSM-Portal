@@ -24,6 +24,7 @@
     
     
     
+    <script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap4.min.js"></script>
     
     
 
@@ -44,8 +45,8 @@
       border: 1px solid #ccc;
       outline: none;
       width: 49.8%;
-      /*border-top-left-radius: 9px;
-      border-top-right-radius: 9px;*/
+      border-top-left-radius: 9px;
+      border-top-right-radius: 9px;
       cursor: pointer;
       padding: 14px 16px;
       transition: 0.3s;
@@ -69,6 +70,11 @@
       border-top: none;
     }
 
+    #filter{
+        height: 37px;
+    }
+}
+
     </style>
 
 </head>
@@ -82,18 +88,10 @@
         <div class="col-sm-6">
             <span>Mathematical and Computing Sciences Unit</span>
         </div>
-        <div class="col-sm-6">
-            <div class="input-group float-right">
-                <label>From:</label>
-                <input class="form-control" type="date" id="min" name="min">
-                <label>To:</label>
-                <input class="form-control" type="date" id="max" name="max">
-                <button type="button" class="btn btn-primary float-right">Filter</button>
-            </div>
-        </div>
+        
     </div>
     
-    
+    <br>
 
     <div class="tab">
         <button class="tablinks active" onclick="openTab(event, 'overview')">Overview</button>
@@ -103,6 +101,15 @@
     <!-- Unit Head Assignment -->
     <!-- Graphs -->
     <div id="overview" class="tabcontent" style="display:block;">
+        <div class="float-right mt-4 mb-4">
+            <div class="input-group float-right">
+                <label style="line-height: 35px; ">From:&nbsp;</label>
+                <input class="form-control" type="date" id="min" name="min">
+                <label style="line-height: 35px; ">&nbsp;To:&nbsp;</label>
+                <input class="form-control" type="date" id="max" name="max">&nbsp;
+                <button type="button" class="btn btn-primary float-right" id="filter">Filter</button>
+            </div>
+        </div>
         <div>
             <canvas id="accomplishmentChart"></canvas>
         </div>
@@ -196,7 +203,7 @@
                                 <option selected value="">All</option>
                                 <option value="Publication">Publication</option>
                                 <option value="Research Grant">Research Grant</option>
-                                <option value="Research Grant">Licensure Exam</option>
+                                <option value="Licensure Exam">Licensure Exam</option>
                                 <option value="Public Service">Public Service</option>
                                 <option value="Training/Seminar">Training/Seminar</option>
                             </select>
@@ -340,6 +347,7 @@ $(document).ready(function(){
 <script>
     $(document).ready(function() {
         $('#accomplishemt_table').DataTable( {
+            searching: false, 
             dom: 'Bfrtip',
             buttons: [
                 'copyHtml5',

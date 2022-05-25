@@ -31144,8 +31144,47 @@ a.text-muted:hover {
   width: 124px;
   background-repeat: no-repeat;
   background-size: contain;
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
+  margin: auto;
 }
+
+.sidebar-collapse .main-sidebar .logo-upm {
+  width: 100%;
+}
+
+.sidebar-collapse .main-sidebar:hover .logo-upm{
+  width: 124px !important;
+}
+
+.sidebar {
+  overflow-x: hidden;
+}
+
+.brank-link {
+  display: block;
+}
+
+.brank-link-alt {
+  display: none;
+  font-size: 14px ! important;
+}
+
+.sidebar-collapse .main-sidebar .brank-link {
+  display: none;
+}
+
+.sidebar-collapse .main-sidebar:hover .brank-link {
+  display: block;
+}
+
+.sidebar-collapse .main-sidebar .brank-link-alt {
+  display: block;
+}
+
+.sidebar-collapse .main-sidebar:hover .brank-link-alt {
+  display: none;
+}
+
 
 
 
@@ -31199,6 +31238,92 @@ a.text-muted:hover {
 .delete-btn {
   -webkit-mask: url(../img/icons/delete.svg);
   -webkit-mask-size: cover;
+}
+
+/* Sidebar icons */
+.sidebar-icon {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  background: white;
+  margin-right: 1rem;
+  -webkit-mask-size: cover !important;
+}
+
+/* .sidebar-icon:hover {
+  background: gray;
+} */
+.dropdown {
+  -webkit-mask: url(../img/icons/sidebar/dropdown.svg);
+}
+
+.basic-information {
+  -webkit-mask: url(../img/icons/sidebar/basic-information.svg);
+}
+
+.personal-information {
+  -webkit-mask: url(../img/icons/sidebar/personal-information.svg);
+}
+
+.educational-attainment {
+  -webkit-mask: url(../img/icons/sidebar/educational-attainment.svg);
+}
+
+.work-experience {
+  -webkit-mask: url(../img/icons/sidebar/work-experience.svg);
+}
+
+.accomplishments {
+  -webkit-mask: url(../img/icons/sidebar/accomplishments.svg);
+}
+
+.publications {
+  -webkit-mask: url(../img/icons/sidebar/publications.svg);
+}
+
+.research-grants {
+  -webkit-mask: url(../img/icons/sidebar/research-grants.svg);
+}
+
+.licensure-exams {
+  -webkit-mask: url(../img/icons/sidebar/licensure-exams.svg);
+}
+
+.trainings-seminars {
+  -webkit-mask: url(../img/icons/sidebar/trainings-seminars.svg);
+}
+
+.fsr-set {
+  -webkit-mask: url(../img/icons/sidebar/fsr-set.svg);
+}
+
+.dashboard {
+  -webkit-mask: url(../img/icons/sidebar/dashboard.svg);
+}
+
+.faculty-list {
+  -webkit-mask: url(../img/icons/sidebar/faculty-list.svg);
+}
+
+.pending-approvals {
+  -webkit-mask: url(../img/icons/sidebar/pending-approvals.svg);
+}
+
+.role-assignment {
+  -webkit-mask: url(../img/icons/sidebar/role-assignment.svg);
+}
+
+.create-faculty-account {
+  -webkit-mask: url(../img/icons/sidebar/create-faculty-account.svg);
+}
+
+
+.main-sidebar .nav-link {
+  padding: 0.5rem 0.5rem;
+}
+
+.main-sidebar .collapse.show {
+  padding-left: 0% !important;
 }
 
 
