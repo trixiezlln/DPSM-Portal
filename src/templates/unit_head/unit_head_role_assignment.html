@@ -43,7 +43,7 @@
                     {% endfor %}
                 </select>
             </th>
-            <td><button type="submit">Nominate</button></td>
+            <td><button class="btn" style="color: #ffffff; background-color: #014421;" type="submit">Nominate</button></td>
           </tr>
         </tbody>
     </table>
@@ -77,7 +77,7 @@
                   <td>{{nominee.approval_status}}</td>
                   <td>{{nominee.approver_remarks}}</td>
                   {% if nominee.status is true %}
-                    <td><button type="button" onclick="delete_unit_head_nominee('{{nominee.curr_unit_head}}', '{{nominee.nominated_unit_head}}')">Delete</button></td>
+                    <td><button class="btn" type="button" style="color: #ffffff; background-color: #7B1113;" onclick="delete_unit_head_nominee('{{nominee.curr_unit_head}}', '{{nominee.nominated_unit_head}}')">Delete</button></td>
                   {% else %}
                     <td></td>
                   {% endif %}
