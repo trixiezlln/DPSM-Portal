@@ -206,7 +206,7 @@ def clerk_faculty_service_record(user_id):
                 os.makedirs(CURR_FSR_IMGS_DIR, exist_ok=True)
 
                 new_syllabus = fsr_files['new_syllabus']
-                new_set_proof = fsr_files['new_set_proof']
+                new_set_proof = fsr_files['new_syllabus']
 
                 _, syllabus_f_ext = os.path.splitext(new_syllabus.filename)
                 _, set_proof_f_ext = os.path.splitext(new_set_proof.filename)
