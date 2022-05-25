@@ -138,9 +138,51 @@ def load_unit_head_role_assignment():
             print(e)
             return 'Error deleting Unit Head nominee. Please try again.', 400
 
-@unit_head_blueprint.route('/unit_head/pending_approvals', methods=['GET', 'POST'])
+@unit_head_blueprint.route('/unit_head/pending_approvals', methods=['GET', 'PUT'])
 def load_unit_head_pending_approvals():
-    return render_template('unit_head/unit_head_updated_information.html')
+    try:
+        if request.method == 'GET':
+            # pending_reqs = {}
+            educ_pending={}
+            work_pending={}
+            acc_pending={}
+            pub_pending={}
+            rg_pending={}
+            le_pending={}
+            ts_pending={}
+
+            faculty_records = FacultyPersonalInformation.query.filter_by(unit=current_user.unit).all()
+            print(faculty_records)
+
+            for faculty in faculty_records:
+                
+                id = faculty.user_id
+                
+                educ_pending[id]=EducationalAttainment.query.filter_by(user_id=id, info_status=False).all()
+                work_pending[id]=WorkExperience.query.filter_by(user_id=id, info_status=False).all()
+                acc_pending[id]=Accomplishment.query.filter_by(user_id=id, info_status=False).all()
+                pub_pending[id]=Publication.query.filter_by(user_id=id, info_status=False).all()
+                rg_pending[id]=ResearchGrant.query.filter_by(user_id=id, info_status=False).all()
+                le_pending[id]=LicensureExams.query.filter_by(user_id=id, info_status=False).all()
+                ts_pending[id]=TrainingSeminar.query.filter_by(user_id=id, info_status=False).all()
+
+            return render_template(
+                'unit_head/unit_head_pending_approvals.html',
+                faculty_records=faculty_records,
+                educ_pending=educ_pending,
+                work_pending=work_pending,
+                acc_pending=acc_pending,
+                pub_pending=pub_pending,
+                rg_pending=rg_pending,
+                le_pending=le_pending,
+                ts_pending=ts_pending
+            )
+
+    # elif request.method == 'PUT':
+
+    except Exception as e:
+        print(e)
+        return 'An error has occured.', 500
 
 # @unit_head_blueprint.route('/unit_head/dashboard', methods=['GET', 'POST'])
 # def load_unit_head_dashboard():

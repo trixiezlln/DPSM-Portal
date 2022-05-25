@@ -970,4 +970,3 @@ $("#add_ts_form").submit(function(e) {
         datatype: "multipart/form-data"
     });
 });
-

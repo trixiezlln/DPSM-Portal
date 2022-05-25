@@ -1,174 +1,49 @@
 {% extends "unit_head/unit_head_pending_approvals.html" %} 
-{% block unit_head_personal_information %}
-<div class="container">
-	<div class="row">
-		<div class="col-sm-12">
-			<label class="col-form-label">Faculty ID Number</label>
-            <p id="faculty_id_number"></p>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-sm-3">
-			<label class="col-form-label">Rank</label>
-            <p id="rank"></p>
-		</div>
-		<div class="col-sm-3">
-			<label class="col-form-label">Classification</label>
-            <p id="classification"></p>
-		</div>
-		<div class="col-sm-3">
-			<label class="col-form-label">Tenure</label>
-            <p id="tenure"></p>
-		</div>
-		<div class="col-sm-3">
-			<label class="col-form-label">Status</label>
-            <p id="status"></p>
-		</div>
-	</div>
-
-	<h6 class="info-subhead mt-1">Name</h6>
-	<div class="row">
-		
-		<div class="col-sm-3">
-			<label class="col-form-label">First Name</label>
-            <p id="first_name"></p>
-		</div>
-		<div class="col-sm-3">
-			<label class="col-form-label">Middle Name</label>
-            <p id="middle_name"></p>
-		</div>
-		<div class="col-sm-3">
-			<label class="col-form-label">Lastname</label>
-            <p id="last_name"></p>
-		</div>
-		<div class="col-sm-3">
-			<label class="col-form-label">Suffix</label>
-            <p id="suffix"></p>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-sm-12">
-			<label class="col-form-label">Present Address</label>
-            <p id="present_address"></p>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-sm-12">
-			<label class="col-form-label">Permanent Address</label>
-            <p id="permanent_address"></p>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-sm-3">
-			<label class="col-form-label">Date of Birth</label>
-            <p id="date_of_birth"></p>
-		</div>
-		<div class="col-sm-3">
-			<label class="col-form-label">Place of Birth</label>
-            <p id="place_of_birth"></p>
-		</div>
-		<div class="col-sm-3">
-			<label class="col-form-label">Religion</label>
-            <p id="religion"></p>
-		</div>
-		<div class="col-sm-3">
-			<label class="col-form-label">Civil Status</label>
-            <p id="civil_status"></p>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-sm-3">
-			<label class="col-form-label">Telephone Number</label>
-            <p id="landline"></p>
-		</div>
-		<div class="col-sm-3">
-			<label class="col-form-label">Mobile Number</label>
-            <p id="mobile_number"></p>
-		</div>
-		<div class="col-sm-3">
-			<label class="col-form-label">Primary Email (UP Mail Required)</label>
-            <p id="primary_email"></p>
-		</div>
-		<div class="col-sm-3">
-			<label class="col-form-label">Alternate Email</label>
-            <p id="alternate_email"></p>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-sm-6">
-			<label class="col-form-label">Name of Contact Person</label>
-            <p id="emergency_contact_person"></p>
-		</div>
-		<div class="col-sm-6">
-			<label class="col-form-label">Contact Number</label>
-            <p id="emergency_contact_number"></p>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-sm-4">
-			<label class="col-form-label">Name of Dependents</label>
-            <p id="dependent_name"></p>
-		</div>
-		<div class="col-sm-4">
-			<label class="col-form-label">Date of Birth</label>
-            <p id="dependent_birthdate"></p>
-		</div>
-		<div class="col-sm-4">
-			<label class="col-form-label">Relationship to user</label>
-            <p id="dependent_relationship"></p>
-		</div>
-	</div>
-</div>
-{% endblock %}
 
 {% block unit_head_educational_attainment %}
+
+{% for educ in educ_pending[faculty.user_id] %}
 <div class="container">
 	<div class="row">
 		<div class="col-sm-12">
 			<label class="col-form-label">Name of School or Institution</label>
-            <p id="school"></p>
+            <p id="school">{{ educ['school'] }}</p>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-sm-12">
 			<label class="col-form-label">Degree/Certification</label>
-            <p id="degree"></p>
+            <p id="degree">{{ educ['degree'] }}</p>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-sm-12">
 			<label class="col-form-label">Type of Degree</label>
-            <p id="degree_type"></p>
+            <p id="degree_type">{{ educ['degree_type'] }}</p>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-sm-12">
 			<label class="col-form-label">Major/Specialization</label>
-            <p id="specialization"></p>
+            <p id="specialization">{{ educ['specialization'] }}</p>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-sm-6">
 			<label class="col-form-label">Start Date</label>
-            <p id="start_date"></p>
+            <p id="start_date">{{ educ['start_date'] }}</p>
 		</div>
 		<div class="col-sm-6">
 			<label class="col-form-label">End Date</label>
-            <p id="end_date"></p>
+            <p id="end_date">{{ educ['end_date'] }}</p>
 		</div>
 	</div>
 </div>
+{% endfor %}
 {% endblock %}
 
 {% block unit_head_work_experience %}
@@ -411,5 +286,6 @@
 		</div>
 	</div>
 </div>
+
 {% endblock %}
 

@@ -12,10 +12,15 @@
 </head>
 
 <section>
+    {% if current_user.unit == 'mcsu' %}
     <h1>Mathematical and Computing Sciences Unit</h1>
+  {% elif current_user.unit == 'pgu'  %}
+    <h1>Physics and Geology Unit</h1>
+  {% elif current_user.unit == 'cu'  %}
+    <h1>Chemistry Unit</h1>
+  {% endif %}
 
     <br>
-
     <div class="table-responsive-sm">
           <table class="table table-striped table-hover">
             <thead>
@@ -24,66 +29,56 @@
               </tr>
             </thead>
             <tbody>
-              <tr data-toggle="modal" data-target="#exampleModal">
-                <th scope="row"><span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"><center>10</center></span>&nbsp;Chua, Richard Bryann L.</th>
+            {% for record in faculty_records %}
+              <tr data-toggle="modal" data-target="#modalExample">
+                <th scope="row">
+                    <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;">
+                        <center>{{ educ_pending[record.user_id]|length }}</center>
+                    </span>&nbsp;{{ record.first_name }} {{ record.last_name }}
+                </th>
               </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade " id="modalExample" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span>Richard Bryann Chua</span>
+                    <span>{{ record.first_name }} {{ record.last_name }}</span>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" style="max-height: calc(100vh - 100px); overflow-y: auto;">
                     <div id="accordion">
-                        <div class="card">
-                            <div id="headingOne">
-                                <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="width: 100%; font-size: 0.8em;">
-                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;">5</span>
-                                        Personal Information
-                                    </button>
-                                </h5>
-                            </div>
-
-                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                <div class="card-body">
-                                    {% block unit_head_personal_information %} 
-                                    {% endblock %}  
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        
                         <div class="card">
                             <div id="headingTwo">
                                 <h5 class="mb-0">
                                     <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="width: 100%; font-size: 0.8em;">
-                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;">3</span>
+                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;">
+                                            {{ educ_pending[record.user_id]|length }}
+                                        </span>
                                         Educational Attainment
                                     </button>
                                 </h5>
                             </div>
 
                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+
                                 <div class="card-body">
-                                    {% block unit_head_educational_attainment %} 
-                                    {% endblock %} 
+                                    {% block unit_head_educational_attainment%}
+                                    {% endblock %}
                                     <div class="modal-footer">
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
                                     </div> 
+                                    
                                 </div>
+
                             </div>
                         </div>
 
