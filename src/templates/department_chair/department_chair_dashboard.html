@@ -68,6 +68,13 @@
         height: 37px;
     }
 
+
+    .dt-button.btn_grp {
+        color: #ffffff; 
+        background-color: #014421;
+        border-radius: 5px;
+    }
+
  
     </style>
 
@@ -175,18 +182,7 @@
 
     <div id="full_list" class="tabcontent">
         
-        <div class="col-sm-6 float-right"  >
-            <label class="col-form-label" style = "color: black;">Department Unit</label>
-            <br>
-                            <select class="department-select form-select form-control select_department_chair" aria-label="" name="select_department" data-field="select_department" id = "filterByDepartment" onchange="searchFilter()">
-
-                                <option value="" selected>All  </option>
-                                <option value="Chemistry">Chemistry  </option>
-                                <option value="MCSU">MCSU</option>
-                                <option value="Physics">Physics/Geology</option>
-                            </select>
-        </div>
-        <br>
+        
         
  
     
@@ -354,15 +350,22 @@ $(document).ready(function(){
 <script>
     $(document).ready(function() {
         $('#accomplishemt_table').DataTable( {
-            searching: false,
+            searching: false, 
+            autoWidth: false,
             dom: 'Bfrtip',
+            className: 'btn_grp',
             buttons: [
-                'copyHtml5',
-                'excelHtml5',
-                'csvHtml5',
-                'pdfHtml5'
+            { extend: 'copyHtml5', className: 'btn btn_grp' },
+            { extend: 'excelHtml5', className: 'btn btn_grp' },
+            { extend: 'csvHtml5', className: 'btn btn_grp' },
+            { extend: 'pdfHtml5', className: 'btn btn_grp' }
+                // 'copyHtml5',
+                // 'excelHtml5',
+                // 'csvHtml5',
+                // 'pdfHtml5'
             ]
         } );
+        $('.dt-buttons').detach().prependTo('.btn-export')
     } );
 </script>
 
@@ -386,28 +389,6 @@ $(document).ready(function(){
         }
     }
 </script>
-
-<script>
-    function searchFilter() {
-        var input, filter, table, tr, td, i;
-        input = document.getElementById("filterByDepartment");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("myTable");
-        tr = table.getElementsByTagName("tr");
-        
-        for (i = 0; i < tr.length; i++) {
-            th = tr[i].getElementsByTagName("th")[1];
-            if (th) {
-                if (th.getElementById.toUpperCase().indexOf(filter) > -1) {
-                    th[i].style.display = "";
-                } else {
-                    th[i].style.display = "none";
-                }
-            }       
-        }
-    }
-</script>
-
 
 
 {% endblock %}
