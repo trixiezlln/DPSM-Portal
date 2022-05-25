@@ -31144,8 +31144,47 @@ a.text-muted:hover {
   width: 124px;
   background-repeat: no-repeat;
   background-size: contain;
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
+  margin: auto;
 }
+
+.sidebar-collapse .main-sidebar .logo-upm {
+  width: 100%;
+}
+
+.sidebar-collapse .main-sidebar:hover .logo-upm{
+  width: 124px !important;
+}
+
+.sidebar {
+  overflow-x: hidden;
+}
+
+.brank-link {
+  display: block;
+}
+
+.brank-link-alt {
+  display: none;
+  font-size: 14px ! important;
+}
+
+.sidebar-collapse .main-sidebar .brank-link {
+  display: none;
+}
+
+.sidebar-collapse .main-sidebar:hover .brank-link {
+  display: block;
+}
+
+.sidebar-collapse .main-sidebar .brank-link-alt {
+  display: block;
+}
+
+.sidebar-collapse .main-sidebar:hover .brank-link-alt {
+  display: none;
+}
+
 
 
 
@@ -31215,6 +31254,10 @@ a.text-muted:hover {
   background: gray;
 } */
 
+.basic-information {
+  -webkit-mask: url(../img/icons/sidebar/basic-information.svg);
+}
+
 .personal-information {
   -webkit-mask: url(../img/icons/sidebar/personal-information.svg);
 }
@@ -31270,11 +31313,6 @@ a.text-muted:hover {
 .create-faculty-account {
   -webkit-mask: url(../img/icons/sidebar/create-faculty-account.svg);
 }
-
-
-
-
-
 
 .info-subhead {
   font-weight: bold;
