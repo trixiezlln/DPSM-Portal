@@ -51,9 +51,7 @@ def view_info():
             research_grant = ResearchGrant.query.filter_by(user_id=current_user.user_id)
             training = TrainingSeminar.query.filter_by(user_id=current_user.user_id)
 
-            print("ito")
-            for acc in accomplishment:
-                print(acc['info_status'])
+            print("pass models")
 
             return render_template(
                 'faculty/faculty_landing_page.html',
@@ -829,7 +827,7 @@ def add_training():
         print(e)
         return e, 500
 
-@faculty_blueprint.route('/faculty/update_training_or_seminar/<string:id>', methods=['GET', 'PUT'])
+@faculty_blueprint.route('/faculty/update_training/<string:id>', methods=['GET', 'PUT'])
 def update_training(id):
     try:
         if request.method == 'GET':

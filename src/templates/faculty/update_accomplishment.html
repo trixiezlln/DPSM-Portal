@@ -102,7 +102,7 @@
                         <div class="row">
                             <div class="col-12 custom-col-3 mb-3">
                                 <label class="col-form-label">Description<span class="required-field"></span></label>
-                                <textarea class="form-control" id="description" name="description" rows="4" cols="50"></textarea>
+                                <textarea class="form-control" id="description" name="description" rows="4" cols="50">{{ acc.description }}</textarea>
                                 <span class = "validation-status"></span>
                             </div>   
                         </div>
@@ -110,6 +110,7 @@
                         <div class="row">
                             <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                 <label class="col-form-label">Upload File as Proof<span class="required-field"></span></label>
+                                <input type="text" id="label_accomplishment_proof" name="label_accomplishment_proof" value="{{ acc.proof_ext }}" disabled>
                                 <input type="file" id="accomplishment_proof" name="accomplishment_proof" value="{{ acc.proof_ext }}">
                                 <span class = "validation-status"></span>
                             </div>    

@@ -76,7 +76,7 @@
                         <div class="row">
                             <div class="col-12 custom-col-3 mb-3">
                                 <label class="col-form-label">Remarks<span class="required-field"></span></label>
-                                <textarea class="form-control" id="remarks" name="remarks" rows="4" cols="50" value="{{ trec.remarks }}"></textarea>
+                                <textarea class="form-control" id="remarks" name="remarks" rows="4" cols="50">{{ trec.remarks }}</textarea>
                                 <span class = "validation-status"></span>
                             </div>   
                         </div>
@@ -97,8 +97,8 @@
                         
                         <div class="row">
                             <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                <label class="col-form-label">Upload File as Proof<span class="required-field"></span></label>
-                                <input type="file" id="training_proof" name="training_proof" value="{{ trec.proof_ext }}">
+                                <label class="col-form-label">{{ trec.proof_ext }}<span class="required-field"></span></label>
+                                <input type="file" id="training_proof" name="training_proof">
                                 <span class = "validation-status"></span>
                             </div>    
                         </div>

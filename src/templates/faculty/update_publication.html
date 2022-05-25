@@ -92,20 +92,13 @@
                         <div class="row">
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Co-authors (DPSM Faculty)<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="coauthors_dpsm" name="coauthors_dpsm" value="{{ pub.coauthors_dpsm }}">
-                                <!-- <select class="coauthors_dpsm-select form-select form-control coauthors_dpsm" aria-label="" id="coauthors_dpsm" name="coauthors_dpsm" data-field="coauthors_dpsm">
-                                    <option selected value="">N/A</option>
-                                    <option value="SR">Sr.</option>
-                                    <option value="JR">Jr.</option>
-                                    <option value="I">I</option>
-                                    <option value="II">II</option>
-                                    <option value="III">III</option>
-                                    <option value="IV">IV</option>
-                                    <option value="V">V</option>
-                                    <option value="VI">VI</option>
-                                    <option value="VII">VII</option>
-                                    <option value="VIII">VIII</option>
-                                </select> -->
+                                <!-- <input class="form-control" type="text" id="coauthors_dpsm" name="coauthors_dpsm" value="{{ pub.coauthors_dpsm }}"> -->
+                                <select class="coauthors_dpsm-select form-select form-control coauthors_dpsm" aria-label="" id="coauthors_dpsm" name="coauthors_dpsm" data-field="coauthors_dpsm">
+                                    <option selected value="">{{ pub.coauthors_dpsm }}</option>
+                                    {% for faculty in faculty_list %}
+                                    <option value={{faculty}}>{{faculty}}</option>
+                                    {% endfor %}
+                                </select>
                             </div> 
                             
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
@@ -118,6 +111,7 @@
                         <div class="row">
                             <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                 <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                <input type="text" id="label_publication_file" name="label_publication_file" value="{{ pub.proof_ext }}" disabled>
                                 <input type="file" id="publication_file" name="publication_file">
                                 <span class = "validation-status"></span>
                             </div>    
