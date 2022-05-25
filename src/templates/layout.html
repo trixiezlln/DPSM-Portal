@@ -82,12 +82,297 @@
 
           <!-- Sidebar Menu -->
           <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column"
-              data-widget="treeview" role="menu" data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              {% if current_user.role == "faculty" and current_user.is_unit_head is true %}
+              <li class="nav-item">
+                <a href="/unit_head/dashboard" class="nav-link d-flex align-items-center">
+                  <i class="sidebar-icon dashboard"></i>
+                  <p>
+                    Dashboard
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item" data-toggle="collapse" href="#collapseExample">
+                <a href="#" class="nav-link d-flex align-items-center">
+                  <i class="sidebar-icon basic-information"></i>
+                  <p style="display: flex;align-items: center;">
+                    Basic Information
+                    <i class ="sidebar-icon dropdown"></i>
+                  </p>
+                </a>
+              </li>
+
+              <div class="collapse" id="collapseExample" style="padding-left: 7%;">
+                <ul class="nav nav-pills nav-sidebar flex-column"
+                  data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Basic Information Dropdown -->
+                  <li class="nav-item">
+                    <a href="/faculty/faculty_landing_page" class="nav-link d-flex align-items-center">
+                      <i class="sidebar-icon personal-information"></i>
+                      <p>
+                        Personal Information
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/faculty/add_educational_attainment" class="nav-link d-flex align-items-center">
+                      <i class="sidebar-icon educational-attainment"></i>
+                      <p>
+                        Educational Attainment
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/faculty/add_work_experience" class="nav-link d-flex align-items-center">
+                      <i class="sidebar-icon work-experience"></i>
+                      <p>
+                        Work Experience
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/faculty/add_accomplishment" class="nav-link d-flex align-items-center">
+                      <i class="sidebar-icon accomplishments"></i>
+                      <p>
+                        Accomplishments
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/faculty/add_publication" class="nav-link d-flex align-items-center">
+                      <i class="sidebar-icon publications"></i>
+                      <p>
+                        Publication
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/faculty/add_research_grant" class="nav-link d-flex align-items-center">
+                      <i class="sidebar-icon research-grants"></i>
+                      <p>
+                        Research Grants
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/faculty/add_licensure" class="nav-link d-flex align-items-center">
+                      <i class="sidebar-icon licensure-exams"></i>
+                      <p>
+                        Licensure Exam
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/faculty/add_training" class="nav-link d-flex align-items-center">
+                      <i class="sidebar-icon trainings-seminars"></i>
+                      <p>
+                        Trainings/Seminars
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/faculty/add_fsr_set" class="nav-link d-flex align-items-center">
+                      <i class="sidebar-icon fsr-set"></i>
+                      <p>
+                        FSR/SET
+                      </p>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <li class="nav-item">
+                <a href="/unit_head/faculty_list" class="nav-link d-flex align-items-center">
+                  <i class="sidebar-icon faculty-list"></i>
+                  <p>
+                    Faculty List
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/unit_head/pending_approvals" class="nav-link d-flex align-items-center">
+                  <i class="sidebar-icon pending-approvals"></i>
+                  <p>
+                    Pending Approvals
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/unit_head/role_assignment" class="nav-link d-flex align-items-center">
+                  <i class="sidebar-icon role-assignment"></i>
+                  <p>
+                    Role Assignment
+                  </p>
+                </a>
+              </li>
+
+              {% elif current_user.role == "faculty" and current_user.is_dept_head is true %}
+              <li class="nav-item">
+                <a href="/department_chair/dashboard" class="nav-link d-flex align-items-center">
+                  <i class="sidebar-icon dashboard"></i>
+                  <p>
+                    Dashboard
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item" data-toggle="collapse" href="#collapseExample">
+                <a href="#" class="nav-link d-flex align-items-center">
+                  <i class="sidebar-icon basic-information"></i>
+                  <p style="display: flex;align-items: center;">
+                    Basic Information
+                    <i class ="sidebar-icon dropdown"></i>
+                  </p>
+                </a>
+              </li>
+
+              <div class="collapse" id="collapseExample" style="padding-left: 7%;">
+                <ul class="nav nav-pills nav-sidebar flex-column"
+                  data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Basic Information Dropdown -->
+                  <li class="nav-item">
+                    <a href="/faculty/faculty_landing_page" class="nav-link d-flex align-items-center">
+                      <i class="sidebar-icon personal-information"></i>
+                      <p>
+                        Personal Information
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/faculty/add_educational_attainment" class="nav-link d-flex align-items-center">
+                      <i class="sidebar-icon educational-attainment"></i>
+                      <p>
+                        Educational Attainment
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/faculty/add_work_experience" class="nav-link d-flex align-items-center">
+                      <i class="sidebar-icon work-experience"></i>
+                      <p>
+                        Work Experience
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/faculty/add_accomplishment" class="nav-link d-flex align-items-center">
+                      <i class="sidebar-icon accomplishments"></i>
+                      <p>
+                        Accomplishments
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/faculty/add_publication" class="nav-link d-flex align-items-center">
+                      <i class="sidebar-icon publications"></i>
+                      <p>
+                        Publication
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/faculty/add_research_grant" class="nav-link d-flex align-items-center">
+                      <i class="sidebar-icon research-grants"></i>
+                      <p>
+                        Research Grants
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/faculty/add_licensure" class="nav-link d-flex align-items-center">
+                      <i class="sidebar-icon licensure-exams"></i>
+                      <p>
+                        Licensure Exam
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/faculty/add_training" class="nav-link d-flex align-items-center">
+                      <i class="sidebar-icon trainings-seminars"></i>
+                      <p>
+                        Trainings/Seminars
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/faculty/add_fsr_set" class="nav-link d-flex align-items-center">
+                      <i class="sidebar-icon fsr-set"></i>
+                      <p>
+                        FSR/SET
+                      </p>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <li class="nav-item">
+                <a href="/department_chair/faculty_list" class="nav-link d-flex align-items-center">
+                  <i class="sidebar-icon faculty-list"></i>
+                  <p>
+                    Faculty List
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/department_chair/pending_approvals" class="nav-link d-flex align-items-center">
+                  <i class="sidebar-icon pending-approvals"></i>
+                  <p>
+                    Pending Approvals
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/department_chair/role_assignment" class="nav-link d-flex align-items-center">
+                  <i class="sidebar-icon role-assignment"></i>
+                  <p>
+                    Role Assignment
+                  </p>
+                </a>
+              </li>
+
+              {% elif current_user.role == "clerk" %}
+              <li class="nav-item">
+                <a href="/clerk/faculty_list" class="nav-link">
+                  <p>
+                    Faculty List
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/clerk/create_faculty_account" class="nav-link">
+                  <p>
+                    Create Faculty Account
+                  </p>
+                </a>
+              </li>
+
+              {% elif current_user.role == "faculty" %}
               <li class="nav-item" data-toggle="collapse" href="#collapseExample">
                 <a href="#" class="nav-link d-flex align-items-center">
                   <i class ="sidebar-icon basic-information"></i>
-                  <p style="font-weight: bolder;display: flex;align-items: center;">
+                  <p style="display: flex;align-items: center;">
                     Basic Information
                     <i class ="sidebar-icon dropdown"></i>
                   </p>
@@ -100,7 +385,7 @@
                   data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Basic Information Dropdown -->
                   <li class="nav-item">
-                    <a href="#" class="nav-link d-flex align-items-center">
+                    <a href="/faculty/faculty_landing_page" class="nav-link d-flex align-items-center">
                       <i class="sidebar-icon personal-information"></i>
                       <p>
                         Personal Information
@@ -109,7 +394,7 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="http://127.0.0.1:5000/faculty/add_educational_attainment" class="nav-link d-flex align-items-center">
+                    <a href="/faculty/add_educational_attainment" class="nav-link d-flex align-items-center">
                       <i class="sidebar-icon educational-attainment"></i>
                       <p>
                         Educational Attainment
@@ -118,7 +403,7 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="http://127.0.0.1:5000/faculty/add_work_experience" class="nav-link d-flex align-items-center">
+                    <a href="/faculty/add_work_experience" class="nav-link d-flex align-items-center">
                       <i class="sidebar-icon work-experience"></i>
                       <p>
                         Work Experience
@@ -127,7 +412,7 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="http://127.0.0.1:5000/faculty/add_accomplishment" class="nav-link d-flex align-items-center">
+                    <a href="/faculty/add_accomplishment" class="nav-link d-flex align-items-center">
                       <i class="sidebar-icon accomplishments"></i>
                       <p>
                         Accomplishments
@@ -136,7 +421,7 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="http://127.0.0.1:5000/faculty/add_publication" class="nav-link d-flex align-items-center">
+                    <a href="/faculty/add_publication" class="nav-link d-flex align-items-center">
                       <i class="sidebar-icon publications"></i>
                       <p>
                         Publication
@@ -145,7 +430,7 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="http://127.0.0.1:5000/faculty/add_research_grant" class="nav-link d-flex align-items-center">
+                    <a href="/faculty/add_research_grant" class="nav-link d-flex align-items-center">
                       <i class="sidebar-icon research-grants"></i>
                       <p>
                         Research Grants
@@ -154,7 +439,7 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="http://127.0.0.1:5000/faculty/add_licensure" class="nav-link d-flex align-items-center">
+                    <a href="/faculty/add_licensure" class="nav-link d-flex align-items-center">
                       <i class="sidebar-icon licensure-exams"></i>
                       <p>
                         Licensure Exam
@@ -163,7 +448,7 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="http://127.0.0.1:5000/faculty/add_training" class="nav-link d-flex align-items-center">
+                    <a href="/faculty/add_training" class="nav-link d-flex align-items-center">
                       <i class="sidebar-icon trainings-seminars"></i>
                       <p>
                         Trainings/Seminars
@@ -172,7 +457,7 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="http://127.0.0.1:5000/faculty/add_fsr_set" class="nav-link d-flex align-items-center">
+                    <a href="/faculty/add_fsr_set" class="nav-link d-flex align-items-center">
                       <i class="sidebar-icon fsr-set"></i>
                       <p>
                         FSR/SET
@@ -181,6 +466,8 @@
                   </li>
                 </ul>
               </div>
+              {% endif %}
+              
             </ul>
           </nav>
         </div>
@@ -193,12 +480,27 @@
 
         <!-- Faculty -->
         {% block view_info %} {% endblock %}
-        {% block add_info %} {% endblock %}
+        
         {% block landing %} {% endblock %}
         {% block add_educational %} {% endblock %}
+
         <!-- Unit Head -->
+        {% block add_info %} {% endblock %}
+        {% block unit_head_faculty_list %} {% endblock %}
+        {% block unit_head_pending_approvals %} {% endblock %}
+        {% block unit_head_role_assignment %} {% endblock %}
+        {% block unit_head_dashboard %} {% endblock %}
+
         <!-- Dept Chair -->
+        {% block department_chair_dashboard %} {% endblock %}
+        {% block department_chair_faculty_list %} {% endblock %}
+        {% block department_chair_pending_approvals %} {% endblock %}
+        {% block department_chair_role_assignment %} {% endblock %}
+
         <!-- Clerk -->
+        {% block create_faculty_account %} {% endblock %}
+        {% block faculty_list %} {% endblock %}
+        {% block faculty_service_record %} {% endblock %}
         </div>
       </section>
     </div>

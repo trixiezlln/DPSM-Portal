@@ -31324,6 +31324,7 @@ a.text-muted:hover {
 
 .main-sidebar .collapse.show {
   padding-left: 0% !important;
+  border-left: 1px solid gray;
 }
 
 
