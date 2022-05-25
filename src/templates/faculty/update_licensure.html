@@ -1,12 +1,6 @@
 {% extends "layout.html" %} {% block add_info %}
 <head>
     <title>Update Licensure Exam</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 
     <style type="text/css">
   
@@ -55,18 +49,20 @@
       color: #ffffff;
     }
 
+
     </style>
 </head>
     <section>
         <h1>Licensure Exam</h1>
-        <form class="add-info-form" id="add-info-form">
+        <form class="add-info-form" id="add_lic_form" name="add_lic_form" enctype="multipart/form-data" >
+            {% for lrec in licensure_record %}
             <div class="row">
                 <div class="col-12">
                     <div class="col col-12 container">
                         <div class="row">
                             <div class="col-12 custom-col-3 mb-3">
                                 <label class="col-form-label">Name of Exam<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="name_exam" name="name_exam" value={{licensure_record['name_exam']}}>
+                                <input class="form-control" type="text" id="name_exam" name="name_exam" value="{{ lrec.name_exam }}">
                                 <span class = "validation-status"></span>
                             </div> 
                         </div>
@@ -74,19 +70,19 @@
                         <div class="row">
                             <div class="col-12 col-lg-4 custom-col-3 mb-3">
                                 <label class="col-form-label">Rank<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="rank" name="rank" value={{licensure_record['rank']}}>
+                                <input class="form-control" type="text" id="rank" name="rank" value="{{ lrec.rank }}">
                                 <span class = "validation-status"></span>
                             </div>
                             
                             <div class="col-12 col-lg-4 custom-col-3 mb-3">
                                 <label class="col-form-label">License Number<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="license_number" name="license_number" value={{licensure_record['license_number']}}>
+                                <input class="form-control" type="text" id="license_number" name="license_number" value="{{ lrec.license_number }}">
                                 <span class = "validation-status"></span>
                             </div>
 
                             <div class="col-12 col-lg-4 custom-col-3 mb-3">
                                 <label class="col-form-label">Date<span class="required-field"></span></label>
-                                <input class="form-control" type="date" id="date" name="date" value={{licensure_record['date']}}>
+                                <input class="form-control" type="date" id="date" name="date" value="{{ lrec.date }}">
                                 <span class = "validation-status"></span>
                             </div>  
                         </div>
@@ -94,7 +90,7 @@
                         <div class="row">
                             <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                 <label class="col-form-label">Upload File as Proof<span class="required-field"></span></label>
-                                <input type="file" id="licensure_file" name="licensure_file" value={{licensure_record['licensure_file']}}>
+                                <input type="file" id="licensure_proof" name="licensure_proof" value="{{ lrec.proof_ext }}}">
                                 <span class = "validation-status"></span>
                             </div>    
                         </div>
@@ -102,6 +98,7 @@
                     </div>
                 </div>
             </div>
+            {% endfor %}
 
             <div class="col-12 col-lg-3 custom-col-3 mb-3">
                 <button class="btn btn-primary crud-btn" type="submit">Update</button> 
@@ -111,5 +108,13 @@
         </form>
     
     </section>
+    <script src="{{ url_for('static', filename='js/ajax_calls.js') }}"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 
 {% endblock %}

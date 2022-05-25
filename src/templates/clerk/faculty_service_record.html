@@ -1,4 +1,4 @@
-{% extends "layout.html" %} {% block add_faculty_account %}
+{% extends "clerk_layout.html" %} {% block faculty_service_record %}
 
 <h5>{{faculty_name}}</h5>
 
@@ -13,7 +13,8 @@
                 <th>Schedule</th>
                 <th>No. of Students</th>
                 <th>Syllabus</th>
-                <th>SET</th>
+                <th>SET Score</th>
+                <th>SET Proof</th>
                 <th>Action</th>
             </tr>
             {% for record in fsr_record %}
@@ -35,9 +36,8 @@
                         View Syllabus
                     </button>
                 </td>
+                <td id="set_score{{outer_loop.index}}_{{loop.index}}">{{record['set_score']}}</td>
                 <td id="set_row{{outer_loop.index}}_{{loop.index}}">
-                    {{record['fsr_score']}}
-                    <br>
                     <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_syllabus_img' name='view_syllabus_img' hidden></a>
                     <button type="button" class="btn btn-secondary crud-btn" id="view_set" name="view_set" onclick="show_set_proof(
                         '{{record['id']}}',
@@ -196,7 +196,8 @@
         var schedule=document.getElementById("schedule_row"+no);
         var number_of_students=document.getElementById("number_of_students_row"+no);
         var syllabus=document.getElementById("syllabus_row"+no);
-        var set=document.getElementById("set_row"+no);          
+        var set=document.getElementById("set_row"+no);         
+        var set=document.getElementById("set_score"+no);      
         
         var course_code_data=course_code.innerHTML;
         var section_data=section.innerHTML;
@@ -226,6 +227,7 @@
         var number_of_students_val=document.getElementById("number_of_students_text"+no).value;
         var syllabus_val=document.getElementById("syllabus_text"+no).value;
         var set_val=document.getElementById("set_text"+no).value;
+        var set=document.getElementById("set_text"+no).value;
 
         document.getElementById("course_code_row"+no).innerHTML=course_code_val;
         document.getElementById("section_row"+no).innerHTML=section_val;
@@ -234,7 +236,8 @@
         document.getElementById("number_of_students_row"+no).innerHTML=number_of_students_val;
         document.getElementById("syllabus_row"+no).innerHTML=syllabus_val;
         document.getElementById("set_row"+no).innerHTML=set_val;
-
+        document.getElementById("set_score"+no).innerHTML=set_val;
+        
         document.getElementById("edit_button"+no).style.display="block";
         document.getElementById("save_button"+no).style.display="none";
         
@@ -245,6 +248,7 @@
             schedule_val,
             number_of_students_val,
             syllabus_val,
+            set_score,
             set_val,
             user_id
         )

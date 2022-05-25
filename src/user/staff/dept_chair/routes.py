@@ -18,6 +18,7 @@ import json
 
 #Models
 from ..models import EducationalAttainment, FacultyPersonalInformation, ClerkPeronsalInformation
+from ..models import EducationalAttainment, FacultyPersonalInformation, LicensureExams, TrainingSeminar, Accomplishment, ResearchGrant, Publication, WorkExperience, FacultySETRecords
 from ...auth.models import UserCredentials
 from ..models import UnitHeadNominations
 
@@ -32,7 +33,86 @@ def load_user(user_id):
 
 @dept_chair_blueprint.route('/department_chair/dashboard', methods=['GET', 'POST'])
 def load_dept_head_dashboard():
-    return render_template('department_chair/department_chair_dashboard.html')
+
+    units = ['mcsu', 'cu', 'pgu']
+    accomplishments = [Publication, Accomplishment, TrainingSeminar, LicensureExams, ResearchGrant,]
+
+    total_count = {}
+    for unit in units:
+        unit_count = []
+        for acc in accomplishments:
+            record = db.session.query(acc.id, UserCredentials.unit).join(UserCredentials, acc.user_id==UserCredentials.user_id).filter(UserCredentials.unit==unit).count()
+            unit_count.append(record)
+        total_count[unit] = unit_count
+
+    faculty_accomplishments = (Accomplishment
+        .query
+        .join(FacultyPersonalInformation, Accomplishment.user_id == FacultyPersonalInformation.user_id)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    faculty_publications = (Publication
+        .query
+        .join(FacultyPersonalInformation, Publication.user_id == FacultyPersonalInformation.user_id)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    faculty_research_grants = (ResearchGrant
+        .query
+        .join(FacultyPersonalInformation, ResearchGrant.user_id == FacultyPersonalInformation.user_id)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    faculty_licensure_exams = (LicensureExams
+        .query
+        .join(FacultyPersonalInformation, LicensureExams.user_id == FacultyPersonalInformation.user_id)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    faculty_trainings = (TrainingSeminar
+        .query
+        .join(FacultyPersonalInformation, FacultyPersonalInformation.user_id == TrainingSeminar.user_id)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    print(len(faculty_trainings))
+    try:
+        
+        if request.method == 'GET':
+            return render_template('department_chair/department_chair_dashboard.html', 
+                acc_data_mcsu = total_count['mcsu'],
+                acc_data_physics = total_count['cu'],
+                acc_data_chemistry = total_count['pgu'],
+                faculty_accomplishments = faculty_accomplishments,
+                faculty_publications = faculty_publications,
+                faculty_research_grants = faculty_research_grants,
+                faculty_licensure_exams = faculty_licensure_exams,
+                faculty_trainings = faculty_trainings
+            )
+        elif request.method == 'POST':
+            pass
+
+    except Exception as e:
+        print(e)
+        return 'An error has occured.', 500
+
+@dept_chair_blueprint.route('/department_chair/view_faculty_info/<user_id>', methods=['GET', 'POST'])
+def dept_head_view_faculty_info(user_id):
+    faculty_personal_information = FacultyPersonalInformation.query.filter_by(user_id=user_id).first()
+    faculty_educational_attaiment = EducationalAttainment.query.filter_by(user_id=user_id).all()
+    faculty_work_experience = WorkExperience.query.filter_by(user_id=user_id).all()
+    faculty_accomplishments = Accomplishment.query.filter_by(user_id=user_id).all()
+    faculty_publications = Publication.query.filter_by(user_id=user_id).all()
+    faculty_research_grants = ResearchGrant.query.filter_by(user_id=user_id).all()
+    faculty_licensure_exams = LicensureExams.query.filter_by(user_id=user_id).all()
+    faculty_trainings = TrainingSeminar.query.filter_by(user_id=user_id).all()
+    # faculty_service_records = FacultySETRecords.query.filter_by(id=user_id).first()
+    return render_template(
+        'faculty/view_info.html',
+        faculty_personal_information = faculty_personal_information,
+        faculty_educational_attaiment = faculty_educational_attaiment,
+        faculty_work_experience = faculty_work_experience,
+        faculty_accomplishments = faculty_accomplishments,
+        faculty_publications = faculty_publications,
+        faculty_research_grants = faculty_research_grants,
+        faculty_licensure_exams = faculty_licensure_exams,
+        faculty_trainings = faculty_trainings,
+    )
 
 @dept_chair_blueprint.route('/department_chair/pending_approvals', methods=['GET', 'POST'])
 def department_chair_pending_approvals():

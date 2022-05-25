@@ -43,7 +43,11 @@
             <tbody>
               {% for faculty in unit_faculty_list %}
                 <tr class="clickable" onclick="window.location='#'">
-                  <th scope="row">{{faculty.last_name}}, {{faculty.first_name}}</th>
+                  <th scope="row">
+                    <a href="/unit_head/view_faculty_info/{{faculty.user_id}}">
+                      {{faculty.last_name}}, {{faculty.first_name}}
+                    </a>
+                  </th>
                   <td><span id="rank">{{faculty.rank}}</span></td>
                   <td><span id="classification">{{faculty.classification}}</span></td>
                   <td><span id="tenure">{{faculty.tenure}}</span></td>

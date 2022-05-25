@@ -156,7 +156,9 @@ class LicensureExams(UserMixin, db.Model):
     last_modified               = db.Column(TIMESTAMP, nullable=True)
     
     def __repr__(self):
-        return f'<Licensure Exam Name {self.name_exam}>'
+        return f'<Licensure Exam Name {self.name_exam},\
+            Rank {self.rank}, License Number {self.license_number},\
+                Date {self.date}, Proof {self.proof_ext}, Last Modified {self.last_modified}>'
 
 class TrainingSeminar(UserMixin, db.Model):
     __table_args__ = {
@@ -176,7 +178,9 @@ class TrainingSeminar(UserMixin, db.Model):
     last_modified               = db.Column(TIMESTAMP, nullable=True)
 
     def __repr__(self):
-        return f'<Training/Seminar Exam Name {self.name_training}>'
+        return f'<Training/Seminar Name {self.name_training},\
+            Role {self.role}, Remarks {self.remarks},\
+                Start Date {self.start_date}, End Date {self.end_date}, Proof {self.proof_ext}, Last Modified {self.last_modified}>'
 
 class FacultySETRecords(UserMixin, db.Model):
     __table_args__ = {
@@ -197,10 +201,13 @@ class FacultySETRecords(UserMixin, db.Model):
     last_modified               = db.Column(TIMESTAMP, nullable=True)
     syllabus_f_ext              = db.Column(db.String(180), nullable=True)
     set_f_ext                   = db.Column(db.String(180), nullable=True)
-    status                      = db.Column(db.Boolean, nullable=True)
+    # status                      = db.Column(db.Boolean, nullable=True)
 
     def __repr__(self):
-        return f'<FSR ID {self.id}>'
+        return f'<Course Code {self.course_code}, Section {self.section}, Semester {self.semester}\
+            SY {self.sy}, Schedule {self.schedule}, Number of Students {self.number_students}\
+                FSR Score {self.fsr_score}, SET Score {self.set_score}, Last Modified {self.last_modified}>\
+                    Syllabus {self.syllabus_f_ext}, SET Proof {self.set_f_ext}'
 
 class UnitHeadNominations(UserMixin, db.Model):
     __table_args__ = {

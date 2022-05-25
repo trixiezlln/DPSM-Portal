@@ -24,6 +24,8 @@ clerk_blueprint = Blueprint('clerk_blueprint', __name__)
 
 FSR_IMGS_DIR = r'src\static\img\fsr_imgs'
 FSR_SYLLABUS_DIR = r'src\static\img\fsr_syllabus'
+RENDER_FSR_IMGS_DIR = r'static\img\fsr_imgs'
+RENDER_FSR_SYLLABUS_DIR = r'static\img\fsr_syllabus'
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -99,7 +101,7 @@ def create_faculty_account():
 def clerk_faculty_list():
     try:
         faculty_list = []
-        faculty_records = FacultyPersonalInformation.query.order_by(FacultyPersonalInformation.last_name.asc()).all()
+        faculty_records = FacultyPersonalInformation.query.order_by(FacultyPersonalInformation.first_name.asc()).all()
 
         for record in faculty_records:
             if record.middle_name is None:
