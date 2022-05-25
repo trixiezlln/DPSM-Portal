@@ -31253,6 +31253,9 @@ a.text-muted:hover {
 /* .sidebar-icon:hover {
   background: gray;
 } */
+.dropdown {
+  -webkit-mask: url(../img/icons/sidebar/dropdown.svg);
+}
 
 .basic-information {
   -webkit-mask: url(../img/icons/sidebar/basic-information.svg);
