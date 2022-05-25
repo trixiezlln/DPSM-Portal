@@ -100,7 +100,7 @@
                         <div class="row">
                             <div class="col-12 custom-col-3 mb-3">
                                 <label class="col-form-label">Description<span class="required-field"></span></label>
-                                <textarea class="form-control" id="description" name="description" rows="4" cols="50"></textarea>
+                                <textarea class="form-control" id="description" name="description" rows="4" cols="50">{{ work.description }}</textarea>
                                 <span class = "validation-status"></span>
                             </div>   
                         </div>
@@ -108,6 +108,7 @@
                         <div class="row">
                             <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                 <label class="col-form-label">Upload File as Proof<span class="required-field"></span></label>
+                                <input type="text" id="label_work_proof" name="label_work_proof" value="{{ work.proof_ext }}" disabled>
                                 <input type="file" id="work_proof" name="work_proof">
                                 <span class = "validation-status"></span>
                             </div>    
