@@ -31254,6 +31254,10 @@ a.text-muted:hover {
   background: gray;
 } */
 
+.basic-information {
+  -webkit-mask: url(../img/icons/sidebar/basic-information.svg);
+}
+
 .personal-information {
   -webkit-mask: url(../img/icons/sidebar/personal-information.svg);
 }
