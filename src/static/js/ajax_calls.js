@@ -943,7 +943,7 @@ $("#add_ts_form").submit(function(e) {
     });
     $.ajax({
         type: "POST",
-        url: "/faculty/add_training_or_seminar",
+        url: "/faculty/add_training",
         processData: false,
         contentType: false,
         data: facultyData,
