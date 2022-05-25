@@ -117,11 +117,18 @@
             <ul class="nav nav-pills nav-sidebar flex-column"
               data-widget="treeview" role="menu" data-accordion="false">
 
-              <li class="nav-item" data-toggle="collapse" href="#collapseExample">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-graduation-cap"></i>
+              <li class="nav-item">
+                <a href="http://127.0.0.1:5000/clerk/faculty_list" class="nav-link">
                   <p>
-                    Basic Information
+                    Faculty List
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="http://127.0.0.1:5000/clerk/create_faculty_account" class="nav-link">
+                  <p>
+                    Create Faculty Account
                   </p>
                 </a>
               </li>
@@ -230,18 +237,15 @@
         <div class="container-fluid">
 
         <!-- Faculty -->
-        {% block view_info %} {% endblock %}
-        {% block add_info %} {% endblock %}
-        {% block landing %} {% endblock %}
-        {% block add_educational %} {% endblock %}
+
         <!-- Unit Head -->
-        
 
         <!-- Dept Chair -->
-        
 
         <!-- Clerk -->
-
+        {% block create_faculty_account %} {% endblock %}
+        {% block faculty_list %} {% endblock %}
+        {% block faculty_service_record %} {% endblock %}
           
         </div><!-- /.container-fluid -->
       </section>
