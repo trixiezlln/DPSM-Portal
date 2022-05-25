@@ -59,27 +59,33 @@
 </head>
     <section>
         <h1>Basic Information</h1>
+        <!-- Personal Info -->
         <div class="info-section">
 
             <!-- box header -->
             <div class="d-flex justify-content-between my-3">
                 <h4 class="">Personal Information</h4>
+<<<<<<< HEAD
+=======
                 <div>
                     <!-- <a class="crud-icon add-btn"></a> -->
                     
                 </div>
+>>>>>>> 729cf996947d91054c16fad60dfaf03ccad6afed
             </div>
-
             <hr>
 
             <!-- box content -->
+<<<<<<< HEAD
+=======
             <!-- box content -->
             
+>>>>>>> 729cf996947d91054c16fad60dfaf03ccad6afed
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
                     <div>
-                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon edit-btn" href="/faculty/update_personal_info"></a>
                         <a class="crud-icon delete-btn"></a>
                     </div>
                 </div>
@@ -93,7 +99,7 @@
                                 <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                     <label class="col-form-label">Faculty ID Number
                                         <!--<<span class="required-field">*</span></label> -->
-                                    <input class="form-control" type="text" id="faculty_id_number" name="faculty_id_number">
+                                    <input class="form-control" type="text" id="faculty_id_number" name="faculty_id_number"  value="{{personal_info['user_id']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
                             </div>
@@ -108,42 +114,79 @@
                                 <div class="col-12 col-lg-3 custom-col-1 mb-3">
                                     <label class="col-form-label">Rank</label>
                                     <select class="suffix-select form-select form-control suffix" aria-label="" id="rank" name="rank" data-field="suffix">
-                                        <option selected value="">N/A</option>
-                                        <option value="#">Instructor 1</option>
-                                        <option value="#">Instructor 2</option>
-                                        <option value="#">Assistant Professor 1</option>
-                                        <option value="#">Assistant Professor 2</option>
-                                        <option value="#">Professor 1</option>
+                                        <option selected value="{{personal_info['rank']}}" disabled>{{personal_info['rank']}}</option>
+                                        <option value="">N/A</option>
+                                        <option value='Lecturer 1'>Lecturer 1</option>
+                                        <option value='Lecturer 2'>Lecturer 2</option>
+                                        <option value='Sr. Lecturer 1'>Sr. Lecturer 1</option>
+                                        <option value='Sr. Lecturer 2'>Sr. Lecturer 2</option>
+                                        <option value='Instructor 1'>Instructor 1</option>
+                                        <option value='Instructor 2'>Instructor 2</option>
+                                        <option value='Instructor 3'>Instructor 3</option>
+                                        <option value='Instructor 4'>Instructor 4</option>
+                                        <option value='Instructor 5'>Instructor 5</option>
+                                        <option value='Instructor 6'>Instructor 6</option>
+                                        <option value='Instructor 7'>Instructor 7</option>
+                                        <option value='Teaching Associate'>Teaching Associate</option>
+                                        <option value='Teaching Fellow'>Teaching Fellow</option>
+                                        <option value='Assistant Professor 1'>Assistant Professor 1</option>
+                                        <option value='Assistant Professor 2'>Assistant Professor 2</option>
+                                        <option value='Assistant Professor 3'>Assistant Professor 3</option>
+                                        <option value='Assistant Professor 4'>Assistant Professor 4</option>
+                                        <option value='Assistant Professor 5'>Assistant Professor 5</option>
+                                        <option value='Assistant Professor 6'>Assistant Professor 6</option>
+                                        <option value='Assistant Professor 7'>Assistant Professor 7</option>
+                                        <option value='Associate Professor 1'>Associate Professor 1</option>
+                                        <option value='Associate Professor 2'>Associate Professor 2</option>
+                                        <option value='Associate Professor 3'>Associate Professor 3</option>
+                                        <option value='Associate Professor 4'>Associate Professor 4</option>
+                                        <option value='Associate Professor 5'>Associate Professor 5</option>
+                                        <option value='Associate Professor 6'>Associate Professor 6</option>
+                                        <option value='Associate Professor 7'>Associate Professor 7</option>
+                                        <option value='Professor 1'>Professor 1</option>
+                                        <option value='Professor 2'>Professor 2</option>
+                                        <option value='Professor 3'>Professor 3</option>
+                                        <option value='Professor 4'>Professor 4</option>
+                                        <option value='Professor 5'>Professor 5</option>
+                                        <option value='Professor 6'>Professor 6</option>
+                                        <option value='Professor 7'>Professor 7</option>
+                                        <option value='Professor 8'>Professor 8</option>
+                                        <option value='Professor 9'>Professor 9</option>
+                                        <option value='Professor 10'>Professor 10</option>
+                                        <option value='Professor 11'>Professor 11</option>
+                                        <option value='Professor 12'>Professor 12</option>
+                                        <option value='University Professor'>University Professor</option>
                                     </select>
                                 </div>
                                 <div class="col-12 col-lg-3 custom-col-1 mb-3">
                                     <label class="col-form-label">Classification</label>
-                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="classification" name="classification" data-field="suffix">
-                                        <option selected value="">N/A</option>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="classification" name="classification" disabled>
+                                        <option selected value="{{personal_info['classification']}}">{{personal_info['classification']}}</option>
                                         <option value="full-time">Full-time</option>
                                         <option value="part-time">Part-time</option>
                                     </select>
                                 </div>
                                 <div class="col-12 col-lg-3 custom-col-1 mb-3">
                                     <label class="col-form-label">Tenure</label>
-                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="tenure" name="tenure" data-field="suffix">
-                                        <option selected value="">N/A</option>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="tenure" name="tenure" disabled>
+                                        <option selected value="{{personal_info['tenure']}}">{{personal_info['tenure']}}</option>
                                         <option value="temporary">Temporary</option>
                                         <option value="permanent">Permanent</option>
                                     </select>
                                 </div>
                                 <div class="col-12 col-lg-3 custom-col-1 mb-3">
                                     <label class="col-form-label">Status</label>
-                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="status" name="status" data-field="suffix">
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="status" name="status" disabled>
+                                        <option selected value="{{personal_info['status']}}">{{personal_info['status']}}</option>
                                         <option selected value="">N/A</option>
-                                        <option value="#">Active Service</option>
-                                        <option value="#">On study leave with pay</option>
-                                        <option value="#">On study leave without pay</option>
-                                        <option value="#">On sabbatical leave</option>
-                                        <option value="#">On secondment</option>
-                                        <option value="#">Retired</option>
-                                        <option value="#">Resigned</option>
-                                        <option value="#">AWOL</option>
+                                        <option value="Active Service">Active Service</option>
+                                        <option value="On study leave with pay">On study leave with pay</option>
+                                        <option value="On study leave without pay">On study leave without pay</option>
+                                        <option value="On sabbatical leave">On sabbatical leave</option>
+                                        <option value="On secondment">On secondment</option>
+                                        <option value="Retired">Retired</option>
+                                        <option value="Resigned">Resigned</option>
+                                        <option value="AWOL">AWOL</option>
                                     </select>
                                 </div>
                             </div>
@@ -156,23 +199,24 @@
                             <div class="row">
                                 <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                     <label class="col-form-label">First Name</label>
-                                    <input class="form-control" type="text" id="first_name" name="first_name">
+                                    <input class="form-control" type="text" id="first_name" name="first_name" value="{{personal_info['first_name']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
                                 <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                     <label class="col-form-label">Middle Name</label>
-                                    <input class="form-control" type="text" id="middle_name" name="middle_name">
+                                    <input class="form-control" type="text" id="middle_name" name="middle_name" value="{{personal_info['middle_name']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
                                 <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                     <label class="col-form-label">Last Name</label>
-                                    <input class="form-control" type="text" id="last_name" name="last_name">
+                                    <input class="form-control" type="text" id="last_name" name="last_name" value="{{personal_info['last_name']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
                                 <div class="col-12 col-lg-1 custom-col-1 mb-3">
                                     <label class="col-form-label">Suffix</label>
-                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="suffix" name="suffix" data-field="suffix">
-                                        <option selected value="">N/A</option>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="suffix" name="suffix" disabled>
+                                        <option selected value="{{personal_info['suffix']}}">{{personal_info['suffix']}}</option>
+                                        <option value="">N/A</option>
                                         <option value="SR">Sr.</option>
                                         <option value="JR">Jr.</option>
                                         <option value="I">I</option>
@@ -189,14 +233,15 @@
                         </div>
                     </div>
     
+
                     <!-- address -->
                     <div class="col-12">
-                        <!-- <h6 class="info-subhead mt-1">Basic Information</h6> -->
+                  ;<!-- <h6 class="info-subhead mt-1">Basic Information</h6> -->
                         <div class="col col-12 container">
                             <div class="row">
                                 <div class="col-12 col-lg-12 custom-col-3 mb-3">
                                     <label class="col-form-label">Present Address</label>
-                                    <input class="form-control" type="text" id="present_address" name="present_address">
+                                    <input class="form-control" type="text" id="present_address" name="present_address" value="{{personal_info['present_address']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
                             </div>
@@ -206,7 +251,7 @@
                             <div class="row">
                                 <div class="col-12 col-lg-12 custom-col-3 mb-3">
                                     <label class="col-form-label">Permanent Address</label>
-                                    <input class="form-control" type="text" id="permanent_address" name="permanent_address">
+                                    <input class="form-control" type="text" id="permanent_address" name="permanent_address" value="{{personal_info['permanent_address']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
                             </div>
@@ -222,41 +267,42 @@
                             <div class="row">
                                 <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                     <label class="col-form-label">Date of Birth</label>
-                                    <input class="form-control" type="date" id="date_of_birth" name="date_of_birth">
+                                    <input class="form-control" type="date" id="date_of_birth" name="date_of_birth" value="{{personal_info['date_of_birth']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
                                 <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                     <label class="col-form-label">Place of Birth</label>
-                                    <input class="form-control" type="text" id="place_of_birth" name="place_of_birth">
+                                    <input class="form-control" type="text" id="place_of_birth" name="place_of_birth" value="{{personal_info['place_of_birth']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
                                 
                                 <div class="col-12 col-lg-3 custom-col-1 mb-3">
                                     <label class="col-form-label">Religion</label>
-                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="religion" name="religion" data-field="suffix">
-                                        <option selected value="">N/A</option>
-                                        <option value="SR">Sr.</option>
-                                        <option value="JR">Jr.</option>
-                                        <option value="I">I</option>
-                                        <option value="II">II</option>
-                                        <option value="III">III</option>
-                                        <option value="IV">IV</option>
-                                        <option value="V">V</option>
-                                        <option value="VI">VI</option>
-                                        <option value="VII">VII</option>
-                                        <option value="VIII">VIII</option>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="religion" name="religion" data-field="suffix" disabled>
+                                        <option selected value="{{personal_info['religion']}}">{{personal_info['religion']}}</option>
+                                        <option value="">N/A</option>
+                                        <option value="Roman Catholic">Roman Catholic</option>
+                                        <option value="Islam">Islam</option>
+                                        <option value="Evangelical">Evangelical</option>
+                                        <option value="Protestant">Protestant</option>
+                                        <option value="Aglipayan">Aglipayan</option>
+                                        <option value="Seventh-day-Adventist">Seventh-day-Adventist</option>
+                                        <option value="Bible Baptist Church">Bible Baptist Church</option>
+                                        <option value="United Church of Christ in the Philippines">United Church of Christ in the Philippines</option>
+                                        <option value="Jehovah's Witnesses">Jehovah's Witnesses</option>
                                     </select>
                                 </div>
     
                                 <div class="col-12 col-lg-3 custom-col-1 mb-3">
                                     <label class="col-form-label">Civil Status</label>
-                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="civil_status" name="civil_status" data-field="suffix">
-                                        <option selected value="">N/A</option>
-                                        <option value="#">Single</option>
-                                        <option value="#">Married</option>
-                                        <option value="#">Divorced</option>
-                                        <option value="#">Separated</option>
-                                        <option value="#">Widowed</option>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="civil_status" name="civil_status" disabled>
+                                        <option selected value="{{personal_info['civil_status']}}"></option>
+                                        <option value="">N/A</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Divorced">Divorced</option>
+                                        <option value="Separated">Separated</option>
+                                        <option value="Widowed">Widowed</option>
                                     </select>
                                 </div>
                             </div>
@@ -270,23 +316,23 @@
                             <div class="row">
                                 <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                     <label class="col-form-label">Telephone Number</label>
-                                    <input class="form-control" type="text" id="landline" name="landline">
+                                    <input class="form-control" type="text" id="landline" name="landline" value="{{personal_info['landline']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
                                 <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                     <label class="col-form-label">Mobile Number</label>
-                                    <input class="form-control" type="text" id="mobile_number" name="mobile_number">
+                                    <input class="form-control" type="text" id="mobile_number" name="mobile_number" value="{{personal_info['mobile_number']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
     
                                 <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                     <label class="col-form-label">Primary Email (UP Mail Required)</label>
-                                    <input class="form-control" type="text" id="primary_email" name="primary_email">
+                                    <input class="form-control" type="text" id="primary_email" name="primary_email" value="{{personal_info['primary_email']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
                                 <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                     <label class="col-form-label">Alternate Email</label>
-                                    <input class="form-control" type="text" id="alternate_email" name="alternate_email">
+                                    <input class="form-control" type="text" id="alternate_email" name="alternate_email" value="{{personal_info['alternate_email']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
     
@@ -301,12 +347,12 @@
                             <div class="row">
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">Name of Emergency Contact Person</label>
-                                    <input class="form-control" type="text" id="emergency_contact_person" name="emergency_contact_person">
+                                    <input class="form-control" type="text" id="emergency_contact_person" name="emergency_contact_person" value="{{personal_info['emergency_contact_person']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">Emergency Contact Number</label>
-                                    <input class="form-control" type="text" id="emergency_contact_number" name="emergency_contact_number">
+                                    <input class="form-control" type="text" id="emergency_contact_number" name="emergency_contact_number" value="{{personal_info['emergency_contact_number']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
                             </div>
@@ -321,19 +367,19 @@
                             <div class="row">
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">Name of Dependents</label>
-                                    <input class="form-control" type="text" id="dependent_name" name="dependent_name">
+                                    <input class="form-control" type="text" id="dependent_name" name="dependent_name" value="{{personal_info['dependent_name']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
     
                                 <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                     <label class="col-form-label">Date of Birth</label>
-                                    <input class="form-control" type="text" id="dependent_birthdate " name="dependent_birthdate ">
+                                    <input class="form-control" type="text" id="dependent_birthdate " name="dependent_birthdate" value="{{personal_info['dependent_birthdate']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
                                 
                                 <div class="col-12 col-lg-3 custom-col-1 mb-3">
-                                    <label class="col-form-label">Relationship to user</label>
-                                    <input class="form-control" type="text" id="dependent_relationship" name="dependent_relationship">
+                                    <label class="col-form-label">Relationship to user</label> 
+                                    <input class="form-control" type="text" id="dependent_relationship" name="dependent_relationship" value="{{personal_info['dependent_relationship']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
                             </div>
@@ -345,25 +391,30 @@
 
         </div>
 
+        <!-- Educational -->
         <div class="info-section">
-
             <!-- box header -->
             <div class="d-flex justify-content-between my-3">
                 <h4 class="">Educational Attainment</h4>
                 <div>
-                    <a class="crud-icon add-btn"></a>
+                    <a class="crud-icon add-btn" href="/faculty/add_educational_attainment"></a>                
                 </div>
             </div>
 
             <hr>
 
             <!-- box content -->
+<<<<<<< HEAD
+            {% for educ_record in educ_attainment %}
+            {% if educ_record['info_status'] is none %}
+=======
 
+>>>>>>> 729cf996947d91054c16fad60dfaf03ccad6afed
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
                     <div>
-                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon edit-btn"  href="/faculty/update_educational/{{educ_record['id']}}"></a>
                         <a class="crud-icon delete-btn"></a>
                     </div>
                 </div>
@@ -374,7 +425,7 @@
                             <div class="row">
                                 <div class="col-12 custom-col-3 mb-3">
                                     <label class="col-form-label">Name of School or Institution<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="school" name="school">
+                                    <input class="form-control" type="text" id="school" name="school" value="{{ educ_record['school']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>     
                             </div>
@@ -382,7 +433,7 @@
                             <div class="row">
                                 <div class="col-12 custom-col-3 mb-3">
                                     <label class="col-form-label">Degree/Certification<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="degree" name="degree">
+                                    <input class="form-control" type="text" id="degree" name="degree" value="{{ educ_record['degree']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>    
                             </div>
@@ -390,7 +441,8 @@
                             <div class="row">
                                 <div class="col-12 col-lg-6 custom-col-1 mb-3">
                                     <label class="col-form-label">Type of Degree</label>
-                                    <select class="degree_type-select form-select form-control degree_type" aria-label="" id="degree_type" name="degree_type" data-field="degree_type">
+                                    <select class="degree_type-select form-select form-control degree_type" aria-label="" id="degree_type" name="degree_type" disabled>
+                                        <option selected value="{{ educ_record['degree_type']}}">{{ educ_record['degree_type']}}</option>
                                         <option value="AA">Associate of Arts (AA)</option>
                                         <option value="AS">Associate of Science (AS)</option>
                                         <option value="BA">Bachelor of Arts (BA)</option>
@@ -404,7 +456,7 @@
 
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">Major/Specialization<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="specialization" name="specialization">
+                                    <input class="form-control" type="text" id="specialization" name="specialization" value="{{ educ_record['specialization']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
                             </div>
@@ -412,13 +464,13 @@
                             <div class="row">
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">Start Date<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="start_date" name="start_date">
+                                    <input class="form-control" type="date" id="start_date" name="start_date" value="{{ educ_record['start_date']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>   
                                 
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">End Date<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="end_date" name="end_date">
+                                    <input class="form-control" type="date" id="end_date" name="end_date" value="{{ educ_record['end_date']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>  
                             </div>
@@ -435,8 +487,15 @@
                     </div>
                 </div>           
             </div>
-
+               
             <hr>
+<<<<<<< HEAD
+            {% endif %}
+            {% endfor %} 
+        </div>           
+
+        <!-- Work Experience -->
+=======
             
             <!-- box content -->
             <div class="info-sub-section">
@@ -518,24 +577,27 @@
 
         </div>
 
+>>>>>>> 729cf996947d91054c16fad60dfaf03ccad6afed
         <div class="info-section">
 
             <!-- box header -->
             <div class="d-flex justify-content-between my-3">
                 <h4 class="">Work Experience</h4>
                 <div>
-                    <a class="crud-icon add-btn"></a>
+                    <a class="crud-icon add-btn" href="/faculty/add_work_experience"></a>
                 </div>
             </div>
 
             <hr>
             
             <!-- box content -->
+            {% for work_record in work_experience %}
+                {% if work_record['info_status'] is none %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
                     <div>
-                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon edit-btn" href="/faculty/update_work_experience/{{work_record['id']}}"></a>
                         <a class="crud-icon delete-btn"></a>
                     </div>
                 </div>
@@ -547,7 +609,8 @@
                             <div class="row">
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">Location<span class="required-field"></span></label>
-                                    <select class="location-select form-select form-control location" aria-label="" id="location" name="location" data-field="location">
+                                    <select class="location-select form-select form-control location" aria-label="" id="location" name="location" disabled>
+                                        <option selected value="{{work_record['location']}}">{{work_record['location']}}</option>
                                         <option value="Outside">Outside UP Manila</option>
                                         <option value="Within">Within UP Manila</option>
                                         
@@ -558,13 +621,13 @@
                             <div class="row">
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">Name of Employer<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="name_employer" name="name_employer">
+                                    <input class="form-control" type="text" id="name_employer" name="name_employer" value="{{work_record['name_employer']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>  
 
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">Title/Position<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="title" name="title">
+                                    <input class="form-control" type="text" id="title" name="title" value="{{work_record['title']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>  
                             </div>
@@ -572,13 +635,13 @@
                             <div class="row">
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">Start Date<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="start_date" name="start_date">
+                                    <input class="form-control" type="date" id="start_date" name="start_date" value="{{work_record['start_date']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>   
                                 
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">End Date<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="end_date" name="end_date">
+                                    <input class="form-control" type="date" id="end_date" name="end_date" value="{{work_record['end_date']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>  
                             </div>
@@ -586,7 +649,7 @@
                             <div class="row">
                                 <div class="col-12 custom-col-3 mb-3">
                                     <label class="col-form-label">Description<span class="required-field"></span></label>
-                                    <textarea class="form-control" id="description" name="description" rows="4" cols="50"></textarea>
+                                    <textarea class="form-control" id="description" name="description" rows="4" cols="50" value="{{work_record['description']}}" disabled></textarea>
                                     <span class = "validation-status"></span>
                                 </div>   
                             </div>
@@ -605,101 +668,31 @@
             </div>
 
             <hr>
+            {% endif %}
+            {% endfor %}
 
-            <!-- box content -->
-            <div class="info-sub-section">
-            <div class="d-flex justify-content-between my-3">
-                <h1 class=""></h1>
-                <div>
-                    <a class="crud-icon edit-btn"></a>
-                    <a class="crud-icon delete-btn"></a>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-12">
-                    <div class="col col-12 container">
-
-                        <div class="row">
-                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                <label class="col-form-label">Location<span class="required-field"></span></label>
-                                <select class="location-select form-select form-control location" aria-label="" id="location" name="location" data-field="location">
-                                    <option value="Outside">Outside UP Manila</option>
-                                    <option value="Within">Within UP Manila</option>
-                                    
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                <label class="col-form-label">Name of Employer<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="name_employer" name="name_employer">
-                                <span class = "validation-status"></span>
-                            </div>  
-
-                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                <label class="col-form-label">Title/Position<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="title" name="title">
-                                <span class = "validation-status"></span>
-                            </div>  
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                <label class="col-form-label">Start Date<span class="required-field"></span></label>
-                                <input class="form-control" type="date" id="start_date" name="start_date">
-                                <span class = "validation-status"></span>
-                            </div>   
-                            
-                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                <label class="col-form-label">End Date<span class="required-field"></span></label>
-                                <input class="form-control" type="date" id="end_date" name="end_date">
-                                <span class = "validation-status"></span>
-                            </div>  
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12 custom-col-3 mb-3">
-                                <label class="col-form-label">Description<span class="required-field"></span></label>
-                                <textarea class="form-control" id="description" name="description" rows="4" cols="50"></textarea>
-                                <span class = "validation-status"></span>
-                            </div>   
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
-                                <input type="file" id="work_file" name="work_file">
-                                <span class = "validation-status"></span>
-                            </div>    
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            </div>
-       
         </div>
 
+        <!-- Accomplishment -->
         <div class="info-section">
 
             <!-- box header -->
             <div class="d-flex justify-content-between my-3">
                 <h4 class="">Accomplishment</h4>
                 <div>
-                    <a class="crud-icon add-btn"></a>
+                    <a class="crud-icon add-btn" href="/faculty/add_accomplishment"></a>
                 </div>
             </div>
 
             <hr>
             
-            <!-- box content -->
+            {% for acc_record in accomplishment %}
+            {% if acc_record['info_status'] is none %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
                     <div>
-                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon edit-btn" href="/faculty/update_accomplishment/{{acc_record['id']}}"></a>
                         <a class="crud-icon delete-btn"></a>
                     </div>
                 </div>
@@ -710,13 +703,13 @@
                             <div class="row">
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">Position/Role<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="position" name="position">
+                                    <input class="form-control" type="text" id="position" name="position" value="{{acc_record['position']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div> 
                 
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">Organization<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="organization" name="organization">
+                                    <input class="form-control" type="text" id="organization" name="organization" value="{{acc_record['organization']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div> 
                             </div>
@@ -724,13 +717,13 @@
                             <div class="row">
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">Start Date<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="start_date" name="start_date">
+                                    <input class="form-control" type="date" id="start_date" name="start_date" value="{{acc_record['start_date']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>   
                                 
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">End Date<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="end_date" name="end_date">
+                                    <input class="form-control" type="date" id="end_date" name="end_date" value="{{acc_record['end_date']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>  
                             </div>
@@ -738,7 +731,8 @@
                             <div class="row">
                                 <div class="col-12 col-lg-6 custom-col-1 mb-3">
                                     <label class="col-form-label">Type of Contribution</label>
-                                    <select class="type_contribution-select form-select form-control type_contribution" aria-label="" id="type_contribution" name="type_contribution" data-field="type_contribution">
+                                    <select class="type_contribution-select form-select form-control type_contribution" aria-label="" id="type_contribution" name="type_contribution" disabled>
+                                        <option selected value="{{acc_record['type_contribution']}}">{{acc_record['type_contribution']}}</option>
                                         <option value="1">Accomplishments within UPM</option>
                                         <option value="2">Contributions to Professions</option>
                                         <option value="3">Contributions to Nation</option>
@@ -750,7 +744,7 @@
                             <div class="row">
                                 <div class="col-12 custom-col-3 mb-3">
                                     <label class="col-form-label">Description<span class="required-field"></span></label>
-                                    <textarea class="form-control" id="description" name="description" rows="4" cols="50"></textarea>
+                                    <textarea class="form-control" id="description" name="description" rows="4" cols="50" value="{{acc_record['description']}}" disabled></textarea>
                                     <span class = "validation-status"></span>
                                 </div>   
                             </div>
@@ -769,100 +763,30 @@
             </div>
 
             <hr>
-
-            <!-- box content -->
-            <div class="info-sub-section">
-            <div class="d-flex justify-content-between my-3">
-                <h1 class=""></h1>
-                <div>
-                    <a class="crud-icon edit-btn"></a>
-                    <a class="crud-icon delete-btn"></a>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="col col-12 container">
-                        <div class="row">
-                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                <label class="col-form-label">Position/Role<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="position" name="position">
-                                <span class = "validation-status"></span>
-                            </div> 
-            
-                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                <label class="col-form-label">Organization<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="organization" name="organization">
-                                <span class = "validation-status"></span>
-                            </div> 
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                <label class="col-form-label">Start Date<span class="required-field"></span></label>
-                                <input class="form-control" type="date" id="start_date" name="start_date">
-                                <span class = "validation-status"></span>
-                            </div>   
-                            
-                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                <label class="col-form-label">End Date<span class="required-field"></span></label>
-                                <input class="form-control" type="date" id="end_date" name="end_date">
-                                <span class = "validation-status"></span>
-                            </div>  
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12 col-lg-6 custom-col-1 mb-3">
-                                <label class="col-form-label">Type of Contribution</label>
-                                <select class="type_contribution-select form-select form-control type_contribution" aria-label="" id="type_contribution" name="type_contribution" data-field="type_contribution">
-                                    <option value="1">Accomplishments within UPM</option>
-                                    <option value="2">Contributions to Professions</option>
-                                    <option value="3">Contributions to Nation</option>
-                                    <option value="4">Contributions to World</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12 custom-col-3 mb-3">
-                                <label class="col-form-label">Description<span class="required-field"></span></label>
-                                <textarea class="form-control" id="description" name="description" rows="4" cols="50"></textarea>
-                                <span class = "validation-status"></span>
-                            </div>   
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
-                                <input type="file" id="accomplishment_file" name="accomplishment_file">
-                                <span class = "validation-status"></span>
-                            </div>    
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            </div>
+            {% endif %}
+            {% endfor %}
         </div>
 
+        <!-- Publication -->
         <div class="info-section">
 
             <!-- box header -->
             <div class="d-flex justify-content-between my-3">
                 <h4 class="">Publication</h4>
                 <div>
-                    <a class="crud-icon add-btn"></a>
+                    <a class="crud-icon add-btn" href="/faculty/add_publication"></a>
                 </div>
             </div>
 
             <hr>
             
-            <!-- box content -->
+            {% for pub_record in publication %}
+            {% if pub_record['info_status'] is none %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
                     <div>
-                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon edit-btn" href="/faculty/update_publication/{{pub_record['id']}}"></a>
                         <a class="crud-icon delete-btn"></a>
                     </div>
                 </div>
@@ -873,7 +797,7 @@
                             <div class="row">
                                 <div class="col-12 custom-col-3 mb-3">
                                     <label class="col-form-label">Publication Name<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="publication" name="publication">
+                                    <input class="form-control" type="text" id="publication" name="publication" value="{{pub_record['publication']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div> 
         
@@ -882,7 +806,7 @@
                             <div class="row">
                                 <div class="col-12 custom-col-3 mb-3">
                                     <label class="col-form-label">Citation<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="citation" name="citation">
+                                    <input class="form-control" type="text" id="citation" name="citation" value="{{pub_record['citation']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
                             </div>
@@ -890,13 +814,13 @@
                             <div class="row">
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">URL<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="url" name="url">
+                                    <input class="form-control" type="text" id="url" name="url" value="{{pub_record['url']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>
     
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">Date Published<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="date_published" name="date_published">
+                                    <input class="form-control" type="date" id="date_published" name="date_published" value="{{pub_record['date_published']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>    
                             </div>
@@ -904,8 +828,9 @@
                             <div class="row">
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">Co-authors (DPSM Faculty)<span class="required-field"></span></label>
-                                    <select class="coauthors_dpsm-select form-select form-control coauthors_dpsm" aria-label="" id="coauthors_dpsm" name="coauthors_dpsm" data-field="coauthors_dpsm">
-                                        <option selected value="">N/A</option>
+                                    <select class="coauthors_dpsm-select form-select form-control coauthors_dpsm" aria-label="" id="coauthors_dpsm" name="coauthors_dpsm" disabled>
+                                        <option selected value="{{pub_record['coauthors_dpsm']}}">{{pub_record['coauthors_dpsm']}}</option>
+                                        <option value="">N/A</option>
                                         <option value="SR">Sr.</option>
                                         <option value="JR">Jr.</option>
                                         <option value="I">I</option>
@@ -921,7 +846,7 @@
                                 
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                     <label class="col-form-label">Co-authors (non-DPSM Faculty)<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="coauthors_nondpsm" name="coauthors_nondpsm">
+                                    <input class="form-control" type="text" id="coauthors_nondpsm" name="coauthors_nondpsm" value="{{pub_record['coauthors_nondpsm']}}" disabled>
                                     <span class = "validation-status"></span>
                                 </div> 
                             </div>
@@ -941,110 +866,32 @@
             </div>
             
             <hr>
+            {% endif %}
+            {% endfor %}
             
-            <!-- box content -->
-            <div class="info-sub-section">
-                <div class="d-flex justify-content-between my-3">
-                    <h1 class=""></h1>
-                    <div>
-                        <a class="crud-icon edit-btn"></a>
-                        <a class="crud-icon delete-btn"></a>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="col col-12 container">
-                            <div class="row">
-                                <div class="col-12 custom-col-3 mb-3">
-                                    <label class="col-form-label">Publication Name<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="publication" name="publication">
-                                    <span class = "validation-status"></span>
-                                </div> 
-        
-                            </div>
-    
-                            <div class="row">
-                                <div class="col-12 custom-col-3 mb-3">
-                                    <label class="col-form-label">Citation<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="citation" name="citation">
-                                    <span class = "validation-status"></span>
-                                </div>
-                            </div>
-    
-                            <div class="row">
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">URL<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="url" name="url">
-                                    <span class = "validation-status"></span>
-                                </div>
-    
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Date Published<span class="required-field"></span></label>
-                                    <input class="form-control" type="date" id="date_published" name="date_published">
-                                    <span class = "validation-status"></span>
-                                </div>    
-                            </div>
-    
-                            <div class="row">
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Co-authors (DPSM Faculty)<span class="required-field"></span></label>
-                                    <select class="coauthors_dpsm-select form-select form-control coauthors_dpsm" aria-label="" id="coauthors_dpsm" name="coauthors_dpsm" data-field="coauthors_dpsm">
-                                        <option selected value="">N/A</option>
-                                        <option value="SR">Sr.</option>
-                                        <option value="JR">Jr.</option>
-                                        <option value="I">I</option>
-                                        <option value="II">II</option>
-                                        <option value="III">III</option>
-                                        <option value="IV">IV</option>
-                                        <option value="V">V</option>
-                                        <option value="VI">VI</option>
-                                        <option value="VII">VII</option>
-                                        <option value="VIII">VIII</option>
-                                    </select>
-                                </div> 
-                                
-                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                    <label class="col-form-label">Co-authors (non-DPSM Faculty)<span class="required-field"></span></label>
-                                    <input class="form-control" type="text" id="coauthors_nondpsm" name="coauthors_nondpsm">
-                                    <span class = "validation-status"></span>
-                                </div> 
-                            </div>
-    
-                            <div class="row">
-                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
-                                    <input type="file" id="publication_file" name="publication_file">
-                                    <span class = "validation-status"></span>
-                                </div>    
-                            </div>
-    
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
+            
         </div>
 
+        <!-- Research Grant -->
         <div class="info-section">
 
             <!-- box header -->
             <div class="d-flex justify-content-between my-3">
                 <h4 class="">Research Grant</h4>
                 <div>
-                    <a class="crud-icon add-btn"></a>
+                    <a class="crud-icon add-btn" href="/faculty/add_research_grant"></a>
                 </div>
             </div>
 
             <hr>
             
-            <!-- box content -->
+            {% for rg_record in research_grant %}
+            {% if rg_record['info_status'] is none %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
                     <div>
-                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon edit-btn" href="/faculty/update_research_grant/{{rg_record['id']}}"></a>
                         <a class="crud-icon delete-btn"></a>
                     </div>
                 </div>
@@ -1055,7 +902,7 @@
                                 <div class="row">
                                     <div class="col-12 custom-col-3 mb-3">
                                         <label class="col-form-label">Name of Research Project<span class="required-field"></span></label>
-                                        <input class="form-control" type="text" id="name_research" name="name_research">
+                                        <input class="form-control" type="text" id="name_research" name="name_research" value="{{rg_record['name_research']}}" disabled>
                                         <span class = "validation-status"></span>
                                     </div>  
                                 </div>
@@ -1063,13 +910,13 @@
                                 <div class="row">
                                     <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                         <label class="col-form-label">Sponsor<span class="required-field"></span></label>
-                                        <input class="form-control" type="text" id="sponsor" name="sponsor">
+                                        <input class="form-control" type="text" id="sponsor" name="sponsor" value="{{rg_record['sponsor']}}" disabled>
                                         <span class = "validation-status"></span>
                                     </div> 
                                     
                                     <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                         <label class="col-form-label">Amount Granted<span class="required-field"></span></label>
-                                        <input class="form-control" type="text" id="amount_granted" name="amount_granted">
+                                        <input class="form-control" type="text" id="amount_granted" name="amount_granted" value="{{rg_record['amount_granted']}}" disabled>
                                         <span class = "validation-status"></span>
                                     </div> 
                                 </div>
@@ -1077,13 +924,13 @@
                                 <div class="row">
                                     <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                         <label class="col-form-label">Projected Start Date<span class="required-field"></span></label>
-                                        <input class="form-control" type="date" id="projected_start" name="projected_start">
+                                        <input class="form-control" type="date" id="projected_start" name="projected_start" value="{{rg_record['projected_start']}}" disabled>
                                         <span class = "validation-status"></span>
                                     </div>   
                                     
                                     <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                         <label class="col-form-label">Projected End Date<span class="required-field"></span></label>
-                                        <input class="form-control" type="date" id="projected_end" name="projected_end">
+                                        <input class="form-control" type="date" id="projected_end" name="projected_end" value="{{rg_record['projected_end']}}" disabled>
                                         <span class = "validation-status"></span>
                                     </div>  
                                 </div>
@@ -1091,13 +938,13 @@
                                 <div class="row">
                                     <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                         <label class="col-form-label">Actual Start Date<span class="required-field"></span></label>
-                                        <input class="form-control" type="date" id="actual_start" name="actual_start">
+                                        <input class="form-control" type="date" id="actual_start" name="actual_start" value="{{rg_record['actual_start']}}" disabled>
                                         <span class = "validation-status"></span>
                                     </div>   
                                     
                                     <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                         <label class="col-form-label">Actual End Date<span class="required-field"></span></label>
-                                        <input class="form-control" type="date" id="actual_end" name="actual_end">
+                                        <input class="form-control" type="date" id="actual_end" name="actual_end" value="{{rg_record['actual_end']}}" disabled>
                                         <span class = "validation-status"></span>
                                     </div>  
                                 </div>
@@ -1105,7 +952,7 @@
                                 <div class="row">
                                     <div class="col-12 custom-col-3 mb-3">
                                         <label class="col-form-label">Research Progress<span class="required-field"></span></label>
-                                        <textarea class="form-control" id="research_progress" name="research_progress" rows="4" cols="50"></textarea>
+                                        <textarea class="form-control" id="research_progress" name="research_progress" rows="4" cols="50" value="{{rg_record['research_progress']}}" disabled></textarea>
                                         <span class = "validation-status"></span>
                                     </div>   
                                 </div>
@@ -1113,8 +960,9 @@
                                 <div class="row">
                                     <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                         <label class="col-form-label">Co-researchers (DPSM Faculty)<span class="required-field"></span></label>
-                                        <select class="coresearchers_dpsm-select form-select form-control coresearchers_dpsm" aria-label="" id="coresearchers_dpsm" name="coresearchers_dpsm" data-field="coresearchers_dpsm">
-                                            <option selected value="">N/A</option>
+                                        <select class="coresearchers_dpsm-select form-select form-control coresearchers_dpsm" aria-label="" id="coresearchers_dpsm" name="coresearchers_dpsm" disabled>
+                                            <option selected value="{{rg_record['coresearchers_dpsm']}}">{{rg_record['coresearchers_dpsm']}}</option>
+                                            <option value="">N/A</option>
                                             <option value="SR">Sr.</option>
                                             <option value="JR">Jr.</option>
                                             <option value="I">I</option>
@@ -1130,7 +978,7 @@
                                     
                                     <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                         <label class="col-form-label">Co-researchers (non-DPSM Faculty)<span class="required-field"></span></label>
-                                        <input class="form-control" type="text" id="amount_granted" name="amount_granted">
+                                        <input class="form-control" type="text" id="coresearchers_nondpsm" name="coresearchers_nondpsm" value="{{rg_record['coresearchers_nondpsm']}}" disabled>
                                         <span class = "validation-status"></span>
                                     </div> 
                                 </div>
@@ -1150,17 +998,42 @@
             </div>
 
             <hr>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Licensure Exam -->
+        <div class="info-section">
+
+            <!-- box header -->
+            <div class="d-flex justify-content-between my-3">
+                <h4 class="">Licensure Exam</h4>
+                <div>
+                    <a class="crud-icon add-btn" href="/faculty/add_licensure"></a>
+                </div>
+            </div>
+
+            <hr>
             
-            <!-- box content -->
+            {% for le_record in licensure %}
+            {% if le_record['info_status'] is none %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
                     <div>
-                        <a class="crud-icon edit-btn"></a>
+                        <a class="crud-icon edit-btn" href="/faculty/update_licensure/{{le_record['id']}}"></a>
                         <a class="crud-icon delete-btn"></a>
                     </div>
                 </div>
 
+<<<<<<< HEAD
+                <div class="row">
+                    <div class="col-12 custom-col-3 mb-3">
+                        <label class="col-form-label">Name of Exam<span class="required-field"></span></label>
+                        <input class="form-control" type="text" id="name_exam" name="name_exam" value="{{le_record['name_exan']}}" disabled>
+                        <span class = "validation-status"></span>
+                    </div> 
+=======
                     <div class="row">
                         <div class="col-12">
                             <div class="col col-12 container">
@@ -1269,9 +1142,16 @@
                 <h4 class="">Licensure Exam</h4>
                 <div>
                     <a class="crud-icon add-btn" href="add_licensure"></a>
+>>>>>>> 729cf996947d91054c16fad60dfaf03ccad6afed
                 </div>
-            </div>
 
+<<<<<<< HEAD
+                <div class="row">
+                    <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                        <label class="col-form-label">Rank<span class="required-field"></span></label>
+                        <input class="form-control" type="text" id="rank" name="rank" value="{{le_record['rank']}}" disabled>
+                        <span class = "validation-status"></span>
+=======
             <hr>
             
              <!-- box content -->
@@ -1283,10 +1163,41 @@
                     <div>
                         <a class="crud-icon edit-btn" href="/faculty/update_licensure_exam/{{ lrec.id }}"></a>
                         <a class="crud-icon delete-btn"></a>
+>>>>>>> 729cf996947d91054c16fad60dfaf03ccad6afed
                     </div>
+                    
+                    <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                        <label class="col-form-label">License Number<span class="required-field"></span></label>
+                        <input class="form-control" type="text" id="license_number" name="license_number" value="{{le_record['license_number']}}" disabled>
+                        <span class = "validation-status"></span>
+                    </div>
+
+                    <div class="col-12 col-lg-4 custom-col-3 mb-3">
+                        <label class="col-form-label">Date<span class="required-field"></span></label>
+                        <input class="form-control" type="date" id="date" name="date" value="{{le_record['date']}}" disabled>
+                        <span class = "validation-status"></span>
+                    </div>  
                 </div>
 
                 <div class="row">
+<<<<<<< HEAD
+                    <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                        <label class="col-form-label">Upload File as Proof<span class="required-field"></span></label>
+                        <input type="file" id="licensure_proof" name="licensure_proof">
+                        <span class = "validation-status"></span>
+                    </div>    
+    
+                </div>
+            </div>
+
+            <hr>
+            {% endif %}
+            {% endfor %}
+   
+        </div>
+
+        <!-- Training/Seminar -->
+=======
                     <div class="col-12">
                         <div class="col col-12 container">
                             <div class="row">
@@ -1336,18 +1247,90 @@
         </div>
 
 
+>>>>>>> 729cf996947d91054c16fad60dfaf03ccad6afed
         <div class="info-section">
 
             <!-- box header -->
             <div class="d-flex justify-content-between my-3">
                 <h4 class="">Training/Seminar</h4>
                 <div>
+<<<<<<< HEAD
+                    <a class="crud-icon add-btn" href="/faculty/add_training_or_seminar"></a>
+=======
                     <a class="crud-icon add-btn" href="add_training"></a>
+>>>>>>> 729cf996947d91054c16fad60dfaf03ccad6afed
                 </div>
             </div>
 
             <hr>
             
+<<<<<<< HEAD
+            {% for ts_record in training %}
+            {% if ts_record['info_status'] is none %}
+            <div class="info-sub-section">
+                <div class="d-flex justify-content-between my-3">
+                    <h1 class=""></h1>
+                    <div>
+                        <a class="crud-icon edit-btn" href="/faculty/update_training_or_seminar/{{ts_record['id']}}"></a>
+                        <a class="crud-icon delete-btn"></a>
+                    </div>
+                </div>
+        
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col col-12 container">
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Name of Training/Seminar<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="name_training" name="name_training" value="{{ts_record['name_training']}}" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>  
+    
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Role<span class="required-field"></span></label>
+                                    <input class="form-control" type="text" id="role" name="role"  value="{{ts_record['role']}}" disabled>
+                                    <span class = "validation-status"></span>
+                                </div> 
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 custom-col-3 mb-3">
+                                    <label class="col-form-label">Remarks<span class="required-field"></span></label>
+                                    <textarea class="form-control" id="remarks" name="remarks" rows="4" cols="50"  value="{{ts_record['remarks']}}" disabled></textarea>
+                                    <span class = "validation-status"></span>
+                                </div>   
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">Start Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="start_date" name="start_date"  value="{{ts_record['start_date']}}" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>   
+                                
+                                <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                    <label class="col-form-label">End Date<span class="required-field"></span></label>
+                                    <input class="form-control" type="date" id="end_date" name="end_date"  value="{{ts_record['end_date']}}" disabled>
+                                    <span class = "validation-status"></span>
+                                </div>  
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                    <input type="file" id="accomplishment_file" name="accomplishment_file">
+                                    <span class = "validation-status"></span>
+                                </div>    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            {% endif %}
+            {% endfor %}
+=======
             <!-- box content -->
 
             {% for trec in training_record %}
@@ -1583,6 +1566,7 @@
                     </div>
                 </div>
             </div>
+>>>>>>> 729cf996947d91054c16fad60dfaf03ccad6afed
         </div>
 
     </section>
