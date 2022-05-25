@@ -42,65 +42,74 @@ def load_user(user_id):
 def view_info():
     try:
         if request.method == 'GET':
-            return render_template('faculty/faculty_landing_page.html')
+            personal_info = FacultyPersonalInformation.query.filter_by(user_id=current_user.user_id).first()
+            educ_attainment = EducationalAttainment.query.filter_by(user_id=current_user.user_id)
+            work_experience = WorkExperience.query.filter_by(user_id=current_user.user_id)
+            accomplishment = Accomplishment.query.filter_by(user_id=current_user.user_id)
+            publication = Publication.query.filter_by(user_id=current_user.user_id)
+            licensure = LicensureExams.query.filter_by(user_id=current_user.user_id)
+            research_grant = ResearchGrant.query.filter_by(user_id=current_user.user_id)
+            training = TrainingSeminar.query.filter_by(user_id=current_user.user_id)
+
+            return render_template(
+                'faculty/faculty_landing_page.html',
+                personal_info=personal_info,
+                educ_attainment=educ_attainment,
+                work_experience=work_experience,
+                accomplishment=accomplishment,
+                publication=publication,
+                licensure=licensure,
+                research_grant=research_grant,
+                training=training
+                )
         elif request.method == 'POST':
             pass
     except Exception as e:
         print(e)
         return e, 500
 
-@faculty_blueprint.route('/faculty/add_personal_info', methods=['GET', 'POST'])
-def add_personal_info():
+# # edit personal information
+@faculty_blueprint.route('/faculty/update_personal_info', methods = ['GET', 'PUT'])
+def update_personal_info():
     try:
         if request.method == 'GET':
             faculty_info_record = FacultyPersonalInformation.query.filter_by(user_id=current_user.user_id).first()
-            return render_template('faculty/add_info.html', faculty_info_record=faculty_info_record)
-        elif request.method == 'POST':
-            faculty_info_record = FacultyPersonalInformation.query.filter_by(user_id=current_user.user_id).first()
+            print(faculty_info_record.__dict__)
+            return render_template(
+            'faculty/update_info.html',
+            faculty_info_record=faculty_info_record
+            )
+        elif request.method == 'PUT':
             faculty_info_form = request.form
+            faculty_info_record = FacultyPersonalInformation.query.filter_by(user_id=faculty_info_form['faculty_id_number']).first()
 
-            faculty_info_record.emergency_contact_person = faculty_info_form['emergency_contact_person'],
-            faculty_info_record.emergency_contact_number = faculty_info_form['emergency_contact_number'],
-            faculty_info_record.dependent_name = faculty_info_form['dependent_name'],
-            faculty_info_record.dependent_birthdate = faculty_info_form['dependent_birthdate'],
-            faculty_info_record.dependent_relationship = faculty_info_form['dependent_relationship'],
-            faculty_info_record.info_status = False,
-            faculty_info_record.last_modified = date.today()
+            faculty_info_record.first_name             = faculty_info_form['first_name'],
+            faculty_info_record.middle_name            = faculty_info_form['middle_name'],
+            faculty_info_record.last_name              = faculty_info_form['last_name'],
+            faculty_info_record.suffix                 = faculty_info_form['suffix'],
+            faculty_info_record.date_of_birth          = faculty_info_form['date_of_birth'],
+            faculty_info_record.place_of_birth         = faculty_info_form['place_of_birth'],
+            faculty_info_record.present_address        = faculty_info_form['present_address'],
+            faculty_info_record.permanent_address      = faculty_info_form['permanent_address'],
+            faculty_info_record.civil_status           = faculty_info_form['civil_status'],
+            faculty_info_record.religion               = faculty_info_form['religion'],
+            faculty_info_record.landline               = faculty_info_form['landline'],
+            faculty_info_record.mobile_number          = faculty_info_form['mobile_number'],
+            faculty_info_record.primary_email          = faculty_info_form['primary_email'],
+            faculty_info_record.alternate_email        = faculty_info_form['alternate_email'],
+            faculty_info_record.emergency_contact_person     = faculty_info_form['emergency_contact_person'],
+            faculty_info_record.emergency_contact_number     = faculty_info_form['emergency_contact_number'],
+            faculty_info_record.dependent_name          = faculty_info_form['dependent_name'],
+            faculty_info_record.dependent_birthdate     = faculty_info_form['dependent_birthdate'],
+            faculty_info_record.dependent_relationship  = faculty_info_form['dependent_relationship'],
+            faculty_info_record.last_modified       = date.today()
 
             db.session.commit()
 
-            return 'Personal Info Record Successfully Updated', 200
+            return 'Personal Information Record Successfully Updated.', 200
     except Exception as e:
         print(e)
-        return e, 500
-
-# # edit personal information
-# @faculty_blueprint.route('faculty/update_info/<string:id>', methods = ['GET', 'POST'])
-# def update_personal_info():
-#     try:
-#         if request.method == 'GET':
-#             faculty_info_record = FacultyPersonalInformation.query.filter_by(id=id).first()
-#             #return render_template(
-#             # '.html',
-#             # educational_attainment_record
-#             # )
-#         elif request.method == 'PUT':
-#             faculty_info_record = EducationalAttainment.query.filter_by(id=id).first()
-#             faculty_info_form = request.form
-
-#             faculty_info_record.school = faculty_info_form['school'],
-#             faculty_info_record.degree = faculty_info_form['degree'],
-#             faculty_info_record.specialization = educational_attainment_form['specialization'],
-#             faculty_info_record.degree_type = educational_attainment_form['degree_type'],
-#             faculty_info_record.start_date = educational_attainment_form['start_date'],
-#             faculty_info_record.end_date = educational_attainment_form['end_date'],
-#             faculty_info_record.last_modified = date.today()
-#             db.session.commit()
-
-#             return 'Educational Attainment Record Successfully Updated.', 200
-#     except Exception as e:
-#         print(e)
-#         return 'An error has occured.', 500
+        return 'An error has occured.', 500
 
 from pprint import pprint
 from PIL import Image
@@ -672,7 +681,7 @@ def add_training():
         print(e)
         return e, 500
 
-@faculty_blueprint.route('/faculty/update_training/<string:id>', methods=['GET', 'PUT'])
+@faculty_blueprint.route('/faculty/update_training_or_seminar/<string:id>', methods=['GET', 'PUT'])
 def update_training(id):
     try:
         if request.method == 'GET':

@@ -105,13 +105,13 @@ function edit_fsr(
     alert('pasok')
     var fsrData = new FormData();
 
-    facultyData.append('course_code_val', course_code_val);
-    facultyData.append('section_val', section_val);
-    facultyData.append('semester_val', semester_val);
-    facultyData.append('schedule_val', schedule_val);
-    facultyData.append('number_of_students_val', number_of_students_val);
-    facultyData.append('syllabus_val', syllabus_val);
-    facultyData.append('set_val', set_val);
+    fsrData.append('course_code_val', course_code_val);
+    fsrData.append('section_val', section_val);
+    fsrData.append('semester_val', semester_val);
+    fsrData.append('schedule_val', schedule_val);
+    fsrData.append('number_of_students_val', number_of_students_val);
+    fsrData.append('syllabus_val', syllabus_val);
+    fsrData.append('set_val', set_val);
 
     Swal.fire({
         title: '<h2>Please Wait</h2>',
@@ -971,10 +971,11 @@ $("#add_ts_form").submit(function(e) {
     });
 });
 
-/* Add FSR/SET Info */ 
-$("#add_fsr_form").submit(function(e) {
+
+/* Update Personal Info */
+$("#update_info_form").submit(function(e) {
     e.preventDefault();
-    var facultyData = new FormData(document.getElementById("add_fsr_form"));
+    var facultyData = new FormData(document.getElementById("update_info_form"));
     Swal.fire({
         title: '<h2>Please Wait</h2>',
         html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
@@ -987,8 +988,8 @@ $("#add_fsr_form").submit(function(e) {
         },
     });
     $.ajax({
-        type: "POST",
-        url: "/faculty/add_fsr_set",
+        type: "PUT",
+        url: "/faculty/update_personal_info",
         processData: false,
         contentType: false,
         data: facultyData,
@@ -1015,3 +1016,87 @@ $("#add_fsr_form").submit(function(e) {
         datatype: "multipart/form-data"
     });
 });
+
+
+// function update_personal_info(
+//     first_name_val,
+//     middle_name_val,
+//     last_name_val,
+//     suffix_val,
+//     date_of_birth_val,
+//     place_of_birth_val,
+//     present_address_val,
+//     permanent_address_val,
+//     civil_status_val,
+//     religion_val,
+//     landline_val,
+//     mobile_number_val,
+//     primary_email_val,
+//     alternate_email_val,
+//     emergency_contact_person_val,
+//     emergency_contact_number_val,
+//     dependent_name_val,
+//     dependent_birthdate_val,
+//     dependent_relationship_val
+// ) {
+//     alert('pasok')
+//     var facultyData = new FormData();
+
+//     facultyData.append('first_name', first_name_val);
+//     facultyData.append('middle_name', middle_name_val);
+//     facultyData.append('last_name', last_name_val);
+//     facultyData.append('suffix', suffix_val);
+//     facultyData.append('date_of_birth', date_of_birth_val);
+//     facultyData.append('place_of_birth', place_of_birth_val);
+//     facultyData.append('present_address', present_address_val);
+//     facultyData.append('permanent_address', permanent_address_val);
+//     facultyData.append('civil_status', civil_status_val);
+//     facultyData.append('religion', religion_val);
+//     facultyData.append('landline', landline_val);
+//     facultyData.append('mobile_number', mobile_number_val);
+//     facultyData.append('primary_email', primary_email_val);
+//     facultyData.append('alternate_email', alternate_email_val);
+//     facultyData.append('emergency_contact_person', emergency_contact_person_val);
+//     facultyData.append('emergency_contact_number', emergency_contact_number_val);
+//     facultyData.append('dependent_name', dependent_name_val);
+//     facultyData.append('dependent_birthdate', dependent_birthdate_val);
+//     facultyData.append('dependent_relationship', dependent_relationship_val);
+
+//     Swal.fire({
+//         title: '<h2>Please Wait</h2>',
+//         html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+//         //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+//         allowOutsideClick: false,
+//         allowEscapeKey: false,
+//         showConfirmButton: false,
+//         onBeforeOpen: () => {
+//             Swal.showLoading()
+//         },
+//     });
+//     $.ajax({
+//         type: "PUT",
+//         url: "/faculty/update_personal_info",
+//         processData: false,
+//         contentType: false,
+//         data: facultyData,
+//         success: function(success){
+//             Swal.fire({
+//                 allowEscapeKey: false,
+//                 allowOutsideClick: false,
+//                 icon: 'success',
+//                 title: 'Success',
+//                 text: success.responseText
+//             }) 
+//         },
+//         error: function(error) {
+//             Swal.fire({
+//                 allowEscapeKey: false,
+//                 allowOutsideClick: false,
+//                 icon: 'warning',
+//                 title: 'Warning',
+//                 text: error.responseText
+//             })
+//         },
+//         datatype: "multipart/form-data"
+//     });
+// }
