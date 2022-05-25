@@ -220,7 +220,8 @@ def load_unit_head_dashboard():
         unit_count.append(record)
     
     print(unit_count)
-
+    unit_label = str(current_user.unit.upper())
+    print(unit_label)
 
     faculty_accomplishments = (Accomplishment
         .query
@@ -258,6 +259,7 @@ def load_unit_head_dashboard():
         if request.method == 'GET':
             return render_template('unit_head/unit_head_dashboard.html', 
                 unit_count = unit_count,
+                unit_label = unit_label,
                 faculty_accomplishments = faculty_accomplishments,
                 faculty_publications = faculty_publications,
                 faculty_research_grants = faculty_research_grants,

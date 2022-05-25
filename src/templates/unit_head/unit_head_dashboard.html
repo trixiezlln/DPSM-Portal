@@ -126,13 +126,14 @@
             let accomplishmentChart = document.getElementById('accomplishmentChart').getContext('2d');
             
             let unit_count = {{ unit_count }};
+            let unit_label = '{{ unit_label }}';
 
             let countChart = new Chart(accomplishmentChart, {
                 type:'bar', 
                 data:{
                     labels:['Publication', 'Public Service', 'Trainings/Seminars', 'Licensure Exams', 'Research Grants'],
                     datasets:[{
-                        label:'MCSU',
+                        label: unit_label,
                         data: unit_count,
                         backgroundColor: [
                             'rgba(205, 72, 141, 0.8)',
