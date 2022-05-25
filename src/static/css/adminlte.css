@@ -31201,6 +31201,80 @@ a.text-muted:hover {
   -webkit-mask-size: cover;
 }
 
+/* Sidebar icons */
+.sidebar-icon {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  background: white;
+  margin-right: 1rem;
+  -webkit-mask-size: cover !important;
+}
+
+/* .sidebar-icon:hover {
+  background: gray;
+} */
+
+.personal-information {
+  -webkit-mask: url(../img/icons/sidebar/personal-information.svg);
+}
+
+.educational-attainment {
+  -webkit-mask: url(../img/icons/sidebar/educational-attainment.svg);
+}
+
+.work-experience {
+  -webkit-mask: url(../img/icons/sidebar/work-experience.svg);
+}
+
+.accomplishments {
+  -webkit-mask: url(../img/icons/sidebar/accomplishments.svg);
+}
+
+.publications {
+  -webkit-mask: url(../img/icons/sidebar/publications.svg);
+}
+
+.research-grants {
+  -webkit-mask: url(../img/icons/sidebar/research-grants.svg);
+}
+
+.licensure-exams {
+  -webkit-mask: url(../img/icons/sidebar/licensure-exams.svg);
+}
+
+.trainings-seminars {
+  -webkit-mask: url(../img/icons/sidebar/trainings-seminars.svg);
+}
+
+.fsr-set {
+  -webkit-mask: url(../img/icons/sidebar/fsr-set.svg);
+}
+
+.dashboard {
+  -webkit-mask: url(../img/icons/sidebar/dashboard.svg);
+}
+
+.faculty-list {
+  -webkit-mask: url(../img/icons/sidebar/faculty-list.svg);
+}
+
+.pending-approvals {
+  -webkit-mask: url(../img/icons/sidebar/pending-approvals.svg);
+}
+
+.role-assignment {
+  -webkit-mask: url(../img/icons/sidebar/role-assignment.svg);
+}
+
+.create-faculty-account {
+  -webkit-mask: url(../img/icons/sidebar/create-faculty-account.svg);
+}
+
+
+
+
+
 
 .info-subhead {
   font-weight: bold;
