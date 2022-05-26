@@ -99,6 +99,10 @@ class Accomplishment(UserMixin, db.Model):
     last_modified       = db.Column(TIMESTAMP, nullable=True)
     id                  = db.Column(db.String(180), primary_key=True, nullable=True) 
 
+    def __repr__(self):
+        return f'<Position {self.position}, Organization {self.organization}, Type {self.type_contribution},\
+            Description {self.description}, Proof {self.proof_ext}, Start Date {self.start_date}, End Date {self.end_date}, Last Modified {self.last_modified}>'
+
 class Publication(UserMixin, db.Model):
     __table_args__ = {
         'schema' : schema, 
@@ -138,6 +142,12 @@ class ResearchGrant(UserMixin, db.Model):
     actual_end          = db.Column(DATE, nullable=True)
     last_modified       = db.Column(TIMESTAMP, nullable=True)
     id                  = db.Column(db.String(180), primary_key=True, nullable=True) 
+
+    def __repr__(self):
+        return f'<Research Name {self.name_research}, Sponsor {self.sponsor}, Amount Granted {self.amount_granted},\
+            Progress {self.progress}, Projected Start {self.projected_start}, Projected End {self.projected_end},\
+                Actual Start {self.actual_start}, Actual End {self.actual_end}, Co-researchers (DPSM) {self.coresearchers_dpsm},\
+                    Co-researchers (Non-DPSM) {self.coresearchers_nondpsm}, Proof {self.proof_ext}, Last Modified {self.last_modified}>'
 
 class LicensureExams(UserMixin, db.Model):
     __table_args__ = {

@@ -1,4 +1,4 @@
-{% extends "unit_head_layout.html" %} {% block unit_head_faculty_list %}
+{% extends "layout.html" %} {% block unit_head_faculty_list %}
 <head>
     <title>Unit Head - Faculty List</title>
 
@@ -44,7 +44,7 @@
               {% for faculty in unit_faculty_list %}
                 <tr class="clickable" onclick="window.location='#'">
                   <th scope="row">
-                    <a href="/unit_head/view_faculty_info/{{faculty.user_id}}">
+                    <a href="/unit_head/view_faculty_info/{{faculty.user_id}}" style="color: #7B1113;">
                       {{faculty.last_name}}, {{faculty.first_name}}
                     </a>
                   </th>

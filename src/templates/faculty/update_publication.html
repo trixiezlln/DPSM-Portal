@@ -1,12 +1,6 @@
 {% extends "layout.html" %} {% block add_info %}
 <head>
-    <title>Update Publication</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <title>Add Publication</title>
 
     <style type="text/css">
   
@@ -59,23 +53,24 @@
 </head>
     <section>
         <h1>Publication</h1>
-        <form class="add-info-form" id="add-info-form">
+        <form class="add-info-form" id="add_pub_form" name="add_pub_form">
+            {% for pub in publication_record %}
             <div class="row">
                 <div class="col-12">
                     <div class="col col-12 container">
                         <div class="row">
                             <div class="col-12 custom-col-3 mb-3">
                                 <label class="col-form-label">Publication Name<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="publication" name="publication" value={{publication_record['publication']}}>
+                                <input class="form-control" type="text" id="publication" name="publication" value="{{ pub.publication }}">
                                 <span class = "validation-status"></span>
                             </div> 
- 
+    
                         </div>
 
                         <div class="row">
                             <div class="col-12 custom-col-3 mb-3">
                                 <label class="col-form-label">Citation<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="citation" name="citation" value={{publication_record['citation']}}>
+                                <input class="form-control" type="text" id="citation" name="citation" value="{{ pub.citation }}">
                                 <span class = "validation-status"></span>
                             </div>
                         </div>
@@ -83,13 +78,13 @@
                         <div class="row">
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">URL<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="url" name="url" value={{publication_record['url']}}>
+                                <input class="form-control" type="text" id="url" name="url" value="{{ pub.url }}">
                                 <span class = "validation-status"></span>
                             </div>
 
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Date Published<span class="required-field"></span></label>
-                                <input class="form-control" type="date" id="date_published" name="date_published" value={{publication_record['date_published']}}>
+                                <input class="form-control" type="date" id="date_published" name="date_published" value="{{ pub.date_published }}">
                                 <span class = "validation-status"></span>
                             </div>    
                         </div>
@@ -97,27 +92,33 @@
                         <div class="row">
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Co-authors (DPSM Faculty)<span class="required-field"></span></label>
-                                <select class="coauthors_dpsm-select form-select form-control coauthors_dpsm" aria-label="" id="coauthors_dpsm" name="coauthors_dpsm" data-field="coauthors_dpsm">
-                                    <option selected value={{publication_record['coauthors_dpsm']}}>{{publication_record['coauthors_dpsm']}}</option>
-                                    <option value="N/A">N/A</option>
-                                    {% for faculty in faculty_list %}
-                                    <option value={{faculty}}>{{faculty}}</option>
-                                    {% endfor %}
-                                   
-                                </select>
+                                <input class="form-control" type="text" id="coauthors_dpsm" name="coauthors_dpsm" value="{{ pub.coauthors_dpsm }}">
+                                <!-- <select class="coauthors_dpsm-select form-select form-control coauthors_dpsm" aria-label="" id="coauthors_dpsm" name="coauthors_dpsm" data-field="coauthors_dpsm">
+                                    <option selected value="">N/A</option>
+                                    <option value="SR">Sr.</option>
+                                    <option value="JR">Jr.</option>
+                                    <option value="I">I</option>
+                                    <option value="II">II</option>
+                                    <option value="III">III</option>
+                                    <option value="IV">IV</option>
+                                    <option value="V">V</option>
+                                    <option value="VI">VI</option>
+                                    <option value="VII">VII</option>
+                                    <option value="VIII">VIII</option>
+                                </select> -->
                             </div> 
                             
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Co-authors (non-DPSM Faculty)<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="coauthors_nondpsm" name="coauthors_nondpsm" {{publication_record['coauthors_nondpsm']}}>
+                                <input class="form-control" type="text" id="coauthors_nondpsm" name="coauthors_nondpsm" value="{{ pub.coauthors_nondpsm }}">
                                 <span class = "validation-status"></span>
                             </div> 
                         </div>
 
                         <div class="row">
                             <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                <label class="col-form-label">Upload File as Proof<span class="required-field"></span></label>
-                                <input type="file" id="publication_file" name="publication_file" {{publication_record['publication_file']}}>
+                                <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                <input type="file" id="publication_file" name="publication_file">
                                 <span class = "validation-status"></span>
                             </div>    
                         </div>
@@ -125,6 +126,8 @@
                     </div>
                 </div>
             </div>
+
+            {% endfor %}
 
             <div class="col-12 col-lg-3 custom-col-3 mb-3">
                 <button class="btn btn-primary crud-btn" type="submit">Update</button> 
@@ -134,5 +137,13 @@
         </form>
     
     </section>
+  <script src="{{ url_for('static', filename='js/ajax_calls.js') }}"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 
 {% endblock %}

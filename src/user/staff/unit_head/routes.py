@@ -140,49 +140,54 @@ def load_unit_head_role_assignment():
 
 @unit_head_blueprint.route('/unit_head/pending_approvals', methods=['GET', 'PUT'])
 def load_unit_head_pending_approvals():
+    faculty_accomplishments = (Accomplishment
+        .query
+        .join(FacultyPersonalInformation, Accomplishment.user_id == FacultyPersonalInformation.user_id)
+        .filter(FacultyPersonalInformation.unit == current_user.unit)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    faculty_publications = (Publication
+        .query
+        .join(FacultyPersonalInformation, Publication.user_id == FacultyPersonalInformation.user_id)
+        .filter(FacultyPersonalInformation.unit == current_user.unit)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    faculty_research_grants = (ResearchGrant
+        .query
+        .join(FacultyPersonalInformation, ResearchGrant.user_id == FacultyPersonalInformation.user_id)
+        .filter(FacultyPersonalInformation.unit == current_user.unit)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    faculty_licensure_exams = (LicensureExams
+        .query
+        .join(FacultyPersonalInformation, LicensureExams.user_id == FacultyPersonalInformation.user_id)
+        .filter(FacultyPersonalInformation.unit == current_user.unit)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    faculty_trainings = (TrainingSeminar
+        .query
+        .join(FacultyPersonalInformation, FacultyPersonalInformation.user_id == TrainingSeminar.user_id)
+        .filter(FacultyPersonalInformation.unit == current_user.unit)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+    ).all()
+    print(len(faculty_trainings))
     try:
         if request.method == 'GET':
-            # pending_reqs = {}
-            educ_pending={}
-            work_pending={}
-            acc_pending={}
-            pub_pending={}
-            rg_pending={}
-            le_pending={}
-            ts_pending={}
-
-            faculty_records = FacultyPersonalInformation.query.filter_by(unit=current_user.unit).all()
-            print(faculty_records)
-
-            for faculty in faculty_records:
-                
-                id = faculty.user_id
-                
-                educ_pending[id]=EducationalAttainment.query.filter_by(user_id=id, info_status=False).all()
-                work_pending[id]=WorkExperience.query.filter_by(user_id=id, info_status=False).all()
-                acc_pending[id]=Accomplishment.query.filter_by(user_id=id, info_status=False).all()
-                pub_pending[id]=Publication.query.filter_by(user_id=id, info_status=False).all()
-                rg_pending[id]=ResearchGrant.query.filter_by(user_id=id, info_status=False).all()
-                le_pending[id]=LicensureExams.query.filter_by(user_id=id, info_status=False).all()
-                ts_pending[id]=TrainingSeminar.query.filter_by(user_id=id, info_status=False).all()
-
-            return render_template(
-                'unit_head/unit_head_pending_approvals.html',
-                faculty_records=faculty_records,
-                educ_pending=educ_pending,
-                work_pending=work_pending,
-                acc_pending=acc_pending,
-                pub_pending=pub_pending,
-                rg_pending=rg_pending,
-                le_pending=le_pending,
-                ts_pending=ts_pending
+            return render_template('unit_head/unit_head_pending_approvals.html', 
+                faculty_accomplishments = faculty_accomplishments,
+                faculty_publications = faculty_publications,
+                faculty_research_grants = faculty_research_grants,
+                faculty_licensure_exams = faculty_licensure_exams,
+                faculty_trainings = faculty_trainings
             )
-
-    # elif request.method == 'PUT':
+        elif request.method == 'POST':
+            pass
 
     except Exception as e:
         print(e)
         return 'An error has occured.', 500
+
+    return render_template('unit_head/unit_head_updated_information.html')
 
 # @unit_head_blueprint.route('/unit_head/dashboard', methods=['GET', 'POST'])
 # def load_unit_head_dashboard():
@@ -203,37 +208,15 @@ def load_unit_head_dashboard():
     accomplishments = [Publication, Accomplishment, TrainingSeminar, LicensureExams, ResearchGrant,]
 
     total_count = {}
-    for unit in units:
-        unit_count = []
-        for acc in accomplishments:
-            record = db.session.query(acc.id, UserCredentials.unit).join(UserCredentials, acc.user_id==UserCredentials.user_id).filter(UserCredentials.unit==unit).count()
-            unit_count.append(record)
-        total_count[unit] = unit_count
-
-    # accomplishment_count = []
-    # for total_count in acc_data_mcsu:
-    #     accomplishment_count.append(total_count)
-
-    acc_data_chemistry = db.session.query(db.func.count(Publication.id), db.func.count(Accomplishment.id), db.func.count(TrainingSeminar.id), db.func.count(LicensureExams.id), db.func.count(ResearchGrant.id))\
-        .filter(Publication.user_id == FacultyPersonalInformation.user_id)\
-        .filter(Accomplishment.user_id == FacultyPersonalInformation.user_id)\
-        .filter(TrainingSeminar.user_id == FacultyPersonalInformation.user_id)\
-        .filter(LicensureExams.user_id == FacultyPersonalInformation.user_id)\
-        .filter(ResearchGrant.user_id == FacultyPersonalInformation.user_id)\
-        .filter(FacultyPersonalInformation.unit == "chemistry")\
-        .all()
-
-    # count_mcsu = []
-    # count_physics = []
-    # count_chemistry = []
-    # for total_count in acc_data_mcsu:
-    #     count_mcsu.append(total_count)
-        
-    # for total_count in acc_data_physics:
-    #     count_physics.append(total_count)
-
-    # for total_count in acc_data_chemistry:
-    #     count_chemistry.append(total_count)
+  
+    unit_count = []
+    for acc in accomplishments:
+        record = db.session.query(acc.id, UserCredentials.unit).join(UserCredentials, acc.user_id==UserCredentials.user_id).filter(UserCredentials.unit==current_user.unit).count()
+        unit_count.append(record)
+    
+    print(unit_count)
+    unit_label = str(current_user.unit.upper())
+    print(unit_label)
 
     faculty_accomplishments = (Accomplishment
         .query
@@ -270,9 +253,8 @@ def load_unit_head_dashboard():
         
         if request.method == 'GET':
             return render_template('unit_head/unit_head_dashboard.html', 
-                acc_data_mcsu = total_count['mcsu'],
-                acc_data_physics = total_count['cu'],
-                acc_data_chemistry = total_count['pgu'],
+                unit_count = unit_count,
+                unit_label = unit_label,
                 faculty_accomplishments = faculty_accomplishments,
                 faculty_publications = faculty_publications,
                 faculty_research_grants = faculty_research_grants,
@@ -285,56 +267,6 @@ def load_unit_head_dashboard():
     except Exception as e:
         print(e)
         return 'An error has occured.', 500
-
-
-
-# acc_data_mcsu = db.session.query(db.func.count(Publication.id), db.func.count(Accomplishment.id), db.func.count(TrainingSeminar.id), db.func.count(LicensureExams.id), db.func.count(ResearchGrant.id))\
-    #     .filter(Publication.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(Accomplishment.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(TrainingSeminar.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(LicensureExams.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(ResearchGrant.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(FacultyPersonalInformation.unit == "mcsu")\
-    #     .all()
-
-    # print(acc_data_mcsu)
-    # accomplishment_count = []
-    # for total_count in acc_data_mcsu:
-    #     accomplishment_count.append(total_count)
-    
-    # acc_data_physics = db.session.query(db.func.count(Publication.id), db.func.count(Accomplishment.id), db.func.count(TrainingSeminar.id), db.func.count(LicensureExams.id), db.func.count(ResearchGrant.id))\
-    #     .filter(Publication.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(Accomplishment.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(TrainingSeminar.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(LicensureExams.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(ResearchGrant.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(FacultyPersonalInformation.unit == "physics")\
-    #     .all()
-
-    # accomplishment_count = []
-    # for total_count in acc_data_mcsu:
-    #     accomplishment_count.append(total_count)
-
-    # acc_data_chemistry = db.session.query(db.func.count(Publication.id), db.func.count(Accomplishment.id), db.func.count(TrainingSeminar.id), db.func.count(LicensureExams.id), db.func.count(ResearchGrant.id))\
-    #     .filter(Publication.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(Accomplishment.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(TrainingSeminar.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(LicensureExams.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(ResearchGrant.user_id == FacultyPersonalInformation.user_id)\
-    #     .filter(FacultyPersonalInformation.unit == "chemistry")\
-    #     .all()
-
-    # count_mcsu = []
-    # count_physics = []
-    # count_chemistry = []
-    # for total_count in acc_data_mcsu:
-    #     count_mcsu.append(total_count)
-        
-    # for total_count in acc_data_physics:
-    #     count_physics.append(total_count)
-
-    # for total_count in acc_data_chemistry:
-    #     count_chemistry.append(total_count)
 
 
 

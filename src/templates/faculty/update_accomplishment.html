@@ -1,12 +1,6 @@
 {% extends "layout.html" %} {% block add_info %}
 <head>
-    <title>Update Accomplishment</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <title>Add Accomplishment</title>
 
     <style type="text/css">
   
@@ -60,20 +54,21 @@
 </head>
     <section>
         <h1>Accomplishment</h1>
-        <form class="add-info-form" id="add-info-form">
+        <form class="add-info-form" id="add_acc_form" name="add_acc_form">
+            {% for acc in accomplishment_record %}
             <div class="row">
                 <div class="col-12">
                     <div class="col col-12 container">
                         <div class="row">
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Position/Role<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="position" name="position" value={{accomplishment_record['position']}}>
+                                <input class="form-control" type="text" id="position" name="position" value="{{ acc.position }}">
                                 <span class = "validation-status"></span>
                             </div> 
             
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Organization<span class="required-field"></span></label>
-                                <input class="form-control" type="text" id="organization" name="organization" value={{accomplishment_record['organization']}}>
+                                <input class="form-control" type="text" id="organization" name="organization" value="{{ acc.organization }}">
                                 <span class = "validation-status"></span>
                             </div> 
                         </div>
@@ -81,13 +76,13 @@
                         <div class="row">
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">Start Date<span class="required-field"></span></label>
-                                <input class="form-control" type="date" id="start_date" name="start_date" value={{accomplishment_record['start_date']}}>
+                                <input class="form-control" type="date" id="start_date" name="start_date" value="{{ acc.start_date }}">
                                 <span class = "validation-status"></span>
                             </div>   
                             
                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                 <label class="col-form-label">End Date<span class="required-field"></span></label>
-                                <input class="form-control" type="date" id="end_date" name="end_date" value={{accomplishment_record['end_date]}}>
+                                <input class="form-control" type="date" id="end_date" name="end_date" value="{{ acc.end_date }}">
                                 <span class = "validation-status"></span>
                             </div>  
                         </div>
@@ -96,7 +91,6 @@
                             <div class="col-12 col-lg-6 custom-col-1 mb-3">
                                 <label class="col-form-label">Type of Contribution</label>
                                 <select class="type_contribution-select form-select form-control type_contribution" aria-label="" id="type_contribution" name="type_contribution" data-field="type_contribution">
-                                    <option selected value={{accomplishment_record['type_contribution']}}>{{accomplishment_record['type_contribution]}}</option>
                                     <option value="1">Accomplishments within UPM</option>
                                     <option value="2">Contributions to Professions</option>
                                     <option value="3">Contributions to Nation</option>
@@ -108,7 +102,7 @@
                         <div class="row">
                             <div class="col-12 custom-col-3 mb-3">
                                 <label class="col-form-label">Description<span class="required-field"></span></label>
-                                <textarea class="form-control" id="description" name="description" rows="4" cols="50" value={{accomplishment_record['description']}}></textarea>
+                                <textarea class="form-control" id="description" name="description" rows="4" cols="50"></textarea>
                                 <span class = "validation-status"></span>
                             </div>   
                         </div>
@@ -116,7 +110,7 @@
                         <div class="row">
                             <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                 <label class="col-form-label">Upload File as Proof<span class="required-field"></span></label>
-                                <input type="file" id="accomplishment_file" name="accomplishment_file" value={{accomplishment_record['accomplishment_file']}}>
+                                <input type="file" id="accomplishment_proof" name="accomplishment_proof" value="{{ acc.proof_ext }}">
                                 <span class = "validation-status"></span>
                             </div>    
                         </div>
@@ -124,6 +118,7 @@
                     </div>
                 </div>
             </div>
+            {% endfor %}
 
             <div class="col-12 col-lg-3 custom-col-3 mb-3">
                 <button class="btn btn-primary crud-btn" type="submit">Update</button> 
@@ -133,5 +128,14 @@
         </form>
     
     </section>
+    <script src="{{ url_for('static', filename='js/ajax_calls.js') }}"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+
 
 {% endblock %}

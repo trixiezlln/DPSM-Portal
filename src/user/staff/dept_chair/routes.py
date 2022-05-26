@@ -299,8 +299,6 @@ def department_chair_role_assignment_clerk():
             return 'Error deleting clerk account. Please try again.', 400
 
 
-
-
 @dept_chair_blueprint.route('/department_chair/pending_approvals', methods=['GET', 'POST'])
 def department_chair_pending_approvals():
     try:
@@ -372,5 +370,4 @@ def department_chair_faculty_list():
     except Exception as e:
         print(e)
         return 'Error accessing faculty list. Please try again', 400
-
 
