@@ -2,48 +2,47 @@
 
 {% block unit_head_educational_attainment %}
 
-{% for educ in educ_pending[faculty.user_id] %}
 <div class="container">
 	<div class="row">
 		<div class="col-sm-12">
 			<label class="col-form-label">Name of School or Institution</label>
-            <p id="school">{{ educ['school'] }}</p>
+            <p id="school"></p>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-sm-12">
 			<label class="col-form-label">Degree/Certification</label>
-            <p id="degree">{{ educ['degree'] }}</p>
+            <p id="degree"></p>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-sm-12">
 			<label class="col-form-label">Type of Degree</label>
-            <p id="degree_type">{{ educ['degree_type'] }}</p>
+            <p id="degree_type"></p>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-sm-12">
 			<label class="col-form-label">Major/Specialization</label>
-            <p id="specialization">{{ educ['specialization'] }}</p>
+            <p id="specialization"></p>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-sm-6">
 			<label class="col-form-label">Start Date</label>
-            <p id="start_date">{{ educ['start_date'] }}</p>
+            <p id="educ_start_date"></p>
 		</div>
 		<div class="col-sm-6">
 			<label class="col-form-label">End Date</label>
-            <p id="end_date">{{ educ['end_date'] }}</p>
+            <p id="educ_end_date"></p>
 		</div>
 	</div>
 </div>
-{% endfor %}
+
 {% endblock %}
 
 {% block unit_head_work_experience %}

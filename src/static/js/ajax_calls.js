@@ -969,3 +969,21 @@ $("#add_ts_form").submit(function(e) {
         datatype: "multipart/form-data"
     });
 });
+
+/* Unit Head Pending Approval Modal */
+function unit_head_pending_modal(first_name, last_name, educ){
+    $('#faculty_name').html(first_name+' '+last_name);
+
+    // Educational Attainment
+    if(educ) {
+        $('#educ_count').html('1');
+    }
+    $('#school').html(educ.school);
+    $('#degree').html(educ.degree);
+    $('#degree_type').html(educ.degree_type);
+    $('#specialization').html(educ.specialization);
+    $('#educ_start_date').html(educ.start_date);
+    $('#educ_end_date').html(educ.end_date);
+
+    $('#pendingModal').modal('toggle');
+} 
