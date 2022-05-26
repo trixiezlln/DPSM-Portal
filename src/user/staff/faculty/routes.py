@@ -165,6 +165,21 @@ def add_educational_attainment():
         print(e)
         return e, 500
 
+
+@faculty_blueprint.route('/faculty/delete_educational_attainment/<string:id>', methods=['GET', 'POST'])
+def delete_educational_attainment(id):    
+    educational_delete = EducationalAttainment.query.filter_by(id=id).first()
+    try:
+        if request.method == 'GET':
+            db.session.delete(educational_delete)
+            db.session.commit()
+            return 'Record successfully deleted.', 200 
+        elif request.method == 'POST':
+            pass
+    except Exception as e:
+        print(e)
+        return e, 500     
+
 @faculty_blueprint.route('/faculty/update_educational_attainment/<string:id>', methods=['GET', 'POST'])
 def update_educational_attainment(id):
     try:
@@ -264,6 +279,20 @@ def add_work_experience():
     except Exception as e:
         print(e)
         return e, 500
+
+@faculty_blueprint.route('/faculty/delete_work_experience/<string:id>', methods=['GET', 'POST'])
+def delete_work_experience(id):    
+    work_delete = WorkExperience.query.filter_by(id=id).first()
+    try:
+        if request.method == 'GET':
+            db.session.delete(work_delete)
+            db.session.commit()
+            return 'Record successfully deleted.', 200 
+        elif request.method == 'POST':
+            pass
+    except Exception as e:
+        print(e)
+        return e, 500     
 
 @faculty_blueprint.route('/faculty/update_work_experience/<string:id>', methods=['GET', 'POST'])
 def update_work_experience(id):
@@ -368,6 +397,21 @@ def add_accomplishment():
     except Exception as e:
         print(e)
         return e, 500
+
+
+@faculty_blueprint.route('/faculty/delete_accomplishment/<string:id>', methods=['GET', 'POST'])
+def delete_accomplishment(id):    
+    accomplishment_delete = Accomplishment.query.filter_by(id=id).first()
+    try:
+        if request.method == 'GET':
+            db.session.delete(accomplishment_delete)
+            db.session.commit()
+            return 'Record successfully deleted.', 200 
+        elif request.method == 'POST':
+            pass
+    except Exception as e:
+        print(e)
+        return e, 500     
 
 @faculty_blueprint.route('/faculty/update_accomplishment/<string:id>', methods=['GET', 'POST'])
 def update_accomplishment(id):
@@ -479,6 +523,21 @@ def add_publication():
     except Exception as e:
         print(e)
         return e, 500
+
+@faculty_blueprint.route('/faculty/delete_publication/<string:id>', methods=['GET', 'POST'])
+def delete_publication(id):    
+    publication_delete = Publication.query.filter_by(id=id).first()
+    try:
+        if request.method == 'GET':
+            print(publication_delete)
+            db.session.delete(publication_delete)
+            db.session.commit()
+            return render_template('/faculty/faculty_landing_page.html')
+        elif request.method == 'POST':
+            pass
+    except Exception as e:
+        print(e)
+        return e, 500            
 
 @faculty_blueprint.route('/faculty/update_publication/<string:id>', methods=['GET', 'POST'])
 def update_publication(id):
@@ -611,6 +670,21 @@ def add_research_grant():
         print(e)
         return e, 500
 
+
+@faculty_blueprint.route('/faculty/delete_research_grant/<string:id>', methods=['GET', 'POST'])
+def delete_research_grant(id):    
+    research_delete = ResearchGrant.query.filter_by(id=id).first()
+    try:
+        if request.method == 'GET':
+            db.session.delete(research_delete)
+            db.session.commit()
+            return 'Record successfully deleted.', 200 
+        elif request.method == 'POST':
+            pass
+    except Exception as e:
+        print(e)
+        return e, 500     
+
 @faculty_blueprint.route('/faculty/update_research_grant/<string:id>', methods=['GET', 'POST'])
 def update_research_grant(id):
     try:
@@ -727,6 +801,22 @@ def add_licensure():
         print(e)
         return e, 500
 
+@faculty_blueprint.route('/faculty/delete_licensure/<string:id>', methods=['GET', 'POST'])
+def delete_licensure(id):    
+    licensure_delete = LicensureExams.query.filter_by(id=id).first()
+    try:
+        if request.method == 'GET':
+            print("dito")
+            print(licensure_delete)
+            db.session.delete(licensure_delete)
+            db.session.commit()
+            return 'Record successfully deleted.', 200 
+        elif request.method == 'POST':
+            pass
+    except Exception as e:
+        print(e)
+        return e, 500     
+
 @faculty_blueprint.route('/faculty/update_licensure_exam/<string:id>', methods=['GET', 'POST'])
 def update_licensure_exam(id):
     try:
@@ -826,6 +916,20 @@ def add_training():
     except Exception as e:
         print(e)
         return e, 500
+
+@faculty_blueprint.route('/faculty/delete_training/<string:id>', methods=['GET', 'POST'])
+def delete_training(id):    
+    training_delete = TrainingSeminar.query.filter_by(id=id).first()
+    try:
+        if request.method == 'GET':
+            db.session.delete(training_delete)
+            db.session.commit()
+            return 'Record successfully deleted.', 200 
+        elif request.method == 'POST':
+            pass
+    except Exception as e:
+        print(e)
+        return e, 500     
 
 @faculty_blueprint.route('/faculty/update_training/<string:id>', methods=['GET', 'PUT'])
 def update_training(id):
