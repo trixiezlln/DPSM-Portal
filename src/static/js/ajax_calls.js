@@ -608,6 +608,63 @@ function show_set_proof(user_id, sy, semester, section, f_ext) {
     });
 };
 
+function show_info_proof(current_user, proof_type, user_id, last_modified, f_ext) {
+    filename = proof_type + "_" + user_id + "_" + last_modified + "." + f_ext
+    $.ajax({
+        type: "GET",
+        url: current_user + "/view_faculty_info/" + user_id + "/" + proof_type + "/" + filename,
+        success: function(response){
+            var data = JSON.parse(response);
+            var file_ext = data['file_ext'];
+
+            if (file_ext === 'pdf'){
+                window.open(data['syllabus_file'], '_blank');
+            } else {
+                var img_loc = "../../../"+data['syllabus_file'];
+                $('#view_syllabus_img').attr("href", img_loc);
+                $('#view_syllabus_img').click();
+            };
+        },
+        error: function(error){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+    });
+};
+
+/* Show SET Proof Image */
+function show_set_proof(user_id, sy, semester, section, f_ext) {
+    filename = "FSR_SET_PROOF_" + sy + "_" + semester + "_" + section + "." + f_ext
+    $.ajax({
+        type: "GET",
+        url: "/clerk/faculty_service_record/"+user_id+"/show_set_proof/"+filename,
+        success: function(response){
+            var data = JSON.parse(response);
+            var file_ext = data['file_ext'];
+            if (file_ext === 'pdf'){
+                window.open(data['syllabus_file'], '_blank');
+            } else {
+                var img_loc = "../../../"+data['syllabus_file']
+                $('#view_set_img').attr("href", img_loc);
+                $('#view_set_img').click();
+            };
+        },
+        error: function(error){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+    });
+};
 
 /* Add Personal Info */ 
 $("#add_personal_form").submit(function(e) {

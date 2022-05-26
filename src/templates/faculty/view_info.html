@@ -851,11 +851,24 @@
                                     </div>
                                     
                                     <div class="row">
-                                        <div class="col-12 col-lg-3 custom-col-3 mb-3">
+                                        <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                            <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_syllabus_img' name='view_syllabus_img' hidden></a>
+                                            <button type="button" class="btn btn-secondary crud-btn" id="view_syllabus" name="view_syllabus" onclick="show_syllabus(
+                                                '{{fsr['id']}}',
+                                                '{{sy}}',
+                                                '{{fsr['semester']}}',
+                                                '{{fsr['section']}}',
+                                                '{{fsr['syllabus_f_ext']}}'
+                                            )">
+                                                View Syllabus Proof
+                                            </button>    
+                                        </div>
+
+                                        <!-- <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                             <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
                                             <input type="file" id="accomplishment_file" name="accomplishment_file">
                                             <span class = "validation-status"></span>
-                                        </div>    
+                                        </div>     -->
                                     </div>
             
                                 </div>
