@@ -243,6 +243,7 @@ def clerk_faculty_service_record(user_id):
                     sy                      = fsr_form['new_sy'],
                     schedule                = fsr_form['new_schedule'],
                     number_students         = fsr_form['new_number_students'],
+                    set_score               = fsr_form['new_set'],
                     syllabus_f_ext          = syllabus_f_ext[1:],
                     set_f_ext               = set_proof_f_ext[1:]
                 )
@@ -265,8 +266,8 @@ def clerk_faculty_service_record_show_syllabus(user_id, filename):
         SYLLABUS_PATH = os.path.join(CURR_FSR_SYLLABUS_DIR, filename)
         _, syllabus_f_ext = os.path.splitext(filename)
         response = json.dumps({
-				'syllabus_file':str(SYLLABUS_PATH),
-				'file_ext':syllabus_f_ext
+            'syllabus_file':str(SYLLABUS_PATH),
+            'file_ext':syllabus_f_ext
 		})
 
         return response, 200
@@ -281,8 +282,8 @@ def clerk_faculty_service_record_show_set_proof(user_id, filename):
         SET_PATH = os.path.join(CURR_FSR_SET_DIR, filename)
         _, syllabus_f_ext = os.path.splitext(filename)
         response = json.dumps({
-				'syllabus_file':str(SET_PATH),
-				'file_ext':syllabus_f_ext
+            'syllabus_file':str(SET_PATH),
+            'file_ext':syllabus_f_ext
 		})
 
         return response, 200

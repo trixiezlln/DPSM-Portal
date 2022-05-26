@@ -562,7 +562,7 @@ function show_syllabus(user_id, sy, semester, section, f_ext) {
             if (file_ext === 'pdf'){
                 window.open(data['syllabus_file'], '_blank');
             } else {
-                var img_loc = "../../../"+data['syllabus_file']
+                var img_loc = "../../../"+data['syllabus_file'];
                 $('#view_syllabus_img').attr("href", img_loc);
                 $('#view_syllabus_img').click();
             };
@@ -588,13 +588,12 @@ function show_set_proof(user_id, sy, semester, section, f_ext) {
         success: function(response){
             var data = JSON.parse(response);
             var file_ext = data['file_ext'];
-
             if (file_ext === 'pdf'){
                 window.open(data['syllabus_file'], '_blank');
             } else {
                 var img_loc = "../../../"+data['syllabus_file']
-                $('#view_syllabus_img').attr("href", img_loc);
-                $('#view_syllabus_img').click();
+                $('#view_set_img').attr("href", img_loc);
+                $('#view_set_img').click();
             };
         },
         error: function(error){
@@ -970,3 +969,21 @@ $("#add_ts_form").submit(function(e) {
         datatype: "multipart/form-data"
     });
 });
+
+/* Unit Head Pending Approval Modal */
+function unit_head_pending_modal(first_name, last_name, educ){
+    $('#faculty_name').html(first_name+' '+last_name);
+
+    // Educational Attainment
+    if(educ) {
+        $('#educ_count').html('1');
+    }
+    $('#school').html(educ.school);
+    $('#degree').html(educ.degree);
+    $('#degree_type').html(educ.degree_type);
+    $('#specialization').html(educ.specialization);
+    $('#educ_start_date').html(educ.start_date);
+    $('#educ_end_date').html(educ.end_date);
+
+    $('#pendingModal').modal('toggle');
+} 

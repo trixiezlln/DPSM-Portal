@@ -48,29 +48,35 @@ def load_dept_head_dashboard():
     faculty_accomplishments = (Accomplishment
         .query
         .join(FacultyPersonalInformation, Accomplishment.user_id == FacultyPersonalInformation.user_id)
-        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name, FacultyPersonalInformation.unit)
     ).all()
     faculty_publications = (Publication
         .query
         .join(FacultyPersonalInformation, Publication.user_id == FacultyPersonalInformation.user_id)
-        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name, FacultyPersonalInformation.unit)
     ).all()
     faculty_research_grants = (ResearchGrant
         .query
         .join(FacultyPersonalInformation, ResearchGrant.user_id == FacultyPersonalInformation.user_id)
-        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name, FacultyPersonalInformation.unit)
     ).all()
     faculty_licensure_exams = (LicensureExams
         .query
         .join(FacultyPersonalInformation, LicensureExams.user_id == FacultyPersonalInformation.user_id)
-        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name, FacultyPersonalInformation.unit)
     ).all()
     faculty_trainings = (TrainingSeminar
         .query
         .join(FacultyPersonalInformation, FacultyPersonalInformation.user_id == TrainingSeminar.user_id)
-        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name, FacultyPersonalInformation.unit)
     ).all()
-    print(len(faculty_trainings))
+    convert_unit([
+        faculty_accomplishments,
+            faculty_publications,
+            faculty_research_grants,
+            faculty_licensure_exams,
+            faculty_trainings
+    ])
     try:
         
         if request.method == 'GET':
@@ -91,6 +97,18 @@ def load_dept_head_dashboard():
         print(e)
         return 'An error has occured.', 500
 
+def convert_unit(info_list_list):
+    for item in info_list_list:
+        for idx, info in enumerate(item):
+            info_list = list(info)
+            if info[3] == 'mcsu':
+                info_list[3] = 'MCSU'
+            elif info[3] == 'pgu':
+                info_list[3] = 'Physics/Geology'
+            elif info[3] == 'cu':
+                info_list[3] = 'Chemistry'
+            item[idx] = tuple(info_list) 
+
 @dept_chair_blueprint.route('/department_chair/view_faculty_info/<user_id>', methods=['GET', 'POST'])
 def dept_head_view_faculty_info(user_id):
     faculty_personal_information = FacultyPersonalInformation.query.filter_by(user_id=user_id).first()
@@ -101,7 +119,15 @@ def dept_head_view_faculty_info(user_id):
     faculty_research_grants = ResearchGrant.query.filter_by(user_id=user_id).all()
     faculty_licensure_exams = LicensureExams.query.filter_by(user_id=user_id).all()
     faculty_trainings = TrainingSeminar.query.filter_by(user_id=user_id).all()
-    # faculty_service_records = FacultySETRecords.query.filter_by(id=user_id).first()
+    faculty_service_records = FacultySETRecords.query.filter_by(id=user_id).all()
+
+    fsr_dict = {} # Keys = initial school year, Value = list of records within that year
+
+    for record in faculty_service_records:
+        if record.sy in fsr_dict:
+            fsr_dict[record.sy].append(record.__dict__)
+        else:
+            fsr_dict[record.sy] = [record.__dict__]
     return render_template(
         'faculty/view_info.html',
         faculty_personal_information = faculty_personal_information,
@@ -112,6 +138,7 @@ def dept_head_view_faculty_info(user_id):
         faculty_research_grants = faculty_research_grants,
         faculty_licensure_exams = faculty_licensure_exams,
         faculty_trainings = faculty_trainings,
+        fsr_dict = fsr_dict
     )
 
 # @dept_chair_blueprint.route('/department_chair/pending_approvals', methods=['GET', 'POST'])

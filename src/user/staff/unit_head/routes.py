@@ -39,7 +39,15 @@ def unit_head_view_faculty_info(user_id):
     faculty_research_grants = ResearchGrant.query.filter_by(user_id=user_id).all()
     faculty_licensure_exams = LicensureExams.query.filter_by(user_id=user_id).all()
     faculty_trainings = TrainingSeminar.query.filter_by(user_id=user_id).all()
-    # faculty_service_records = FacultySETRecords.query.filter_by(id=user_id).first()
+    faculty_service_records = FacultySETRecords.query.filter_by(id=user_id).all()
+
+    fsr_dict = {} # Keys = initial school year, Value = list of records within that year
+
+    for record in faculty_service_records:
+        if record.sy in fsr_dict:
+            fsr_dict[record.sy].append(record.__dict__)
+        else:
+            fsr_dict[record.sy] = [record.__dict__]
     return render_template(
         'faculty/view_info.html',
         faculty_personal_information = faculty_personal_information,
@@ -50,6 +58,7 @@ def unit_head_view_faculty_info(user_id):
         faculty_research_grants = faculty_research_grants,
         faculty_licensure_exams = faculty_licensure_exams,
         faculty_trainings = faculty_trainings,
+        fsr_dict = fsr_dict
     )
 
 @unit_head_blueprint.route('/unit_head/faculty_list', methods=['GET', 'POST'])
@@ -141,46 +150,96 @@ def load_unit_head_role_assignment():
 
 @unit_head_blueprint.route('/unit_head/pending_approvals', methods=['GET', 'PUT'])
 def load_unit_head_pending_approvals():
-    faculty_accomplishments = (Accomplishment
-        .query
-        .join(FacultyPersonalInformation, Accomplishment.user_id == FacultyPersonalInformation.user_id)
-        .filter(FacultyPersonalInformation.unit == current_user.unit)
-        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
-    ).all()
-    faculty_publications = (Publication
-        .query
-        .join(FacultyPersonalInformation, Publication.user_id == FacultyPersonalInformation.user_id)
-        .filter(FacultyPersonalInformation.unit == current_user.unit)
-        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
-    ).all()
-    faculty_research_grants = (ResearchGrant
-        .query
-        .join(FacultyPersonalInformation, ResearchGrant.user_id == FacultyPersonalInformation.user_id)
-        .filter(FacultyPersonalInformation.unit == current_user.unit)
-        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
-    ).all()
-    faculty_licensure_exams = (LicensureExams
-        .query
-        .join(FacultyPersonalInformation, LicensureExams.user_id == FacultyPersonalInformation.user_id)
-        .filter(FacultyPersonalInformation.unit == current_user.unit)
-        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
-    ).all()
-    faculty_trainings = (TrainingSeminar
-        .query
-        .join(FacultyPersonalInformation, FacultyPersonalInformation.user_id == TrainingSeminar.user_id)
-        .filter(FacultyPersonalInformation.unit == current_user.unit)
-        .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
-    ).all()
-    print(len(faculty_trainings))
     try:
         if request.method == 'GET':
-            return render_template('unit_head/unit_head_pending_approvals.html', 
+            faculty_list = (FacultyPersonalInformation
+                .query
+                .filter(FacultyPersonalInformation.unit == current_user.unit)
+                .order_by(
+                    FacultyPersonalInformation
+                    .last_name
+                    .asc()
+                )
+                .all()
+            )
+
+            faculty_educ = {}
+            faculty_work = {}
+            faculty_accomplishments = {}
+            faculty_publications = {}
+            faculty_research_grants = {}
+            faculty_licensure_exams = {}
+            faculty_trainings = {}
+
+            for faculty in faculty_list:
+                faculty_educ[faculty.user_id] = EducationalAttainment.query.filter_by(user_id=faculty.user_id).first()
+                faculty_work[faculty.user_id] = WorkExperience.query.filter_by(user_id=faculty.user_id).first()
+                faculty_accomplishments[faculty.user_id] = Accomplishment.query.filter_by(user_id=faculty.user_id).first()
+                faculty_publications[faculty.user_id] = Publication.query.filter_by(user_id=faculty.user_id).first()
+                faculty_research_grants[faculty.user_id] = ResearchGrant.query.filter_by(user_id=faculty.user_id).first()
+                faculty_licensure_exams[faculty.user_id] = LicensureExams.query.filter_by(user_id=faculty.user_id).first()
+                faculty_trainings[faculty.user_id] = TrainingSeminar.query.filter_by(user_id=faculty.user_id).first()
+
+            # faculty_educ = (EducationalAttainment
+            #     .query
+            #     .join(FacultyPersonalInformation, EducationalAttainment.user_id == FacultyPersonalInformation.user_id)
+            #     .filter(FacultyPersonalInformation.unit == current_user.unit, EducationalAttainment.info_status == False)
+            #    .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+            # ).all()
+
+            # faculty_work = (WorkExperience
+            #     .query
+            #     .join(FacultyPersonalInformation, WorkExperience.user_id == FacultyPersonalInformation.user_id)
+            #     .filter(FacultyPersonalInformation.unit == current_user.unit, WorkExperience.info_status == False)
+            #     .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+            # ).all()
+
+            # faculty_accomplishments = (Accomplishment
+            #     .query
+            #     .join(FacultyPersonalInformation, Accomplishment.user_id == FacultyPersonalInformation.user_id)
+            #     .filter(FacultyPersonalInformation.unit == current_user.unit, Accomplishment.info_status == False)
+            #     .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+            # ).all()
+
+            # faculty_publications = (Publication
+            #     .query
+            #     .join(FacultyPersonalInformation, Publication.user_id == FacultyPersonalInformation.user_id)
+            #     .filter(FacultyPersonalInformation.unit == current_user.unit, Publication.info_status==False)
+            #     .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+            # ).all()
+
+            # faculty_research_grants = (ResearchGrant
+            #     .query
+            #     .join(FacultyPersonalInformation, ResearchGrant.user_id == FacultyPersonalInformation.user_id)
+            #     .filter(FacultyPersonalInformation.unit == current_user.unit, ResearchGrant.info_status==False)
+            #     .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+            # ).all()
+
+            # faculty_licensure_exams = (LicensureExams
+            #     .query
+            #     .join(FacultyPersonalInformation, LicensureExams.user_id == FacultyPersonalInformation.user_id)
+            #     .filter(FacultyPersonalInformation.unit == current_user.unit, LicensureExams.info_status==False)
+            #     .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+            # ).all()
+            # faculty_trainings = (TrainingSeminar
+            #     .query
+            #     .join(FacultyPersonalInformation, FacultyPersonalInformation.user_id == TrainingSeminar.user_id)
+            #     .filter(FacultyPersonalInformation.unit == current_user.unit, TrainingSeminar.info_status==False)
+            #     .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+            # ).all()
+
+
+            return render_template('unit_head/unit_head_pending_approvals.html',
+                faculty_list = faculty_list,
+                faculty_educ = faculty_educ,
+                faculty_work = faculty_work,
                 faculty_accomplishments = faculty_accomplishments,
                 faculty_publications = faculty_publications,
                 faculty_research_grants = faculty_research_grants,
                 faculty_licensure_exams = faculty_licensure_exams,
                 faculty_trainings = faculty_trainings
             )
+
         elif request.method == 'POST':
             pass
 
@@ -188,7 +247,7 @@ def load_unit_head_pending_approvals():
         print(e)
         return 'An error has occured.', 500
 
-    return render_template('unit_head/unit_head_updated_information.html')
+    # return render_template('unit_head/unit_head_updated_information.html')
 
 # @unit_head_blueprint.route('/unit_head/dashboard', methods=['GET', 'POST'])
 # def load_unit_head_dashboard():
