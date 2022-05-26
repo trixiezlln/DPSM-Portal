@@ -86,8 +86,48 @@
                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 
                                 <div class="card-body">
-                                    {% block unit_head_educational_attainment%}
-                                    {% endblock %}
+                                    <!-- {% block unit_head_educational_attainment%}
+                                    {% endblock %} -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Name of School or Institution</label>
+                                                <p id="school"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Degree/Certification</label>
+                                                <p id="degree"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Type of Degree</label>
+                                                <p id="degree_type"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Major/Specialization</label>
+                                                <p id="specialization"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">Start Date</label>
+                                                <p id="educ_start_date"></p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">End Date</label>
+                                                <p id="educ_end_date"></p>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
@@ -110,8 +150,41 @@
 
                             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                                 <div class="card-body">
-                                    {% block unit_head_work_experience %} 
-                                    {% endblock %} 
+                                    <!-- {% block unit_head_work_experience %} 
+                                    {% endblock %}  -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Name of Employer</label>
+                                                <p id="name_employer"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Title/Position</label>
+                                                <p id="title"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Description</label>
+                                                <p id="description"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">Start Date</label>
+                                                <p id="start_date"></p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">End Date</label>
+                                                <p id="end_date"></p>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
@@ -132,8 +205,37 @@
 
                             <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
                                 <div class="card-body">
-                                    {% block unit_head_accomplishments %} 
-                                    {% endblock %} 
+                                    <!-- {% block unit_head_accomplishments %} 
+                                    {% endblock %}  -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Position/Role</label>
+                                                <p id="position"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Organization</label>
+                                                <p id="organization"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Type of Contribution</label>
+                                                <p id="type_contribution"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Description</label>
+                                                <p id="description"></p>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
@@ -154,8 +256,48 @@
 
                             <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
                                 <div class="card-body">
-                                    {% block unit_head_publications %} 
-                                    {% endblock %} 
+                                    <!-- {% block unit_head_publications %} 
+                                    {% endblock %}  -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Publication Name</label>
+                                                <p id="publication"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Citation</label>
+                                                <p id="citation"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">URL</label>
+                                                <p id="url"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">DPSM Profs</label>
+                                                <p id="coauthors_dpsm"></p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">Non-DPSM Profs</label>
+                                                <p id="coauthors_nondpsm"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Publication Date</label>
+                                                <p id="date_published"></p>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
@@ -176,8 +318,76 @@
 
                             <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
                                 <div class="card-body">
-                                    {% block unit_head_research_grants %} 
-                                    {% endblock %}
+                                    <!-- {% block unit_head_research_grants %} 
+                                    {% endblock %} -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Name of Research Project</label>
+                                                <p id="name_research"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Sponsor</label>
+                                                <p id="sponsor"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Amount Granted</label>
+                                                <p id="amount_granted"></p>
+                                            </div>
+                                        </div>
+
+                                        <h6>Projected Start and End Date</h6>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">Start Date</label>
+                                                <p id="projected_start"></p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">End Date</label>
+                                                <p id="projected_end"></p>
+                                            </div>
+                                        </div>
+
+                                        <h6>Actual Start and End Date</h6>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">Start Date</label>
+                                                <p id="actual_start"></p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">End Date</label>
+                                                <p id="actual_end"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Research Progress</label>
+                                                <p id="research_progress"></p>
+                                            </div>
+                                        </div>
+
+                                        <h6>Co-Authors</h6>
+                                        
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">DPSM Profs</label>
+                                                <p id="coresearchers_dpsm"></p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">Non-DPSM Profs</label>
+                                                <p id="coresearchers_nondpsm"></p>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
@@ -198,8 +408,31 @@
 
                             <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
                                 <div class="card-body">
-                                    {% block unit_head_licensure_exams %} 
-                                    {% endblock %}
+                                    <!-- {% block unit_head_licensure_exams %} 
+                                    {% endblock %} -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Name of Exam</label>
+                                                <p id="name_exam"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label class="col-form-label">Rank</label>
+                                                <p id="rank"></p>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="col-form-label">License Number</label>
+                                                <p id="license_number"></p>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="col-form-label">Date</label>
+                                                <p id="date"></p>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
@@ -220,8 +453,38 @@
 
                             <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
                                 <div class="card-body">
-                                    {% block unit_head_trainings_seminars %} 
-                                    {% endblock %}
+                                    <!-- {% block unit_head_trainings_seminars %} 
+                                    {% endblock %} -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">Name of Training/Seminar</label>
+                                                <p id="name_training"></p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">Role</label>
+                                                <p id="role"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Remarks</label>
+                                                <p id="remarks"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">Start Date</label>
+                                                <p id="start_date"></p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">End Date</label>
+                                                <p id="end_date"></p>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
