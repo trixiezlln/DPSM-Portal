@@ -1,4 +1,3 @@
-
 {% extends "layout.html" %} {% block add_info %}
 <head>
     <title>Landing Page</title>
@@ -394,12 +393,12 @@
 
             <!-- box content -->
             {% for educ_record in educ_attainment %}
-            {% if educ_record['info_status'] is none %}
+            {% if educ_record['info_status'] != False %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
                     <div>
-                        <a class="crud-icon edit-btn"  href="/faculty/update_educational/{{educ_record['id']}}"></a>
+                        <a class="crud-icon edit-btn"  href="/faculty/update_educational_attainment/{{educ_record['id']}}"></a>
                         <a class="crud-icon delete-btn"></a>
                     </div>
                 </div>
@@ -462,8 +461,8 @@
 
                             <div class="row">
                                 <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                    <!-- <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label> -->
-                                    <input type="file" id="educ_file" name="educ_file" value="{{ educ.proof_ext }}">
+                                    <label class="col-form-label">{{ educ_record['proof_ext'] }}<span class="required-field"></span></label>
+                                    <input type="file" id="educ_file" name="educ_file" disabled>
                                     <span class = "validation-status"></span>
                                 </div>    
                             </div>
@@ -493,7 +492,7 @@
             
             <!-- box content -->
             {% for work_record in work_experience %}
-                {% if work_record['info_status'] is none %}
+                {% if work_record['info_status'] != False %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
@@ -514,8 +513,7 @@
                                         <option selected value="{{work_record['location']}}">{{work_record['location']}}</option>
                                         <option value="Outside">Outside UP Manila</option>
                                         <option value="Within">Within UP Manila</option>
-                                        
-                                    </select>
+                                    </select> 
                                 </div>
                             </div>
 
@@ -550,7 +548,7 @@
                             <div class="row">
                                 <div class="col-12 custom-col-3 mb-3">
                                     <label class="col-form-label">Description<span class="required-field"></span></label>
-                                    <textarea class="form-control" id="description" name="description" rows="4" cols="50" value="{{work_record['description']}}" disabled></textarea>
+                                    <textarea class="form-control" id="description" name="description" rows="4" cols="50" disabled>{{work_record['description']}}</textarea>
                                     <span class = "validation-status"></span>
                                 </div>   
                             </div>
@@ -588,7 +586,7 @@
             <hr>
             
             {% for acc_record in accomplishment %}
-            {% if acc_record['info_status'] is none %}
+            {% if acc_record['info_status'] != False %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
@@ -645,7 +643,7 @@
                             <div class="row">
                                 <div class="col-12 custom-col-3 mb-3">
                                     <label class="col-form-label">Description<span class="required-field"></span></label>
-                                    <textarea class="form-control" id="description" name="description" rows="4" cols="50" value="{{acc_record['description']}}" disabled></textarea>
+                                    <textarea class="form-control" id="description" name="description" rows="4" cols="50" disabled>{{acc_record['description']}}</textarea>
                                     <span class = "validation-status"></span>
                                 </div>   
                             </div>
@@ -653,7 +651,7 @@
                             <div class="row">
                                 <div class="col-12 col-lg-3 custom-col-3 mb-3">
                                     <!-- <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label> -->
-                                    <input type="file" id="accomplishment_file" name="accomplishment_file" value="{{ acc.proof_ext }}">
+                                    <input type="text" id="accomplishment_file" name="accomplishment_file" value="{{ acc_record['proof_ext'] }}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>    
                             </div>
@@ -682,7 +680,7 @@
             <hr>
             
             {% for pub_record in publication %}
-            {% if pub_record['info_status'] is none %}
+            {% if pub_record['info_status'] != False %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
@@ -742,7 +740,7 @@
                                         <option value="VI">VI</option>
                                         <option value="VII">VII</option>
                                         <option value="VIII">VIII</option>
-                                    </select>
+                                    </select> 
                                 </div> 
                                 
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
@@ -754,8 +752,8 @@
     
                             <div class="row">
                                 <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                    <!-- <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label> -->
-                                    <input type="file" id="publication_file" name="publication_file" value="{{ pub.proof_ext }}">
+                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                    <input type="text" id="publication_file" name="publication_file" value="{{ pub_record['proof_ext'] }}" disabled>
                                     <span class = "validation-status"></span>
                                 </div>    
                             </div>
@@ -787,7 +785,7 @@
             <hr>
             
             {% for rg_record in research_grant %}
-            {% if rg_record['info_status'] is none %}
+            {% if rg_record['info_status'] != False %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
@@ -853,7 +851,7 @@
                                 <div class="row">
                                     <div class="col-12 custom-col-3 mb-3">
                                         <label class="col-form-label">Research Progress<span class="required-field"></span></label>
-                                        <textarea class="form-control" id="research_progress" name="research_progress" rows="4" cols="50" value="{{rg_record['research_progress']}}" disabled></textarea>
+                                        <textarea class="form-control" id="research_progress" name="research_progress" rows="4" cols="50" disabled>{{ rg_record['progress'] }}</textarea>
                                         <span class = "validation-status"></span>
                                     </div>   
                                 </div>
@@ -863,18 +861,10 @@
                                         <label class="col-form-label">Co-researchers (DPSM Faculty)<span class="required-field"></span></label>
                                         <select class="coresearchers_dpsm-select form-select form-control coresearchers_dpsm" aria-label="" id="coresearchers_dpsm" name="coresearchers_dpsm" disabled>
                                             <option selected value="{{rg_record['coresearchers_dpsm']}}">{{rg_record['coresearchers_dpsm']}}</option>
-                                            <option value="">N/A</option>
-                                            <option value="SR">Sr.</option>
-                                            <option value="JR">Jr.</option>
-                                            <option value="I">I</option>
-                                            <option value="II">II</option>
-                                            <option value="III">III</option>
-                                            <option value="IV">IV</option>
-                                            <option value="V">V</option>
-                                            <option value="VI">VI</option>
-                                            <option value="VII">VII</option>
-                                            <option value="VIII">VIII</option>
-                                        </select>
+                                            {% for faculty in faculty_list %}
+                                            <option value={{faculty}}>{{faculty}}</option>
+                                            {% endfor %}
+                                        </select> 
                                     </div> 
                                     
                                     <div class="col-12 col-lg-6 custom-col-3 mb-3">
@@ -887,8 +877,8 @@
         
                                 <div class="row">
                                     <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                        <!-- <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label> -->
-                                        <input type="file" id="accomplishment_file" name="accomplishment_file" value="{{ rrec.proof_ext }}" disabled>
+                                        <label class="col-form-label">{{ rg_record['proof_ext'] }}<span class="required-field"></span></label>
+                                        <input type="file" id="accomplishment_file" name="accomplishment_file" disabled>
                                         <span class = "validation-status"></span>
                                     </div>    
                                 </div>
@@ -917,7 +907,7 @@
             <hr>
             
             {% for le_record in licensure %}
-            {% if le_record['info_status'] is none %}
+            {% if le_record['info_status'] != False %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
@@ -930,7 +920,7 @@
                 <div class="row">
                     <div class="col-12 custom-col-3 mb-3">
                         <label class="col-form-label">Name of Exam<span class="required-field"></span></label>
-                        <input class="form-control" type="text" id="name_exam" name="name_exam" value="{{le_record['name_exan']}}" disabled>
+                        <input class="form-control" type="text" id="name_exam" name="name_exam" value="{{le_record['name_exam']}}" disabled>
                         <span class = "validation-status"></span>
                     </div> 
                 </div>
@@ -957,8 +947,8 @@
 
                 <div class="row">
                     <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                        <label class="col-form-label">Upload File as Proof<span class="required-field"></span></label>
-                        <input type="file" id="licensure_proof" name="licensure_proof">
+                        <label class="col-form-label">{{ le_record['proof_ext'] }}<span class="required-field"></span></label>
+                        <input type="file" id="licensure_proof" name="licensure_proof" disabled>
                         <span class = "validation-status"></span>
                     </div>    
     
@@ -978,19 +968,19 @@
             <div class="d-flex justify-content-between my-3">
                 <h4 class="">Training/Seminar</h4>
                 <div>
-                    <a class="crud-icon add-btn" href="/faculty/add_training_or_seminar"></a>
+                    <a class="crud-icon add-btn" href="/faculty/add_training"></a>
                 </div>
             </div>
 
             <hr>
             
             {% for ts_record in training %}
-            {% if ts_record['info_status'] is none %}
+            {% if ts_record['info_status'] != False %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
                     <div>
-                        <a class="crud-icon edit-btn" href="/faculty/update_training_or_seminar/{{ts_record['id']}}"></a>
+                        <a class="crud-icon edit-btn" href="/faculty/update_training/{{ts_record['id']}}"></a>
                         <a class="crud-icon delete-btn"></a>
                     </div>
                 </div>
