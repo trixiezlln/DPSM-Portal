@@ -139,7 +139,7 @@ def load_unit_head_role_assignment():
             print(e)
             return 'Error deleting Unit Head nominee. Please try again.', 400
 
-@unit_head_blueprint.route('/unit_head/pending_approvals', methods=['GET', 'POST'])
+@unit_head_blueprint.route('/unit_head/pending_approvals', methods=['GET', 'PUT'])
 def load_unit_head_pending_approvals():
     faculty_accomplishments = (Accomplishment
         .query
@@ -187,11 +187,6 @@ def load_unit_head_pending_approvals():
     except Exception as e:
         print(e)
         return 'An error has occured.', 500
-
-
-
-
-    
 
     return render_template('unit_head/unit_head_updated_information.html')
 

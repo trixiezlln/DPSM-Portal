@@ -30,34 +30,32 @@
 
 
 </style>
+
 <section>
+
 <div class="card-columns" id = "accordion">
+  
+
   <div class="card">
     <img src="https://www.solidbackgrounds.com/images/1920x1080/1920x1080-up-maroon-solid-color-background.jpg" class="card-img-top" alt="...">
     <div class="card-header text-center" style = "font-weight:bold; ">Chemistry Unit</div>
     <div class="card-body text-center" >
-        Billones, Junie B.
-
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style = "color:#7b1113;"> <i class="arrow down"></i> </button>
-        
+        Chem Head
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style = "color:#7b1113;"> <i class="arrow down"></i> </button>        
 
       <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
         <div class="card-body" data-toggle="modal" data-target="#exampleModal" >
+            {% for cu_faculty in cu_list %}
             <div class="card-body text-center" data-toggle="modal" data-target="#exampleModal">
-                        Carillo, Maria Constancia O.
+                {{ cu_faculty['last_name'] }}, {{ cu_faculty['first_name'] }}
             </div>
+            {% endfor %}
 
-            <div class="card-body text-center" data-toggle="modal" data-target="#exampleModal">
-                        Cruz, Fatima Joy C.
-            </div>
-
-      </div>
+        </div>
+       </div>      
     </div>
-
-      
-    </div>
-
 </div>
+
 
 <div class="card">
     <img src="https://www.solidbackgrounds.com/images/2560x1440/2560x1440-up-forest-green-solid-color-background.jpg" class="card-img-top" alt="...">
@@ -67,16 +65,13 @@
         <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" style = "color:#7b1113; "> <i class="arrow down"></i>
         </button>
 
-
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
         <div class="card-body" data-toggle="modal" data-target="#exampleModal2" >
-            <div class="card-body text-center" data-toggle="modal" data-target="#exampleModal2">
-                        Basco-Uy, Therese Anne G.
+            {% for mcsu_faculty in mcsu_list %}
+            <div class="card-body text-center" data-toggle="modal" data-target="#exampleModal">
+                {{ mcsu_faculty['last_name'] }}, {{ mcsu_faculty['first_name'] }}
             </div>
-
-            <div class="card-body text-center" data-toggle="modal" data-target="#exampleModal2">
-                        Billones, Liza T.
-            </div>
+            {% endfor %}
 
       </div>
     </div>
@@ -98,13 +93,12 @@
 
       <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
         <div class="card-body" data-toggle="modal" data-target="#exampleModal3" >
-            <div class="card-body text-center" data-toggle="modal" data-target="#exampleModal3">
-                        Bustillo, John Paul O.
+            {% for pgu_faculty in pgu_list %}
+            <div class="card-body text-center" data-toggle="modal" data-target="#exampleModal">
+                {{ pgu_faculty['last_name'] }}, {{ pgu_faculty['first_name'] }}
             </div>
+            {% endfor %}
 
-            <div class="card-body text-center" data-toggle="modal" data-target="#exampleModal3">
-                        Cometa, Adam Jesson P.
-            </div>
 
       </div>
     </div>

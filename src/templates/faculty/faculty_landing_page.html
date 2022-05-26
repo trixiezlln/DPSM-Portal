@@ -101,8 +101,8 @@
                             <div class="row">
                                 <div class="col-12 col-lg-3 custom-col-1 mb-3">
                                     <label class="col-form-label">Rank</label>
-                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="rank" name="rank" data-field="suffix">
-                                        <option selected value="{{personal_info['rank']}}" disabled>{{personal_info['rank']}}</option>
+                                    <select class="suffix-select form-select form-control suffix" aria-label="" id="rank" name="rank" data-field="suffix" disabled>
+                                        <option selected value="{{personal_info['rank']}}">{{personal_info['rank']}}</option>
                                         <option value="">N/A</option>
                                         <option value='Lecturer 1'>Lecturer 1</option>
                                         <option value='Lecturer 2'>Lecturer 2</option>
@@ -435,7 +435,7 @@
                                         <option value="MS">Master of Science (MS)</option>
                                         <option value="PhD">Doctoral (PhD)</option>
                                         <option value="MD">Doctor of Medicine (MD)</option>
-                                    </select> -->
+                                    </select>
                                 </div>
 
                                 <div class="col-12 col-lg-6 custom-col-3 mb-3">
@@ -489,7 +489,6 @@
             </div>
 
             <hr>
-
             
             <!-- box content -->
             {% for work_record in work_experience %}
@@ -556,8 +555,8 @@
                             
                             <div class="row">
                                 <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                    <label class="col-form-label">{{ work_record['proof_ext'] }}<span class="required-field"></span></label>
-                                    <input type="file" id="work_file" name="work_file" disabled>
+                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                    <input type="file" id="work_file" name="work_file">
                                     <span class = "validation-status"></span>
                                 </div>    
                             </div>
@@ -1027,8 +1026,8 @@
                             
                             <div class="row">
                                 <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                    <label class="col-form-label">{{ ts_record['proof_ext'] }}<span class="required-field"></span></label>
-                                    <input type="file" id="accomplishment_file" name="accomplishment_file" disabled>
+                                    <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
+                                    <input type="file" id="training_file" name="training_file">
                                     <span class = "validation-status"></span>
                                 </div>    
                             </div>

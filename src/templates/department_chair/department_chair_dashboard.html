@@ -181,17 +181,15 @@
 
 
     <div id="full_list" class="tabcontent">
+        <div class="btn-export float-right"></div>
         
-        
-        
- 
-    
 
         <div class="table-responsive">
             <table class="table table-striped table-hover dt-bootstrap4 no-footer" id="accomplishemt_table" style="font-size: 1vw; width: 100%;">
                 <thead>
                     <tr>
                         <th scope="col">Name of Faculty</th>
+                        <th scope="col">Department Unit</th>
                         <th scope="col">Accomplishment</th>
                         <th scope="col">Accomplishment Type</th>
                         <th scope="col">Start Date</th>
@@ -201,6 +199,19 @@
                         <th>
                             <input class="form-control" type="text" id="faculty_name" name="" style="font-size: 1vw;">
                         </th>
+
+                        <th>
+                            <select class="suffix-select form-select form-control suffix" aria-label="" id="department_unit" name="" data-field="suffix" onchange="filter_unit()" style="font-size: 1vw;">
+                                <option selected value="">All</option>
+                                <option value="Chemistry">Chemistry</option>
+                                <option value="MCSU">MCSU</option>
+                                <option value="Physics/Geology">Physics/Geology</option>
+                                
+                            </select>
+                        </th>
+
+
+
                         <th>
                             <input class="form-control" type="text" id="accomplishment" name="" style="font-size: 1vw;">
                         </th>
@@ -223,10 +234,14 @@
                     </tr>
                 </thead>
                 <tbody id="myTable">
+
+                      
+
                     {% if faculty_accomplishments is not none %}
                         {% for accomplishment in faculty_accomplishments %}
                         <tr class="clickable" onclick="window.location='#'">
                             <th scope="row">{{accomplishment[2]}}, {{accomplishment[1]}}</th>
+                            <td><span id="">Physics/Geology</span></td>
                             <td><span id="">{{accomplishment[0]['type_contribution']}}</span></td>
                             <td><span id="">Accomplishment</span></td>
                             <td><span id="start_date">{{accomplishment[0]['start_date']}}</span></td>
@@ -239,6 +254,7 @@
                         {% for publication in faculty_publications %}
                         <tr class="clickable" onclick="window.location='#'">
                             <th scope="row">{{publication[2]}}, {{publication[1]}}</th>
+                            <td><span id="">MCSU</span></td>
                             <td><span id="">{{publication[0]['publication']}}</span></td>
                             <td><span id="">Publication</span></td>
                             <td><span id="start_date">{{publication[0]['date_published']}}</span></td>
@@ -251,6 +267,7 @@
                         {% for grant in faculty_research_grants %}
                         <tr class="clickable" onclick="window.location='#'">
                             <th scope="row">{{grant[2]}}, {{grant[1]}}</th>
+                            <td><span id="">Physics/Geology</span></td>
                             <td><span id="">{{grant[0]['name_research']}}</span></td>
                             <td><span id="">Research Grant</span></td>
                             <td><span id="start_date">{{grant[0]['actual_start']}}</span></td>
@@ -263,6 +280,7 @@
                         {% for licensure in faculty_licensure_exams %}
                         <tr class="clickable" onclick="window.location='#'">
                             <th scope="row">{{licensure[2]}}, {{licensure[1]}}</th>
+                            <td><span id="">MCSU</span></td>
                             <td><span id="">{{licensure[0]['name_exam']}}</span></td>
                             <td><span id="">Licensure Exam</span></td>
                             <td><span id="start_date">{{licensure[0]['date']}}</span></td>
@@ -275,6 +293,7 @@
                         {% for training in faculty_trainings %}
                         <tr class="clickable" onclick="window.location='#'">
                             <th scope="row">{{training[2]}}, {{training[1]}}</th>
+                            <td><span id="">MCSU</span></td>
                             <td><span id="">{{training[0]['name_training']}}</span></td>
                             <td><span id="">Training/Seminar</span></td>
                             <td><span id="start_date">{{training[0]['start_date']}}</span></td>
@@ -389,6 +408,28 @@ $(document).ready(function(){
         }
     }
 </script>
+
+<script>
+    function filter_unit() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("department_unit");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("accomplishemt_table");
+        tr = table.getElementsByTagName("tr");
+        
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }       
+        }
+    }
+</script>
+
 
 
 {% endblock %}

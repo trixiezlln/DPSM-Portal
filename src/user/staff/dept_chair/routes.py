@@ -114,9 +114,9 @@ def dept_head_view_faculty_info(user_id):
         faculty_trainings = faculty_trainings,
     )
 
-@dept_chair_blueprint.route('/department_chair/pending_approvals', methods=['GET', 'POST'])
-def department_chair_pending_approvals():
-    return render_template('department_chair/department_chair_pending_approvals.html')
+# @dept_chair_blueprint.route('/department_chair/pending_approvals', methods=['GET', 'POST'])
+# def department_chair_pending_approvals():
+#     return render_template('department_chair/department_chair_pending_approvals.html')
 
 @dept_chair_blueprint.route('/department_chair/role_assignment', methods=['GET', 'POST', 'DELETE', 'PUT'])
 def department_chair_role_assignment():
@@ -298,6 +298,44 @@ def department_chair_role_assignment_clerk():
             print(e)
             return 'Error deleting clerk account. Please try again.', 400
 
+
+@dept_chair_blueprint.route('/department_chair/pending_approvals', methods=['GET', 'POST'])
+def department_chair_pending_approvals():
+    try:
+        department_faculty_list = (FacultyPersonalInformation
+            .query
+            .order_by(
+                FacultyPersonalInformation
+                .last_name
+                .asc()
+            )
+            .all()
+        )
+
+        cu_list = []
+        pgu_list = []
+        mcsu_list = []
+
+        for faculty in department_faculty_list:
+            if faculty.unit == 'cu':
+                cu_list.append(faculty)
+            elif faculty.unit == 'pgu':
+                pgu_list.append(faculty)
+            elif faculty.unit == 'mcsu':
+                mcsu_list.append(faculty)
+
+        return render_template(
+            'department_chair/department_chair_pending_approvals.html',
+            cu_list = cu_list,
+            pgu_list = pgu_list,
+            mcsu_list = mcsu_list,
+        )
+    except Exception as e:
+        print(e)
+        return 'Error accessing faculty list. Please try again', 400
+
+
+
 @dept_chair_blueprint.route('/department_chair/faculty_list', methods=['GET', 'POST'])
 def department_chair_faculty_list():
     try:
@@ -332,3 +370,4 @@ def department_chair_faculty_list():
     except Exception as e:
         print(e)
         return 'Error accessing faculty list. Please try again', 400
+
