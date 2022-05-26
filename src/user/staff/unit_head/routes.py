@@ -13,6 +13,7 @@ from datetime import timedelta, date
 import requests
 import pip._vendor.cachecontrol as cacheControl
 import json
+from sqlalchemy import and_
 
 #Models
 from ..models import EducationalAttainment, FacultyPersonalInformation, LicensureExams, TrainingSeminar, Accomplishment, ResearchGrant, Publication, WorkExperience, FacultySETRecords
@@ -211,7 +212,7 @@ def load_unit_head_pending_approvals():
 def load_unit_head_dashboard():
     units = ['mcsu', 'cu', 'pgu']
     accomplishments = [Publication, Accomplishment, TrainingSeminar, LicensureExams, ResearchGrant,]
-
+    
     total_count = {}
   
     unit_count = []
@@ -257,6 +258,7 @@ def load_unit_head_dashboard():
     try:
         
         if request.method == 'GET':
+            
             return render_template('unit_head/unit_head_dashboard.html', 
                 unit_count = unit_count,
                 unit_label = unit_label,
@@ -267,7 +269,72 @@ def load_unit_head_dashboard():
                 faculty_trainings = faculty_trainings
             )
         elif request.method == 'POST':
-            pass
+            dashboard_form = request.form
+            min_date = dashboard_form.getlist('min_date')[0]
+            print(f"min date: {min_date}")
+
+            max_date = dashboard_form.getlist('max_date')[0]
+            print(f"max date: {max_date}")
+
+            faculty_accomplishments = (Accomplishment
+                .query
+                .join(FacultyPersonalInformation, Accomplishment.user_id == FacultyPersonalInformation.user_id)
+                .filter(FacultyPersonalInformation.unit == current_user.unit)
+                .filter(and_(Accomplishment.start_date >= min_date, Accomplishment.end_date <= max_date))
+                .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+            ).all()
+            faculty_publications = (Publication
+                .query
+                .join(FacultyPersonalInformation, Publication.user_id == FacultyPersonalInformation.user_id)
+                .filter(FacultyPersonalInformation.unit == current_user.unit)
+                .filter(Publication.date_published.between(min_date, max_date))
+                .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+            ).all()
+            faculty_research_grants = (ResearchGrant
+                .query
+                .join(FacultyPersonalInformation, ResearchGrant.user_id == FacultyPersonalInformation.user_id)
+                .filter(FacultyPersonalInformation.unit == current_user.unit)
+                .filter(and_(ResearchGrant.actual_start >= min_date, ResearchGrant.actual_end <= max_date))
+                .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+            ).all()
+            faculty_licensure_exams = (LicensureExams
+                .query
+                .join(FacultyPersonalInformation, LicensureExams.user_id == FacultyPersonalInformation.user_id)
+                .filter(FacultyPersonalInformation.unit == current_user.unit)
+                .filter(LicensureExams.date.between(min_date, max_date))
+                .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+            ).all()
+            faculty_trainings = (TrainingSeminar
+                .query
+                .join(FacultyPersonalInformation, FacultyPersonalInformation.user_id == TrainingSeminar.user_id)
+                .filter(FacultyPersonalInformation.unit == current_user.unit)
+                .filter(and_(TrainingSeminar.start_date >= min_date, TrainingSeminar.end_date <= max_date))
+                .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+            ).all()
+
+            print("try count")
+            print(len(faculty_publications))
+
+            unit_count_filtered = [
+                len(faculty_publications),
+                len(faculty_accomplishments),
+                len(faculty_trainings),
+                len(faculty_licensure_exams),
+                len(faculty_research_grants)
+            ]
+            
+            
+    
+
+            return render_template('unit_head/unit_head_dashboard.html',
+                unit_count = unit_count_filtered,
+                unit_label = unit_label,
+                faculty_accomplishments = faculty_accomplishments,
+                faculty_publications = faculty_publications,
+                faculty_research_grants = faculty_research_grants,
+                faculty_licensure_exams = faculty_licensure_exams,
+                faculty_trainings = faculty_trainings
+            )
 
     except Exception as e:
         print(e)
