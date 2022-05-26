@@ -101,7 +101,15 @@ def dept_head_view_faculty_info(user_id):
     faculty_research_grants = ResearchGrant.query.filter_by(user_id=user_id).all()
     faculty_licensure_exams = LicensureExams.query.filter_by(user_id=user_id).all()
     faculty_trainings = TrainingSeminar.query.filter_by(user_id=user_id).all()
-    # faculty_service_records = FacultySETRecords.query.filter_by(id=user_id).first()
+    faculty_service_records = FacultySETRecords.query.filter_by(id=user_id).all()
+
+    fsr_dict = {} # Keys = initial school year, Value = list of records within that year
+
+    for record in faculty_service_records:
+        if record.sy in fsr_dict:
+            fsr_dict[record.sy].append(record.__dict__)
+        else:
+            fsr_dict[record.sy] = [record.__dict__]
     return render_template(
         'faculty/view_info.html',
         faculty_personal_information = faculty_personal_information,
@@ -112,6 +120,7 @@ def dept_head_view_faculty_info(user_id):
         faculty_research_grants = faculty_research_grants,
         faculty_licensure_exams = faculty_licensure_exams,
         faculty_trainings = faculty_trainings,
+        fsr_dict = fsr_dict
     )
 
 # @dept_chair_blueprint.route('/department_chair/pending_approvals', methods=['GET', 'POST'])

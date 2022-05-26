@@ -3,7 +3,7 @@
     <title>Landing Page</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
@@ -872,8 +872,142 @@
             {% endif %}
         </div>
 
+        <div class="info-section">
+
+            <!-- box header -->
+            <div class="d-flex justify-content-between my-3">
+                <h4 class="">Faculty Service Record</h4>
+            </div>
+
+            <hr>
+            {% if fsr_dict is not none %}
+                {% for sy, fsr_record in fsr_dict.items() %}
+                    <h4 class="header" >A.Y. {{sy}}</h4>
+                    {% for fsr in fsr_record %}
+                    <!-- box content -->
+                    <div class="info-sub-section">
+                        <div class="d-flex justify-content-between my-3">
+                            <h1 class=""></h1>
+                        </div>
+                
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="col col-12 container">
+                                    <div class="row">
+                                        <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                            <label class="col-form-label">Course Code<span class="required-field"></span></label>
+                                            <input class="form-control" type="text" id="name_training" name="name_training" value="{{fsr['course_code']}}" disabled>
+                                            <span class = "validation-status"></span>
+                                        </div>  
+            
+                                        <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                            <label class="col-form-label">Section<span class="required-field"></span></label>
+                                            <input class="form-control" type="text" id="role" name="role" value="{{fsr['section']}}" disabled>
+                                            <span class = "validation-status"></span>
+                                        </div> 
+                                    </div>
+            
+                                    <div class="row">
+                                        <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                            <label class="col-form-label">Semester<span class="required-field"></span></label>
+                                            <input class="form-control" type="text" id="start_date" name="start_date" value="{{fsr['semester']}}" disabled>
+                                            <span class = "validation-status"></span>
+                                        </div>   
+                                        
+                                        <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                            <label class="col-form-label">Schedule<span class="required-field"></span></label>
+                                            <input class="form-control" type="text" id="end_date" name="end_date" value="{{fsr['schedule']}}" disabled>
+                                            <span class = "validation-status"></span>
+                                        </div>  
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                            <label class="col-form-label">Number of Students<span class="required-field"></span></label>
+                                            <input class="form-control" type="text" id="start_date" name="start_date" value="{{fsr['number_students']}}" disabled>
+                                            <span class = "validation-status"></span>
+                                        </div>   
+                                        
+                                        <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                            <label class="col-form-label">SET Score<span class="required-field"></span></label>
+                                            <input class="form-control" type="text" id="end_date" name="end_date" value="{{fsr['set_score']}}" disabled>
+                                            <span class = "validation-status"></span>
+                                        </div>  
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                            <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_syllabus_img' name='view_syllabus_img' hidden></a>
+                                            <button type="button" class="btn btn-secondary crud-btn" id="view_syllabus" name="view_syllabus" onclick="show_syllabus(
+                                                '{{fsr['id']}}',
+                                                '{{sy}}',
+                                                '{{fsr['semester']}}',
+                                                '{{fsr['section']}}',
+                                                '{{fsr['syllabus_f_ext']}}'
+                                            )">
+                                                View Syllabus Proof
+                                            </button>    
+                                        </div>
+
+                                        <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                            <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_set_img' name='view_set_img' hidden></a>
+                                            <button type="button" class="btn btn-secondary crud-btn" id="view_set" name="view_set" onclick="show_set_proof(
+                                                '{{fsr['id']}}',
+                                                '{{sy}}',
+                                                '{{fsr['semester']}}',
+                                                '{{fsr['section']}}',
+                                                '{{fsr['set_f_ext']}}'
+                                            )">
+                                                View SET Proof
+                                            </button>    
+                                        </div>
+                                        
+                                    </div>
+            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    {% endfor %}
+                {% endfor %}
+            {% else %}
+                <div class="row">
+                    <h5 class="">No information to show</h4>
+                </div>
+            {% endif %}
+        </div>
+
 
     </section>
+
+<!-- Core CSS file -->
+<link href="{{ url_for('static', filename='css/photoviewer.css') }}" rel="stylesheet">
+<!-- Core JS file -->
+<script src="{{ url_for('static', filename='js/photoviewer.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ajax_calls.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+
+    // initialize manually with a list of links
+    $('[data-gallery=photoviewer]').click(function (e) {
+        e.preventDefault();
+        var items = [],
+            options = {
+            index: $(this).index(),
+            };
+    
+    $('[data-gallery=photoviewer]').each(function () {
+        items.push({
+        src: $(this).attr('href'),
+        title: $(this).attr('data-title')
+        });
+    });
+    new PhotoViewer(items, options);
+    });
+</script>
 
 {% endblock %}
 
