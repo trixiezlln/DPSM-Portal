@@ -609,20 +609,37 @@ function show_set_proof(user_id, sy, semester, section, f_ext) {
 };
 
 function show_info_proof(current_user, proof_type, user_id, last_modified, f_ext) {
-    filename = proof_type + "_" + user_id + "_" + last_modified + "." + f_ext
+    filename = proof_type + "_" + user_id + "_" + last_modified.replace(' ', '_') + "." + f_ext
     $.ajax({
         type: "GET",
-        url: current_user + "/view_faculty_info/" + user_id + "/" + proof_type + "/" + filename,
+        url: current_user + "/view_faculty_info/" + user_id + "/" + proof_type.toLowerCase() + "/" + filename,
         success: function(response){
             var data = JSON.parse(response);
             var file_ext = data['file_ext'];
+            var file_window = ""
+
+            if(proof_type == 'EDUC_PROOF'){
+                file_window = "view_educ_proof"
+            } else if(proof_type == 'WORK_PROOF'){
+                file_window = "view_work_proof"
+            } else if(proof_type == 'ACCOMPLISHMENT_PROOF'){
+                file_window = "view_accomplishment_proof"
+            } else if(proof_type == 'PUBLICATION_PROOF'){
+                file_window = "view_publication_proof"
+            } else if(proof_type == 'LICENSURE_PROOF'){
+                file_window = "view_licensure_proof"
+            } else if(proof_type == 'RESEARCH_GRANT_PROOF'){
+                file_window = "view_research_proof"
+            } else if(proof_type == 'TRAINING_SEMINAR_PROOF'){
+                file_window = "view_training_proof"
+            } 
 
             if (file_ext === 'pdf'){
-                window.open(data['syllabus_file'], '_blank');
+                window.open(data['proof_file'], '_blank');
             } else {
-                var img_loc = "../../../"+data['syllabus_file'];
-                $('#view_syllabus_img').attr("href", img_loc);
-                $('#view_syllabus_img').click();
+                var img_loc = "../../../"+data['proof_file'];
+                $('#'+file_window).attr("href", img_loc);
+                $('#'+file_window).click();
             };
         },
         error: function(error){
@@ -1027,20 +1044,136 @@ $("#add_ts_form").submit(function(e) {
     });
 });
 
-/* Unit Head Pending Approval Modal */
-function unit_head_pending_modal(first_name, last_name, educ){
+/* Toggle Pending Approval Modal */
+function toggle_pending_modal(first_name, last_name, school, degree, degree_type, specialization, educ_start_date, educ_end_date,
+    employer, title, work_desc, work_start_date, work_end_date, position, org, contribution, acc_desc,
+    publication, citation, url, coauthors_dpsm, coauthors_nondpsm, date_published,
+    research, sponsor,amount_granted, projected_start, projected_end,actual_start, actual_end, progress, coresearchers_dpsm, coresearchers_nondpsm,
+    name_exam, rank, license_number, date,
+    name_training, role, remarks, ts_start_date, ts_start_date
+    ){
     $('#faculty_name').html(first_name+' '+last_name);
 
     // Educational Attainment
-    if(educ) {
+    if(school != '') {
         $('#educ_count').html('1');
+        $('#pendingEduc').show();
+        $('#emptyEducMsg').hide();
+    } else {
+        $('#educ_count').html('');
+        $('#pendingEduc').hide();
+        $('#emptyEducMsg').show();
     }
-    $('#school').html(educ.school);
-    $('#degree').html(educ.degree);
-    $('#degree_type').html(educ.degree_type);
-    $('#specialization').html(educ.specialization);
-    $('#educ_start_date').html(educ.start_date);
-    $('#educ_end_date').html(educ.end_date);
+    $('#school').html(school);
+    $('#degree').html(degree);
+    $('#degree_type').html(degree_type);
+    $('#specialization').html(specialization);
+    $('#educ_start_date').html(educ_start_date);
+    $('#educ_end_date').html(educ_end_date);
+
+    // Work Experience
+    if(employer != '') {
+        $('#work_count').html('1');
+        $('#pendingWork').show();
+        $('#emptyWorkMsg').hide();
+    } else {
+        $('#work_count').html('');
+        $('#pendingWork').hide();
+        $('#emptyWorkMsg').show();
+    }
+    $('#name_employer').html(employer);
+    $('#title').html(title);
+    $('#work_description').html(work_desc);
+    $('#work_start_date').html(work_start_date);
+    $('#work_end_date').html(work_end_date);
+
+    // Accomplishment
+    if(position != '') {
+        $('#acc_count').html('1');
+        $('#pendingAcc').show();
+        $('#emptyAccMsg').hide();
+    } else {
+        $('#acc_count').html('');
+        $('#pendingAcc').hide();
+        $('#emptyAccMsg').show();
+    }
+    $('#position').html(position);
+    $('#organization').html(org);
+    $('#type_contribution').html(contribution);
+    $('#acc_description').html(acc_desc);
+
+    // Publication
+    if(publication != '') {
+        $('#pub_count').html('1');
+        $('#pendingPub').show();
+        $('#emptyPubMsg').hide();
+    } else {
+        $('#pub_count').html('');
+        $('#pendingPub').hide();
+        $('#emptyPubMsg').show();
+    }
+    $('#publication').html(publication);
+    $('#citation').html(citation);
+    $('#url').html(url);
+    $('#coauthors_dpsm').html(coauthors_dpsm);
+    $('#coauthors_nondpsm').html(coauthors_nondpsm);
+    $('#date_published').html(date_published);
+
+    // Research Grant
+    if(amount_granted != '') {
+        $('#rg_count').html('1');
+        $('#pendingRG').show();
+        $('#emptyRGMsg').hide();
+    } else {
+        $('#rg_count').html('');
+        $('#pendingRG').hide();
+        $('#emptyRGMsg').show();
+    }
+
+    $('#name_research').html(research);
+    $('#sponsor').html(sponsor);
+    $('#amount_granted').html(amount_granted);
+    $('#projected_start').html(projected_start);
+    $('#projected_end').html(projected_end);
+    $('#actual_start').html(actual_start);
+    $('#actual_end').html(actual_end);
+    $('#research_progress').html(progress);
+    $('#coresearchers_dpsm').html(coresearchers_dpsm);
+    $('#coresearchers_nondpsm').html(coresearchers_nondpsm);
+
+    // Licensure Exam
+    if(name_exam != '') {
+        $('#le_count').html('1');
+        $('#pendingLE').show();
+        $('#emptyLEMsg').hide();
+    } else {
+        $('#le_count').html('');
+        $('#pendingLE').hide();
+        $('#emptyLEMsg').show();
+    }
+
+    $('#name_exam').html(name_exam);
+    $('#rank').html(rank);
+    $('#license_number').html(license_number);
+    $('#date').html(date);
+
+    // Training/Seminar
+    if(name_training != '') {
+        $('#ts_count').html('1');
+        $('#pendingTS').show();
+        $('#emptyTSMsg').hide();
+    } else {
+        $('#ts_count').html('');
+        $('#pendingTS').hide();
+        $('#emptyTSMsg').show();
+    }
+
+    $('#name_training').html(name_training);
+    $('#role').html(role);
+    $('#remarks').html(remarks);
+    $('#ts_start_date').html(ts_start_date);
+    $('#ts_end_date').html(ts_end_date);
+
 
     $('#pendingModal').modal('toggle');
 } 

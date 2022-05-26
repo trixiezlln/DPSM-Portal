@@ -45,10 +45,47 @@
 
       <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
         <div class="card-body" data-toggle="modal" data-target="#exampleModal" >
-            {% for cu_faculty in cu_list %}
-            <div class="card-body text-center" data-toggle="modal" data-target="#exampleModal">
-                {{ cu_faculty['last_name'] }}, {{ cu_faculty['first_name'] }}
+            {% for cu_faculty in faculty_list %}
+            {% if cu_faculty.unit == 'cu' %}
+            <div class="card-body text-center" data-toggle="modal" 
+            onclick="toggle_pending_modal(
+                '{{ cu_faculty.first_name }}', '{{ cu_faculty.last_name }}', 
+                // educational
+                '{{ faculty_educ[cu_faculty.user_id].school }}', '{{ faculty_educ[cu_faculty.user_id].degree }}',
+                '{{ faculty_educ[cu_faculty.user_id].degree_type }}', '{{ faculty_educ[cu_faculty.user_id].specialization }}',
+                '{{ faculty_educ[cu_faculty.user_id].start_date }}', '{{ faculty_educ[cu_faculty.user_id].end_date }}',
+                // work
+                '{{ faculty_work[cu_faculty.user_id].name_employer }}', '{{ faculty_work[cu_faculty.user_id].title }}',
+                '{{ faculty_work[cu_faculty.user_id].work_description }}', '{{ faculty_work[cu_faculty.user_id].work_start_date }}',
+                '{{ faculty_work[cu_faculty.user_id].work_end_date }}',
+                // work
+                '{{ faculty_accomplishments[cu_faculty.user_id].position }}', '{{ faculty_accomplishments[cu_faculty.user_id].organization }}',
+                '{{ faculty_accomplishments[cu_faculty.user_id].type_contribution }}', '{{ faculty_accomplishments[cu_faculty.user_id].description }}',
+                // publication
+                '{{ faculty_publications[cu_faculty.user_id].publication }}', '{{ faculty_publications[cu_faculty.user_id].citation }}',
+                '{{ faculty_publications[cu_faculty.user_id].url }}', '{{ faculty_publications[cu_faculty.user_id].coauthors_dpsm }}',
+                '{{ faculty_publications[cu_faculty.user_id].coauthors_nondpsm }}',  '{{ faculty_publications[cu_faculty.user_id].date_published }}',
+                // research grant
+                '{{ faculty_research_grants[cu_faculty.user_id].name_research }}', '{{ faculty_research_grants[cu_faculty.user_id].sponsor }}',
+                '{{ faculty_research_grants[cu_faculty.user_id].amount_granted }}', '{{ faculty_research_grants[cu_faculty.user_id].projected_start }}',
+                '{{ faculty_research_grants[cu_faculty.user_id].projected_end }}', '{{ faculty_research_grants[cu_faculty.user_id].actual_start }}',
+                '{{ faculty_research_grants[cu_faculty.user_id].actual_end }}', '{{ faculty_research_grants[cu_faculty.user_id].research_progress }}',
+                '{{ faculty_research_grants[cu_faculty.user_id].coresearchers_dpsm }}', '{{ faculty_research_grants[cu_faculty.user_id].coresearchers_nondpsm }}',
+                // licensure exam
+                '{{ faculty_licensure_exams[cu_faculty.user_id].name_exam }}', '{{ faculty_licensure_exams[cu_faculty.user_id].rank }}',
+                '{{ faculty_licensure_exams[cu_faculty.user_id].license_number }}', '{{ faculty_licensure_exams[cu_faculty.user_id].date }}',
+                // training/seminar
+                '{{ faculty_trainings[cu_faculty.user_id].name_training }}', '{{ faculty_trainings[cu_faculty.user_id].role }}',
+                '{{ faculty_trainings[cu_faculty.user_id].remarks }}', '{{ faculty_trainings[cu_faculty.user_id].start_date }}',
+                '{{ faculty_trainings[cu_faculty.user_id].end_date }}'
+              )">
+                <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;">
+                    <center>
+                        {{ faculty_record_count[cu_faculty.user_id] }}
+                    </center>
+                </span>&nbsp;{{ cu_faculty['last_name'] }}, {{ cu_faculty['first_name'] }}
             </div>
+            {% endif %}
             {% endfor %}
 
         </div>
@@ -68,9 +105,47 @@
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
         <div class="card-body" data-toggle="modal" data-target="#exampleModal2" >
             {% for mcsu_faculty in mcsu_list %}
-            <div class="card-body text-center" data-toggle="modal" data-target="#exampleModal">
-                {{ mcsu_faculty['last_name'] }}, {{ mcsu_faculty['first_name'] }}
+            {% if mcsu_faculty.unit == 'mcsu' %}
+            <div class="card-body text-center" data-toggle="modal" <div class="card-body text-center" data-toggle="modal" 
+            onclick="toggle_pending_modal(
+                '{{ mcsu_faculty.first_name }}', '{{ mcsu_faculty.last_name }}', 
+                // educational
+                '{{ faculty_educ[mcsu_faculty.user_id].school }}', '{{ faculty_educ[mcsu_faculty.user_id].degree }}',
+                '{{ faculty_educ[mcsu_faculty.user_id].degree_type }}', '{{ faculty_educ[mcsu_faculty.user_id].specialization }}',
+                '{{ faculty_educ[mcsu_faculty.user_id].start_date }}', '{{ faculty_educ[mcsu_faculty.user_id].end_date }}',
+                // work
+                '{{ faculty_work[mcsu_faculty.user_id].name_employer }}', '{{ faculty_work[mcsu_faculty.user_id].title }}',
+                '{{ faculty_work[mcsu_faculty.user_id].work_description }}', '{{ faculty_work[mcsu_faculty.user_id].work_start_date }}',
+                '{{ faculty_work[mcsu_faculty.user_id].work_end_date }}',
+                // work
+                '{{ faculty_accomplishments[mcsu_faculty.user_id].position }}', '{{ faculty_accomplishments[mcsu_faculty.user_id].organization }}',
+                '{{ faculty_accomplishments[mcsu_faculty.user_id].type_contribution }}', '{{ faculty_accomplishments[mcsu_faculty.user_id].description }}',
+                // publication
+                '{{ faculty_publications[mcsu_faculty.user_id].publication }}', '{{ faculty_publications[mcsu_faculty.user_id].citation }}',
+                '{{ faculty_publications[mcsu_faculty.user_id].url }}', '{{ faculty_publications[mcsu_faculty.user_id].coauthors_dpsm }}',
+                '{{ faculty_publications[mcsu_faculty.user_id].coauthors_nondpsm }}',  '{{ faculty_publications[mcsu_faculty.user_id].date_published }}',
+                // research grant
+                '{{ faculty_research_grants[mcsu_faculty.user_id].name_research }}', '{{ faculty_research_grants[mcsu_faculty.user_id].sponsor }}',
+                '{{ faculty_research_grants[mcsu_faculty.user_id].amount_granted }}', '{{ faculty_research_grants[mcsu_faculty.user_id].projected_start }}',
+                '{{ faculty_research_grants[mcsu_faculty.user_id].projected_end }}', '{{ faculty_research_grants[mcsu_faculty.user_id].actual_start }}',
+                '{{ faculty_research_grants[mcsu_faculty.user_id].actual_end }}', '{{ faculty_research_grants[mcsu_faculty.user_id].research_progress }}',
+                '{{ faculty_research_grants[mcsu_faculty.user_id].coresearchers_dpsm }}', '{{ faculty_research_grants[mcsu_faculty.user_id].coresearchers_nondpsm }}',
+                // licensure exam
+                '{{ faculty_licensure_exams[mcsu_faculty.user_id].name_exam }}', '{{ faculty_licensure_exams[mcsu_faculty.user_id].rank }}',
+                '{{ faculty_licensure_exams[mcsu_faculty.user_id].license_number }}', '{{ faculty_licensure_exams[mcsu_faculty.user_id].date }}',
+                // training/seminar
+                '{{ faculty_trainings[mcsu_faculty.user_id].name_training }}', '{{ faculty_trainings[mcsu_faculty.user_id].role }}',
+                '{{ faculty_trainings[mcsu_faculty.user_id].remarks }}', '{{ faculty_trainings[mcsu_faculty.user_id].start_date }}',
+                '{{ faculty_trainings[mcsu_faculty.user_id].end_date }}'
+              )">
+                
+                <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;">
+                    <center>
+                        {{ faculty_record_count[mcsu_faculty.user_id] }}
+                    </center>
+                </span>&nbsp;{{ mcsu_faculty['last_name'] }}, {{ mcsu_faculty['first_name'] }}
             </div>
+            {% endif %}
             {% endfor %}
 
       </div>
@@ -94,9 +169,46 @@
       <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
         <div class="card-body" data-toggle="modal" data-target="#exampleModal3" >
             {% for pgu_faculty in pgu_list %}
-            <div class="card-body text-center" data-toggle="modal" data-target="#exampleModal">
-                {{ pgu_faculty['last_name'] }}, {{ pgu_faculty['first_name'] }}
+            {% if pgu_faculty.unit == 'pgu' %}
+            <div class="card-body text-center" data-toggle="modal" onclick="toggle_pending_modal(
+                '{{ pgu_faculty.first_name }}', '{{ pgu_faculty.last_name }}', 
+                // educational
+                '{{ faculty_educ[pgu_faculty.user_id].school }}', '{{ faculty_educ[pgu_faculty.user_id].degree }}',
+                '{{ faculty_educ[pgu_faculty.user_id].degree_type }}', '{{ faculty_educ[pgu_faculty.user_id].specialization }}',
+                '{{ faculty_educ[pgu_faculty.user_id].start_date }}', '{{ faculty_educ[pgu_faculty.user_id].end_date }}',
+                // work
+                '{{ faculty_work[pgu_faculty.user_id].name_employer }}', '{{ faculty_work[pgu_faculty.user_id].title }}',
+                '{{ faculty_work[pgu_faculty.user_id].work_description }}', '{{ faculty_work[pgu_faculty.user_id].work_start_date }}',
+                '{{ faculty_work[pgu_faculty.user_id].work_end_date }}',
+                // work
+                '{{ faculty_accomplishments[pgu_faculty.user_id].position }}', '{{ faculty_accomplishments[pgu_faculty.user_id].organization }}',
+                '{{ faculty_accomplishments[pgu_faculty.user_id].type_contribution }}', '{{ faculty_accomplishments[pgu_faculty.user_id].description }}',
+                // publication
+                '{{ faculty_publications[pgu_faculty.user_id].publication }}', '{{ faculty_publications[pgu_faculty.user_id].citation }}',
+                '{{ faculty_publications[pgu_faculty.user_id].url }}', '{{ faculty_publications[pgu_faculty.user_id].coauthors_dpsm }}',
+                '{{ faculty_publications[pgu_faculty.user_id].coauthors_nondpsm }}',  '{{ faculty_publications[pgu_faculty.user_id].date_published }}',
+                // research grant
+                '{{ faculty_research_grants[pgu_faculty.user_id].name_research }}', '{{ faculty_research_grants[pgu_faculty.user_id].sponsor }}',
+                '{{ faculty_research_grants[pgu_faculty.user_id].amount_granted }}', '{{ faculty_research_grants[pgu_faculty.user_id].projected_start }}',
+                '{{ faculty_research_grants[pgu_faculty.user_id].projected_end }}', '{{ faculty_research_grants[pgu_faculty.user_id].actual_start }}',
+                '{{ faculty_research_grants[pgu_faculty.user_id].actual_end }}', '{{ faculty_research_grants[pgu_faculty.user_id].research_progress }}',
+                '{{ faculty_research_grants[pgu_faculty.user_id].coresearchers_dpsm }}', '{{ faculty_research_grants[pgu_faculty.user_id].coresearchers_nondpsm }}',
+                // licensure exam
+                '{{ faculty_licensure_exams[pgu_faculty.user_id].name_exam }}', '{{ faculty_licensure_exams[pgu_faculty.user_id].rank }}',
+                '{{ faculty_licensure_exams[pgu_faculty.user_id].license_number }}', '{{ faculty_licensure_exams[pgu_faculty.user_id].date }}',
+                // training/seminar
+                '{{ faculty_trainings[pgu_faculty.user_id].name_training }}', '{{ faculty_trainings[pgu_faculty.user_id].role }}',
+                '{{ faculty_trainings[pgu_faculty.user_id].remarks }}', '{{ faculty_trainings[pgu_faculty.user_id].start_date }}',
+                '{{ faculty_trainings[pgu_faculty.user_id].end_date }}'
+              )">
+                
+                <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;">
+                    <center>
+                        {{ faculty_record_count[pgu_faculty.user_id] }}
+                    </center>
+                </span>&nbsp;{{ pgu_faculty['last_name'] }}, {{ pgu_faculty['first_name'] }}
             </div>
+            {% endif %}
             {% endfor %}
 
 
@@ -112,171 +224,440 @@
 </div>
 
 
-<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal fade " id="pendingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span>Richard Bryann Chua</span>
+                    <span id="faculty_name"></span>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" style="max-height: calc(100vh - 100px); overflow-y: auto;">
                     <div id="accordion">
+                        
                         <div class="card">
-                            <div id="headingOne">
+                            <div id="headingTwo">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="width: 100%; font-size: 0.8em;">
-                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;">
-                                            3
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="width: 100%; font-size: 0.8em;">
+                                        <span id="educ_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;">   
                                         </span>
-                                        Personal Information
+                                        Educational Attainment
                                     </button>
                                 </h5>
                             </div>
 
-                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                <div class="card-body">
-                                    {% block department_chair_personal_information %} 
-                                    {% endblock %}  
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div id="headingTwo">
-                                <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="width: 100%; font-size: 0.8em;">Educational Attainment</button>
-                                </h5>
-                            </div>
-
                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                <div class="card-body">
-                                    {% block department_chair_educational_attainment %} 
-                                    {% endblock %} 
+
+                                <div class="card-body" id="pendingEduc">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Name of School or Institution</label>
+                                                <p id="school"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Degree/Certification</label>
+                                                <p id="degree"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Type of Degree</label>
+                                                <p id="degree_type"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Major/Specialization</label>
+                                                <p id="specialization"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">Start Date</label>
+                                                <p id="educ_start_date"></p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">End Date</label>
+                                                <p id="educ_end_date"></p>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
                                     </div> 
                                 </div>
+                                <p id="emptyEducMsg" style="text-align: center; padding: 10px;">No pending for this category.</p>
                             </div>
                         </div>
 
                         <div class="card">
                             <div id="headingThree">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%; font-size: 0.8em;">Work Experience</button>
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%; font-size: 0.8em;">
+                                        <span id="work_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        Work Experience
+                                    </button>
                                 </h5>
                             </div>
 
                             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                <div class="card-body">
-                                    {% block department_chair_work_experience %} 
-                                    {% endblock %} 
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                <div class="card-body" id="pendingWork">
+                                    <!-- {% block unit_head_work_experience %} 
+                                    {% endblock %}  -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Name of Employer</label>
+                                                <p id="name_employer"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Title/Position</label>
+                                                <p id="title"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Description</label>
+                                                <p id="work_description"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">Start Date</label>
+                                                <p id="work_start_date"></p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">End Date</label>
+                                                <p id="work_end_date"></p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        </div>
                                     </div>
                                 </div>
+                                <p id="emptyWorkMsg" style="text-align: center; padding: 10px;">No pending for this category.</p>
                             </div>
                         </div>
 
                         <div class="card">
                             <div id="headingFour">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="width: 100%; font-size: 0.8em;">Accomplishments</button>
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="width: 100%; font-size: 0.8em;">
+                                        <span id="acc_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        Accomplishments
+                                    </button>
                                 </h5>
                             </div>
 
                             <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-                                <div class="card-body">
-                                    {% block department_chair_accomplishments %} 
-                                    {% endblock %} 
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
-                                    </div>
+                                <div class="card-body" id="pendingAcc">
+                                    <!-- {% block unit_head_accomplishments %} 
+                                    {% endblock %}  -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Position/Role</label>
+                                                <p id="position"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Organization</label>
+                                                <p id="organization"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Type of Contribution</label>
+                                                <p id="type_contribution"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Description</label>
+                                                <p id="acc_description"></p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        </div>
+                                    </div>                                   
                                 </div>
+                                <p id="emptyAccMsg" style="text-align: center; padding: 10px;">No pending for this category.</p>
                             </div>
                         </div>
 
                         <div class="card">
                             <div id="headingFive">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="width: 100%; font-size: 0.8em;">Publications</button>
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="width: 100%; font-size: 0.8em;">
+                                        <span id="pub_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        Publications
+                                    </button>
                                 </h5>
                             </div>
 
                             <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
-                                <div class="card-body">
-                                    {% block department_chair_publications %} 
-                                    {% endblock %} 
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                <div class="card-body" id="pendingPub">
+                                    <!-- {% block unit_head_publications %} 
+                                    {% endblock %}  -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Publication Name</label>
+                                                <p id="publication"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Citation</label>
+                                                <p id="citation"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">URL</label>
+                                                <p id="url"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">DPSM Profs</label>
+                                                <p id="coauthors_dpsm"></p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">Non-DPSM Profs</label>
+                                                <p id="coauthors_nondpsm"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Publication Date</label>
+                                                <p id="date_published"></p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        </div>
                                     </div>
                                 </div>
+                                <p id="emptyPubMsg" style="text-align: center; padding: 10px;">No pending for this category.</p>
                             </div>
                         </div>
 
                         <div class="card">
                             <div id="headingSix">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix" style="width: 100%; font-size: 0.8em;">Research Grants</button>
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix" style="width: 100%; font-size: 0.8em;">
+                                        <span id="rg_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        Research Grants
+                                    </button>
                                 </h5>
                             </div>
 
                             <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
-                                <div class="card-body">
-                                    {% block department_chair_research_grants %} 
-                                    {% endblock %}
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
-                                    </div>
+                                <div class="card-body" id="pendingRG">
+                                    <!-- {% block unit_head_research_grants %} 
+                                    {% endblock %} -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Name of Research Project</label>
+                                                <p id="name_research"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Sponsor</label>
+                                                <p id="sponsor"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Amount Granted</label>
+                                                <p id="amount_granted"></p>
+                                            </div>
+                                        </div>
+
+                                        <h6>Projected Start and End Date</h6>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">Start Date</label>
+                                                <p id="projected_start"></p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">End Date</label>
+                                                <p id="projected_end"></p>
+                                            </div>
+                                        </div>
+
+                                        <h6>Actual Start and End Date</h6>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">Start Date</label>
+                                                <p id="actual_start"></p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">End Date</label>
+                                                <p id="actual_end"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Research Progress</label>
+                                                <p id="research_progress"></p>
+                                            </div>
+                                        </div>
+
+                                        <h6>Co-Authors</h6>
+                                        
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">DPSM Profs</label>
+                                                <p id="coresearchers_dpsm"></p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">Non-DPSM Profs</label>
+                                                <p id="coresearchers_nondpsm"></p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        </div>
+                                    </div>                           
                                 </div>
+                                <p id="emptyRGMsg" style="text-align: center; padding: 10px;">No pending for this category.</p>
                             </div>
                         </div>
 
                         <div class="card">
                             <div id="headingSeven">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven" style="width: 100%; font-size: 0.8em;">Licensure Exam</button>
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven" style="width: 100%; font-size: 0.8em;">
+                                        <span id="le_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        Licensure Exam
+                                    </button>
                                 </h5>
                             </div>
 
                             <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
-                                <div class="card-body">
-                                    {% block department_chair_licensure_exams %} 
-                                    {% endblock %}
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                <div class="card-body" id="pendingLE">
+                                    <!-- {% block unit_head_licensure_exams %} 
+                                    {% endblock %} -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Name of Exam</label>
+                                                <p id="name_exam"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label class="col-form-label">Rank</label>
+                                                <p id="rank"></p>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="col-form-label">License Number</label>
+                                                <p id="license_number"></p>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="col-form-label">Date</label>
+                                                <p id="date"></p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        </div>
                                     </div>
                                 </div>
+                                <p id="emptyLEMsg" style="text-align: center; padding: 10px;">No pending for this category.</p>
                             </div>
                         </div>
 
                         <div class="card">
                             <div id="headingEight">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight" style="width: 100%; font-size: 0.8em;">Trainings/Seminars</button>
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight" style="width: 100%; font-size: 0.8em;">
+                                        <span id="ts_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        Trainings/Seminars
+                                    </button>
                                 </h5>
                             </div>
 
                             <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
-                                <div class="card-body">
-                                    {% block department_chair_trainings_seminars %} 
-                                    {% endblock %}
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                <div class="card-body" id="pendingTS">
+                                    <!-- {% block unit_head_trainings_seminars %} 
+                                    {% endblock %} -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">Name of Training/Seminar</label>
+                                                <p id="name_training"></p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">Role</label>
+                                                <p id="role"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="col-form-label">Remarks</label>
+                                                <p id="remarks"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">Start Date</label>
+                                                <p id="ts_start_date"></p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-form-label">End Date</label>
+                                                <p id="ts_end_date"></p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        </div>
                                     </div>
                                 </div>
+                                <p id="emptyTSMsg" style="text-align: center; padding: 10px;">No pending for this category.</p>
                             </div>
                         </div>
                     </div>
@@ -324,5 +705,7 @@
         </div>
     </div>
 </section>
+
+<script src="{{ url_for('static', filename='js/ajax_calls.js') }}"></script>
 {% endblock %}
       

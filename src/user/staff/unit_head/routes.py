@@ -61,6 +61,24 @@ def unit_head_view_faculty_info(user_id):
         fsr_dict = fsr_dict
     )
 
+
+@unit_head_blueprint.route('/unit_head/view_faculty_info/<string:id>/<string:proof_type>/<string:filename>', methods=['GET'])
+def view_proof(id, proof_type, filename):
+    try:
+        CURR_FILE_DIR = os.path.join(proof_type, id)
+        print(CURR_FILE_DIR)
+        FILE_PATH = os.path.join(CURR_FILE_DIR, filename)
+        _, proof_f_ext = os.path.splitext(filename)
+        response = json.dumps({
+            'proof_file':str(FILE_PATH),
+            'file_ext':proof_f_ext
+		})
+        print(FILE_PATH)
+        return response, 200
+    except Exception as e:
+        print(e)
+        return 'Error displaying syllabus. Please try again.', 400
+
 @unit_head_blueprint.route('/unit_head/faculty_list', methods=['GET', 'POST'])
 def load_unit_head_faculty_list():
     unit_faculty_list = (FacultyPersonalInformation
@@ -170,8 +188,10 @@ def load_unit_head_pending_approvals():
             faculty_research_grants = {}
             faculty_licensure_exams = {}
             faculty_trainings = {}
+            faculty_record_count = {}
 
             for faculty in faculty_list:
+                count = 0
                 faculty_educ[faculty.user_id] = EducationalAttainment.query.filter_by(user_id=faculty.user_id).first()
                 faculty_work[faculty.user_id] = WorkExperience.query.filter_by(user_id=faculty.user_id).first()
                 faculty_accomplishments[faculty.user_id] = Accomplishment.query.filter_by(user_id=faculty.user_id).first()
@@ -179,6 +199,42 @@ def load_unit_head_pending_approvals():
                 faculty_research_grants[faculty.user_id] = ResearchGrant.query.filter_by(user_id=faculty.user_id).first()
                 faculty_licensure_exams[faculty.user_id] = LicensureExams.query.filter_by(user_id=faculty.user_id).first()
                 faculty_trainings[faculty.user_id] = TrainingSeminar.query.filter_by(user_id=faculty.user_id).first()
+
+                if faculty_educ[faculty.user_id] is not None:
+                    count += 1
+                if faculty_work[faculty.user_id] is not None:
+                    count += 1
+                if faculty_accomplishments[faculty.user_id] is not None:
+                    count += 1
+                if faculty_publications[faculty.user_id] is not None:
+                    count += 1
+                if faculty_research_grants[faculty.user_id] is not None:
+                    count += 1
+                if faculty_licensure_exams[faculty.user_id] is not None:
+                    count += 1
+                if faculty_trainings[faculty.user_id] is not None:
+                    count += 1
+                
+                faculty_record_count[faculty.user_id] = count
+            
+            return render_template('unit_head/unit_head_pending_approvals.html',
+                faculty_list = faculty_list,
+                faculty_educ = faculty_educ,
+                faculty_work = faculty_work,
+                faculty_accomplishments = faculty_accomplishments,
+                faculty_publications = faculty_publications,
+                faculty_research_grants = faculty_research_grants,
+                faculty_licensure_exams = faculty_licensure_exams,
+                faculty_trainings = faculty_trainings,
+                faculty_record_count = faculty_record_count
+            )
+
+        elif request.method == 'POST':
+            pass
+
+    except Exception as e:
+        print(e)
+        return 'An error has occured.', 500
 
             # faculty_educ = (EducationalAttainment
             #     .query
@@ -229,23 +285,6 @@ def load_unit_head_pending_approvals():
             # ).all()
 
 
-            return render_template('unit_head/unit_head_pending_approvals.html',
-                faculty_list = faculty_list,
-                faculty_educ = faculty_educ,
-                faculty_work = faculty_work,
-                faculty_accomplishments = faculty_accomplishments,
-                faculty_publications = faculty_publications,
-                faculty_research_grants = faculty_research_grants,
-                faculty_licensure_exams = faculty_licensure_exams,
-                faculty_trainings = faculty_trainings
-            )
-
-        elif request.method == 'POST':
-            pass
-
-    except Exception as e:
-        print(e)
-        return 'An error has occured.', 500
 
     # return render_template('unit_head/unit_head_updated_information.html')
 

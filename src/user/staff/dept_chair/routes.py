@@ -311,34 +311,93 @@ def department_chair_role_assignment_clerk():
 @dept_chair_blueprint.route('/department_chair/pending_approvals', methods=['GET', 'POST'])
 def department_chair_pending_approvals():
     try:
-        department_faculty_list = (FacultyPersonalInformation
-            .query
-            .order_by(
-                FacultyPersonalInformation
-                .last_name
-                .asc()
+        if request.method == 'GET':
+            faculty_list = (FacultyPersonalInformation
+                .query
+                .order_by(
+                    FacultyPersonalInformation
+                    .last_name
+                    .asc()
+                )
+                .all()
             )
-            .all()
-        )
 
-        cu_list = []
-        pgu_list = []
-        mcsu_list = []
+            faculty_educ = {}
+            faculty_work = {}
+            faculty_accomplishments = {}
+            faculty_publications = {}
+            faculty_research_grants = {}
+            faculty_licensure_exams = {}
+            faculty_trainings = {}
+            faculty_record_count = {}
 
-        for faculty in department_faculty_list:
-            if faculty.unit == 'cu':
-                cu_list.append(faculty)
-            elif faculty.unit == 'pgu':
-                pgu_list.append(faculty)
-            elif faculty.unit == 'mcsu':
-                mcsu_list.append(faculty)
+            for faculty in faculty_list:
+                count = 0
+                faculty_educ[faculty.user_id] = EducationalAttainment.query.filter_by(user_id=faculty.user_id).first()
+                faculty_work[faculty.user_id] = WorkExperience.query.filter_by(user_id=faculty.user_id).first()
+                faculty_accomplishments[faculty.user_id] = Accomplishment.query.filter_by(user_id=faculty.user_id).first()
+                faculty_publications[faculty.user_id] = Publication.query.filter_by(user_id=faculty.user_id).first()
+                faculty_research_grants[faculty.user_id] = ResearchGrant.query.filter_by(user_id=faculty.user_id).first()
+                faculty_licensure_exams[faculty.user_id] = LicensureExams.query.filter_by(user_id=faculty.user_id).first()
+                faculty_trainings[faculty.user_id] = TrainingSeminar.query.filter_by(user_id=faculty.user_id).first()
 
-        return render_template(
-            'department_chair/department_chair_pending_approvals.html',
-            cu_list = cu_list,
-            pgu_list = pgu_list,
-            mcsu_list = mcsu_list,
-        )
+                if faculty_educ[faculty.user_id] is not None:
+                    count += 1
+                if faculty_work[faculty.user_id] is not None:
+                    count += 1
+                if faculty_accomplishments[faculty.user_id] is not None:
+                    count += 1
+                if faculty_publications[faculty.user_id] is not None:
+                    count += 1
+                if faculty_research_grants[faculty.user_id] is not None:
+                    count += 1
+                if faculty_licensure_exams[faculty.user_id] is not None:
+                    count += 1
+                if faculty_trainings[faculty.user_id] is not None:
+                    count += 1
+                
+                faculty_record_count[faculty.user_id] = count
+            
+            return render_template('department_chair/department_chair_pending_approvals.html',
+                faculty_list = faculty_list,
+                faculty_educ = faculty_educ,
+                faculty_work = faculty_work,
+                faculty_accomplishments = faculty_accomplishments,
+                faculty_publications = faculty_publications,
+                faculty_research_grants = faculty_research_grants,
+                faculty_licensure_exams = faculty_licensure_exams,
+                faculty_trainings = faculty_trainings,
+                faculty_record_count = faculty_record_count
+            )
+
+        # department_faculty_list = (FacultyPersonalInformation
+        #     .query
+        #     .order_by(
+        #         FacultyPersonalInformation
+        #         .last_name
+        #         .asc()
+        #     )
+        #     .all()
+        # )
+
+        # cu_list = []
+        # pgu_list = []
+        # mcsu_list = []
+
+        # for faculty in department_faculty_list:
+        #     if faculty.unit == 'cu':
+        #         cu_list.append(faculty)
+        #     elif faculty.unit == 'pgu':
+        #         pgu_list.append(faculty)
+        #     elif faculty.unit == 'mcsu':
+        #         mcsu_list.append(faculty)
+
+        # return render_template(
+        #     'department_chair/department_chair_pending_approvals.html',
+        #     cu_list = cu_list,
+        #     pgu_list = pgu_list,
+        #     mcsu_list = mcsu_list,
+        # )
     except Exception as e:
         print(e)
         return 'Error accessing faculty list. Please try again', 400

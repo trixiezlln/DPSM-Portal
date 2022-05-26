@@ -707,11 +707,22 @@
                 
                 
                                         <div class="row">
-                                            <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                                <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
-                                                <input type="file" id="accomplishment_file" name="accomplishment_file">
-                                                <span class = "validation-status"></span>
-                                            </div>    
+                                            <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                                <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_research_proof' name='view_research_proof' hidden></a>
+                                                <button type="button" class="btn btn-secondary crud-btn" id="view_research" name="view_research" onclick="show_info_proof(
+                                                    {% if current_user.is_unit_head %} 
+                                                        'unit_head'
+                                                    {% elif current_user.is_department_chair %} 
+                                                        'department_chair'
+                                                    {% endif %},
+                                                    'RESEARCH_GRANT_PROOF',
+                                                    '{{faculty_personal_information['user_id']}}',
+                                                    '{{grant['last_modified']}}',
+                                                    '{{grant['proof_ext']}}'
+                                                )">
+                                                    View Research Grant Proof
+                                                </button>    
+                                            </div>
                                         </div>
                 
                                     </div>
@@ -776,11 +787,22 @@
                                     </div>
             
                                     <div class="row">
-                                        <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                            <label class="col-form-label">Upload File as Proof<span class="required-field"></span></label>
-                                            <input type="file" id="licensure_proof" name="licensure_proof">
-                                            <span class = "validation-status"></span>
-                                        </div>    
+                                        <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                            <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_licensure_proof' name='view_licensure_proof' hidden></a>
+                                            <button type="button" class="btn btn-secondary crud-btn" id="view_licensure" name="view_licensure" onclick="show_info_proof(
+                                                {% if current_user.is_unit_head %} 
+                                                    'unit_head'
+                                                {% elif current_user.is_department_chair %} 
+                                                    'department_chair'
+                                                {% endif %},
+                                                'LICENSURE_PROOF',
+                                                '{{faculty_personal_information['user_id']}}',
+                                                '{{licensure['last_modified']}}',
+                                                '{{licensure['proof_ext']}}'
+                                            )">
+                                                View Licensure Proof
+                                            </button>    
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -852,23 +874,21 @@
                                     
                                     <div class="row">
                                         <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                            <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_syllabus_img' name='view_syllabus_img' hidden></a>
-                                            <button type="button" class="btn btn-secondary crud-btn" id="view_syllabus" name="view_syllabus" onclick="show_syllabus(
-                                                '{{fsr['id']}}',
-                                                '{{sy}}',
-                                                '{{fsr['semester']}}',
-                                                '{{fsr['section']}}',
-                                                '{{fsr['syllabus_f_ext']}}'
+                                            <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_training_proof' name='view_training_proof' hidden></a>
+                                            <button type="button" class="btn btn-secondary crud-btn" id="view_training" name="view_training" onclick="show_info_proof(
+                                                {% if current_user.is_unit_head %} 
+                                                    'unit_head'
+                                                {% elif current_user.is_department_chair %} 
+                                                    'department_chair'
+                                                {% endif %},
+                                                '{{faculty_personal_information['user_id']}}',
+                                                'TRAINING_SEMINAR_PROOF',
+                                                '{{training['last_modified']}}',
+                                                '{{training['proof_ext']}}'
                                             )">
-                                                View Syllabus Proof
+                                                View Training Proof
                                             </button>    
                                         </div>
-
-                                        <!-- <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                            <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
-                                            <input type="file" id="accomplishment_file" name="accomplishment_file">
-                                            <span class = "validation-status"></span>
-                                        </div>     -->
                                     </div>
             
                                 </div>

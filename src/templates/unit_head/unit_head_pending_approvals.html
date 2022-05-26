@@ -31,25 +31,42 @@
             <tbody>
             {% for faculty in faculty_list %}
 
-            <script>
-                let educ = {
-                    'school': '{{ faculty_educ[faculty.user_id].school }}',
-                    'degree': '{{ faculty_educ[faculty.user_id].degree }}',
-                    'degree_type': '{{ faculty_educ[faculty.user_id].degree_type }}',
-                    'specialization': '{{ faculty_educ[faculty.user_id].specialization }}',
-                    'start_date': '{{ faculty_educ[faculty.user_id].start_date }}',
-                    'end_date': '{{ faculty_educ[faculty.user_id].end_date }}'
-                }
-            </script>
-
-              <tr data-toggle="modal" onclick="unit_head_pending_modal('{{ faculty.first_name }}', '{{ faculty.last_name }}', educ)">
+              <tr data-toggle="modal" 
+                  onclick="toggle_pending_modal(
+                      '{{ faculty.first_name }}', '{{ faculty.last_name }}', 
+                      // educational
+                      '{{ faculty_educ[faculty.user_id].school }}', '{{ faculty_educ[faculty.user_id].degree }}',
+                      '{{ faculty_educ[faculty.user_id].degree_type }}', '{{ faculty_educ[faculty.user_id].specialization }}',
+                      '{{ faculty_educ[faculty.user_id].start_date }}', '{{ faculty_educ[faculty.user_id].end_date }}',
+                      // work
+                      '{{ faculty_work[faculty.user_id].name_employer }}', '{{ faculty_work[faculty.user_id].title }}',
+                      '{{ faculty_work[faculty.user_id].work_description }}', '{{ faculty_work[faculty.user_id].work_start_date }}',
+                      '{{ faculty_work[faculty.user_id].work_end_date }}',
+                      // work
+                      '{{ faculty_accomplishments[faculty.user_id].position }}', '{{ faculty_accomplishments[faculty.user_id].organization }}',
+                      '{{ faculty_accomplishments[faculty.user_id].type_contribution }}', '{{ faculty_accomplishments[faculty.user_id].description }}',
+                      // publication
+                      '{{ faculty_publications[faculty.user_id].publication }}', '{{ faculty_publications[faculty.user_id].citation }}',
+                      '{{ faculty_publications[faculty.user_id].url }}', '{{ faculty_publications[faculty.user_id].coauthors_dpsm }}',
+                      '{{ faculty_publications[faculty.user_id].coauthors_nondpsm }}',  '{{ faculty_publications[faculty.user_id].date_published }}',
+                      // research grant
+                      '{{ faculty_research_grants[faculty.user_id].name_research }}', '{{ faculty_research_grants[faculty.user_id].sponsor }}',
+                      '{{ faculty_research_grants[faculty.user_id].amount_granted }}', '{{ faculty_research_grants[faculty.user_id].projected_start }}',
+                      '{{ faculty_research_grants[faculty.user_id].projected_end }}', '{{ faculty_research_grants[faculty.user_id].actual_start }}',
+                      '{{ faculty_research_grants[faculty.user_id].actual_end }}', '{{ faculty_research_grants[faculty.user_id].research_progress }}',
+                      '{{ faculty_research_grants[faculty.user_id].coresearchers_dpsm }}', '{{ faculty_research_grants[faculty.user_id].coresearchers_nondpsm }}',
+                      // licensure exam
+                      '{{ faculty_licensure_exams[faculty.user_id].name_exam }}', '{{ faculty_licensure_exams[faculty.user_id].rank }}',
+                      '{{ faculty_licensure_exams[faculty.user_id].license_number }}', '{{ faculty_licensure_exams[faculty.user_id].date }}',
+                      // training/seminar
+                      '{{ faculty_trainings[faculty.user_id].name_training }}', '{{ faculty_trainings[faculty.user_id].role }}',
+                      '{{ faculty_trainings[faculty.user_id].remarks }}', '{{ faculty_trainings[faculty.user_id].start_date }}',
+                      '{{ faculty_trainings[faculty.user_id].end_date }}'
+                    )">
                 <th scope="row">
                     <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;">
-                        <center>{% if faculty_educ[faculty.user_id] is not none %} 
-                                    1
-                                {% else %}
-                                    0
-                                {% endif %}
+                        <center>
+                            {{ faculty_record_count[faculty.user_id] }}
                         </center>
                     </span>&nbsp;{{ faculty.first_name }} {{ faculty.last_name }}
                 </th>
@@ -85,9 +102,7 @@
 
                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 
-                                <div class="card-body">
-                                    <!-- {% block unit_head_educational_attainment%}
-                                    {% endblock %} -->
+                                <div class="card-body" id="pendingEduc">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-sm-12">
@@ -132,9 +147,8 @@
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
                                         <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
                                     </div> 
-                                    
                                 </div>
-
+                                <p id="emptyEducMsg" style="text-align: center; padding: 10px;">No pending for this category.</p>
                             </div>
                         </div>
 
@@ -142,14 +156,14 @@
                             <div id="headingThree">
                                 <h5 class="mb-0">
                                     <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%; font-size: 0.8em;">
-                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;">2</span>
+                                        <span id="work_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
                                         Work Experience
                                     </button>
                                 </h5>
                             </div>
 
                             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                <div class="card-body">
+                                <div class="card-body" id="pendingWork">
                                     <!-- {% block unit_head_work_experience %} 
                                     {% endblock %}  -->
                                     <div class="container">
@@ -170,26 +184,27 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <label class="col-form-label">Description</label>
-                                                <p id="description"></p>
+                                                <p id="work_description"></p>
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <label class="col-form-label">Start Date</label>
-                                                <p id="start_date"></p>
+                                                <p id="work_start_date"></p>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label class="col-form-label">End Date</label>
-                                                <p id="end_date"></p>
+                                                <p id="work_end_date"></p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        </div>
                                     </div>
                                 </div>
+                                <p id="emptyWorkMsg" style="text-align: center; padding: 10px;">No pending for this category.</p>
                             </div>
                         </div>
 
@@ -197,14 +212,14 @@
                             <div id="headingFour">
                                 <h5 class="mb-0">
                                     <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="width: 100%; font-size: 0.8em;">
-                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        <span id="acc_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
                                         Accomplishments
                                     </button>
                                 </h5>
                             </div>
 
                             <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-                                <div class="card-body">
+                                <div class="card-body" id="pendingAcc">
                                     <!-- {% block unit_head_accomplishments %} 
                                     {% endblock %}  -->
                                     <div class="container">
@@ -232,15 +247,16 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <label class="col-form-label">Description</label>
-                                                <p id="description"></p>
+                                                <p id="acc_description"></p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
-                                    </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        </div>
+                                    </div>                                   
                                 </div>
+                                <p id="emptyAccMsg" style="text-align: center; padding: 10px;">No pending for this category.</p>
                             </div>
                         </div>
 
@@ -248,14 +264,14 @@
                             <div id="headingFive">
                                 <h5 class="mb-0">
                                     <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="width: 100%; font-size: 0.8em;">
-                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        <span id="pub_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
                                         Publications
                                     </button>
                                 </h5>
                             </div>
 
                             <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
-                                <div class="card-body">
+                                <div class="card-body" id="pendingPub">
                                     <!-- {% block unit_head_publications %} 
                                     {% endblock %}  -->
                                     <div class="container">
@@ -297,12 +313,13 @@
                                                 <p id="date_published"></p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        </div>
                                     </div>
                                 </div>
+                                <p id="emptyPubMsg" style="text-align: center; padding: 10px;">No pending for this category.</p>
                             </div>
                         </div>
 
@@ -310,14 +327,14 @@
                             <div id="headingSix">
                                 <h5 class="mb-0">
                                     <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix" style="width: 100%; font-size: 0.8em;">
-                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        <span id="rg_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
                                         Research Grants
                                     </button>
                                 </h5>
                             </div>
 
                             <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
-                                <div class="card-body">
+                                <div class="card-body" id="pendingRG">
                                     <!-- {% block unit_head_research_grants %} 
                                     {% endblock %} -->
                                     <div class="container">
@@ -387,12 +404,13 @@
                                                 <p id="coresearchers_nondpsm"></p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
-                                    </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        </div>
+                                    </div>                           
                                 </div>
+                                <p id="emptyRGMsg" style="text-align: center; padding: 10px;">No pending for this category.</p>
                             </div>
                         </div>
 
@@ -400,14 +418,14 @@
                             <div id="headingSeven">
                                 <h5 class="mb-0">
                                     <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven" style="width: 100%; font-size: 0.8em;">
-                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        <span id="le_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
                                         Licensure Exam
                                     </button>
                                 </h5>
                             </div>
 
                             <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
-                                <div class="card-body">
+                                <div class="card-body" id="pendingLE">
                                     <!-- {% block unit_head_licensure_exams %} 
                                     {% endblock %} -->
                                     <div class="container">
@@ -432,12 +450,13 @@
                                                 <p id="date"></p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        </div>
                                     </div>
                                 </div>
+                                <p id="emptyLEMsg" style="text-align: center; padding: 10px;">No pending for this category.</p>
                             </div>
                         </div>
 
@@ -445,14 +464,14 @@
                             <div id="headingEight">
                                 <h5 class="mb-0">
                                     <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight" style="width: 100%; font-size: 0.8em;">
-                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
+                                        <span id="ts_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
                                         Trainings/Seminars
                                     </button>
                                 </h5>
                             </div>
 
                             <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
-                                <div class="card-body">
+                                <div class="card-body" id="pendingTS">
                                     <!-- {% block unit_head_trainings_seminars %} 
                                     {% endblock %} -->
                                     <div class="container">
@@ -477,19 +496,20 @@
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <label class="col-form-label">Start Date</label>
-                                                <p id="start_date"></p>
+                                                <p id="ts_start_date"></p>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label class="col-form-label">End Date</label>
-                                                <p id="end_date"></p>
+                                                <p id="ts_end_date"></p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
-                                        <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421;" data-toggle="modal" data-target=".bd-example-modal-sm_approve">Approve</button>
+                                            <button type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113;" data-toggle="modal" data-target=".bd-example-modal-sm_reject">Reject</button>
+                                        </div>
                                     </div>
                                 </div>
+                                <p id="emptyTSMsg" style="text-align: center; padding: 10px;">No pending for this category.</p>
                             </div>
                         </div>
                     </div>

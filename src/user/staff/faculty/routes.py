@@ -954,3 +954,19 @@ def update_fsr_set(id):
         print(e)
         return 'An error has occured.', 500
 
+# @faculty_blueprint.route('/<string:user_type>/view_faculty_info/<string:id>/<string:proof_type>/<string:filename>', methods=['GET'])
+# def view_proof(user_type, id, proof_type, filename):
+#     try:
+#         CURR_FILE_DIR = os.path.join(proof_type, id)
+#         print(CURR_FILE_DIR)
+#         FILE_PATH = os.path.join(CURR_FILE_DIR, filename)
+#         _, proof_f_ext = os.path.splitext(filename)
+#         response = json.dumps({
+#             'proof_file':str(FILE_PATH),
+#             'file_ext':proof_f_ext
+# 		})
+
+#         return response, 200
+#     except Exception as e:
+#         print(e)
+#         return 'Error displaying syllabus. Please try again.', 400
