@@ -241,7 +241,7 @@
                         {% for accomplishment in faculty_accomplishments %}
                         <tr class="clickable" onclick="window.location='#'">
                             <th scope="row">{{accomplishment[2]}}, {{accomplishment[1]}}</th>
-                            <td><span id="">Physics/Geology</span></td>
+                            <td><span id="">{{accomplishment[3]}}</span></td>
                             <td><span id="">{{accomplishment[0]['type_contribution']}}</span></td>
                             <td><span id="">Accomplishment</span></td>
                             <td><span id="start_date">{{accomplishment[0]['start_date']}}</span></td>
@@ -254,7 +254,7 @@
                         {% for publication in faculty_publications %}
                         <tr class="clickable" onclick="window.location='#'">
                             <th scope="row">{{publication[2]}}, {{publication[1]}}</th>
-                            <td><span id="">MCSU</span></td>
+                            <td><span id="">{{publication[3]}}</span></td>
                             <td><span id="">{{publication[0]['publication']}}</span></td>
                             <td><span id="">Publication</span></td>
                             <td><span id="start_date">{{publication[0]['date_published']}}</span></td>
@@ -267,7 +267,7 @@
                         {% for grant in faculty_research_grants %}
                         <tr class="clickable" onclick="window.location='#'">
                             <th scope="row">{{grant[2]}}, {{grant[1]}}</th>
-                            <td><span id="">Physics/Geology</span></td>
+                            <td><span id="">{{grant[3]}}</span></td>
                             <td><span id="">{{grant[0]['name_research']}}</span></td>
                             <td><span id="">Research Grant</span></td>
                             <td><span id="start_date">{{grant[0]['actual_start']}}</span></td>
@@ -280,7 +280,7 @@
                         {% for licensure in faculty_licensure_exams %}
                         <tr class="clickable" onclick="window.location='#'">
                             <th scope="row">{{licensure[2]}}, {{licensure[1]}}</th>
-                            <td><span id="">MCSU</span></td>
+                            <td><span id="">{{licensure[3]}}</span></td>
                             <td><span id="">{{licensure[0]['name_exam']}}</span></td>
                             <td><span id="">Licensure Exam</span></td>
                             <td><span id="start_date">{{licensure[0]['date']}}</span></td>
@@ -293,7 +293,7 @@
                         {% for training in faculty_trainings %}
                         <tr class="clickable" onclick="window.location='#'">
                             <th scope="row">{{training[2]}}, {{training[1]}}</th>
-                            <td><span id="">MCSU</span></td>
+                            <td><span id="">{{training[3]}}</span></td>
                             <td><span id="">{{training[0]['name_training']}}</span></td>
                             <td><span id="">Training/Seminar</span></td>
                             <td><span id="start_date">{{training[0]['start_date']}}</span></td>
