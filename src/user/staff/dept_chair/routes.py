@@ -107,7 +107,6 @@ def convert_unit(info_list_list):
                 info_list[3] = 'Physics/Geology'
             elif info[3] == 'cu':
                 info_list[3] = 'Chemistry'
-            print(info_list)
             item[idx] = tuple(info_list) 
 
 @dept_chair_blueprint.route('/department_chair/view_faculty_info/<user_id>', methods=['GET', 'POST'])
