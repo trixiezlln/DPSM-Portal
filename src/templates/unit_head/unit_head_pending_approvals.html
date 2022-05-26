@@ -29,12 +29,29 @@
               </tr>
             </thead>
             <tbody>
-            {% for record in faculty_records %}
-              <tr data-toggle="modal" data-target="#modalExample">
+            {% for faculty in faculty_list %}
+
+            <script>
+                let educ = {
+                    'school': '{{ faculty_educ[faculty.user_id].school }}',
+                    'degree': '{{ faculty_educ[faculty.user_id].degree }}',
+                    'degree_type': '{{ faculty_educ[faculty.user_id].degree_type }}',
+                    'specialization': '{{ faculty_educ[faculty.user_id].specialization }}',
+                    'start_date': '{{ faculty_educ[faculty.user_id].start_date }}',
+                    'end_date': '{{ faculty_educ[faculty.user_id].end_date }}'
+                }
+            </script>
+
+              <tr data-toggle="modal" onclick="unit_head_pending_modal('{{ faculty.first_name }}', '{{ faculty.last_name }}', educ)">
                 <th scope="row">
                     <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;">
-                        <center>{{ educ_pending[record.user_id]|length }}</center>
-                    </span>&nbsp;{{ record.first_name }} {{ record.last_name }}
+                        <center>{% if faculty_educ[faculty.user_id] is not none %} 
+                                    1
+                                {% else %}
+                                    0
+                                {% endif %}
+                        </center>
+                    </span>&nbsp;{{ faculty.first_name }} {{ faculty.last_name }}
                 </th>
               </tr>
             {% endfor %}
@@ -43,11 +60,11 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade " id="modalExample" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade " id="pendingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span>{{ record.first_name }} {{ record.last_name }}</span>
+                    <span id="faculty_name"></span>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -59,8 +76,7 @@
                             <div id="headingTwo">
                                 <h5 class="mb-0">
                                     <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="width: 100%; font-size: 0.8em;">
-                                        <span class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;">
-                                            {{ educ_pending[record.user_id]|length }}
+                                        <span id="educ_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;">   
                                         </span>
                                         Educational Attainment
                                     </button>
@@ -262,4 +278,6 @@
         $('.change_info:empty').remove();
     </script>
 </section>
+<script src="{{ url_for('static', filename='js/ajax_calls.js') }}"></script>
+
 {% endblock %}
