@@ -42,14 +42,14 @@ def load_user(user_id):
 def view_info():
     try:
         if request.method == 'GET':
-            personal_info = FacultyPersonalInformation.query.filter_by(user_id=current_user.user_id).first()
-            educ_attainment = EducationalAttainment.query.filter_by(user_id=current_user.user_id)
-            work_experience = WorkExperience.query.filter_by(user_id=current_user.user_id)
-            accomplishment = Accomplishment.query.filter_by(user_id=current_user.user_id)
-            publication = Publication.query.filter_by(user_id=current_user.user_id)
-            licensure = LicensureExams.query.filter_by(user_id=current_user.user_id)
-            research_grant = ResearchGrant.query.filter_by(user_id=current_user.user_id)
-            training = TrainingSeminar.query.filter_by(user_id=current_user.user_id)
+            personal_info = FacultyPersonalInformation.query.filter_by(user_id=current_user.user_id, info_status=None).first()
+            educ_attainment = EducationalAttainment.query.filter_by(user_id=current_user.user_id, info_status=None)
+            work_experience = WorkExperience.query.filter_by(user_id=current_user.user_id, info_status=None)
+            accomplishment = Accomplishment.query.filter_by(user_id=current_user.user_id, info_status=None)
+            publication = Publication.query.filter_by(user_id=current_user.user_id, info_status=None)
+            licensure = LicensureExams.query.filter_by(user_id=current_user.user_id, info_status=None)
+            research_grant = ResearchGrant.query.filter_by(user_id=current_user.user_id, info_status=None)
+            training = TrainingSeminar.query.filter_by(user_id=current_user.user_id, info_status=None)
 
             print("pass models")
 

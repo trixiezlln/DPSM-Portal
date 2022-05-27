@@ -290,6 +290,54 @@ function delete_unit_head_nominee(curr_unit_head, nominated_unit_head){
     });
 }
 
+/* UNIT HEAD: Approve pending info */
+function approve_unit_head_nominee(){
+    var new_unit_head_data = new FormData();
+
+    new_unit_head_data.append('curr_unit_head', $('#accept_modal_curr_unit_head').val());
+    new_unit_head_data.append('nominated_unit_head', $('#accept_modal_nominated_unit_head').val());
+    
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    $.ajax({
+        type: "POST",
+        url: "/department_chair/role_assignment",
+        processData: false,
+        contentType: false,
+        data: new_unit_head_data,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }).then(function(then){
+                location.reload();
+            })
+        },
+        error: function(error){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+}
+
 /* DEPT HEAD: Approve Unit Head */
 function approve_unit_head_nominee(){
     var new_unit_head_data = new FormData();
@@ -1044,15 +1092,26 @@ $("#add_ts_form").submit(function(e) {
     });
 });
 
+/* Toggle Approve/Reject Modal */
+function toggle_approve_reject_modal(modal, info_type, id) {
+    $('#request_id').html(id)
+    $('#request_id').hide()
+    $('#request_type').html(info_type)
+    $('#request_type').hide()
+    $('#'+modal).modal('toggle')
+}
+
 /* Toggle Pending Approval Modal */
-function toggle_pending_modal(first_name, last_name, school, degree, degree_type, specialization, educ_start_date, educ_end_date,
-    employer, title, work_desc, work_start_date, work_end_date, position, org, contribution, acc_desc,
-    publication, citation, url, coauthors_dpsm, coauthors_nondpsm, date_published,
-    research, sponsor,amount_granted, projected_start, projected_end,actual_start, actual_end, progress, coresearchers_dpsm, coresearchers_nondpsm,
-    name_exam, rank, license_number, date,
-    name_training, role, remarks, ts_start_date, ts_start_date
+function toggle_pending_modal(first_name, last_name, 
+    educ_id, school, degree, degree_type, specialization, educ_start_date, educ_end_date, 
+    work_id, employer, title, work_desc, work_start_date, work_end_date, 
+    acc_id, position, org, contribution, acc_desc,
+    pub_id, publication, citation, url, coauthors_dpsm, coauthors_nondpsm, date_published, 
+    rg_id, research, sponsor,amount_granted, projected_start, projected_end,actual_start, actual_end, progress, coresearchers_dpsm, coresearchers_nondpsm, le_id, name_exam, rank, license_number, date,
+    ts_id, name_training, role, remarks, ts_start_date, ts_start_date
     ){
-    $('#faculty_name').html(first_name+' '+last_name);
+
+    $('#faculty_name').html('<b>'+first_name+' '+last_name+'</b>');
 
     // Educational Attainment
     if(school != '') {
@@ -1071,6 +1130,9 @@ function toggle_pending_modal(first_name, last_name, school, degree, degree_type
     $('#educ_start_date').html(educ_start_date);
     $('#educ_end_date').html(educ_end_date);
 
+    $('#acceptEduc').click(function(){toggle_approve_reject_modal("modal_approve", 'educ', educ_id)})
+    $('#rejectEduc').click(function(){toggle_approve_reject_modal("modal_reject", 'educ', educ_id)})
+
     // Work Experience
     if(employer != '') {
         $('#work_count').html('1');
@@ -1087,6 +1149,9 @@ function toggle_pending_modal(first_name, last_name, school, degree, degree_type
     $('#work_start_date').html(work_start_date);
     $('#work_end_date').html(work_end_date);
 
+    $('#acceptWork').click(function(){toggle_approve_reject_modal("modal_approve", 'work', work_id)})
+    $('#rejectWork').click(function(){toggle_approve_reject_modal("modal_reject", 'work', work_id)})
+
     // Accomplishment
     if(position != '') {
         $('#acc_count').html('1');
@@ -1101,6 +1166,9 @@ function toggle_pending_modal(first_name, last_name, school, degree, degree_type
     $('#organization').html(org);
     $('#type_contribution').html(contribution);
     $('#acc_description').html(acc_desc);
+
+    $('#acceptAcc').click(function(){toggle_approve_reject_modal("modal_approve", 'acc', acc_id)})
+    $('#rejectAcc').click(function(){toggle_approve_reject_modal("modal_reject", 'acc', acc_id)})
 
     // Publication
     if(publication != '') {
@@ -1118,6 +1186,9 @@ function toggle_pending_modal(first_name, last_name, school, degree, degree_type
     $('#coauthors_dpsm').html(coauthors_dpsm);
     $('#coauthors_nondpsm').html(coauthors_nondpsm);
     $('#date_published').html(date_published);
+
+    $('#acceptPub').click(function(){toggle_approve_reject_modal("modal_approve", 'pub', pub_id)})
+    $('#rejectPub').click(function(){toggle_approve_reject_modal("modal_reject", 'educ', pub_id)})
 
     // Research Grant
     if(amount_granted != '') {
@@ -1141,6 +1212,9 @@ function toggle_pending_modal(first_name, last_name, school, degree, degree_type
     $('#coresearchers_dpsm').html(coresearchers_dpsm);
     $('#coresearchers_nondpsm').html(coresearchers_nondpsm);
 
+    $('#acceptRG').click(function(){toggle_approve_reject_modal("modal_approve", 'rg', rg_id)})
+    $('#rejectRG').click(function(){toggle_approve_reject_modal("modal_reject", 'rg', rg_id)})
+
     // Licensure Exam
     if(name_exam != '') {
         $('#le_count').html('1');
@@ -1156,6 +1230,9 @@ function toggle_pending_modal(first_name, last_name, school, degree, degree_type
     $('#rank').html(rank);
     $('#license_number').html(license_number);
     $('#date').html(date);
+
+    $('#acceptLE').click(function(){toggle_approve_reject_modal("modal_approve", 'le', le_id)})
+    $('#rejectLE').click(function(){toggle_approve_reject_modal("modal_reject", 'le', le_id)})
 
     // Training/Seminar
     if(name_training != '') {
@@ -1174,6 +1251,114 @@ function toggle_pending_modal(first_name, last_name, school, degree, degree_type
     $('#ts_start_date').html(ts_start_date);
     $('#ts_end_date').html(ts_end_date);
 
+    $('#acceptTS').click(function(){toggle_approve_reject_modal("modal_approve", 'ts', ts_id)})
+    $('#rejectTS').click(function(){toggle_approve_reject_modal("modal_reject", 'ts', ts_id)})
 
+    
     $('#pendingModal').modal('toggle');
 } 
+
+/* UNIT HEAD: Approve Information */
+function unit_head_approve_pending_info(){
+    var info_data = new FormData();
+
+    info_data.append('id', $('#request_id').html());
+    info_data.append('type', $('#request_type').html());
+    
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    $.ajax({
+        type: "PUT",
+        url: "/unit_head/pending_approvals",
+        processData: false,
+        contentType: false,
+        data: info_data,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }).then(function(then){
+                location.reload();
+            })
+        },
+        error: function(error){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+}
+
+
+/* UNIT HEAD: Reject Pending Info */
+
+
+
+/* DEPT CHAIR: Approve Information */
+function dept_chair_approve_pending_info(){
+    var info_data = new FormData();
+
+    info_data.append('id', $('#request_id').html());
+    info_data.append('type', $('#request_type').html());
+    
+    Swal.fire({
+        title: '<h2>Please Wait</h2>',
+        html: '<h3><img src=".././../static/img/loading-spinner.gif" height=75 width=75></h3>',// add html attribute if you want or remove
+        //html: '<h3><i class="fas fa-stroopwafel fa-spin"></i></h3>'
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    $.ajax({
+        type: "PUT",
+        url: "/department_chair/pending_approvals",
+        processData: false,
+        contentType: false,
+        data: info_data,
+        success: function(success){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'success',
+                title: 'Success',
+                text: success.responseText
+            }).then(function(then){
+                location.reload();
+            })
+        },
+        error: function(error){
+            Swal.fire({
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                icon: 'warning',
+                title: 'Warning',
+                text: error.responseText
+            })
+        },
+        datatype: "multipart/form-data"
+    });
+}
+
+
+
+

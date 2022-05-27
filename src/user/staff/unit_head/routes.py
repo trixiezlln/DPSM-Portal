@@ -192,13 +192,13 @@ def load_unit_head_pending_approvals():
 
             for faculty in faculty_list:
                 count = 0
-                faculty_educ[faculty.user_id] = EducationalAttainment.query.filter_by(user_id=faculty.user_id).first()
-                faculty_work[faculty.user_id] = WorkExperience.query.filter_by(user_id=faculty.user_id).first()
-                faculty_accomplishments[faculty.user_id] = Accomplishment.query.filter_by(user_id=faculty.user_id).first()
-                faculty_publications[faculty.user_id] = Publication.query.filter_by(user_id=faculty.user_id).first()
-                faculty_research_grants[faculty.user_id] = ResearchGrant.query.filter_by(user_id=faculty.user_id).first()
-                faculty_licensure_exams[faculty.user_id] = LicensureExams.query.filter_by(user_id=faculty.user_id).first()
-                faculty_trainings[faculty.user_id] = TrainingSeminar.query.filter_by(user_id=faculty.user_id).first()
+                faculty_educ[faculty.user_id] = EducationalAttainment.query.filter_by(user_id=faculty.user_id, info_status=False).first()
+                faculty_work[faculty.user_id] = WorkExperience.query.filter_by(user_id=faculty.user_id, info_status=False).first()
+                faculty_accomplishments[faculty.user_id] = Accomplishment.query.filter_by(user_id=faculty.user_id, info_status=False).first()
+                faculty_publications[faculty.user_id] = Publication.query.filter_by(user_id=faculty.user_id, info_status=False).first()
+                faculty_research_grants[faculty.user_id] = ResearchGrant.query.filter_by(user_id=faculty.user_id, info_status=False).first()
+                faculty_licensure_exams[faculty.user_id] = LicensureExams.query.filter_by(user_id=faculty.user_id, info_status=False).first()
+                faculty_trainings[faculty.user_id] = TrainingSeminar.query.filter_by(user_id=faculty.user_id, info_status=False).first()
 
                 if faculty_educ[faculty.user_id] is not None:
                     count += 1
@@ -229,9 +229,30 @@ def load_unit_head_pending_approvals():
                 faculty_record_count = faculty_record_count
             )
 
-        elif request.method == 'POST':
-            pass
+        elif request.method == 'PUT':
+            info_form = request.form
+            info_record = {}
 
+            if info_form['type'] == 'educ':
+                info_record = EducationalAttainment.query.filter_by(id=info_form['id']).first()
+            elif info_form['type'] == 'work':
+                info_record = WorkExperience.query.filter_by(id=info_form['id']).first()
+            elif info_form['type'] == 'acc':
+                info_record = Accomplishment.query.filter_by(id=info_form['id']).first()
+            elif info_form['type'] == 'pub':
+                info_record = Publication.query.filter_by(id=info_form['id']).first()
+            elif info_form['type'] == 'rg':
+                info_record = ResearchGrant.query.filter_by(id=info_form['id']).first()
+            elif info_form['type'] == 'le':
+                info_record = LicensureExams.query.filter_by(id=info_form['id']).first()
+            elif info_form['type'] == 'ts':
+                info_record = TrainingSeminar.query.filter_by(id=info_form['id']).first()
+            
+            info_record.info_status = True
+
+            db.session.commit()
+
+        return 'Info has been Approved by Unit Head', 200
     except Exception as e:
         print(e)
         return 'An error has occured.', 500
@@ -415,9 +436,7 @@ def load_unit_head_dashboard():
                 len(faculty_licensure_exams),
                 len(faculty_research_grants)
             ]
-            
-            
-    
+   
 
             return render_template('unit_head/unit_head_dashboard.html',
                 unit_count = unit_count_filtered,
