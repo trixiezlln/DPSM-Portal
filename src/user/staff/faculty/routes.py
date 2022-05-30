@@ -50,8 +50,17 @@ def view_info():
             licensure = LicensureExams.query.filter_by(user_id=current_user.user_id, info_status=None)
             research_grant = ResearchGrant.query.filter_by(user_id=current_user.user_id, info_status=None)
             training = TrainingSeminar.query.filter_by(user_id=current_user.user_id, info_status=None)
+            fsr = FacultySETRecords.query.filter_by(id=current_user.user_id).all()
 
             rejected_info_id = RejectedInfo.query.with_entities(RejectedInfo.info_id)
+
+            fsr_dict = {} # Keys = initial school year, Value = list of records within that year
+
+            for  record in fsr:
+                if record.sy in fsr_dict:
+                    fsr_dict[record.sy].append(record.__dict__)
+                else:
+                    fsr_dict[record.sy] = [record.__dict__]
 
             return render_template(
                 'faculty/faculty_landing_page.html',
@@ -63,6 +72,7 @@ def view_info():
                 licensure=licensure,
                 research_grant=research_grant,
                 training=training,
+                fsr_dict=fsr_dict,
                 rejected_info_id=rejected_info_id
                 )
         elif request.method == 'POST':
@@ -70,6 +80,25 @@ def view_info():
     except Exception as e:
         print(e)
         return e, 500
+
+
+@faculty_blueprint.route('/faculty/faculty_landing_page/<string:filename>', methods=['GET'])
+def view_proof(id, proof_type, filename):
+    try:
+        CURR_FILE_DIR = os.path.join(proof_type, id)
+        print(CURR_FILE_DIR)
+        FILE_PATH = os.path.join(CURR_FILE_DIR, filename)
+        _, proof_f_ext = os.path.splitext(filename)
+        response = json.dumps({
+            'proof_file':str(FILE_PATH),
+            'file_ext':proof_f_ext
+		})
+        print(FILE_PATH)
+        return response, 200
+    except Exception as e:
+        print(e)
+        return 'Error displaying syllabus. Please try again.', 400
+
 
 # # edit personal information
 @faculty_blueprint.route('/faculty/update_personal_info', methods = ['GET', 'PUT'])

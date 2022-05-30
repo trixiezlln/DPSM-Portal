@@ -658,36 +658,46 @@ function show_set_proof(user_id, sy, semester, section, f_ext) {
 
 function show_info_proof(current_user, proof_type, user_id, last_modified, f_ext) {
     filename = proof_type + "_" + user_id + "_" + last_modified.replace(' ', '_') + "." + f_ext
+
+    page_url = ""
+
+    if(current_user == "faculty") {
+        page_url = "/faculty/faculty_landing_page/" + filename;
+    } else {
+        page_url = "/"+ current_user +"/view_faculty_info/" + filename;
+    }
+
     $.ajax({
         type: "GET",
-        url: current_user + "/view_faculty_info/" + user_id + "/" + proof_type.toLowerCase() + "/" + filename,
+        url: page_url,
         success: function(response){
             var data = JSON.parse(response);
             var file_ext = data['file_ext'];
             var file_window = ""
 
             if(proof_type == 'EDUC_PROOF'){
-                file_window = "view_educ_proof"
+                file_window = "#view_educ_proof"
             } else if(proof_type == 'WORK_PROOF'){
-                file_window = "view_work_proof"
+                file_window = "#view_work_proof"
             } else if(proof_type == 'ACCOMPLISHMENT_PROOF'){
-                file_window = "view_accomplishment_proof"
+                file_window = "#view_accomplishment_proof"
             } else if(proof_type == 'PUBLICATION_PROOF'){
-                file_window = "view_publication_proof"
+                file_window = "#view_publication_proof"
             } else if(proof_type == 'LICENSURE_PROOF'){
-                file_window = "view_licensure_proof"
+                file_window = "#view_licensure_proof"
             } else if(proof_type == 'RESEARCH_GRANT_PROOF'){
-                file_window = "view_research_proof"
+                file_window = "#view_research_proof"
             } else if(proof_type == 'TRAINING_SEMINAR_PROOF'){
-                file_window = "view_training_proof"
+                file_window = "#view_training_proof"
             } 
 
             if (file_ext === 'pdf'){
                 window.open(data['proof_file'], '_blank');
             } else {
                 var img_loc = "../../../"+data['proof_file'];
-                $('#'+file_window).attr("href", img_loc);
-                $('#'+file_window).click();
+                alert(img_loc)
+                $(file_window).attr("href", img_loc);
+                $(file_window).click();
             };
         },
         error: function(error){
@@ -1095,10 +1105,10 @@ $("#add_ts_form").submit(function(e) {
 /* Toggle Approve/Reject Modal */
 function toggle_approve_reject_modal(modal, info_type, id, user_id) {
     if(modal == 'modal_approve'){
-        $('#request_id').html(id)
-        $('#request_id').hide()
-        $('#request_type').html(info_type)
-        $('#request_type').hide()
+        $('#approved_id').html(id)
+        $('#approved_id').hide()
+        $('#approved_type').html(info_type)
+        $('#approved_type').hide()
         $('#'+modal).modal('toggle')
     } else {
         $('#rejected_id').html(id)
@@ -1124,7 +1134,7 @@ function toggle_pending_modal(first_name, last_name, user_id,
     $('#faculty_name').html('<b>'+first_name+' '+last_name+'</b>');
 
     // Educational Attainment
-    if(school != '') {
+    if(educ_id != '') {
         $('#educ_count').html('1');
         $('#pendingEduc').show();
         $('#emptyEducMsg').hide();
@@ -1144,7 +1154,7 @@ function toggle_pending_modal(first_name, last_name, user_id,
     $('#rejectEduc').click(function(){toggle_approve_reject_modal("modal_reject", 'educ', educ_id, user_id)})
 
     // Work Experience
-    if(employer != '') {
+    if(work_id != '') {
         $('#work_count').html('1');
         $('#pendingWork').show();
         $('#emptyWorkMsg').hide();
@@ -1163,7 +1173,7 @@ function toggle_pending_modal(first_name, last_name, user_id,
     $('#rejectWork').click(function(){toggle_approve_reject_modal("modal_reject", 'work', work_id, user_id)})
 
     // Accomplishment
-    if(position != '') {
+    if(acc_id != '') {
         $('#acc_count').html('1');
         $('#pendingAcc').show();
         $('#emptyAccMsg').hide();
@@ -1181,7 +1191,7 @@ function toggle_pending_modal(first_name, last_name, user_id,
     $('#rejectAcc').click(function(){toggle_approve_reject_modal("modal_reject", 'acc', acc_id, user_id)})
 
     // Publication
-    if(publication != '') {
+    if(pub_id != '') {
         $('#pub_count').html('1');
         $('#pendingPub').show();
         $('#emptyPubMsg').hide();
@@ -1201,7 +1211,7 @@ function toggle_pending_modal(first_name, last_name, user_id,
     $('#rejectPub').click(function(){toggle_approve_reject_modal("modal_reject", 'educ', pub_id, user_id)})
 
     // Research Grant
-    if(amount_granted != '') {
+    if(rg_id != '') {
         $('#rg_count').html('1');
         $('#pendingRG').show();
         $('#emptyRGMsg').hide();
@@ -1226,7 +1236,7 @@ function toggle_pending_modal(first_name, last_name, user_id,
     $('#rejectRG').click(function(){toggle_approve_reject_modal("modal_reject", 'rg', rg_id, user_id)})
 
     // Licensure Exam
-    if(name_exam != '') {
+    if(le_id != '') {
         $('#le_count').html('1');
         $('#pendingLE').show();
         $('#emptyLEMsg').hide();
@@ -1245,7 +1255,7 @@ function toggle_pending_modal(first_name, last_name, user_id,
     $('#rejectLE').click(function(){toggle_approve_reject_modal("modal_reject", 'le', le_id, user_id)})
 
     // Training/Seminar
-    if(name_training != '') {
+    if(ts_id != '') {
         $('#ts_count').html('1');
         $('#pendingTS').show();
         $('#emptyTSMsg').hide();
@@ -1272,6 +1282,7 @@ function toggle_pending_modal(first_name, last_name, user_id,
 function unit_head_approve_pending_info(){
     var info_data = new FormData();
 
+    alert($('#approved_id').html())
     info_data.append('id', $('#approved_id').html());
     info_data.append('type', $('#approved_type').html());
     

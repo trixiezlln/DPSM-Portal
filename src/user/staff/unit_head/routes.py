@@ -42,6 +42,8 @@ def unit_head_view_faculty_info(user_id):
     faculty_trainings = TrainingSeminar.query.filter_by(user_id=user_id).all()
     faculty_service_records = FacultySETRecords.query.filter_by(id=user_id).all()
 
+    faculty_rejected_info = RejectedInfo.query.filter_by(info_by=user_id).with_entities(RejectedInfo.info_id)
+
     fsr_dict = {} # Keys = initial school year, Value = list of records within that year
 
     for record in faculty_service_records:
@@ -59,11 +61,12 @@ def unit_head_view_faculty_info(user_id):
         faculty_research_grants = faculty_research_grants,
         faculty_licensure_exams = faculty_licensure_exams,
         faculty_trainings = faculty_trainings,
+        faculty_rejected_info = faculty_rejected_info,
         fsr_dict = fsr_dict
     )
 
 
-@unit_head_blueprint.route('/unit_head/view_faculty_info/<string:id>/<string:proof_type>/<string:filename>', methods=['GET'])
+@unit_head_blueprint.route('/unit_head/view_faculty_info/<string:filename>', methods=['GET'])
 def view_proof(id, proof_type, filename):
     try:
         CURR_FILE_DIR = os.path.join(proof_type, id)
@@ -232,7 +235,7 @@ def load_unit_head_pending_approvals():
 
         elif request.method == 'PUT':
             info_form = request.form
-            info_record = {}
+            info_record = None
 
             if info_form['type'] == 'educ':
                 info_record = EducationalAttainment.query.filter_by(id=info_form['id']).first()
@@ -249,6 +252,7 @@ def load_unit_head_pending_approvals():
             elif info_form['type'] == 'ts':
                 info_record = TrainingSeminar.query.filter_by(id=info_form['id']).first()
             
+            print(info_record)
             info_record.info_status = True
 
             db.session.commit()
@@ -404,7 +408,6 @@ def load_unit_head_dashboard():
     ).all()
     print(len(faculty_trainings))
     try:
-        
         if request.method == 'GET':
             
             return render_template('unit_head/unit_head_dashboard.html', 

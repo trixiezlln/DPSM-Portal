@@ -62,9 +62,9 @@
         <div class="info-section">
 
             <!-- box header -->
-            <!--<div class="d-flex justify-content-between my-3">
+            <div class="d-flex justify-content-between my-3">
                 <h4 class="">Personal Information</h4>
-            </div>-->
+            </div>
 
             <hr>
 
@@ -290,8 +290,9 @@
             <hr>
 
             <!-- box content -->
-            {% if faculty_educational_attaiment is not none %}
+            {% if faculty_educational_attaiment|length > 0 %}
                 {% for educ in faculty_educational_attaiment %}
+                {% if educ['id'] not in faculty_rejected_info %}
                     <div class="info-sub-section">
                         
                         <div class="row">
@@ -342,22 +343,32 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                            <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
-                                            <input type="file" id="educ_file" name="educ_file">
-                                            <span class = "validation-status"></span>
-                                        </div>    
+                                        <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                            <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_educ_proof' name='view_educ_proof' hidden></a>
+                                            <button type="button" class="btn btn-secondary crud-btn" id="view_educ" name="view_educ" onclick="show_info_proof(
+                                                {% if current_user.is_unit_head %} 
+                                                    'unit_head'
+                                                {% elif current_user.is_department_chair %} 
+                                                    'department_chair'
+                                                {% endif %},
+                                                'EDUC_PROOF',
+                                                '{{faculty_personal_information['user_id']}}',
+                                                '{{educ['last_modified']}}',
+                                                '{{educ['proof_ext']}}'
+                                            )">
+                                                View Educational Attainment Proof
+                                            </button>    
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>           
                     </div>
                     <hr>
+                {% endif %}
                 {% endfor %}
             {% else %}
-                <div class="d-flex justify-content-between my-3">
-                    <h5 class="">No information to show</h4>
-                </div>
+            <h5 class="" style="padding: 10px;">No information to show</h5>
             {% endif %}
         </div>
 
@@ -369,8 +380,9 @@
             </div>
 
             <hr>
-            {% if faculty_work_experience is not none %}
+            {% if faculty_work_experience|length > 0 %}
                 {% for experience in faculty_work_experience %}
+                {% if experience['id'] not in faculty_rejected_info %}
                     <!-- box content -->
                     <div class="info-sub-section">
                         <div class="d-flex justify-content-between my-3">
@@ -424,22 +436,32 @@
                                     </div>
                                     
                                     <div class="row">
-                                        <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                            <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
-                                            <input type="file" id="work_file" name="work_file">
-                                            <span class = "validation-status"></span>
-                                        </div>    
+                                        <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                            <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_work_proof' name='view_work_proof' hidden></a>
+                                            <button type="button" class="btn btn-secondary crud-btn" id="view_work" name="view_work" onclick="show_info_proof(
+                                                {% if current_user.is_unit_head %} 
+                                                    'unit_head'
+                                                {% elif current_user.is_department_chair %} 
+                                                    'department_chair'
+                                                {% endif %},
+                                                'WORK_PROOF',
+                                                '{{faculty_personal_information['user_id']}}',
+                                                '{{experience['last_modified']}}',
+                                                '{{experience['proof_ext']}}'
+                                            )">
+                                                View Work Experience Proof
+                                            </button>    
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <hr>      
+                    <hr>   
+                    {% endif %}   
                 {% endfor %}
             {% else %}
-                <div class="row">
-                    <h5 class="">No information to show</h4>
-                </div>
+            <h5 class="" style="padding: 10px;">No information to show</h5>
             {% endif %} 
         </div>
 
@@ -453,8 +475,9 @@
             <hr>
             
             <!-- box content -->
-            {% if faculty_accomplishments is not none %}
+            {% if faculty_accomplishments|length > 0 %}
                 {% for accomplishment in faculty_accomplishments %}
+                {% if accomplishment['id'] not in faculty_rejected_info %}
                     <div class="info-sub-section">
                         <div class="d-flex justify-content-between my-3">
                             <h1 class=""></h1>
@@ -508,22 +531,32 @@
                                     </div>
             
                                     <div class="row">
-                                        <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                            <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
-                                            <input type="file" id="accomplishment_file" name="accomplishment_file">
-                                            <span class = "validation-status"></span>
-                                        </div>    
+                                        <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                            <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_accomplishment_proof' name='view_accomplishment_proof' hidden></a>
+                                            <button type="button" class="btn btn-secondary crud-btn" id="view_accomplishment" name="view_accomplishment" onclick="show_info_proof(
+                                                {% if current_user.is_unit_head %} 
+                                                    'unit_head'
+                                                {% elif current_user.is_department_chair %} 
+                                                    'department_chair'
+                                                {% endif %},
+                                                'ACCOMPLISHMENT_PROOF',
+                                                '{{faculty_personal_information['user_id']}}',
+                                                '{{accomplishment['last_modified']}}',
+                                                '{{accomplishment['proof_ext']}}'
+                                            )">
+                                                View Accomplishment Proof
+                                            </button>    
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <hr>
+                    {% endif %}
                 {% endfor %}
             {% else %}
-                <div class="row">
-                    <h5 class="">No information to show</h4>
-                </div>
+            <h5 class="" style="padding: 10px;">No information to show</h5>
             {% endif %}
         </div>
 
@@ -537,8 +570,9 @@
             <hr>
             
             <!-- box content -->
-            {% if faculty_publications is not none %}
+            {% if faculty_publications|length > 0 %}
                 {% for publication in faculty_publications %}
+                {% if publication['id'] not in faculty_rejected_info %}
                     <div class="info-sub-section">
                         <div class="d-flex justify-content-between my-3">
                             <h1 class=""></h1>
@@ -592,11 +626,22 @@
                                     </div>
             
                                     <div class="row">
-                                        <div class="col-12 col-lg-3 custom-col-3 mb-3">
-                                            <label class="col-form-label">Uploaded File as Proof<span class="required-field"></span></label>
-                                            <input type="file" id="publication_file" name="publication_file">
-                                            <span class = "validation-status"></span>
-                                        </div>    
+                                        <div class="col-12 col-lg-6 custom-col-3 mb-3">
+                                            <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_publication_proof' name='view_publication_proof' hidden></a>
+                                            <button type="button" class="btn btn-secondary crud-btn" id="view_publication" name="view_publication" onclick="show_info_proof(
+                                                {% if current_user.is_unit_head %} 
+                                                    'unit_head'
+                                                {% elif current_user.is_department_chair %} 
+                                                    'department_chair'
+                                                {% endif %},
+                                                'PUBLICATION_PROOF',
+                                                '{{faculty_personal_information['user_id']}}',
+                                                '{{publication['last_modified']}}',
+                                                '{{publication['proof_ext']}}'
+                                            )">
+                                                View Publication Proof
+                                            </button>    
+                                        </div>
                                     </div>
             
                                 </div>
@@ -606,11 +651,10 @@
                     </div>
                     
                     <hr>
+                    {% endif %}
                 {% endfor %}
             {% else %}
-                <div class="row">
-                    <h5 class="">No information to show</h4>
-                </div>
+            <h5 class="" style="padding: 10px;">No information to show</h5>
             {% endif %} 
         </div>
 
@@ -624,8 +668,9 @@
             <hr>
             
             <!-- box content -->
-            {% if faculty_research_grants is not none %}
+            {% if faculty_research_grants|length > 0 %}
                 {% for grant in faculty_research_grants %}
+                {% if grant['id'] not in faculty_rejected_info %}
                     <div class="info-sub-section">
                         <div class="d-flex justify-content-between my-3">
                             <h1 class=""></h1>
@@ -731,11 +776,10 @@
                     </div>
 
                     <hr>
+                    {% endif %}
                 {% endfor %}
             {% else %}
-                <div class="row">
-                    <h5 class="">No information to show</h4>
-                </div>
+            <h5 class="" style="padding: 10px;">No information to show</h5>
             {% endif %}
         </div>
 
@@ -749,8 +793,9 @@
             <hr>
             
             <!-- box content -->
-            {% if faculty_licensure_exams is not none %}
+            {% if faculty_licensure_exams|length > 0 %}
                 {% for licensure in faculty_licensure_exams %}
+                {% if licensure['id'] not in faculty_rejected_info %}
                     <div class="info-sub-section">
                         <div class="d-flex justify-content-between my-3">
                             <h1 class=""></h1>
@@ -809,11 +854,10 @@
                         </div>
                     </div>
                     <hr>
+                    {% endif %}
                 {% endfor %}
             {% else %}
-                <div class="row">
-                    <h5 class="">No information to show</h4>
-                </div>
+            <h5 class="" style="padding: 10px;">No information to show</h5>
             {% endif %}
         </div>
 
@@ -825,8 +869,9 @@
             </div>
 
             <hr>
-            {% if faculty_trainings is not none %}
+            {% if faculty_trainings|length > 0 %}
                 {% for training in faculty_trainings %}
+                {% if training['id'] not in faculty_rejected_info %}
                     <!-- box content -->
                     <div class="info-sub-section">
                         <div class="d-flex justify-content-between my-3">
@@ -881,12 +926,12 @@
                                                 {% elif current_user.is_department_chair %} 
                                                     'department_chair'
                                                 {% endif %},
-                                                '{{faculty_personal_information['user_id']}}',
                                                 'TRAINING_SEMINAR_PROOF',
+                                                '{{faculty_personal_information['user_id']}}',
                                                 '{{training['last_modified']}}',
                                                 '{{training['proof_ext']}}'
                                             )">
-                                                View Training Proof
+                                                View Trainin/Seminar Proof
                                             </button>    
                                         </div>
                                     </div>
@@ -897,11 +942,10 @@
                     </div>
 
                     <hr>
+                    {% endif %}
                 {% endfor %}
             {% else %}
-                <div class="row">
-                    <h5 class="">No information to show</h4>
-                </div>
+                <h5 class="" style="padding: 10px;">No information to show</h5>
             {% endif %}
         </div>
 
@@ -913,7 +957,7 @@
             </div>
 
             <hr>
-            {% if fsr_dict is not none %}
+            {% if fsr_dict|length > 0 %}
                 {% for sy, fsr_record in fsr_dict.items() %}
                     <h4 class="header" >A.Y. {{sy}}</h4>
                     {% for fsr in fsr_record %}
@@ -1006,9 +1050,7 @@
                     {% endfor %}
                 {% endfor %}
             {% else %}
-                <div class="row">
-                    <h5 class="">No information to show</h4>
-                </div>
+                <h5 class="" style="padding: 10px;">No information to show</h5>
             {% endif %}
         </div>
 
