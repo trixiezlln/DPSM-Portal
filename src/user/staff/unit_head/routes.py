@@ -1,3 +1,4 @@
+from distutils.log import info
 import email
 from src import login_manager, db
 from flask import Blueprint, render_template, redirect, url_for, flash, g
@@ -16,7 +17,7 @@ import json
 from sqlalchemy import and_
 
 #Models
-from ..models import EducationalAttainment, FacultyPersonalInformation, LicensureExams, TrainingSeminar, Accomplishment, ResearchGrant, Publication, WorkExperience, FacultySETRecords
+from ..models import EducationalAttainment, FacultyPersonalInformation, LicensureExams, TrainingSeminar, Accomplishment, ResearchGrant, Publication, WorkExperience, FacultySETRecords, RejectedInfo
 from ...auth.models import UserCredentials
 from ..models import UnitHeadNominations
 
@@ -166,7 +167,7 @@ def load_unit_head_role_assignment():
             print(e)
             return 'Error deleting Unit Head nominee. Please try again.', 400
 
-@unit_head_blueprint.route('/unit_head/pending_approvals', methods=['GET', 'PUT'])
+@unit_head_blueprint.route('/unit_head/pending_approvals', methods=['GET', 'PUT', 'POST'])
 def load_unit_head_pending_approvals():
     try:
         if request.method == 'GET':
@@ -252,7 +253,40 @@ def load_unit_head_pending_approvals():
 
             db.session.commit()
 
-        return 'Info has been Approved by Unit Head', 200
+            return 'Info has been Approved by Unit Head', 200
+    
+        elif request.method == 'POST':
+            info_form = request.form
+            info_record = {}
+
+            if info_form['type'] == 'educ':
+                info_record = EducationalAttainment.query.filter_by(id=info_form['id']).first()
+            elif info_form['type'] == 'work':
+                info_record = WorkExperience.query.filter_by(id=info_form['id']).first()
+            elif info_form['type'] == 'acc':
+                info_record = Accomplishment.query.filter_by(id=info_form['id']).first()
+            elif info_form['type'] == 'pub':
+                info_record = Publication.query.filter_by(id=info_form['id']).first()
+            elif info_form['type'] == 'rg':
+                info_record = ResearchGrant.query.filter_by(id=info_form['id']).first()
+            elif info_form['type'] == 'le':
+                info_record = LicensureExams.query.filter_by(id=info_form['id']).first()
+            elif info_form['type'] == 'ts':
+                info_record = TrainingSeminar.query.filter_by(id=info_form['id']).first()
+            
+            rejected_info = RejectedInfo (
+                info_by = info_form['user_id'],
+                info_id = info_form['id'],
+                remarks = info_form['remarks'],
+                rejected_by = current_user.user_id
+            )
+
+            info_record.info_status = None; 
+            db.session.add(rejected_info)
+            db.session.commit()
+
+            return 'Info has been Rejected by Unit Head', 200
+
     except Exception as e:
         print(e)
         return 'An error has occured.', 500

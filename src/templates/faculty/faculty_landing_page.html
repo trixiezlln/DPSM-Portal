@@ -393,7 +393,7 @@
 
             <!-- box content -->
             {% for educ_record in educ_attainment %}
-            {% if educ_record['info_status'] != False %}
+            {% if educ_record['id'] not in rejected_info_id %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
@@ -492,7 +492,7 @@
             
             <!-- box content -->
             {% for work_record in work_experience %}
-                {% if work_record['info_status'] != False %}
+                {% if work_record['id'] not in rejected_info_id %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
@@ -586,7 +586,7 @@
             <hr>
             
             {% for acc_record in accomplishment %}
-            {% if acc_record['info_status'] != False %}
+            {% if acc_record['id'] not in rejected_info_id %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
@@ -680,7 +680,7 @@
             <hr>
             
             {% for pub_record in publication %}
-            {% if pub_record['info_status'] != False %}
+            {% if pub_record['id'] not in rejected_info_id %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
@@ -785,7 +785,7 @@
             <hr>
             
             {% for rg_record in research_grant %}
-            {% if rg_record['info_status'] != False %}
+            {% if rg_record['id'] not in rejected_info_id %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
@@ -907,7 +907,7 @@
             <hr>
             
             {% for le_record in licensure %}
-            {% if le_record['info_status'] != False %}
+            {% if le_record['id'] not in rejected_info_id %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>
@@ -975,7 +975,7 @@
             <hr>
             
             {% for ts_record in training %}
-            {% if ts_record['info_status'] != False %}
+            {% if ts_record['id'] not in rejected_info_id %}
             <div class="info-sub-section">
                 <div class="d-flex justify-content-between my-3">
                     <h1 class=""></h1>

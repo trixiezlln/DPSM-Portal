@@ -16,7 +16,7 @@ import pip._vendor.cachecontrol as cacheControl
 import json
 
 #Models
-from ..models import EducationalAttainment, FacultyPersonalInformation, FacultySETRecords, LicensureExams, TrainingSeminar, WorkExperience, Accomplishment, ResearchGrant, Publication
+from ..models import EducationalAttainment, FacultyPersonalInformation, FacultySETRecords, LicensureExams, TrainingSeminar, WorkExperience, Accomplishment, ResearchGrant, Publication, RejectedInfo
 from ...auth.models import UserCredentials
 
 #External Functions
@@ -51,7 +51,7 @@ def view_info():
             research_grant = ResearchGrant.query.filter_by(user_id=current_user.user_id, info_status=None)
             training = TrainingSeminar.query.filter_by(user_id=current_user.user_id, info_status=None)
 
-            print("pass models")
+            rejected_info_id = RejectedInfo.query.with_entities(RejectedInfo.info_id)
 
             return render_template(
                 'faculty/faculty_landing_page.html',
@@ -62,7 +62,8 @@ def view_info():
                 publication=publication,
                 licensure=licensure,
                 research_grant=research_grant,
-                training=training
+                training=training,
+                rejected_info_id=rejected_info_id
                 )
         elif request.method == 'POST':
             pass

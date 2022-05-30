@@ -28,7 +28,7 @@
 
               <tr data-toggle="modal" 
                   onclick="toggle_pending_modal(
-                      '{{ faculty.first_name }}', '{{ faculty.last_name }}', 
+                      '{{ faculty.first_name }}', '{{ faculty.last_name }}', '{{ faculty.user_id}}', 
                       // educational
                       '{{ faculty_educ[faculty.user_id].id }}',
                       '{{ faculty_educ[faculty.user_id].school }}', '{{ faculty_educ[faculty.user_id].degree }}',
@@ -529,13 +529,13 @@
                 </div>
                 <div class="modal-body">
                     Are you sure you want to reject this change?
-                    <p id="request_id"></p><p id="request_type"></p>
+                    <p id="rejected_id"></p><p id="rejected_type"></p><p id="rejected_user_id"></p>
                     <br>
                     Reason/Remarks for rejection
-                    <input type="text" name="reject_remarks" id="reject_remarks" style="width: 100%;">
+                    <input type="text" name="rejected_remarks" id="rejected_remarks" style="width: 100%;">
                 </div>
                 <div class="modal-footer">
-                    <button id="reject" type="button" class="btn" data-toggle="modal" data-target="#exampleModal" data-dismiss="modal" style="color: #ffffff; background-color: #014421; font-size: 0.7vw;">Yes, reject</button>
+                    <button onclick="unit_head_reject_pending_info()" type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421; font-size: 0.7vw;">Yes, reject</button>
                     <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113; font-size: 0.7vw;">No, don't reject</button>
                 </div>
             </div>
@@ -550,7 +550,7 @@
                 </div>
                 <div class="modal-body">
                     Are you sure you want to approve this change?
-                    <p id="request_id"></p><p id="request_type"></p>
+                    <p id="approved_id"></p><p id="approved_type"></p>
                 </div>
                 <div class="modal-footer">
                     <button onclick="unit_head_approve_pending_info()" type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421; font-size: 0.7vw;">Yes, approve</button>

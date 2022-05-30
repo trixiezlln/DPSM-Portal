@@ -44,7 +44,7 @@
             {% if cu_faculty.unit == 'cu' %}
             <div class="card-body text-center" data-toggle="modal" 
             onclick="toggle_pending_modal(
-                '{{ cu_faculty.first_name }}', '{{ cu_faculty.last_name }}', 
+                '{{ cu_faculty.first_name }}', '{{ cu_faculty.last_name }}', '{{ cu_faculty.user_id }}', 
                 // educational
                 '{{ faculty_educ[cu_faculty.user_id].id }}',
                 '{{ faculty_educ[cu_faculty.user_id].school }}', '{{ faculty_educ[cu_faculty.user_id].degree }}',
@@ -110,7 +110,7 @@
             {% if mcsu_faculty.unit == 'mcsu' %}
             <div class="card-body text-center" data-toggle="modal" <div class="card-body text-center" data-toggle="modal" 
             onclick="toggle_pending_modal(
-                '{{ mcsu_faculty.first_name }}', '{{ mcsu_faculty.last_name }}', 
+                '{{ mcsu_faculty.first_name }}', '{{ mcsu_faculty.last_name }}', '{{ mcsu_faculty.user_id }}', 
                 // educational
                 '{{ faculty_educ[mcsu_faculty.user_id].id }}',
                 '{{ faculty_educ[mcsu_faculty.user_id].school }}', '{{ faculty_educ[mcsu_faculty.user_id].degree }}',
@@ -180,7 +180,7 @@
             {% for pgu_faculty in pgu_list %}
             {% if pgu_faculty.unit == 'pgu' %}
             <div class="card-body text-center" data-toggle="modal" onclick="toggle_pending_modal(
-                '{{ pgu_faculty.first_name }}', '{{ pgu_faculty.last_name }}', 
+                '{{ pgu_faculty.first_name }}', '{{ pgu_faculty.last_name }}', '{{ pgu_faculty.user_id}}', 
                 // educational
                 '{{ faculty_educ[pgu_faculty.user_id].id }}',
                 '{{ faculty_educ[pgu_faculty.user_id].school }}', '{{ faculty_educ[pgu_faculty.user_id].degree }}',
@@ -690,17 +690,18 @@
                 </div>
                 <div class="modal-body">
                     Are you sure you want to reject this change?
-                    <p id="request_id"></p><p id="request_type"></p>
+                    <p id="rejected_id"></p><p id="rejected_type"></p><p id="rejected_user_id"></p>
                     <br>
                     Reason/Remarks for rejection
-                    <input type="text" name="reject_remarks" id="reject_remarks" style="width: 100%;">
+                    <input type="text" name="rejected_remarks" id="rejected_remarks" style="width: 100%;">
                 </div>
                 <div class="modal-footer">
-                    <button id="reject" type="button" class="btn" data-toggle="modal" data-target="#exampleModal" data-dismiss="modal" style="color: #ffffff; background-color: #014421; font-size: 0.7vw;">Yes, reject</button>
+                    <button onclick="dept_chair_reject_pending_info()" type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421; font-size: 0.7vw;">Yes, reject</button>
                     <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" data-dismiss="modal" style="color: #ffffff; background-color: #7B1113; font-size: 0.7vw;">No, don't reject</button>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <div class="modal fade bd-example-modal-sm_approve" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal_approve">
@@ -711,7 +712,7 @@
                 </div>
                 <div class="modal-body">
                     Are you sure you want to approve this change?
-                    <p id="request_id"></p><p id="request_type"></p>
+                    <p id="approved_id"></p><p id="approved_type"></p>
                 </div>
                 <div class="modal-footer">
                     <button onclick="dept_chair_approve_pending_info()" type="button" class="btn" data-dismiss="modal" style="color: #ffffff; background-color: #014421; font-size: 0.7vw;">Yes, approve</button>

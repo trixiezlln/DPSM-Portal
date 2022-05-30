@@ -242,3 +242,15 @@ class ClerkPeronsalInformation(UserMixin, db.Model):
     id                          = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
     name                        = db.Column(db.String(180), nullable=True)
     user_id                     = db.Column(db.String(180), nullable=True)
+
+class RejectedInfo(UserMixin, db.Model):
+    __table_args__ = {
+        'schema' : schema, 
+        'extend_existing': True
+    }
+    __tablename__ = 'rejected_info'
+    seq_id          = db.Column(db.Integer, primary_key=True, nullable=True)
+    info_by         = db.Column(db.String(180), nullable=True)
+    info_id         = db.Column(db.String(180), nullable=True)
+    remarks         = db.Column(db.String(180), nullable=True)
+    rejected_by     = db.Column(db.String(180), nullable=True)
