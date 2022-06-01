@@ -31250,11 +31250,14 @@ a.text-muted:hover {
   -webkit-mask-size: cover !important;
 }
 
-/* .sidebar-icon:hover {
-  background: gray;
-} */
+#collapseExample .sidebar-icon {
+  width: 28px;
+  height: 28px;
+}
 .dropdown-icon {
   -webkit-mask: url(../img/icons/sidebar/dropdown.svg);
+  width: 28px;
+  height: 28px;
 }
 
 .basic-information {
@@ -31322,7 +31325,7 @@ a.text-muted:hover {
   padding: 0.5rem 0.5rem;
 }
 
-.main-sidebar .collapse.show {
+.main-sidebar #collapseExample {
   padding-left: 0% !important;
   border-left: 1px solid gray;
 }
@@ -31369,6 +31372,15 @@ a.text-muted:hover {
   background: #F2F3F4 !important;
 }
 
+.basic-information-item-button:hover{
+  background-color: rgba(255,255,255,0.1);
+  color: white !important;
+}
 
+.basic-information-item-dropdown:hover{
+  background-color: rgba(255,255,255,0.1);
+}
 
-
+.sidebar-collapse .main-sidebar:hover .basic-information-item-button {
+  width: 195px;
+}

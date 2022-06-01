@@ -93,13 +93,17 @@
                 </a>
               </li>
 
-              <li class="nav-item" data-toggle="collapse" href="#collapseExample">
-                <a href="#" class="nav-link d-flex align-items-center">
-                  <i class="sidebar-icon basic-information"></i>
-                  <p style="display: flex;align-items: center;">
+              <li class="basic-information-item" style="display:flex;">
+                <a href="/faculty/faculty_landing_page" class="nav-link d-flex align-items-center basic-information-item-button">
+                  <i class="sidebar-icon personal-information"></i>
+                  <p style="display: flex;align-items: center;font-family:Avenir LT Std;">
                     Basic Information
-                    <i class ="sidebar-icon dropdown-icon"></i>
                   </p>
+                </a>
+                <a class=" nav-item nav-link d-flex align-items-center basic-information-item-dropdown" data-toggle="collapse" href="#collapseExample">
+                  <i class ="sidebar-icon dropdown-icon mr-0"></i>
+                  <!-- <p style="display: flex;align-items: center;">
+                  </p> -->
                 </a>
               </li>
 
@@ -227,13 +231,17 @@
                 </a>
               </li>
 
-              <li class="nav-item" data-toggle="collapse" href="#collapseExample">
-                <a href="#" class="nav-link d-flex align-items-center">
-                  <i class="sidebar-icon basic-information"></i>
-                  <p style="display: flex;align-items: center;">
+              <li class="basic-information-item" style="display:flex;">
+                <a href="/faculty/faculty_landing_page" class="nav-link d-flex align-items-center basic-information-item-button">
+                  <i class="sidebar-icon personal-information"></i>
+                  <p style="display: flex;align-items: center;font-family:Avenir LT Std;">
                     Basic Information
-                    <i class ="sidebar-icon dropdown-icon"></i>
                   </p>
+                </a>
+                <a class=" nav-item nav-link d-flex align-items-center basic-information-item-dropdown" data-toggle="collapse" href="#collapseExample">
+                  <i class ="sidebar-icon dropdown-icon mr-0"></i>
+                  <!-- <p style="display: flex;align-items: center;">
+                  </p> -->
                 </a>
               </li>
 
@@ -369,32 +377,27 @@
               </li>
 
               {% elif current_user.role == "faculty" %}
-              <li class="nav-item" data-toggle="collapse" href="#collapseExample">
-                <a href="#" class="nav-link d-flex align-items-center">
-                  <i class ="sidebar-icon basic-information"></i>
-                  <p style="display: flex;align-items: center;">
+
+              <li class="basic-information-item" style="display:flex;">
+                <a href="/faculty/faculty_landing_page" class="nav-link d-flex align-items-center basic-information-item-button">
+                  <i class="sidebar-icon personal-information"></i>
+                  <p style="display: flex;align-items: center;font-family:Avenir LT Std;">
                     Basic Information
-                    <i class ="sidebar-icon dropdown-icon"></i>
                   </p>
-                  
+                </a>
+                <a class=" nav-item nav-link d-flex align-items-center basic-information-item-dropdown" data-toggle="collapse" href="#collapseExample">
+                  <i class ="sidebar-icon dropdown-icon mr-0"></i>
+                  <!-- <p style="display: flex;align-items: center;">
+                  </p> -->
                 </a>
               </li>
 
-              <div class="collapse" id="collapseExample" style="padding-left: 7%;">
+              <div class="collapse" id="collapseExample" >
                 <ul class="nav nav-pills nav-sidebar flex-column"
                   data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Basic Information Dropdown -->
-                  <li class="nav-item">
-                    <a href="/faculty/faculty_landing_page" class="nav-link d-flex align-items-center">
-                      <i class="sidebar-icon personal-information"></i>
-                      <p>
-                        Personal Information
-                      </p>
-                    </a>
-                  </li>
 
                   <li class="nav-item">
-                    <a href="/faculty/add_educational_attainment" class="nav-link d-flex align-items-center">
+                    <a href="/faculty/faculty_landing_page" class="nav-link d-flex align-items-center">
                       <i class="sidebar-icon educational-attainment"></i>
                       <p>
                         Educational Attainment
