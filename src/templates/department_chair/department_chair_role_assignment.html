@@ -96,8 +96,8 @@
                 {% if chem_nominee is not none %}
                   <tr class="clickable" onclick="window.location='#'">
                     <th scope="row">Chemistry Unit</th>
-                    <td>{{chem_nominee.nominee_info['last_name']}}, {{chem_nominee.nominee_info['first_name']}}</td>
                     <td>{{chem_nominee.unit_head_info['last_name']}}, {{chem_nominee.unit_head_info['first_name']}}</td>
+                    <td>{{chem_nominee.nominee_info['last_name']}}, {{chem_nominee.nominee_info['first_name']}}</td>
                     <td>
                       <button data-toggle="modal" class="btn btn-primary" data-target="#acceptModal">Accept</button>
                       <button data-toggle="modal" class="btn btn-secondary" style="background-color: #7B1113; border-color: #7B1113;" data-target="#rejectModal">Reject</button>
@@ -109,8 +109,8 @@
                 {% if mcsu_nominee is not none %}
                   <tr class="clickable" onclick="window.location='#'">
                     <th scope="row">Mathematics and Computing Sciences Unit</th>
-                    <td>{{mcsu_nominee.nominee_info['last_name']}}, {{mcsu_nominee.nominee_info['first_name']}}</td>
                     <td>{{mcsu_nominee.unit_head_info['last_name']}}, {{mcsu_nominee.unit_head_info['first_name']}}</td>
+                    <td>{{mcsu_nominee.nominee_info['last_name']}}, {{mcsu_nominee.nominee_info['first_name']}}</td>
                     <td>
                       <button type="button" class="btn btn-primary" onclick="unit_head_info_modal('{{mcsu_nominee.curr_unit_head}}', '{{mcsu_nominee.nominated_unit_head}}', 'accept')">Accept</button>
                       <button type="button" class="btn btn-secondary" style="background-color: #7B1113; border-color: #7B1113;" onclick="unit_head_info_modal('{{mcsu_nominee.curr_unit_head}}', '{{mcsu_nominee.nominated_unit_head}}', 'reject')">Reject</button>
@@ -121,9 +121,9 @@
                 <!-- PGU Head Nominee -->
                 {% if pgu_nominee is not none %}
                   <tr class="clickable" onclick="window.location='#'">
-                    <th scope="row">Physics and Geology Unit</th>
-                    <td>{{pgu_nominee.nominee_info['last_name']}}, {{pgu_nominee.nominee_info['first_name']}}</td>
+                    <th scope="row">Physics and Geology Unit</th>                   
                     <td>{{pgu_nominee.unit_head_info['last_name']}}, {{pgu_nominee.unit_head_info['first_name']}}</td>
+                    <td>{{pgu_nominee.nominee_info['last_name']}}, {{pgu_nominee.nominee_info['first_name']}}</td>
                     <td>
                       <button data-toggle="modal" class="btn btn-primary" data-target="#acceptModal">Accept</button>
                       <button data-toggle="modal" class="btn btn-secondary" style="background-color: #7B1113; border-color: #7B1113;" data-target="#rejectModal">Reject</button>
