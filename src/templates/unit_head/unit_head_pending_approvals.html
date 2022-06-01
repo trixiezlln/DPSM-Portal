@@ -25,6 +25,7 @@
             </thead>
             <tbody>
             {% for faculty in faculty_list %}
+            {% if faculty_record_count[faculty.user_id] > 0 %}
 
               <tr data-toggle="modal" 
                   onclick="toggle_pending_modal(
@@ -73,6 +74,7 @@
                     </span>&nbsp;{{ faculty.first_name }} {{ faculty.last_name }}
                 </th>
               </tr>
+            {% endif %}
             {% endfor %}
             </tbody>
         </table>
