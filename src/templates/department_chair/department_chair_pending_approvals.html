@@ -23,17 +23,16 @@
   -webkit-transform: rotate(45deg);
 }
 
-
 </style>
 
+
 <section>
-
-<div class="card-columns" id = "accordion">
-  
-
-  <div class="card">
+ <div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card" >
     <img src="https://www.solidbackgrounds.com/images/1920x1080/1920x1080-up-maroon-solid-color-background.jpg" class="card-img-top" alt="...">
-    <div class="card-header text-center" style = "font-weight:bold; ">Chemistry Unit</div>
+    <div class="card-header text-center" style = "font-weight:bold;" >Chemistry Unit</div>
     <div class="card-body text-center" >
         Chem Head
         <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style = "color:#7b1113;"> <i class="arrow down"></i> </button>        
@@ -93,10 +92,11 @@
         </div>
        </div>      
     </div>
-</div>
+            </div>
+        </div>
 
-
-<div class="card">
+        <div class="col-md-4">
+            <div class="card" >
     <img src="https://www.solidbackgrounds.com/images/2560x1440/2560x1440-up-forest-green-solid-color-background.jpg" class="card-img-top" alt="...">
     <div class="card-header text-center" style = "font-weight:bold; ">Math and Computing Sciences Unit</div>
     <div class="card-body text-center">
@@ -162,11 +162,11 @@
 
       
     </div>
+            </div>
+        </div>
 
-</div>
-
-
-<div class="card">
+        <div class="col-md-4">
+            <div class="card" >
     <img src="https://www.solidbackgrounds.com/images/1920x1080/1920x1080-up-maroon-solid-color-background.jpg" class="card-img-top" alt="...">
     <div class="card-header text-center" style = "font-weight:bold;">Physics and Geology Unit</div>
     <div class="card-body text-center">
@@ -175,7 +175,7 @@
         </button>
 
 
-      <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div id="collapseThree" class="collapse" aria-labelledby="heading1" data-parent="#accordion">
         <div class="card-body" data-toggle="modal" data-target="#exampleModal3" >
             {% for pgu_faculty in pgu_list %}
             {% if pgu_faculty.unit == 'pgu'  && faculty_record_count[pgu_faculty.user_id] > 0 %}
@@ -233,10 +233,9 @@
 
       
     </div>
-
-</div>
-
-
+            </div>
+        </div>
+    </div>
 </div>
 
     <!-- Modal -->
@@ -253,9 +252,9 @@
                     <div id="accordion">
                         
                         <div class="card">
-                            <div id="headingTwo">
+                            <div id="heading_two">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="width: 100%; font-size: 0.8em;">
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapse_two" aria-expanded="false" aria-controls="collapse_two" style="width: 100%; font-size: 0.8em;">
                                         <span id="educ_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;">   
                                         </span>
                                         Educational Attainment
@@ -263,7 +262,7 @@
                                 </h5>
                             </div>
 
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div id="collapse_two" class="collapse" aria-labelledby="heading_two" data-parent="#accordion">
 
                                 <div class="card-body" id="pendingEduc">
                                     <div class="container">
@@ -316,16 +315,16 @@
                         </div>
 
                         <div class="card">
-                            <div id="headingThree">
+                            <div id="heading_three">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%; font-size: 0.8em;">
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapse_three" aria-expanded="false" aria-controls="collapse_three" style="width: 100%; font-size: 0.8em;">
                                         <span id="work_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
                                         Work Experience
                                     </button>
                                 </h5>
                             </div>
 
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div id="collapse_three" class="collapse" aria-labelledby="heading_three" data-parent="#accordion">
                                 <div class="card-body" id="pendingWork">
                                     <!-- {% block unit_head_work_experience %} 
                                     {% endblock %}  -->
@@ -372,16 +371,16 @@
                         </div>
 
                         <div class="card">
-                            <div id="headingFour">
+                            <div id="heading_four">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="width: 100%; font-size: 0.8em;">
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapse_four" aria-expanded="false" aria-controls="collapse_four" style="width: 100%; font-size: 0.8em;">
                                         <span id="acc_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
                                         Accomplishments
                                     </button>
                                 </h5>
                             </div>
 
-                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                            <div id="collapse_four" class="collapse" aria-labelledby="heading_four" data-parent="#accordion">
                                 <div class="card-body" id="pendingAcc">
                                     <!-- {% block unit_head_accomplishments %} 
                                     {% endblock %}  -->
@@ -424,16 +423,16 @@
                         </div>
 
                         <div class="card">
-                            <div id="headingFive">
+                            <div id="heading_five">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="width: 100%; font-size: 0.8em;">
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapse_five" aria-expanded="false" aria-controls="collapse_five" style="width: 100%; font-size: 0.8em;">
                                         <span id="pub_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
                                         Publications
                                     </button>
                                 </h5>
                             </div>
 
-                            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                            <div id="collapse_five" class="collapse" aria-labelledby="heading_five" data-parent="#accordion">
                                 <div class="card-body" id="pendingPub">
                                     <!-- {% block unit_head_publications %} 
                                     {% endblock %}  -->
@@ -487,16 +486,16 @@
                         </div>
 
                         <div class="card">
-                            <div id="headingSix">
+                            <div id="heading_six">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix" style="width: 100%; font-size: 0.8em;">
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapse_six" aria-expanded="false" aria-controls="collapse_six" style="width: 100%; font-size: 0.8em;">
                                         <span id="rg_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
                                         Research Grants
                                     </button>
                                 </h5>
                             </div>
 
-                            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+                            <div id="collapse_six" class="collapse" aria-labelledby="heading_six" data-parent="#accordion">
                                 <div class="card-body" id="pendingRG">
                                     <!-- {% block unit_head_research_grants %} 
                                     {% endblock %} -->
@@ -578,16 +577,16 @@
                         </div>
 
                         <div class="card">
-                            <div id="headingSeven">
+                            <div id="heading_seven">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven" style="width: 100%; font-size: 0.8em;">
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapse_seven" aria-expanded="false" aria-controls="collapse_seven" style="width: 100%; font-size: 0.8em;">
                                         <span id="le_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
                                         Licensure Exam
                                     </button>
                                 </h5>
                             </div>
 
-                            <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
+                            <div id="collapse_seven" class="collapse" aria-labelledby="heading_seven" data-parent="#accordion">
                                 <div class="card-body" id="pendingLE">
                                     <!-- {% block unit_head_licensure_exams %} 
                                     {% endblock %} -->
@@ -624,16 +623,16 @@
                         </div>
 
                         <div class="card">
-                            <div id="headingEight">
+                            <div id="heading_eight">
                                 <h5 class="mb-0">
-                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight" style="width: 100%; font-size: 0.8em;">
+                                    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapse_eight" aria-expanded="false" aria-controls="collapse_eight" style="width: 100%; font-size: 0.8em;">
                                         <span id="ts_count" class="change_info" style="background-color: #7B1113; color: #ffffff; border-radius: 5px; width: 25px; display: inline-block;"></span>
                                         Trainings/Seminars
                                     </button>
                                 </h5>
                             </div>
 
-                            <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
+                            <div id="collapse_eight" class="collapse" aria-labelledby="heading_eight" data-parent="#accordion">
                                 <div class="card-body" id="pendingTS">
                                     <!-- {% block unit_head_trainings_seminars %} 
                                     {% endblock %} -->

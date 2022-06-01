@@ -184,8 +184,9 @@
         <div class="btn-export float-right"></div>
         
 
-        <div class="table-responsive">
-            <table class="table table-striped table-hover dt-bootstrap4 no-footer" id="accomplishemt_table" style="font-size: 1vw; width: 100%;">
+<div class="table-responsive">
+            <table class="table table-striped table-hover dt-bootstrap4 no-footer" id="accomplishemt_table" name="accomplishemt_table" style="font-size: 1vw; width: 100%;">
+                <form class="add-info-form" id="add_date_form" name="add_date_form" method="POST">
                 <thead>
                     <tr>
                         <th scope="col">Name of Faculty</th>
@@ -201,8 +202,8 @@
                         </th>
 
                         <th>
-                            <select class="suffix-select form-select form-control suffix" aria-label="" id="department_unit" name="" data-field="suffix" onchange="filter_unit()" style="font-size: 1vw;">
-                                <option selected value="">All</option>
+                            <select class="suffix-select form-select form-control suffix" aria-label="" id="department_unit" name="" data-field="suffix" onchange="filter_unit(this)" style="font-size: 1vw;">
+                                <option selected value="All">All</option>
                                 <option value="Chemistry">Chemistry</option>
                                 <option value="MCSU">MCSU</option>
                                 <option value="Physics/Geology">Physics/Geology</option>
@@ -211,32 +212,30 @@
                         </th>
 
 
-
                         <th>
                             <input class="form-control" type="text" id="accomplishment" name="" style="font-size: 1vw;">
                         </th>
                         <th>
-                            <select class="suffix-select form-select form-control suffix" aria-label="" id="accomplishment_type" name="" data-field="suffix" onchange="filter_accomplishments()" style="font-size: 1vw;">
-                                <option selected value="">All</option>
+                            <select class="suffix-select form-select form-control suffix" aria-label="" id="accomplishment_type" name="" data-field="suffix" onchange="filter_unit(this)" style="font-size: 1vw;">
+                                <option selected value="All">All</option>
                                 <option value="Publication">Publication</option>
                                 <option value="Research Grant">Research Grant</option>
+                                <option value="Licensure Exam">Licensure Exam</option>
                                 <option value="Public Service">Public Service</option>
                                 <option value="Training/Seminar">Training/Seminar</option>
                             </select>
                         </th>
                         <th>
-                            <input class="form-control" type="date" id="start_date" name="" style="font-size: 1vw;">
+                            <input class="form-control" type="date" id="start_date" name="start_date" style="font-size: 1vw;">
 
                         </th>
                         <th>
-                            <input class="form-control" type="date" id="end_date" name="" style="font-size: 1vw;">
+                            <input class="form-control" type="date" id="end_date" name="end_date" style="font-size: 1vw;">
                         </th>
                     </tr>
                 </thead>
+                </form>
                 <tbody id="myTable">
-
-                      
-
                     {% if faculty_accomplishments is not none %}
                         {% for accomplishment in faculty_accomplishments %}
                         <tr class="clickable" onclick="window.location='#'">
@@ -304,7 +303,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
+</div>
 
     
 </section>
@@ -346,21 +345,21 @@ $(document).ready(function(){
   $("#accomplishment").on("keyup", function() {
     var value = $(this).val().toLowerCase();
     $("#myTable tr").filter(function() {
-      $(this).toggle($(this).find("td:eq(0)").text().toLowerCase().indexOf(value) > -1)
+      $(this).toggle($(this).find("td:eq(1)").text().toLowerCase().indexOf(value) > -1)
     });
   });
 
-  $("#start_date").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).find("td:eq(2)").text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-
-  $("#end_date").on("keyup", function() {
+  $("#start_date").on("change", function() {
     var value = $(this).val().toLowerCase();
     $("#myTable tr").filter(function() {
       $(this).toggle($(this).find("td:eq(3)").text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+
+  $("#end_date").on("change", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).find("td:eq(4)").text().toLowerCase().indexOf(value) > -1)
     });
   });
 });
@@ -389,47 +388,23 @@ $(document).ready(function(){
 </script>
 
 <script>
-    function filter_accomplishments() {
-        var input, filter, table, tr, td, i;
-        input = document.getElementById("accomplishment_type");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("accomplishemt_table");
-        tr = table.getElementsByTagName("tr");
+    function filter_unit(select) {
         
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1];
-            if (td) {
-                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }       
-        }
-    }
-</script>
+    var rex = new RegExp($(select).children("option:selected").val());
+    if(rex =="/All/"){clearFilter()} else {
+          $('.clickable').hide();
+          $('.clickable').filter(function() {
+          return rex.test($(this).text());
+          }).show();
+  }
+}
 
-<script>
-    function filter_unit() {
-        var input, filter, table, tr, td, i;
-        input = document.getElementById("department_unit");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("accomplishemt_table");
-        tr = table.getElementsByTagName("tr");
-        
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1];
-            if (td) {
-                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }       
-        }
-    }
+function clearFilter()
+  {
+    $('.filter_unit').val('');
+    $('.clickable').show();
+  }
 </script>
-
 
 
 {% endblock %}
