@@ -102,7 +102,6 @@ function edit_fsr(
     syllabus_val,
     set_val,
 ) {
-    alert('pasok')
     var fsrData = new FormData();
 
     fsrData.append('course_code_val', course_code_val);
@@ -423,7 +422,6 @@ function reject_unit_head_nominee(){
             })
         },
         error: function(error){
-            alert('Error')
             Swal.fire({
                 allowEscapeKey: false,
                 allowOutsideClick: false,
@@ -695,7 +693,6 @@ function show_info_proof(current_user, proof_type, user_id, last_modified, f_ext
                 window.open(data['proof_file'], '_blank');
             } else {
                 var img_loc = "../../../"+data['proof_file'];
-                alert(img_loc)
                 $(file_window).attr("href", img_loc);
                 $(file_window).click();
             };
@@ -1282,7 +1279,6 @@ function toggle_pending_modal(first_name, last_name, user_id,
 function unit_head_approve_pending_info(){
     var info_data = new FormData();
 
-    alert($('#approved_id').html())
     info_data.append('id', $('#approved_id').html());
     info_data.append('type', $('#approved_type').html());
     
