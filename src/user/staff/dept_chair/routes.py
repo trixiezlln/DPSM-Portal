@@ -77,9 +77,6 @@ def load_dept_head_dashboard():
             faculty_licensure_exams,
             faculty_trainings
     ])
-
-    # for date filter
-    unit_label = str(current_user.unit.upper())
     
     try:
         
@@ -102,57 +99,78 @@ def load_dept_head_dashboard():
             max_date = dashboard_form.getlist('max_date')[0]
             print(f"max date: {max_date}")
 
-            faculty_accomplishments = (Accomplishment
-                .query
-                .join(FacultyPersonalInformation, Accomplishment.user_id == FacultyPersonalInformation.user_id)
-                .filter(FacultyPersonalInformation.unit == current_user.unit)
-                .filter(and_(Accomplishment.start_date >= min_date, Accomplishment.end_date <= max_date))
-                .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
-            ).all()
-            faculty_publications = (Publication
-                .query
-                .join(FacultyPersonalInformation, Publication.user_id == FacultyPersonalInformation.user_id)
-                .filter(FacultyPersonalInformation.unit == current_user.unit)
-                .filter(Publication.date_published.between(min_date, max_date))
-                .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
-            ).all()
-            faculty_research_grants = (ResearchGrant
-                .query
-                .join(FacultyPersonalInformation, ResearchGrant.user_id == FacultyPersonalInformation.user_id)
-                .filter(FacultyPersonalInformation.unit == current_user.unit)
-                .filter(and_(ResearchGrant.actual_start >= min_date, ResearchGrant.actual_end <= max_date))
-                .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
-            ).all()
-            faculty_licensure_exams = (LicensureExams
-                .query
-                .join(FacultyPersonalInformation, LicensureExams.user_id == FacultyPersonalInformation.user_id)
-                .filter(FacultyPersonalInformation.unit == current_user.unit)
-                .filter(LicensureExams.date.between(min_date, max_date))
-                .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
-            ).all()
-            faculty_trainings = (TrainingSeminar
-                .query
-                .join(FacultyPersonalInformation, FacultyPersonalInformation.user_id == TrainingSeminar.user_id)
-                .filter(FacultyPersonalInformation.unit == current_user.unit)
-                .filter(and_(TrainingSeminar.start_date >= min_date, TrainingSeminar.end_date <= max_date))
-                .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
-            ).all()
+        
 
-            print("try count")
-            print(len(faculty_publications))
+            filtered_total_count = {}
+            for unit in units:
+                print(f"checking {unit}")
+                faculty_accomplishments = (Accomplishment
+                    .query
+                    .join(FacultyPersonalInformation, Accomplishment.user_id == FacultyPersonalInformation.user_id)
+                    .filter(FacultyPersonalInformation.unit == unit)
+                    .filter(and_(Accomplishment.start_date >= min_date, Accomplishment.end_date <= max_date))
+                    .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+                ).all()
+                faculty_publications = (Publication
+                    .query
+                    .join(FacultyPersonalInformation, Publication.user_id == FacultyPersonalInformation.user_id)
+                    .filter(FacultyPersonalInformation.unit == unit)
+                    .filter(Publication.date_published.between(min_date, max_date))
+                    .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+                ).all()
+                faculty_research_grants = (ResearchGrant
+                    .query
+                    .join(FacultyPersonalInformation, ResearchGrant.user_id == FacultyPersonalInformation.user_id)
+                    .filter(FacultyPersonalInformation.unit == unit)
+                    .filter(and_(ResearchGrant.actual_start >= min_date, ResearchGrant.actual_end <= max_date))
+                    .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+                ).all()
+                faculty_licensure_exams = (LicensureExams
+                    .query
+                    .join(FacultyPersonalInformation, LicensureExams.user_id == FacultyPersonalInformation.user_id)
+                    .filter(FacultyPersonalInformation.unit == unit)
+                    .filter(LicensureExams.date.between(min_date, max_date))
+                    .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+                ).all()
+                faculty_trainings = (TrainingSeminar
+                    .query
+                    .join(FacultyPersonalInformation, FacultyPersonalInformation.user_id == TrainingSeminar.user_id)
+                    .filter(FacultyPersonalInformation.unit == unit)
+                    .filter(and_(TrainingSeminar.start_date >= min_date, TrainingSeminar.end_date <= max_date))
+                    .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
+                ).all()
+                convert_unit([
+                        faculty_accomplishments,
+                        faculty_publications,
+                        faculty_research_grants,
+                        faculty_licensure_exams,
+                        faculty_trainings
+                ])
 
-            unit_count_filtered = [
-                len(faculty_publications),
-                len(faculty_accomplishments),
-                len(faculty_trainings),
-                len(faculty_licensure_exams),
-                len(faculty_research_grants)
-            ]
-   
+                print("try count")
+                print(len(faculty_publications))
 
-            return render_template('unit_head/unit_head_dashboard.html',
-                unit_count = unit_count_filtered,
-                unit_label = unit_label,
+                unit_count_filtered = [
+                    len(faculty_publications),
+                    len(faculty_accomplishments),
+                    len(faculty_trainings),
+                    len(faculty_licensure_exams),
+                    len(faculty_research_grants)
+                ]
+
+                print(f"Unit count filtered {unit_count_filtered}")
+
+                filtered_total_count[unit] = unit_count_filtered
+
+                print(f"passing MCSU {filtered_total_count['mcsu']}")
+
+                print(f"records {faculty_accomplishments}")
+    
+
+            return render_template('department_chair/department_chair_dashboard.html',
+                acc_data_mcsu = filtered_total_count['mcsu'],
+                acc_data_physics = filtered_total_count['cu'],
+                acc_data_chemistry = filtered_total_count['pgu'],
                 faculty_accomplishments = faculty_accomplishments,
                 faculty_publications = faculty_publications,
                 faculty_research_grants = faculty_research_grants,

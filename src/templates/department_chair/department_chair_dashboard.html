@@ -100,13 +100,16 @@
     <div id="overview" class="tabcontent" style="display:block; ">
 
         <div class="float-right mt-4 mb-4">
+            <form class="add-info-form" id="add_date_form" name="add_date_form" method="POST">
+                
             <div class="input-group float-right">
                 <label style="line-height: 35px; ">From:&nbsp;</label>
-                <input class="form-control" type="date" id="min" name="min">
+                <input class="form-control" type="date" id="min_date" name="min_date">
                 <label style="line-height: 35px; ">&nbsp;To:&nbsp;</label>
-                <input class="form-control" type="date" id="max" name="max">&nbsp;
-                <button type="button" class="btn btn-primary float-right" id="filter">Filter</button>
+                <input class="form-control" type="date" id="max_date" name="max_date">&nbsp;
+                <button type="submit" class="btn btn-primary float-right" id="filter">Filter</button>
             </div>
+            </form>
         </div>
 
         <br>
