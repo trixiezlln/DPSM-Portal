@@ -12,9 +12,7 @@
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 3px;
-  position: absolute;
-  right:  40px;
-  top:  260px;
+  
   
 }
 
@@ -23,20 +21,27 @@
   -webkit-transform: rotate(45deg);
 }
 
+.btn {
+
+    padding: 10px;
+    margin-left: 10px;
+}
+
 </style>
 
 
 <section>
- <div class="container">
+ <div class="container" style="">
     <div class="row">
         <div class="col-md-4">
             <div class="card" >
     <img src="https://www.solidbackgrounds.com/images/1920x1080/1920x1080-up-maroon-solid-color-background.jpg" class="card-img-top" alt="...">
     <div class="card-header text-center" style = "font-weight:bold;" >Chemistry Unit</div>
     <div class="card-body text-center" >
-        Chem Head
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style = "color:#7b1113;"> <i class="arrow down"></i> </button>        
-
+        <div class = "d-flex justify-content-center" > 
+            Chem Head
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style = "color:#7b1113;"> <i class="arrow down"></i> </button>        
+        </div>
       <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
         <div class="card-body" data-toggle="modal" data-target="#exampleModal" >
             {% for cu_faculty in faculty_list %}
@@ -100,9 +105,11 @@
     <img src="https://www.solidbackgrounds.com/images/2560x1440/2560x1440-up-forest-green-solid-color-background.jpg" class="card-img-top" alt="...">
     <div class="card-header text-center" style = "font-weight:bold; ">Math and Computing Sciences Unit</div>
     <div class="card-body text-center">
-        Gonzales, Ken Joffaniel
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" style = "color:#7b1113; "> <i class="arrow down"></i>
-        </button>
+        <div class = "d-flex justify-content-center" > 
+            Gonzales, Ken Joffaniel
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" style = "color:#7b1113; "> <i class="arrow down"></i>
+            </button>
+        </div>
 
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
         <div class="card-body" data-toggle="modal" data-target="#exampleModal2" >
@@ -170,9 +177,11 @@
     <img src="https://www.solidbackgrounds.com/images/1920x1080/1920x1080-up-maroon-solid-color-background.jpg" class="card-img-top" alt="...">
     <div class="card-header text-center" style = "font-weight:bold;">Physics and Geology Unit</div>
     <div class="card-body text-center">
-        Bagunu, Ramon Jose C.
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" style = "color:#7b1113;"> <i class="arrow down"></i>
-        </button>
+        <div class = "d-flex justify-content-center" > 
+            Bagunu, Ramon Jose C.
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" style = "color:#7b1113;"> <i class="arrow down"></i>
+            </button>
+        </div>
 
 
       <div id="collapseThree" class="collapse" aria-labelledby="heading1" data-parent="#accordion">
