@@ -106,7 +106,7 @@
 
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
         <div class="card-body" data-toggle="modal" data-target="#exampleModal2" >
-            {% for mcsu_faculty in mcsu_list %}
+            {% for mcsu_faculty in faculty_list %}
             {% if mcsu_faculty.unit == 'mcsu' and faculty_record_count[mcsu_faculty.user_id] > 0 %}
             <div class="card-body text-center" data-toggle="modal"  
             onclick="toggle_pending_modal(
@@ -177,7 +177,7 @@
 
       <div id="collapseThree" class="collapse" aria-labelledby="heading1" data-parent="#accordion">
         <div class="card-body" data-toggle="modal" data-target="#exampleModal3" >
-            {% for pgu_faculty in pgu_list %}
+            {% for pgu_faculty in faculty_list %}
             {% if pgu_faculty.unit == 'pgu'  and faculty_record_count[pgu_faculty.user_id] > 0 %}
             <div class="card-body text-center" data-toggle="modal" onclick="toggle_pending_modal(
                 '{{ pgu_faculty.first_name }}', '{{ pgu_faculty.last_name }}', '{{ pgu_faculty.user_id}}', 
