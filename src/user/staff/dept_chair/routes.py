@@ -139,13 +139,13 @@ def load_dept_head_dashboard():
                     .filter(and_(TrainingSeminar.start_date >= min_date, TrainingSeminar.end_date <= max_date))
                     .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
                 ).all()
-                convert_unit([
-                        faculty_accomplishments,
-                        faculty_publications,
-                        faculty_research_grants,
-                        faculty_licensure_exams,
-                        faculty_trainings
-                ])
+                # convert_unit([
+                #         faculty_accomplishments,
+                #         faculty_publications,
+                #         faculty_research_grants,
+                #         faculty_licensure_exams,
+                #         faculty_trainings
+                # ])
 
                 print("try count")
                 print(len(faculty_publications))
