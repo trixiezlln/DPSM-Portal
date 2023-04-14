@@ -23,8 +23,6 @@ from src.user.staff.unit_head.routes import unit_head_blueprint
 from src.user.staff.dept_chair.routes import dept_chair_blueprint
 load_dotenv(override=True)
 
-
-
 def create_app(config_filename=None):
 
 	#Database credentials
@@ -34,6 +32,7 @@ def create_app(config_filename=None):
 	app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 	app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 1
 
+	migrate = Migrate(app, db) #added by pao
 	#Session timeout
 	# app.config['PERMANENT_SESSION_LIFETIME'] =  timedelta(minutes=2)
 	app.config['SESSION_REFRESH_EACH_REQUEST'] = True
