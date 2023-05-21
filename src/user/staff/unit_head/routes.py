@@ -369,7 +369,7 @@ def load_unit_head_dashboard():
   
     unit_count = []
     for acc in accomplishments:
-        record = db.session.query(acc.id, UserCredentials.unit).join(UserCredentials, acc.user_id==UserCredentials.user_id).filter(UserCredentials.unit==current_user.unit).count()
+        record = db.session.query(acc.id, UserCredentials.unit).join(UserCredentials, acc.user_id==UserCredentials.user_id).filter(UserCredentials.unit==current_user.unit).filter(acc.info_status==True).count()
         unit_count.append(record)
     
     print(unit_count)
@@ -380,30 +380,35 @@ def load_unit_head_dashboard():
         .query
         .join(FacultyPersonalInformation, Accomplishment.user_id == FacultyPersonalInformation.user_id)
         .filter(FacultyPersonalInformation.unit == current_user.unit)
+        .filter(Accomplishment.info_status == True)
         .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
     ).all()
     faculty_publications = (Publication
         .query
         .join(FacultyPersonalInformation, Publication.user_id == FacultyPersonalInformation.user_id)
         .filter(FacultyPersonalInformation.unit == current_user.unit)
+        .filter(Publication.info_status == True)
         .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
     ).all()
     faculty_research_grants = (ResearchGrant
         .query
         .join(FacultyPersonalInformation, ResearchGrant.user_id == FacultyPersonalInformation.user_id)
         .filter(FacultyPersonalInformation.unit == current_user.unit)
+        .filter(ResearchGrant.info_status == True)
         .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
     ).all()
     faculty_licensure_exams = (LicensureExams
         .query
         .join(FacultyPersonalInformation, LicensureExams.user_id == FacultyPersonalInformation.user_id)
         .filter(FacultyPersonalInformation.unit == current_user.unit)
+        .filter(LicensureExams.info_status == True)
         .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
     ).all()
     faculty_trainings = (TrainingSeminar
         .query
         .join(FacultyPersonalInformation, FacultyPersonalInformation.user_id == TrainingSeminar.user_id)
         .filter(FacultyPersonalInformation.unit == current_user.unit)
+        .filter(TrainingSeminar.info_status == True)
         .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
     ).all()
     print(len(faculty_trainings))
@@ -432,6 +437,7 @@ def load_unit_head_dashboard():
                 .join(FacultyPersonalInformation, Accomplishment.user_id == FacultyPersonalInformation.user_id)
                 .filter(FacultyPersonalInformation.unit == current_user.unit)
                 .filter(and_(Accomplishment.start_date >= min_date, Accomplishment.end_date <= max_date))
+                .filter(Accomplishment.info_status == True)
                 .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
             ).all()
             faculty_publications = (Publication
@@ -439,6 +445,7 @@ def load_unit_head_dashboard():
                 .join(FacultyPersonalInformation, Publication.user_id == FacultyPersonalInformation.user_id)
                 .filter(FacultyPersonalInformation.unit == current_user.unit)
                 .filter(Publication.date_published.between(min_date, max_date))
+                .filter(Publication.info_status == True)
                 .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
             ).all()
             faculty_research_grants = (ResearchGrant
@@ -446,6 +453,7 @@ def load_unit_head_dashboard():
                 .join(FacultyPersonalInformation, ResearchGrant.user_id == FacultyPersonalInformation.user_id)
                 .filter(FacultyPersonalInformation.unit == current_user.unit)
                 .filter(and_(ResearchGrant.actual_start >= min_date, ResearchGrant.actual_end <= max_date))
+                .filter(ResearchGrant.info_status == True)
                 .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
             ).all()
             faculty_licensure_exams = (LicensureExams
@@ -453,6 +461,7 @@ def load_unit_head_dashboard():
                 .join(FacultyPersonalInformation, LicensureExams.user_id == FacultyPersonalInformation.user_id)
                 .filter(FacultyPersonalInformation.unit == current_user.unit)
                 .filter(LicensureExams.date.between(min_date, max_date))
+                .filter(LicensureExams.info_status == True)
                 .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
             ).all()
             faculty_trainings = (TrainingSeminar
@@ -460,6 +469,7 @@ def load_unit_head_dashboard():
                 .join(FacultyPersonalInformation, FacultyPersonalInformation.user_id == TrainingSeminar.user_id)
                 .filter(FacultyPersonalInformation.unit == current_user.unit)
                 .filter(and_(TrainingSeminar.start_date >= min_date, TrainingSeminar.end_date <= max_date))
+                .filter(TrainingSeminar.info_status == True)
                 .add_columns(FacultyPersonalInformation.first_name, FacultyPersonalInformation.last_name)
             ).all()
 
