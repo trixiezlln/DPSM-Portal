@@ -329,6 +329,7 @@ $(document).ready(function(){
       $(this).toggle($(this).find("td:eq(3)").text().toLowerCase().indexOf(value) > -1)
     });
   });
+  $('#filter').attr('disabled', true);
 });
 </script>
 
@@ -415,6 +416,20 @@ $(document).ready(function(){
             table.draw();
         });
     });
+</script>
+
+<script>
+    function checkInputs() {
+        var minDate = $('#min_date').val();
+        var maxDate = $('#max_date').val();
+        return minDate !== '' && maxDate !== '';
+    }
+    function toggleFilterButton() {
+        var filterButton = $('#filter');
+        var enableButton = checkInputs();
+        filterButton.prop('disabled', !enableButton);
+    }
+    $('#min_date, #max_date').on('input', toggleFilterButton);
 </script>
 
 {% endblock %}
