@@ -386,7 +386,7 @@
 
             <hr>
             
-            {% if educ_record|length > 0 %}
+            {% if educ_attainment|length > 0 %}
             <!-- box content -->
             {% for educ_record in educ_attainment %}
             {% if educ_record['id'] not in rejected_info_id %}
@@ -495,7 +495,7 @@
             </div>
 
             <hr>
-            {% if work_record|length > 0%}
+            {% if work_experience|length > 0%}
             <!-- box content -->
             {% for work_record in work_experience %}
                 {% if work_record['id'] not in rejected_info_id %}
@@ -599,7 +599,7 @@
             </div>
 
             <hr>
-            {% if acc_record|length > 0 %}
+            {% if accomplishment|length > 0 %}
             {% for acc_record in accomplishment %}
             {% if acc_record['id'] not in rejected_info_id %}
             <div class="info-sub-section">
@@ -703,7 +703,7 @@
             </div>
 
             <hr>
-            {% if pub_record|length > 0 %}
+            {% if publication|length > 0 %}
             {% for pub_record in publication %}
             {% if pub_record['id'] not in rejected_info_id %}
             <div class="info-sub-section">
@@ -817,7 +817,7 @@
             </div>
 
             <hr>
-            {% if rg_record|length > 0 %}
+            {% if research_grant|length > 0 %}
             {% for rg_record in research_grant %}
             {% if rg_record['id'] not in rejected_info_id %}
             <div class="info-sub-section">
@@ -949,7 +949,7 @@
             </div>
 
             <hr>
-            {% if le_record|length > 0 %}
+            {% if licensure|length > 0 %}
             {% for le_record in licensure %}
             {% if le_record['id'] not in rejected_info_id %}
             <div class="info-sub-section">
@@ -1025,7 +1025,7 @@
             </div>
 
             <hr>
-            {% if ts_record|length > 0 %}
+            {% if training|length > 0 %}
             {% for ts_record in training %}
             {% if ts_record['id'] not in rejected_info_id %}
             <div class="info-sub-section">

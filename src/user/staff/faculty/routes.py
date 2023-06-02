@@ -43,13 +43,13 @@ def view_info():
     try:
         if request.method == 'GET':
             personal_info = FacultyPersonalInformation.query.filter_by(user_id=current_user.user_id, info_status=None).first()
-            educ_attainment = EducationalAttainment.query.filter_by(user_id=current_user.user_id, info_status=None)
-            work_experience = WorkExperience.query.filter_by(user_id=current_user.user_id, info_status=None)
-            accomplishment = Accomplishment.query.filter_by(user_id=current_user.user_id, info_status=None)
-            publication = Publication.query.filter_by(user_id=current_user.user_id, info_status=None)
-            licensure = LicensureExams.query.filter_by(user_id=current_user.user_id, info_status=None)
-            research_grant = ResearchGrant.query.filter_by(user_id=current_user.user_id, info_status=None)
-            training = TrainingSeminar.query.filter_by(user_id=current_user.user_id, info_status=None)
+            educ_attainment = EducationalAttainment.query.filter_by(user_id=current_user.user_id, info_status=True).all()
+            work_experience = WorkExperience.query.filter_by(user_id=current_user.user_id, info_status=True).all()
+            accomplishment = Accomplishment.query.filter_by(user_id=current_user.user_id, info_status=True).all()
+            publication = Publication.query.filter_by(user_id=current_user.user_id, info_status=True).all()
+            licensure = LicensureExams.query.filter_by(user_id=current_user.user_id, info_status=True).all()
+            research_grant = ResearchGrant.query.filter_by(user_id=current_user.user_id, info_status=True).all()
+            training = TrainingSeminar.query.filter_by(user_id=current_user.user_id, info_status=True).all()
             fsr = FacultySETRecords.query.filter_by(id=current_user.user_id).all()
 
             rejected_info_id = RejectedInfo.query.with_entities(RejectedInfo.info_id)
