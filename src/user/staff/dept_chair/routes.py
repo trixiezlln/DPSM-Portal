@@ -41,7 +41,7 @@ def load_dept_head_dashboard():
     for unit in units:
         unit_count = []
         for acc in accomplishments:
-            record = db.session.query(acc.id, UserCredentials.unit).join(UserCredentials, acc.user_id==UserCredentials.user_id).filter(UserCredentials.unit==unit).filter(acc.info_status==True).count()
+            record = db.session.query(acc.id, FacultyPersonalInformation.unit).join(FacultyPersonalInformation, acc.user_id==FacultyPersonalInformation.user_id).filter(FacultyPersonalInformation.unit==unit).filter(acc.info_status==True).count()
             unit_count.append(record)
         total_count[unit] = unit_count
 
@@ -88,8 +88,8 @@ def load_dept_head_dashboard():
         if request.method == 'GET':
             return render_template('department_chair/department_chair_dashboard.html', 
                 acc_data_mcsu = total_count['mcsu'],
-                acc_data_physics = total_count['cu'],
-                acc_data_chemistry = total_count['pgu'],
+                acc_data_physics = total_count['pgu'],
+                acc_data_chemistry = total_count['cu'],
                 faculty_accomplishments = faculty_accomplishments,
                 faculty_publications = faculty_publications,
                 faculty_research_grants = faculty_research_grants,
@@ -179,8 +179,8 @@ def load_dept_head_dashboard():
 
             return render_template('department_chair/department_chair_dashboard.html',
                 acc_data_mcsu = filtered_total_count['mcsu'],
-                acc_data_physics = filtered_total_count['cu'],
-                acc_data_chemistry = filtered_total_count['pgu'],
+                acc_data_physics = filtered_total_count['pgu'],
+                acc_data_chemistry = filtered_total_count['cu'],
                 faculty_accomplishments = faculty_accomplishments,
                 faculty_publications = faculty_publications,
                 faculty_research_grants = faculty_research_grants,
@@ -208,13 +208,13 @@ def convert_unit(info_list_list):
 @dept_chair_blueprint.route('/department_chair/view_faculty_info/<user_id>', methods=['GET', 'POST'])
 def dept_head_view_faculty_info(user_id):
     faculty_personal_information = FacultyPersonalInformation.query.filter_by(user_id=user_id).first()
-    faculty_educational_attaiment = EducationalAttainment.query.filter_by(user_id=user_id).all()
-    faculty_work_experience = WorkExperience.query.filter_by(user_id=user_id).all()
-    faculty_accomplishments = Accomplishment.query.filter_by(user_id=user_id).all()
-    faculty_publications = Publication.query.filter_by(user_id=user_id).all()
-    faculty_research_grants = ResearchGrant.query.filter_by(user_id=user_id).all()
-    faculty_licensure_exams = LicensureExams.query.filter_by(user_id=user_id).all()
-    faculty_trainings = TrainingSeminar.query.filter_by(user_id=user_id).all()
+    faculty_educational_attaiment = EducationalAttainment.query.filter(EducationalAttainment.user_id == user_id, EducationalAttainment.info_status.isnot(None)).all()
+    faculty_work_experience = WorkExperience.query.filter(WorkExperience.user_id == user_id, WorkExperience.info_status.isnot(None)).all()
+    faculty_accomplishments = Accomplishment.query.filter(Accomplishment.user_id == user_id, Accomplishment.info_status.isnot(None)).all()
+    faculty_publications = Publication.query.filter(Publication.user_id == user_id, Publication.info_status.isnot(None)).all()
+    faculty_research_grants = ResearchGrant.query.filter(ResearchGrant.user_id == user_id, ResearchGrant.info_status.isnot(None)).all()
+    faculty_licensure_exams = LicensureExams.query.filter(LicensureExams.user_id == user_id, LicensureExams.info_status.isnot(None)).all()
+    faculty_trainings = TrainingSeminar.query.filter(TrainingSeminar.user_id == user_id,TrainingSeminar.info_status.isnot(None)).all()
     faculty_service_records = FacultySETRecords.query.filter_by(id=user_id).all()
 
     faculty_rejected_info = RejectedInfo.query.filter_by(info_by=user_id).with_entities(RejectedInfo.info_id)

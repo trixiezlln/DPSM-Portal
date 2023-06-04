@@ -33,13 +33,13 @@ def load_user(user_id):
 @unit_head_blueprint.route('/unit_head/view_faculty_info/<user_id>', methods=['GET', 'POST'])
 def unit_head_view_faculty_info(user_id):
     faculty_personal_information = FacultyPersonalInformation.query.filter_by(user_id=user_id).first()
-    faculty_educational_attaiment = EducationalAttainment.query.filter_by(user_id=user_id).all()
-    faculty_work_experience = WorkExperience.query.filter_by(user_id=user_id).all()
-    faculty_accomplishments = Accomplishment.query.filter_by(user_id=user_id).all()
-    faculty_publications = Publication.query.filter_by(user_id=user_id).all()
-    faculty_research_grants = ResearchGrant.query.filter_by(user_id=user_id).all()
-    faculty_licensure_exams = LicensureExams.query.filter_by(user_id=user_id).all()
-    faculty_trainings = TrainingSeminar.query.filter_by(user_id=user_id).all()
+    faculty_educational_attaiment = EducationalAttainment.query.filter(EducationalAttainment.user_id == user_id, EducationalAttainment.info_status.isnot(None)).all()
+    faculty_work_experience = WorkExperience.query.filter(WorkExperience.user_id == user_id, WorkExperience.info_status.isnot(None)).all()
+    faculty_accomplishments = Accomplishment.query.filter(Accomplishment.user_id == user_id, Accomplishment.info_status.isnot(None)).all()
+    faculty_publications = Publication.query.filter(Publication.user_id == user_id, Publication.info_status.isnot(None)).all()
+    faculty_research_grants = ResearchGrant.query.filter(ResearchGrant.user_id == user_id, ResearchGrant.info_status.isnot(None)).all()
+    faculty_licensure_exams = LicensureExams.query.filter(LicensureExams.user_id == user_id, LicensureExams.info_status.isnot(None)).all()
+    faculty_trainings = TrainingSeminar.query.filter(TrainingSeminar.user_id == user_id,TrainingSeminar.info_status.isnot(None)).all()
     faculty_service_records = FacultySETRecords.query.filter_by(id=user_id).all()
 
     faculty_rejected_info = RejectedInfo.query.filter_by(info_by=user_id).with_entities(RejectedInfo.info_id)
@@ -369,7 +369,7 @@ def load_unit_head_dashboard():
   
     unit_count = []
     for acc in accomplishments:
-        record = db.session.query(acc.id, UserCredentials.unit).join(UserCredentials, acc.user_id==UserCredentials.user_id).filter(UserCredentials.unit==current_user.unit).filter(acc.info_status==True).count()
+        record = db.session.query(acc.id, FacultyPersonalInformation.unit).join(FacultyPersonalInformation, acc.user_id==FacultyPersonalInformation.user_id).filter(FacultyPersonalInformation.unit==current_user.unit).filter(acc.info_status==True).count()
         unit_count.append(record)
     
     print(unit_count)
