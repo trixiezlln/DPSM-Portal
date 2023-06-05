@@ -15,6 +15,7 @@ from datetime import timedelta, date
 import requests
 import pip._vendor.cachecontrol as cacheControl
 import json
+import time
 
 #Models
 from ..models import EducationalAttainment, FacultyPersonalInformation, ClerkPeronsalInformation
@@ -26,12 +27,18 @@ from ..models import UnitHeadNominations
 # from .functions.generate_educational_attaintment_id import generate_educational_attainment_id
 
 dept_chair_blueprint = Blueprint('dept_chair_blueprint', __name__)
+@login_manager.unauthorized_handler
+def unauthorized_callback():
+    flash('Please login to access this page.', 'error')
+    time.sleep(5)
+    return redirect(url_for('auth_blueprint.index'))
 
 @login_manager.user_loader
 def load_user(user_id):
 	return UserCredentials.query.get(int(user_id))
 
 @dept_chair_blueprint.route('/department_chair/dashboard', methods=['GET', 'POST'])
+@login_required
 def load_dept_head_dashboard():
 
     units = ['mcsu', 'cu', 'pgu']
@@ -206,6 +213,7 @@ def convert_unit(info_list_list):
             item[idx] = tuple(info_list) 
 
 @dept_chair_blueprint.route('/department_chair/view_faculty_info/<user_id>', methods=['GET', 'POST'])
+@login_required
 def dept_head_view_faculty_info(user_id):
     faculty_personal_information = FacultyPersonalInformation.query.filter_by(user_id=user_id).first()
     faculty_educational_attaiment = EducationalAttainment.query.filter(EducationalAttainment.user_id == user_id, EducationalAttainment.info_status.isnot(None)).all()
@@ -242,6 +250,7 @@ def dept_head_view_faculty_info(user_id):
 
 
 @dept_chair_blueprint.route('/department_chair/view_faculty_info/<string:filename>', methods=['GET'])
+@login_required
 def view_proof(id, proof_type, filename):
     try:
         CURR_FILE_DIR = os.path.join(proof_type, id)
@@ -260,6 +269,7 @@ def view_proof(id, proof_type, filename):
 
 
 @dept_chair_blueprint.route('/department_chair/role_assignment', methods=['GET', 'POST', 'DELETE', 'PUT'])
+@login_required
 def department_chair_role_assignment():
     if request.method == 'GET':
         try:
@@ -377,6 +387,7 @@ def department_chair_role_assignment():
     
 
 @dept_chair_blueprint.route('/department_chair/role_assignment/dept_head', methods=['POST'])
+@login_required
 def department_chair_role_assignment_dept_head():
     try:
         new_dept_head_form = request.form 
@@ -399,6 +410,7 @@ def department_chair_role_assignment_dept_head():
         return 'Error assigning new Department Head. Please try again.', 400
 
 @dept_chair_blueprint.route('/department_chair/role_assignment/clerk', methods=['GET', 'POST', 'DELETE', 'PUT'])
+@login_required
 def department_chair_role_assignment_clerk():
     if request.method == 'POST':
         try:
@@ -441,6 +453,7 @@ def department_chair_role_assignment_clerk():
 
 
 @dept_chair_blueprint.route('/department_chair/pending_approvals', methods=['GET', 'PUT', 'POST'])
+@login_required
 def department_chair_pending_approvals():
     try:
         if request.method == 'GET':
@@ -565,6 +578,7 @@ def department_chair_pending_approvals():
 
 
 @dept_chair_blueprint.route('/department_chair/faculty_list', methods=['GET', 'POST'])
+@login_required
 def department_chair_faculty_list():
     try:
         department_faculty_list = (FacultyPersonalInformation

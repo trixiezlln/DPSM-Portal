@@ -12,6 +12,7 @@ from datetime import timedelta, date
 import requests
 import pip._vendor.cachecontrol as cacheControl
 import json
+import time
 
 
 #Google OAuth
@@ -32,6 +33,7 @@ from .models import UserCredentials
 '''GOOGLE OAUTH SETUP'''
 GOOGLE_CLIENT_ID = environ.get('GOOGLE_CLIENT_ID')
 client_secrets_file = environ.get('CLIENTS_SECRETS_FILE')
+GOOGLE_ALLOWED_EMAILS = ['*@up.edu.ph']
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 flow = Flow.from_client_secrets_file(
@@ -80,6 +82,15 @@ def google_sign_in_callback():
             request = token_request,
             audience = GOOGLE_CLIENT_ID
         )
+
+        email = id_info.get('email')
+        allowed_domain = 'up.edu.ph'
+        
+        if not email.endswith('@' + allowed_domain):
+             flash('You are not authorized to access this application.', 'error')
+             time.sleep(5)
+             return redirect(url_for('auth_blueprint.index'))
+
         #return id_info
         
         session['google_id'] = id_info.get('sub')

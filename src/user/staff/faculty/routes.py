@@ -39,6 +39,7 @@ def load_user(user_id):
 	return UserCredentials.query.get(user_id)
 
 @faculty_blueprint.route('/faculty/faculty_landing_page', methods = ['GET', 'POST'])
+@login_required
 def view_info():
     try:
         if request.method == 'GET':
@@ -83,6 +84,7 @@ def view_info():
 
 
 @faculty_blueprint.route('/faculty/faculty_landing_page/<string:filename>', methods=['GET'])
+@login_required
 def view_proof(id, proof_type, filename):
     try:
         CURR_FILE_DIR = os.path.join(proof_type, id)
@@ -101,17 +103,17 @@ def view_proof(id, proof_type, filename):
 
 
 # # edit personal information
-@faculty_blueprint.route('/faculty/update_personal_info', methods = ['GET', 'PUT'])
+@faculty_blueprint.route('/faculty/update_personal_info', methods = ['GET', 'POST'])
+@login_required
 def update_personal_info():
     try:
         if request.method == 'GET':
             faculty_info_record = FacultyPersonalInformation.query.filter_by(user_id=current_user.user_id).first()
-            print(faculty_info_record.__dict__)
             return render_template(
             'faculty/update_info.html',
             faculty_info_record=faculty_info_record
             )
-        elif request.method == 'PUT':
+        elif request.method == 'POST':
             faculty_info_form = request.form
             faculty_info_record = FacultyPersonalInformation.query.filter_by(user_id=faculty_info_form['faculty_id_number']).first()
 
@@ -138,7 +140,8 @@ def update_personal_info():
 
             db.session.commit()
 
-            return 'Personal Information Record Successfully Updated.', 200
+            flash('Personal Information Record Successfully Updated.', 200)
+            return render_template('faculty/update_info.html',faculty_info_record=faculty_info_record)
     except Exception as e:
         print(e)
         return 'An error has occured.', 500
@@ -146,6 +149,7 @@ def update_personal_info():
 from pprint import pprint
 from PIL import Image
 @faculty_blueprint.route('/faculty/add_educational_attainment', methods=['GET', 'POST'])
+@login_required
 def add_educational_attainment():
     try:
         if request.method == 'GET':
@@ -161,42 +165,48 @@ def add_educational_attainment():
 
             educ_proof = educational_attainment_files['educ_proof']
             _, educ_proof_ext = os.path.splitext(educ_proof.filename)
-            educ_proof_img = Image.open(educ_proof)
 
-            educ_proof_filename = '{}_{}_{}.{}'.format(
-                'EDUC_PROOF', 
-                current_user.user_id, 
-                date.today(), 
-                educ_proof_ext[1:]
-            )
+            if (educ_proof_ext == '.jpg' or educ_proof_ext == '.png'):
+                educ_proof_img = Image.open(educ_proof)
 
-            EDUC_PROOF_PATH = os.path.join(CURR_EDUC_PROOF_DIR, educ_proof_filename)
-            educ_proof_img.save(EDUC_PROOF_PATH)
+                educ_proof_filename = '{}_{}_{}.{}'.format(
+                    'EDUC_PROOF', 
+                    current_user.user_id, 
+                    date.today(), 
+                    educ_proof_ext[1:]
+                )
 
-            id = generate_id("ea")
-            new_record = EducationalAttainment(
-                id                  = id,
-                user_id             = current_user.user_id,
-                school              = educational_attainment_form['school'],
-                degree              = educational_attainment_form['degree'],
-                specialization      = educational_attainment_form['specialization'],
-                degree_type         = educational_attainment_form['degree_type'],
-                info_status         = False,
-                proof_ext           = educ_proof_ext[1:],
-                start_date          = educational_attainment_form['start_date'],
-                end_date            = educational_attainment_form['end_date'],
-                last_modified       = date.today()
-            )
-            db.session.add(new_record)
-            db.session.commit()
-                # educational_attainment_record = EducationalAttainment.query.filter_by(id=id).first()
-            return 'Educational Attainment Record Successfully Added.', 200
+                EDUC_PROOF_PATH = os.path.join(CURR_EDUC_PROOF_DIR, educ_proof_filename)
+                educ_proof_img.save(EDUC_PROOF_PATH)
+
+                id = generate_id("ea")
+                new_record = EducationalAttainment(
+                    id                  = id,
+                    user_id             = current_user.user_id,
+                    school              = educational_attainment_form['school'],
+                    degree              = educational_attainment_form['degree'],
+                    specialization      = educational_attainment_form['specialization'],
+                    degree_type         = educational_attainment_form['degree_type'],
+                    info_status         = False,
+                    proof_ext           = educ_proof_ext[1:],
+                    start_date          = educational_attainment_form['start_date'],
+                    end_date            = educational_attainment_form['end_date'],
+                    last_modified       = date.today()
+                )
+                db.session.add(new_record)
+                db.session.commit()
+                    # educational_attainment_record = EducationalAttainment.query.filter_by(id=id).first()
+                return 'Educational Attainment Record Successfully Added.', 200
+        
+            else:
+                return 'Error! File uploaded must only be of file type jpg or png', 500
     except Exception as e:
         print(e)
         return e, 500
 
 
 @faculty_blueprint.route('/faculty/delete_educational_attainment/<string:id>', methods=['GET', 'POST'])
+@login_required
 def delete_educational_attainment(id):    
     educational_delete = EducationalAttainment.query.filter_by(id=id).first()
     try:
@@ -211,6 +221,7 @@ def delete_educational_attainment(id):
         return e, 500     
 
 @faculty_blueprint.route('/faculty/update_educational_attainment/<string:id>', methods=['GET', 'POST'])
+@login_required
 def update_educational_attainment(id):
     try:
         if request.method == 'GET':
@@ -261,6 +272,7 @@ def update_educational_attainment(id):
         return e, 500
 
 @faculty_blueprint.route('/faculty/add_work_experience', methods=['GET', 'POST'])
+@login_required
 def add_work_experience():
     try:
         if request.method == 'GET':
@@ -276,41 +288,46 @@ def add_work_experience():
 
             work_proof = work_experience_files['work_proof']
             _, work_proof_ext = os.path.splitext(work_proof.filename)
-            work_proof_img = Image.open(work_proof)
 
-            work_proof_filename = '{}_{}_{}.{}'.format(
-                'WORK_PROOF', 
-                current_user.user_id, 
-                date.today(), 
-                work_proof_ext[1:]
-            )
+            if (work_proof_ext == '.jpg' or work_proof_ext == '.png'):
+                work_proof_img = Image.open(work_proof)
 
-            WORK_PROOF_PATH = os.path.join(CURR_WORK_PROOF_DIR, work_proof_filename)
-            work_proof_img.save(WORK_PROOF_PATH)
+                work_proof_filename = '{}_{}_{}.{}'.format(
+                    'WORK_PROOF', 
+                    current_user.user_id, 
+                    date.today(), 
+                    work_proof_ext[1:]
+                )
 
-            id = generate_id("we")
-            new_record = WorkExperience(
-                id                  = id,
-                user_id             = current_user.user_id,
-                name_employer       = work_experience_form['name_employer'],
-                location            = work_experience_form['location'],
-                title               = work_experience_form['title'],
-                description         = work_experience_form['description'],
-                info_status         = False,
-                proof_ext           = work_proof_ext[1:],
-                start_date          = work_experience_form['start_date'],
-                end_date            = work_experience_form['end_date'],
-                last_modified       = date.today()
-            )
-            db.session.add(new_record)
-            db.session.commit()
+                WORK_PROOF_PATH = os.path.join(CURR_WORK_PROOF_DIR, work_proof_filename)
+                work_proof_img.save(WORK_PROOF_PATH)
 
-            return 'Work Experience Successfully Added.', 200
+                id = generate_id("we")
+                new_record = WorkExperience(
+                    id                  = id,
+                    user_id             = current_user.user_id,
+                    name_employer       = work_experience_form['name_employer'],
+                    location            = work_experience_form['location'],
+                    title               = work_experience_form['title'],
+                    description         = work_experience_form['description'],
+                    info_status         = False,
+                    proof_ext           = work_proof_ext[1:],
+                    start_date          = work_experience_form['start_date'],
+                    end_date            = work_experience_form['end_date'],
+                    last_modified       = date.today()
+                )
+                db.session.add(new_record)
+                db.session.commit()
+                return 'Work Experience Successfully Added.', 200
+            
+            else:
+                return 'Error! File uploaded must only be of file type jpg or png', 500
     except Exception as e:
         print(e)
         return e, 500
 
 @faculty_blueprint.route('/faculty/delete_work_experience/<string:id>', methods=['GET', 'POST'])
+@login_required
 def delete_work_experience(id):    
     work_delete = WorkExperience.query.filter_by(id=id).first()
     try:
@@ -325,6 +342,7 @@ def delete_work_experience(id):
         return e, 500     
 
 @faculty_blueprint.route('/faculty/update_work_experience/<string:id>', methods=['GET', 'POST'])
+@login_required
 def update_work_experience(id):
     try:
         if request.method == 'GET':
@@ -379,6 +397,7 @@ def update_work_experience(id):
 
 
 @faculty_blueprint.route('/faculty/add_accomplishment', methods=['GET', 'POST'])
+@login_required
 def add_accomplishment():
     try:
         if request.method == 'GET':
@@ -394,42 +413,46 @@ def add_accomplishment():
 
             acc_proof = accomplishment_files['accomplishment_proof']
             _, acc_proof_ext = os.path.splitext(acc_proof.filename)
-            acc_proof_img = Image.open(acc_proof)
+            
+            if (acc_proof_ext == '.png' or acc_proof_ext == '.jpg'):
+                acc_proof_img = Image.open(acc_proof)
+                acc_proof_filename = '{}_{}_{}.{}'.format(
+                    'ACCOMPLISHMENT_PROOF', 
+                    current_user.user_id, 
+                    date.today(), 
+                    acc_proof_ext[1:]
+                )
 
-            acc_proof_filename = '{}_{}_{}.{}'.format(
-                'ACCOMPLISHMENT_PROOF', 
-                current_user.user_id, 
-                date.today(), 
-                acc_proof_ext[1:]
-            )
+                ACC_PROOF_PATH = os.path.join(CURR_ACC_PROOF_DIR, acc_proof_filename)
+                acc_proof_img.save(ACC_PROOF_PATH)
 
-            ACC_PROOF_PATH = os.path.join(CURR_ACC_PROOF_DIR, acc_proof_filename)
-            acc_proof_img.save(ACC_PROOF_PATH)
-
-
-            id = generate_id("ac")
-            new_record = Accomplishment(
-                id                  = id,
-                user_id             = current_user.user_id,
-                position            = accomplishment_form['position'],
-                organization        = accomplishment_form['organization'],
-                type_contribution   = accomplishment_form['type_contribution'],
-                description         = accomplishment_form['description'],
-                info_status         = False,
-                proof_ext           = acc_proof_ext[1:], 
-                start_date          = accomplishment_form['start_date'],
-                end_date            = accomplishment_form['end_date'],
-                last_modified       = date.today()
-            )
-            db.session.add(new_record)
-            db.session.commit()
-            return 'Accomplishment Successfully Added.', 200
+                id = generate_id("ac")
+                new_record = Accomplishment(
+                    id                  = id,
+                    user_id             = current_user.user_id,
+                    position            = accomplishment_form['position'],
+                    organization        = accomplishment_form['organization'],
+                    type_contribution   = accomplishment_form['type_contribution'],
+                    description         = accomplishment_form['description'],
+                    info_status         = False,
+                    proof_ext           = acc_proof_ext[1:], 
+                    start_date          = accomplishment_form['start_date'],
+                    end_date            = accomplishment_form['end_date'],
+                    last_modified       = date.today()
+                )
+                db.session.add(new_record)
+                db.session.commit()
+                return 'Accomplishment Successfully Added.', 200
+            
+            else:
+                 return 'Error! File uploaded must only be of file type jpg or png', 500
     except Exception as e:
         print(e)
         return e, 500
 
 
 @faculty_blueprint.route('/faculty/delete_accomplishment/<string:id>', methods=['GET', 'POST'])
+@login_required
 def delete_accomplishment(id):    
     accomplishment_delete = Accomplishment.query.filter_by(id=id).first()
     try:
@@ -444,6 +467,7 @@ def delete_accomplishment(id):
         return e, 500     
 
 @faculty_blueprint.route('/faculty/update_accomplishment/<string:id>', methods=['GET', 'POST'])
+@login_required
 def update_accomplishment(id):
     try:
         if request.method == 'GET':
@@ -494,6 +518,7 @@ def update_accomplishment(id):
         return e, 500
 
 @faculty_blueprint.route('/faculty/add_publication', methods=['GET', 'POST'])
+@login_required
 def add_publication():
     try:
         if request.method == 'GET':
@@ -520,41 +545,46 @@ def add_publication():
 
             pub_proof = publication_files['publication_proof']
             _, pub_proof_ext = os.path.splitext(pub_proof.filename)
-            pub_proof_img = Image.open(pub_proof)
 
-            pub_proof_filename = '{}_{}_{}.{}'.format(
-                'PUBLICATION_PROOF', 
-                current_user.user_id, 
-                date.today(), 
-                pub_proof_ext[1:]
-            )
+            if (pub_proof_ext == '.png' or pub_proof_ext == '.jpg'):
+                pub_proof_img = Image.open(pub_proof)
 
-            PUB_PROOF_PATH = os.path.join(CURR_PUB_PROOF_DIR, pub_proof_filename)
-            pub_proof_img.save(PUB_PROOF_PATH)
+                pub_proof_filename = '{}_{}_{}.{}'.format(
+                    'PUBLICATION_PROOF', 
+                    current_user.user_id, 
+                    date.today(), 
+                    pub_proof_ext[1:]
+                )
 
-            id = generate_id("pb")
-            new_record = Publication(
-                id                  = id,
-                user_id             = current_user.user_id,
-                publication         = publication_form['publication'],
-                citation            = publication_form['citation'],
-                url                 = publication_form['url'],
-                coauthors_dpsm      = publication_form['coauthors_dpsm'],
-                coauthors_nondpsm   = publication_form['coauthors_nondpsm'],
-                date_published      = publication_form['date_published'],
-                info_status         = False,
-                proof_ext           = pub_proof_ext[1:],
-                last_modified       = date.today()
-            )
-            db.session.add(new_record)
-            db.session.commit()
-                
-            return 'Publication Successfully Added.', 200
+                PUB_PROOF_PATH = os.path.join(CURR_PUB_PROOF_DIR, pub_proof_filename)
+                pub_proof_img.save(PUB_PROOF_PATH)
+
+                id = generate_id("pb")
+                new_record = Publication(
+                    id                  = id,
+                    user_id             = current_user.user_id,
+                    publication         = publication_form['publication'],
+                    citation            = publication_form['citation'],
+                    url                 = publication_form['url'],
+                    coauthors_dpsm      = publication_form['coauthors_dpsm'],
+                    coauthors_nondpsm   = publication_form['coauthors_nondpsm'],
+                    date_published      = publication_form['date_published'],
+                    info_status         = False,
+                    proof_ext           = pub_proof_ext[1:],
+                    last_modified       = date.today()
+                )
+                db.session.add(new_record)
+                db.session.commit()
+                return 'Publication Successfully Added.', 200
+            
+            else:
+                return 'Error! File uploaded must only be of file type jpg or png', 500
     except Exception as e:
         print(e)
         return e, 500
 
 @faculty_blueprint.route('/faculty/delete_publication/<string:id>', methods=['GET', 'POST'])
+@login_required
 def delete_publication(id):    
     publication_delete = Publication.query.filter_by(id=id).first()
     try:
@@ -570,6 +600,7 @@ def delete_publication(id):
         return e, 500            
 
 @faculty_blueprint.route('/faculty/update_publication/<string:id>', methods=['GET', 'POST'])
+@login_required
 def update_publication(id):
     try:
         if request.method == 'GET':
@@ -635,6 +666,7 @@ def update_publication(id):
 
 
 @faculty_blueprint.route('/faculty/add_research_grant', methods=['GET', 'POST'])
+@login_required
 def add_research_grant():
     try:
         if request.method == 'GET':
@@ -661,47 +693,51 @@ def add_research_grant():
 
             rg_proof = research_grant_files['research_proof']
             _, rg_proof_ext = os.path.splitext(rg_proof.filename)
-            rg_proof_img = Image.open(rg_proof)
 
-            rg_proof_filename = '{}_{}_{}.{}'.format(
-                'RESEARCH_GRANT_PROOF', 
-                current_user.user_id, 
-                date.today(), 
-                rg_proof_ext[1:]
-            )
+            if (rg_proof_ext == '.png' or rg_proof_ext == '.jpg'):
+                rg_proof_img = Image.open(rg_proof)
 
-            RG_PROOF_PATH = os.path.join(CURR_RG_PROOF_DIR, rg_proof_filename)
-            rg_proof_img.save(RG_PROOF_PATH)
+                rg_proof_filename = '{}_{}_{}.{}'.format(
+                    'RESEARCH_GRANT_PROOF', 
+                    current_user.user_id, 
+                    date.today(), 
+                    rg_proof_ext[1:]
+                )
 
+                RG_PROOF_PATH = os.path.join(CURR_RG_PROOF_DIR, rg_proof_filename)
+                rg_proof_img.save(RG_PROOF_PATH)
 
-            id = generate_id("rg")
-            new_record = ResearchGrant(
-                id                  = id,
-                user_id             = current_user.user_id,
-                name_research       = research_grant_form['name_research'],
-                sponsor             = research_grant_form['sponsor'],
-                progress      = research_grant_form['research_progress'],
-                amount_granted      = research_grant_form['amount_granted'],
-                coresearchers_dpsm      = research_grant_form['coresearchers_dpsm'],
-                coresearchers_nondpsm   = research_grant_form['coresearchers_nondpsm'],
-                projected_start     = research_grant_form['projected_start'],
-                projected_end       = research_grant_form['projected_end'],
-                actual_start        = research_grant_form['actual_start'],
-                actual_end          = research_grant_form['actual_end'],
-                info_status         = False,
-                proof_ext           = rg_proof_ext[1:],
-                last_modified       = date.today()
-            )
-            db.session.add(new_record)
-            db.session.commit()
-
-            return 'Research Grant Successfully Added.', 200
+                id = generate_id("rg")
+                new_record = ResearchGrant(
+                    id                  = id,
+                    user_id             = current_user.user_id,
+                    name_research       = research_grant_form['name_research'],
+                    sponsor             = research_grant_form['sponsor'],
+                    progress      = research_grant_form['research_progress'],
+                    amount_granted      = research_grant_form['amount_granted'],
+                    coresearchers_dpsm      = research_grant_form['coresearchers_dpsm'],
+                    coresearchers_nondpsm   = research_grant_form['coresearchers_nondpsm'],
+                    projected_start     = research_grant_form['projected_start'],
+                    projected_end       = research_grant_form['projected_end'],
+                    actual_start        = research_grant_form['actual_start'],
+                    actual_end          = research_grant_form['actual_end'],
+                    info_status         = False,
+                    proof_ext           = rg_proof_ext[1:],
+                    last_modified       = date.today()
+                )
+                db.session.add(new_record)
+                db.session.commit()
+                return 'Research Grant Successfully Added.', 200
+            
+            else:
+                return 'Error! File uploaded must only be of file type jpg or png', 500
     except Exception as e:
         print(e)
         return e, 500
 
 
 @faculty_blueprint.route('/faculty/delete_research_grant/<string:id>', methods=['GET', 'POST'])
+@login_required
 def delete_research_grant(id):    
     research_delete = ResearchGrant.query.filter_by(id=id).first()
     try:
@@ -716,6 +752,7 @@ def delete_research_grant(id):
         return e, 500     
 
 @faculty_blueprint.route('/faculty/update_research_grant/<string:id>', methods=['GET', 'POST'])
+@login_required
 def update_research_grant(id):
     try:
         if request.method == 'GET':
@@ -784,6 +821,7 @@ def update_research_grant(id):
         return e, 500
 
 @faculty_blueprint.route('/faculty/add_licensure', methods=['GET', 'POST'])
+@login_required
 def add_licensure():
     try:
         if request.method == 'GET':
@@ -799,39 +837,44 @@ def add_licensure():
 
             lic_proof = licensure_files['licensure_proof']
             _, lic_proof_ext = os.path.splitext(lic_proof.filename)
-            lic_proof_img = Image.open(lic_proof)
 
-            lic_proof_filename = '{}_{}_{}.{}'.format(
-                'LICENSURE_PROOF', 
-                current_user.user_id, 
-                date.today(), 
-                lic_proof_ext[1:]
-            )
+            if (lic_proof_ext == '.png' or lic_proof_ext == '.jpg'):
+                lic_proof_img = Image.open(lic_proof)
 
-            LIC_PROOF_PATH = os.path.join(CURR_LIC_PROOF_DIR, lic_proof_filename)
-            lic_proof_img.save(LIC_PROOF_PATH)
+                lic_proof_filename = '{}_{}_{}.{}'.format(
+                    'LICENSURE_PROOF', 
+                    current_user.user_id, 
+                    date.today(), 
+                    lic_proof_ext[1:]
+                )
 
-            id = generate_id("le")
-            new_record = LicensureExams(
-                id                  = id,
-                user_id             = current_user.user_id,
-                name_exam           = licensure_form['name_exam'],
-                rank                = licensure_form['rank'],
-                license_number      = licensure_form['license_number'],
-                date                = licensure_form['date'],
-                info_status         = False,
-                proof_ext           = lic_proof_ext[1:],
-                last_modified       = date.today()
-            )
-            db.session.add(new_record)
-            db.session.commit()
+                LIC_PROOF_PATH = os.path.join(CURR_LIC_PROOF_DIR, lic_proof_filename)
+                lic_proof_img.save(LIC_PROOF_PATH)
 
-            return 'Licensure Exam Successfully Added.', 200
+                id = generate_id("le")
+                new_record = LicensureExams(
+                    id                  = id,
+                    user_id             = current_user.user_id,
+                    name_exam           = licensure_form['name_exam'],
+                    rank                = licensure_form['rank'],
+                    license_number      = licensure_form['license_number'],
+                    date                = licensure_form['date'],
+                    info_status         = False,
+                    proof_ext           = lic_proof_ext[1:],
+                    last_modified       = date.today()
+                )
+                db.session.add(new_record)
+                db.session.commit()
+                return 'Licensure Exam Successfully Added.', 200
+            
+            else:
+                return 'Error! File uploaded must only be of file type jpg or png', 500
     except Exception as e:
         print(e)
         return e, 500
 
 @faculty_blueprint.route('/faculty/delete_licensure/<string:id>', methods=['GET', 'POST'])
+@login_required
 def delete_licensure(id):    
     licensure_delete = LicensureExams.query.filter_by(id=id).first()
     try:
@@ -848,6 +891,7 @@ def delete_licensure(id):
         return e, 500     
 
 @faculty_blueprint.route('/faculty/update_licensure_exam/<string:id>', methods=['GET', 'POST'])
+@login_required
 def update_licensure_exam(id):
     try:
         if request.method == 'GET':
@@ -898,6 +942,7 @@ def update_licensure_exam(id):
         return e, 500
 
 @faculty_blueprint.route('/faculty/add_training', methods=['GET', 'POST'])
+@login_required
 def add_training():
     try:
         if request.method == 'GET':
@@ -913,41 +958,45 @@ def add_training():
 
             ts_proof = training_files['training_proof']
             _, ts_proof_ext = os.path.splitext(ts_proof.filename)
-            ts_proof_img = Image.open(ts_proof)
+            
+            if (ts_proof_ext == '.png' or ts_proof_ext == '.jpg'):
+                ts_proof_img = Image.open(ts_proof)
 
-            ts_proof_filename = '{}_{}_{}.{}'.format(
-                'TRAINING_SEMINAR_PROOF', 
-                current_user.user_id, 
-                date.today(), 
-                ts_proof_ext[1:]
-            )
+                ts_proof_filename = '{}_{}_{}.{}'.format(
+                    'TRAINING_SEMINAR_PROOF', 
+                    current_user.user_id, 
+                    date.today(), 
+                    ts_proof_ext[1:]
+                )
 
-            TS_PROOF_PATH = os.path.join(CURR_TS_PROOF_DIR, ts_proof_filename)
-            ts_proof_img.save(TS_PROOF_PATH)
+                TS_PROOF_PATH = os.path.join(CURR_TS_PROOF_DIR, ts_proof_filename)
+                ts_proof_img.save(TS_PROOF_PATH)
 
-
-            id = generate_id("ts")
-            new_record = TrainingSeminar(
-                id                  = id,
-                user_id             = current_user.user_id,
-                name_training       = training_form['name_training'],
-                role                = training_form['role'],
-                remarks             = training_form['remarks'],
-                start_date          = training_form['start_date'],
-                end_date            = training_form['end_date'],
-                info_status         = False,
-                proof_ext           = ts_proof_ext[1:],
-                last_modified       = date.today()
-            )
-            db.session.add(new_record)
-            db.session.commit()
-                
-            return 'Training/Seminar Successfully Added.', 200
+                id = generate_id("ts")
+                new_record = TrainingSeminar(
+                    id                  = id,
+                    user_id             = current_user.user_id,
+                    name_training       = training_form['name_training'],
+                    role                = training_form['role'],
+                    remarks             = training_form['remarks'],
+                    start_date          = training_form['start_date'],
+                    end_date            = training_form['end_date'],
+                    info_status         = False,
+                    proof_ext           = ts_proof_ext[1:],
+                    last_modified       = date.today()
+                )
+                db.session.add(new_record)
+                db.session.commit()
+                return 'Training/Seminar Successfully Added.', 200
+            
+            else:
+                return 'Error! File uploaded must only be of file type jpg or png', 500
     except Exception as e:
         print(e)
         return e, 500
 
 @faculty_blueprint.route('/faculty/delete_training/<string:id>', methods=['GET', 'POST'])
+@login_required
 def delete_training(id):    
     training_delete = TrainingSeminar.query.filter_by(id=id).first()
     try:
@@ -962,6 +1011,7 @@ def delete_training(id):
         return e, 500     
 
 @faculty_blueprint.route('/faculty/update_training/<string:id>', methods=['GET', 'PUT'])
+@login_required
 def update_training(id):
     try:
         if request.method == 'GET':
@@ -1011,6 +1061,7 @@ def update_training(id):
         return e, 500
 
 @faculty_blueprint.route('/faculty/add_fsr_set', methods=['GET', 'POST'])
+@login_required
 def add_fsr_set():
     try:
         if request.method == 'GET':
@@ -1026,42 +1077,46 @@ def add_fsr_set():
 
             fsr_set_proof = fsr_set_files['fsr_set_proof']
             _, fsr_set_proof_ext = os.path.splitext(fsr_set_proof.filename)
-            fsr_set_proof_img = Image.open(fsr_set_proof)
 
-            fsr_set_proof_filename = '{}_{}_{}.{}'.format(
-                'FSR_SET_PROOF', 
-                current_user.user_id, 
-                date.today(), 
-                fsr_set_proof_ext[1:]
-            )
+            if (fsr_set_proof_ext == '.png' or fsr_set_proof_ext == '.jpg'):
+                fsr_set_proof_img = Image.open(fsr_set_proof)
 
-            FSRSET_PROOF_PATH = os.path.join(CURR_FSRSET_PROOF_DIR, fsr_set_proof_filename)
-            fsr_set_proof_img.save(FSRSET_PROOF_PATH)
+                fsr_set_proof_filename = '{}_{}_{}.{}'.format(
+                    'FSR_SET_PROOF', 
+                    current_user.user_id, 
+                    date.today(), 
+                    fsr_set_proof_ext[1:]
+                )
 
+                FSRSET_PROOF_PATH = os.path.join(CURR_FSRSET_PROOF_DIR, fsr_set_proof_filename)
+                fsr_set_proof_img.save(FSRSET_PROOF_PATH)
             
-            id = generate_id("fsr")
-            new_record = FacultySETRecords(
-                id                  = id,
-                user_id             = current_user.user_id,
-                course_code         = fsr_set_form['course_code'],
-                section             = fsr_set_form['section'],
-                semester            = fsr_set_form['semester'],
-                sy                  = fsr_set_form['sy'],
-                schedule            = fsr_set_form['schedule'],
-                number_students     = fsr_set_form['number_students'],
-                fsr_rating          = fsr_set_form['fsr'],
-                set_rating          = fsr_set_form['set'],
-                last_modified       = date.today()
-            )
-            db.session.add(new_record)
-            db.session.commit()
-                
-            return 'FSR and SET Successfully Added.', 200
+                id = generate_id("fsr")
+                new_record = FacultySETRecords(
+                    id                  = id,
+                    user_id             = current_user.user_id,
+                    course_code         = fsr_set_form['course_code'],
+                    section             = fsr_set_form['section'],
+                    semester            = fsr_set_form['semester'],
+                    sy                  = fsr_set_form['sy'],
+                    schedule            = fsr_set_form['schedule'],
+                    number_students     = fsr_set_form['number_students'],
+                    fsr_rating          = fsr_set_form['fsr'],
+                    set_rating          = fsr_set_form['set'],
+                    last_modified       = date.today()
+                )
+                db.session.add(new_record)
+                db.session.commit()
+                return 'FSR and SET Successfully Added.', 200
+            
+            else:
+                return 'Error! File uploaded must only be of file type jpg or png', 500
     except Exception as e:
         print(e)
         return e, 500
 
 @faculty_blueprint.route('/faculty/update_fsr_set/<string:id>', methods=['GET', 'PUT'])
+@login_required
 def update_fsr_set(id):
     try:
         if request.method == 'GET':

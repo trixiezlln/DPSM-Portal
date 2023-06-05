@@ -31,6 +31,7 @@ def load_user(user_id):
 	return UserCredentials.query.get(int(user_id))
 
 @unit_head_blueprint.route('/unit_head/view_faculty_info/<user_id>', methods=['GET', 'POST'])
+@login_required
 def unit_head_view_faculty_info(user_id):
     faculty_personal_information = FacultyPersonalInformation.query.filter_by(user_id=user_id).first()
     faculty_educational_attaiment = EducationalAttainment.query.filter(EducationalAttainment.user_id == user_id, EducationalAttainment.info_status.isnot(None)).all()
@@ -67,6 +68,7 @@ def unit_head_view_faculty_info(user_id):
 
 
 @unit_head_blueprint.route('/unit_head/view_faculty_info/<string:filename>', methods=['GET'])
+@login_required
 def view_proof(id, proof_type, filename):
     try:
         CURR_FILE_DIR = os.path.join(proof_type, id)
@@ -84,6 +86,7 @@ def view_proof(id, proof_type, filename):
         return 'Error displaying syllabus. Please try again.', 400
 
 @unit_head_blueprint.route('/unit_head/faculty_list', methods=['GET', 'POST'])
+@login_required
 def load_unit_head_faculty_list():
     unit_faculty_list = (FacultyPersonalInformation
         .query
@@ -104,6 +107,7 @@ def load_unit_head_faculty_list():
     )
 
 @unit_head_blueprint.route('/unit_head/role_assignment', methods=['GET', 'POST', 'DELETE'])
+@login_required
 def load_unit_head_role_assignment():
     if request.method == 'GET':
         try:
@@ -171,6 +175,7 @@ def load_unit_head_role_assignment():
             return 'Error deleting Unit Head nominee. Please try again.', 400
 
 @unit_head_blueprint.route('/unit_head/pending_approvals', methods=['GET', 'PUT', 'POST'])
+@login_required
 def load_unit_head_pending_approvals():
     try:
         if request.method == 'GET':
@@ -361,6 +366,7 @@ def load_unit_head_pending_approvals():
 #     return render_template('unit_head/unit_head_updated_information.html')
 
 @unit_head_blueprint.route('/unit_head/dashboard', methods=['GET', 'POST'])
+@login_required
 def load_unit_head_dashboard():
     units = ['mcsu', 'cu', 'pgu']
     accomplishments = [Publication, Accomplishment, TrainingSeminar, LicensureExams, ResearchGrant,]
@@ -502,6 +508,7 @@ def load_unit_head_dashboard():
 
 
 @unit_head_blueprint.route('/unit_head/department_chair_role_assignment', methods=['GET', 'POST'])
+@login_required
 def load_department_chair_role_assignment():
     return render_template('unit_head/department_chair_role_assignment.html')
 

@@ -34,6 +34,7 @@ def load_user(user_id):
 
 import time
 @clerk_blueprint.route('/clerk/create_faculty_account', methods=['GET', 'POST'])
+@login_required
 # @role_authenticator_decorator(['clerk'], None)
 def create_faculty_account():
     try:
@@ -98,6 +99,7 @@ def create_faculty_account():
         return 'Error creating faculty record. Please try again.', 400
 
 @clerk_blueprint.route('/clerk/faculty_list', methods=['GET'])
+@login_required
 def clerk_faculty_list():
     try:
         faculty_list = []
@@ -123,6 +125,7 @@ def clerk_faculty_list():
     # return render_template('clerk/faculty_list.html')
 
 @clerk_blueprint.route('/clerk/edit_information', methods=['PUT'])
+@login_required
 def clerk_edit_information():
     try:
         edit_form = request.form 
@@ -145,6 +148,7 @@ def clerk_edit_information():
 from pprint import pprint
 from PIL import Image
 @clerk_blueprint.route('/clerk/faculty_service_record/<user_id>', methods=['GET', 'PUT', 'POST'])
+@login_required
 def clerk_faculty_service_record(user_id):
     
     try:
@@ -260,6 +264,7 @@ def clerk_faculty_service_record(user_id):
         return 'An error has occured. Please try again.', 500
 
 @clerk_blueprint.route('/clerk/faculty_service_record/<user_id>/show_syllabus/<filename>', methods=['GET', 'PUT', 'POST'])
+@login_required
 def clerk_faculty_service_record_show_syllabus(user_id, filename):
     try:
         CURR_FSR_SYLLABUS_DIR = os.path.join(RENDER_FSR_SYLLABUS_DIR, user_id)
@@ -276,6 +281,7 @@ def clerk_faculty_service_record_show_syllabus(user_id, filename):
         return 'Error displaying syllabus. Please try again.', 400
 
 @clerk_blueprint.route('/clerk/faculty_service_record/<user_id>/show_set_proof/<filename>', methods=['GET', 'PUT', 'POST'])
+@login_required
 def clerk_faculty_service_record_show_set_proof(user_id, filename):
     try:
         CURR_FSR_SET_DIR = os.path.join(RENDER_FSR_IMGS_DIR, user_id)
