@@ -58,8 +58,15 @@
     </style>
 </head>
     <section>
-        <h1>Basic Information</h1>
-        <div class="info-section">
+        
+        <div class="d-flex justify-content-between my-3">
+            <h1>Basic Information</h1>
+            <div class="d-flex justify-content-end mt-2">
+                <button class="btn btn-primary crud-bin" onclick="viewPDF()">View PDF</button>
+            </div>
+        </div>
+        <!-- Personal Info -->
+        <div class="info-section"  id="info-section" name="info-section">
 
             <!-- box header -->
             <div class="d-flex justify-content-between my-3">
@@ -317,7 +324,7 @@
                                     <div class="row">
                                         <div class="col-12 col-lg-6 custom-col-1 mb-3">
                                             <label class="col-form-label">Type of Degree</label>
-                                            <input class="form-control" type="text" id="degree_type" name="degree_type" value="{{educ['degree_type']}}]" disabled>
+                                            <input class="form-control" type="text" id="degree_type" name="degree_type" value="{{educ['degree_type']}}" disabled>
                                             <span class = "validation-status"></span>
                                         </div>
 
@@ -341,23 +348,15 @@
                                             <span class = "validation-status"></span>
                                         </div>  
                                     </div>
-
+                                    <p style="margin-bottom: 0; font-weight: bold"> Proof of Faculty ID Number: </p>
+                                    <p class="truncate" id="educ_user_id_container" value="{{faculty_personal_information['user_id']}}">{{faculty_personal_information['user_id']}}</p>
+                                    <p style="margin-bottom: 0; font-weight: bold"> File Type: </p>
+                                    <div class="truncate" id="educ_ext_container" value="{{educ['proof_ext']}}"> {{educ['proof_ext']}}</div>
+                                    <div class="truncate" id="educ_date_container" value="{{educ['last_modified']}}" hidden> {{educ['last_modified']}}</div>
                                     <div class="row">
                                         <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                            <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_educ_proof' name='view_educ_proof' hidden></a>
-                                            <button type="button" class="btn btn-secondary crud-btn" id="view_educ" name="view_educ" onclick="show_info_proof(
-                                                {% if current_user.is_unit_head %} 
-                                                    'unit_head'
-                                                {% elif current_user.is_department_chair %} 
-                                                    'department_chair'
-                                                {% endif %},
-                                                'EDUC_PROOF',
-                                                '{{faculty_personal_information['user_id']}}',
-                                                '{{educ['last_modified']}}',
-                                                '{{educ['proof_ext']}}'
-                                            )">
-                                                View Educational Attainment Proof
-                                            </button>    
+                                            <button type="button" class="btn btn-secondary crud-btn" id="view_educ" name="view_educ" onclick="educ_toggleImage()"> View Educational Attainment Proof </button>
+                                            <img src="" alt="Photo" width="400" height="400" id="educ_image"> 
                                         </div>
                                     </div>
                                 </div>
@@ -371,7 +370,36 @@
             <h5 class="" style="padding: 10px;">No information to show</h5>
             {% endif %}
         </div>
-
+        <style>
+            .truncate {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                text: hidden
+            }
+        </style>
+        <script>
+            var educ_dateContainer = document.getElementById('educ_date_container');
+            var educ_date = educ_dateContainer.innerText;
+            var educ_user_id_container = document.getElementById('educ_user_id_container');
+            var educ_user_id = educ_user_id_container.innerText;
+            var educ_ext_container = document.getElementById('educ_ext_container');
+            var educ_ext = educ_ext_container.innerText;
+            var educ_image = document.getElementById('educ_image');  
+            var maxLength = 11;
+            var educ_shortdate = educ_date.substring(1, maxLength);
+            var educ_src = '\\static\\img\\educ_proof\\' + educ_user_id + '\\EDUC_PROOF_' + educ_user_id + '_' + educ_shortdate + '.' + educ_ext;
+            function educ_toggleImage() {
+                var educ_image = document.getElementById("educ_image");      
+            if (educ_image.style.display === "none") {
+                educ_image.style.display = "block";
+                console.log(educ_src);
+            } else {
+                educ_image.style.display = "none";
+            }
+            educ_image.src = educ_src;
+        }
+        </script>
         <div class="info-section">
 
             <!-- box header -->
@@ -434,23 +462,15 @@
                                             <span class = "validation-status"></span>
                                         </div>   
                                     </div>
-                                    
+                                    <p style="margin-bottom: 0; font-weight: bold"> Proof of Faculty ID Number: </p>
+                                    <p class="truncate" id="work_user_id_container" value="{{faculty_personal_information['user_id']}}">{{faculty_personal_information['user_id']}}</p>
+                                    <p style="margin-bottom: 0; font-weight: bold"> File Type: </p>
+                                    <div class="truncate" id="work_ext_container" value="{{experience['proof_ext']}}"> {{experience['proof_ext']}}</div>
+                                    <div class="truncate" id="work_date_container" value="{{experience['last_modified']}}" hidden> {{experience['last_modified']}}</div>
                                     <div class="row">
                                         <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                            <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_work_proof' name='view_work_proof' hidden></a>
-                                            <button type="button" class="btn btn-secondary crud-btn" id="view_work" name="view_work" onclick="show_info_proof(
-                                                {% if current_user.is_unit_head %} 
-                                                    'unit_head'
-                                                {% elif current_user.is_department_chair %} 
-                                                    'department_chair'
-                                                {% endif %},
-                                                'WORK_PROOF',
-                                                '{{faculty_personal_information['user_id']}}',
-                                                '{{experience['last_modified']}}',
-                                                '{{experience['proof_ext']}}'
-                                            )">
-                                                View Work Experience Proof
-                                            </button>    
+                                            <button type="button" class="btn btn-secondary crud-btn" id="view_work" name="view_work" onclick="work_toggleImage()"> View Work Experience Proof </button>
+                                            <img src="" alt="Photo" width="400" height="400" id="work_image">
                                         </div>
                                     </div>
                                 </div>
@@ -464,7 +484,28 @@
             <h5 class="" style="padding: 10px;">No information to show</h5>
             {% endif %} 
         </div>
-
+        <script>
+            var work_dateContainer = document.getElementById('work_date_container');
+            var work_date = work_dateContainer.innerText;
+            var work_user_id_container = document.getElementById('work_user_id_container');
+            var work_user_id = work_user_id_container.innerText;
+            var work_ext_container = document.getElementById('work_ext_container');
+            var work_ext = work_ext_container.innerText;
+            var work_image = document.getElementById('work_image');  
+            var maxLength = 11; 
+            var work_shortdate = work_date.substring(1, maxLength);
+            var work_src = '\\static\\img\\work_proof\\' + work_user_id + '\\WORK_PROOF_' + work_user_id + '_' + work_shortdate + '.' + work_ext;
+            function work_toggleImage() {
+                var work_image = document.getElementById("work_image");      
+                if (work_image.style.display === "none") {
+                    work_image.style.display = "block";
+                    console.log(work_src);  
+                } else {
+                    work_image.style.display = "none";  
+                }
+                work_image.src = '\\static\\img\\work_proof\\' + work_user_id + '\\WORK_PROOF_' + work_user_id + '_' + work_shortdate + '.' + work_ext;
+            }
+        </script>
         <div class="info-section">
 
             <!-- box header -->
@@ -529,23 +570,15 @@
                                             <span class = "validation-status"></span>
                                         </div>   
                                     </div>
-            
+                                    <p style="margin-bottom: 0; font-weight: bold"> Proof of Faculty ID Number: </p>
+                                    <p class="truncate" id="acc_user_id_container" value="{{faculty_personal_information['user_id']}}">{{faculty_personal_information['user_id']}}</p>
+                                    <p style="margin-bottom: 0; font-weight: bold"> File Type: </p>
+                                    <div class="truncate" id="acc_ext_container" value="{{accomplishment['proof_ext']}}"> {{accomplishment['proof_ext']}}</div>
+                                    <div class="truncate" id="acc_date_container" value="{{accomplishment['last_modified']}}" hidden> {{accomplishment['last_modified']}}</div>
                                     <div class="row">
                                         <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                            <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_accomplishment_proof' name='view_accomplishment_proof' hidden></a>
-                                            <button type="button" class="btn btn-secondary crud-btn" id="view_accomplishment" name="view_accomplishment" onclick="show_info_proof(
-                                                {% if current_user.is_unit_head %} 
-                                                    'unit_head'
-                                                {% elif current_user.is_department_chair %} 
-                                                    'department_chair'
-                                                {% endif %},
-                                                'ACCOMPLISHMENT_PROOF',
-                                                '{{faculty_personal_information['user_id']}}',
-                                                '{{accomplishment['last_modified']}}',
-                                                '{{accomplishment['proof_ext']}}'
-                                            )">
-                                                View Accomplishment Proof
-                                            </button>    
+                                            <button type="button" class="btn btn-secondary crud-btn" id="view_acc" name="view_acc" onclick="acc_toggleImage()"> View Accomplishment Proof </button>
+                                            <img src="" alt="Photo" width="400" height="400" id="acc_image">  
                                         </div>
                                     </div>
                                 </div>
@@ -559,7 +592,28 @@
             <h5 class="" style="padding: 10px;">No information to show</h5>
             {% endif %}
         </div>
-
+        <script>
+            var acc_dateContainer = document.getElementById('acc_date_container');
+            var acc_date = acc_dateContainer.innerText;
+            var acc_user_id_container = document.getElementById('acc_user_id_container');
+            var acc_user_id = acc_user_id_container.innerText;
+            var acc_ext_container = document.getElementById('acc_ext_container');
+            var acc_ext = acc_ext_container.innerText;
+            var acc_image = document.getElementById('acc_image');  
+            var maxLength = 11;
+            var acc_shortdate = acc_date.substring(1, maxLength);
+            var acc_src = '\\static\\img\\accomplishment_proof\\' + acc_user_id + '\\ACCOMPLISHMENT_PROOF_' + acc_user_id + '_' + acc_shortdate + '.' + acc_ext;
+            function acc_toggleImage() {
+                var acc_image = document.getElementById("acc_image");      
+                if (acc_image.style.display === "none") {
+                    acc_image.style.display = "block";
+                    console.log(acc_src); 
+                } else {
+                    acc_image.style.display = "none";   
+                }
+                acc_image.src = acc_src;
+            }
+        </script>
         <div class="info-section">
 
             <!-- box header -->
@@ -624,23 +678,15 @@
                                             <span class = "validation-status"></span>
                                         </div> 
                                     </div>
-            
+                                    <p style="margin-bottom: 0; font-weight: bold"> Proof of Faculty ID Number: </p>
+                                    <p class="truncate" id="pub_user_id_container" value="{{faculty_personal_information['user_id']}}">{{faculty_personal_information['user_id']}}</p>
+                                    <p style="margin-bottom: 0; font-weight: bold"> File Type: </p>
+                                    <div class="truncate" id="pub_ext_container" value="{{publication['proof_ext']}}"> {{publication['proof_ext']}}</div>
+                                    <div class="truncate" id="pub_date_container" value="{{publication['last_modified']}}" hidden> {{publication['last_modified']}}</div>
                                     <div class="row">
                                         <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                            <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_publication_proof' name='view_publication_proof' hidden></a>
-                                            <button type="button" class="btn btn-secondary crud-btn" id="view_publication" name="view_publication" onclick="show_info_proof(
-                                                {% if current_user.is_unit_head %} 
-                                                    'unit_head'
-                                                {% elif current_user.is_department_chair %} 
-                                                    'department_chair'
-                                                {% endif %},
-                                                'PUBLICATION_PROOF',
-                                                '{{faculty_personal_information['user_id']}}',
-                                                '{{publication['last_modified']}}',
-                                                '{{publication['proof_ext']}}'
-                                            )">
-                                                View Publication Proof
-                                            </button>    
+                                            <button type="button" class="btn btn-secondary crud-btn" id="view_pub" name="view_pub" onclick="pub_toggleImage()"> View Publication Proof </button>
+                                            <img src="" alt="Photo" width="400" height="400" id="pub_image">    
                                         </div>
                                     </div>
             
@@ -657,7 +703,28 @@
             <h5 class="" style="padding: 10px;">No information to show</h5>
             {% endif %} 
         </div>
-
+        <script>
+            var pub_dateContainer = document.getElementById('pub_date_container');
+            var pub_date = pub_dateContainer.innerText;
+            var pub_user_id_container = document.getElementById('pub_user_id_container');
+            var pub_user_id = pub_user_id_container.innerText;
+            var pub_ext_container = document.getElementById('pub_ext_container');
+            var pub_ext = pub_ext_container.innerText;
+            var pub_image = document.getElementById('pub_image');  
+            var maxLength = 11; 
+            var pub_shortdate = pub_date.substring(1, maxLength);
+            var pub_src = '\\static\\img\\publication_proof\\' + pub_user_id + '\\PUBLICATION_PROOF_' + pub_user_id + '_' + pub_shortdate + '.' + pub_ext;
+            function pub_toggleImage() {
+                var pub_image = document.getElementById("pub_image");      
+                if (pub_image.style.display === "none") {
+                    pub_image.style.display = "block";
+                    console.log(pub_src); 
+                } else {
+                    pub_image.style.display = "none";  
+                }
+                pub_image.src = pub_src;
+            }
+        </script>
         <div class="info-section">
 
             <!-- box header -->
@@ -739,34 +806,25 @@
                                         <div class="row">
                                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                                 <label class="col-form-label">Co-researchers (DPSM Faculty)<span class="required-field"></span></label>
-                                                <input class="form-control" type="date" id="actual_end" name="actual_end" value="{{grant['actual_end']}}" disabled>
+                                                <input class="form-control" type="text" id="coresearchers_dpsm" name="coresearchers_nondpsm" value="{{grant['coresearchers_dpsm']}}" disabled>
                                                 <span class = "validation-status"></span>
                                             </div> 
                                             
                                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
                                                 <label class="col-form-label">Co-researchers (non-DPSM Faculty)<span class="required-field"></span></label>
-                                                <input class="form-control" type="text" id="amount_granted" name="amount_granted" value="{{grant['amount_granted']}}" disabled>
+                                                <input class="form-control" type="text" id="coresearchers_nondpsm" name="coresearchers_nondpsm" value="{{grant['coresearchers_nondpsm']}}" disabled>
                                                 <span class = "validation-status"></span>
                                             </div> 
                                         </div>
-                
-                
+                                        <p style="margin-bottom: 0; font-weight: bold"> Proof of Faculty ID Number: </p>
+                                        <p class="truncate" id="grant_user_id_container" value="{{faculty_personal_information['user_id']}}">{{faculty_personal_information['user_id']}}</p>
+                                        <p style="margin-bottom: 0; font-weight: bold"> File Type: </p>
+                                        <div class="truncate" id="grant_ext_container" value="{{grant['proof_ext']}}"> {{grant['proof_ext']}}</div>
+                                        <div class="truncate" id="grant_date_container" value="{{grant['last_modified']}}" hidden> {{grant['last_modified']}}</div>   
                                         <div class="row">
                                             <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                                <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_research_proof' name='view_research_proof' hidden></a>
-                                                <button type="button" class="btn btn-secondary crud-btn" id="view_research" name="view_research" onclick="show_info_proof(
-                                                    {% if current_user.is_unit_head %} 
-                                                        'unit_head'
-                                                    {% elif current_user.is_department_chair %} 
-                                                        'department_chair'
-                                                    {% endif %},
-                                                    'RESEARCH_GRANT_PROOF',
-                                                    '{{faculty_personal_information['user_id']}}',
-                                                    '{{grant['last_modified']}}',
-                                                    '{{grant['proof_ext']}}'
-                                                )">
-                                                    View Research Grant Proof
-                                                </button>    
+                                                <button type="button" class="btn btn-secondary crud-btn" id="view_grant" name="view_grant" onclick="grant_toggleImage()"> View Research Grant Proof </button>
+                                                <img src="" alt="Photo" width="400" height="400" id="grant_image">   
                                             </div>
                                         </div>
                 
@@ -782,7 +840,28 @@
             <h5 class="" style="padding: 10px;">No information to show</h5>
             {% endif %}
         </div>
-
+        <script>
+            var grant_dateContainer = document.getElementById('grant_date_container');
+            var grant_date = grant_dateContainer.innerText;
+            var grant_user_id_container = document.getElementById('grant_user_id_container');
+            var grant_user_id = grant_user_id_container.innerText;
+            var grant_ext_container = document.getElementById('grant_ext_container');
+            var grant_ext = grant_ext_container.innerText;
+            var grant_image = document.getElementById('grant_image');  
+            var maxLength = 11; 
+            var grant_shortdate = grant_date.substring(1, maxLength);
+            var grant_src = '\\static\\img\\research_grant_proof\\' + grant_user_id + '\\RESEARCH_GRANT_PROOF_' + grant_user_id + '_' + grant_shortdate + '.' + grant_ext;
+            function grant_toggleImage() {
+                var grant_image = document.getElementById("grant_image");      
+                if (grant_image.style.display === "none") {
+                    grant_image.style.display = "block";
+                    console.log(grant_src);  
+                } else {
+                    grant_image.style.display = "none";   
+                }
+                grant_image.src = grant_src;
+            }
+        </script>
         <div class="info-section">
 
             <!-- box header -->
@@ -830,23 +909,15 @@
                                             <span class = "validation-status"></span>
                                         </div>  
                                     </div>
-            
+                                    <p style="margin-bottom: 0; font-weight: bold"> Proof of Faculty ID Number: </p>
+                                    <p class="truncate" id="lic_user_id_container" value="{{faculty_personal_information['user_id']}}">{{faculty_personal_information['user_id']}}</p>
+                                    <p style="margin-bottom: 0; font-weight: bold"> File Type: </p>
+                                    <div class="truncate" id="lic_ext_container" value="{{licensure['proof_ext']}}"> {{licensure['proof_ext']}}</div>
+                                    <div class="truncate" id="lic_date_container" value="{{licensure['last_modified']}}" hidden> {{licensure['last_modified']}}</div>
                                     <div class="row">
                                         <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                            <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_licensure_proof' name='view_licensure_proof' hidden></a>
-                                            <button type="button" class="btn btn-secondary crud-btn" id="view_licensure" name="view_licensure" onclick="show_info_proof(
-                                                {% if current_user.is_unit_head %} 
-                                                    'unit_head'
-                                                {% elif current_user.is_department_chair %} 
-                                                    'department_chair'
-                                                {% endif %},
-                                                'LICENSURE_PROOF',
-                                                '{{faculty_personal_information['user_id']}}',
-                                                '{{licensure['last_modified']}}',
-                                                '{{licensure['proof_ext']}}'
-                                            )">
-                                                View Licensure Proof
-                                            </button>    
+                                            <button type="button" class="btn btn-secondary crud-btn" id="view_lic" name="view_lic" onclick="lic_toggleImage()"> View Licensure Proof </button>
+                                            <img src="" alt="Photo" width="400" height="400" id="lic_image">   
                                         </div>
                                     </div>
                                 </div>
@@ -860,7 +931,28 @@
             <h5 class="" style="padding: 10px;">No information to show</h5>
             {% endif %}
         </div>
-
+        <script>
+            var lic_dateContainer = document.getElementById('lic_date_container');
+            var lic_date = lic_dateContainer.innerText;
+            var lic_user_id_container = document.getElementById('lic_user_id_container');
+            var lic_user_id = lic_user_id_container.innerText;
+            var lic_ext_container = document.getElementById('lic_ext_container');
+            var lic_ext = lic_ext_container.innerText;
+            var lic_image = document.getElementById('lic_image');  
+            var maxLength = 11; 
+            var lic_shortdate = lic_date.substring(1, maxLength);
+            var lic_src = '\\static\\img\\licensure_proof\\' + lic_user_id + '\\LICENSURE_PROOF_' + lic_user_id + '_' + lic_shortdate + '.' + lic_ext;
+            function lic_toggleImage() {
+                var lic_image = document.getElementById("lic_image");      
+                if (lic_image.style.display === "none") {
+                    lic_image.style.display = "block";
+                    console.log(lic_src); 
+                } else {
+                    lic_image.style.display = "none";   
+                }
+                lic_image.src = lic_src;
+            }
+        </script>
         <div class="info-section">
 
             <!-- box header -->
@@ -916,23 +1008,15 @@
                                             <span class = "validation-status"></span>
                                         </div>  
                                     </div>
-                                    
+                                    <p style="margin-bottom: 0; font-weight: bold"> Proof of Faculty ID Number: </p>
+                                    <p class="truncate" id="train_user_id_container" value="{{faculty_personal_information['user_id']}}">{{faculty_personal_information['user_id']}}</p>
+                                    <p style="margin-bottom: 0; font-weight: bold"> File Type: </p>
+                                    <div class="truncate" id="train_ext_container" value="{{training['proof_ext']}}"> {{training['proof_ext']}}</div>
+                                    <div class="truncate" id="train_date_container" value="{{training['last_modified']}}" hidden> {{training['last_modified']}}</div>
                                     <div class="row">
                                         <div class="col-12 col-lg-6 custom-col-3 mb-3">
-                                            <a data-gallery="photoviewer" data-title="Image" data-group="a" id='view_training_proof' name='view_training_proof' hidden></a>
-                                            <button type="button" class="btn btn-secondary crud-btn" id="view_training" name="view_training" onclick="show_info_proof(
-                                                {% if current_user.is_unit_head %} 
-                                                    'unit_head'
-                                                {% elif current_user.is_department_chair %} 
-                                                    'department_chair'
-                                                {% endif %},
-                                                'TRAINING_SEMINAR_PROOF',
-                                                '{{faculty_personal_information['user_id']}}',
-                                                '{{training['last_modified']}}',
-                                                '{{training['proof_ext']}}'
-                                            )">
-                                                View Trainin/Seminar Proof
-                                            </button>    
+                                            <button type="button" class="btn btn-secondary crud-btn" id="view_train" name="view_train" onclick="train_toggleImage()"> View Training/Seminar Proof </button>
+                                            <img src="" alt="Photo" width="400" height="400" id="train_image">    
                                         </div>
                                     </div>
             
@@ -948,7 +1032,28 @@
                 <h5 class="" style="padding: 10px;">No information to show</h5>
             {% endif %}
         </div>
-
+        <script>
+            var train_dateContainer = document.getElementById('train_date_container');
+            var train_date = train_dateContainer.innerText;
+            var train_user_id_container = document.getElementById('train_user_id_container');
+            var train_user_id = train_user_id_container.innerText;
+            var train_ext_container = document.getElementById('train_ext_container');
+            var train_ext = train_ext_container.innerText;
+            var train_image = document.getElementById('train_image');  
+            var maxLength = 11; 
+            var train_shortdate = train_date.substring(1, maxLength);
+            var train_src = '\\static\\img\\training_seminar_proof\\' + train_user_id + '\\TRAINING_SEMINAR_PROOF_' + train_user_id + '_' + train_shortdate + '.' + train_ext;
+            function train_toggleImage() {
+                var train_image = document.getElementById("train_image");      
+                if (train_image.style.display === "none") {
+                    train_image.style.display = "block";
+                    console.log(train_src); 
+                } else {
+                    train_image.style.display = "none";  
+                }
+                train_image.src = train_src;
+            }
+        </script>
         <div class="info-section">
 
             <!-- box header -->
@@ -1063,10 +1168,9 @@
 <script src="{{ url_for('static', filename='js/photoviewer.js') }}"></script>
 <script src="{{ url_for('static', filename='js/ajax_calls.js') }}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-
-    // initialize manually with a list of links
     $('[data-gallery=photoviewer]').click(function (e) {
         e.preventDefault();
         var items = [],
@@ -1083,6 +1187,74 @@
     new PhotoViewer(items, options);
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script>
+    function viewPDF() {
+        var data = getData();
+        var docDefinition = {
+        content: [
+            { text: 'Personal Information', style: 'header' },
+            data
+        ],
+        styles: {
+            header: {
+            fontSize: 12,
+            bold: true,
+            margin: [0, 0, 0, 10]
+            }
+        }
+        };
 
+        pdfMake.createPdf(docDefinition).open();
+    }
+
+    function getData() {
+            var faculty_num = '{{faculty_personal_information['user_id']}}'
+            var rank = '{{faculty_personal_information['rank']}}'
+            var classification = '{{faculty_personal_information['classification']}}';
+            var tenure = '{{faculty_personal_information['tenure']}}'; 
+            var status = '{{faculty_personal_information['status']}}';
+            var first_name = '{{faculty_personal_information['first_name']}}';
+            var middle_name = '{{faculty_personal_information['middle_name']}}';
+            var last_name = '{{faculty_personal_information['last_name']}}';
+            var suffix = '{{faculty_personal_information['suffix']}}';
+            var present_address = '{{faculty_personal_information['present_address']}}';
+            var permanent_address = '{{faculty_personal_information['permanent_address']}}';
+            var date_of_birth = '{{faculty_personal_information['date_of_birth']}}';
+            var place_of_birth = '{{faculty_personal_information['place_of_birth']}}';
+            var religion = '{{faculty_personal_information['religion']}}';
+            var civil_status = '{{faculty_personal_information['civil_status']}}';
+            var telephone_num = '{{faculty_personal_information['landline']}}';
+            var mobile_number = '{{faculty_personal_information['mobile_number']}}';
+            var primary_email = '{{faculty_personal_information['primary_email']}}';
+            var alternate_email = '{{faculty_personal_information['alternate_email']}}';
+            var emergency_contact_person = '{{faculty_personal_information['emergency_contact_person']}}';
+            var emergency_contact_number = '{{faculty_personal_information['emergency_contact_number']}}';
+            var dependent_name = '{{faculty_personal_information['dependent_name']}}';
+            var dependent_birthdate = '{{faculty_personal_information['dependent_birthdate']}}';
+            var dependent_relationship = '{{faculty_personal_information['dependent_relationship']}}';
+        return [
+        { text: '\n Faculty ID Number: ' + faculty_num},
+        { text: '\n Rank: ' + rank},
+        { text: '\n Classification: ' + classification},
+        { text: '\n Tenure: ' + tenure},
+        { text: '\n Status: ' + status},
+        { text: '\n Full Name: ' + first_name + ' ' + middle_name + ' ' + last_name + ' ' + suffix},
+        { text: '\n Present Address: ' + present_address},
+        { text: '\n Permanent Address: ' + permanent_address},
+        { text: '\n Date of Birth: ' + date_of_birth + '\t' + 'Place of Birth: ' + place_of_birth},
+        { text: '\n Civil Status: ' + civil_status},
+        { text: '\n Religion: ' + religion },
+        { text: '\n Telephone Number: ' + telephone_num + '\t' + 'Mobile Number: ' +  mobile_number},
+        { text: '\n Primary Email: ' + primary_email + '\t' + 'Alternate Email: ' +  alternate_email },
+        { text: '\n Emergency Contact Person: ' + emergency_contact_person + '\t' + 'Emergency Contact Number: ' +  emergency_contact_number },
+        { text: '\n Name of Dependent: ' + dependent_name + '\t' + 'Date of Birth: ' +  dependent_birthdate + '\t' + 'Relationship: ' + dependent_relationship}
+        ];
+    }
+</script>
 {% endblock %}
 
