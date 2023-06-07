@@ -189,7 +189,6 @@
 
 <div class="table-responsive">
             <table class="table table-striped table-hover dt-bootstrap4 no-footer" id="accomplishemt_table" name="accomplishemt_table" style="font-size: 1vw; width: 100%;">
-                <form class="add-info-form" id="add_date_form" name="add_date_form" method="POST">
                 <thead>
                     <tr>
                         <th scope="col">Name of Faculty</th>
@@ -198,47 +197,49 @@
                         <th scope="col">Type</th>
                         <th scope="col">Start Date</th>
                         <th scope="col">End Date</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input class="form-control" type="text" id="faculty_name" name="" style="font-size: 1vw;">
-                        </th>
-
-                        <th>
-                            <select class="suffix-select form-select form-control suffix" aria-label="" id="department_unit" name="" data-field="suffix" onchange="filter_unit(this)" style="font-size: 1vw;">
-                                <option selected value="All">All</option>
-                                <option value="Chemistry">Chemistry</option>
-                                <option value="MCSU">MCSU</option>
-                                <option value="Physics/Geology">Physics/Geology</option>
-                                
-                            </select>
-                        </th>
-
-
-                        <th>
-                            <input class="form-control" type="text" id="accomplishment" name="" style="font-size: 1vw;">
-                        </th>
-                        <th>
-                            <select class="suffix-select form-select form-control suffix" aria-label="" id="accomplishment_type" name="" data-field="suffix" onchange="filter_unit(this)" style="font-size: 1vw;">
-                                <option selected value="All">All</option>
-                                <option value="Publication">Publication</option>
-                                <option value="Research Grant">Research Grant</option>
-                                <option value="Licensure Exam">Licensure Exam</option>
-                                <option value="Accomplishment">Accomplishment</option>
-                                <option value="Training/Seminar">Training/Seminar</option>
-                            </select>
-                        </th>
-                        <th>
-                            <input class="form-control" type="date" id="start_date" name="start_date" style="font-size: 1vw;">
-
-                        </th>
-                        <th>
-                            <input class="form-control" type="date" id="end_date" name="end_date" style="font-size: 1vw;">
-                        </th>
-                    </tr>
+                    </tr>                    
                 </thead>
                 </form>
                 <tbody id="myTable">
+                    <form class="add-info-form" id="add_date_form" name="add_date_form" method="POST"></form>
+                        <tr>
+                            <th>
+                                <input class="form-control" type="text" id="faculty_name" name="" style="font-size: 1vw;">
+                            </th>
+
+                            <th>
+                                <select class="suffix-select form-select form-control suffix" aria-label="" id="department_unit" name="" data-field="suffix" onchange="filter_unit(this)" style="font-size: 1vw;">
+                                    <option selected value="All">All</option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="MCSU">MCSU</option>
+                                    <option value="Physics/Geology">Physics/Geology</option>
+
+                                </select>
+                            </th>
+
+
+                            <th>
+                                <input class="form-control" type="text" id="accomplishment" name="" style="font-size: 1vw;">
+                            </th>
+                            <th>
+                                <select class="suffix-select form-select form-control suffix" aria-label="" id="accomplishment_type" name="" data-field="suffix" onchange="filter_unit(this)" style="font-size: 1vw;">
+                                    <option selected value="All">All</option>
+                                    <option value="Publication">Publication</option>
+                                    <option value="Research Grant">Research Grant</option>
+                                    <option value="Licensure Exam">Licensure Exam</option>
+                                    <option value="Public Service">Public Service</option>
+                                    <option value="Training/Seminar">Training/Seminar</option>
+                                </select>
+                            </th>
+                            <th>
+                                <input class="form-control" type="date" id="start_date" name="start_date" style="font-size: 1vw;">
+
+                            </th>
+                            <th>
+                                <input class="form-control" type="date" id="end_date" name="end_date" style="font-size: 1vw;">
+                            </th>
+                        </tr>
+                    </form>
                     {% if faculty_accomplishments is not none %}
                         {% for accomplishment in faculty_accomplishments %}
                         <tr class="clickable" onclick="window.location='#'">
@@ -377,10 +378,10 @@ $(document).ready(function(){
             dom: 'Bfrtip',
             className: 'btn_grp',
             buttons: [
-            { extend: 'copyHtml5', className: 'btn btn_grp' },
-            { extend: 'excelHtml5', className: 'btn btn_grp' },
-            { extend: 'csvHtml5', className: 'btn btn_grp' },
-            { extend: 'pdfHtml5', className: 'btn btn_grp' }
+            { extend: 'copyHtml5', exportOptions: {rows: ':not(:first-child)'}, className: 'btn btn_grp' },
+            { extend: 'excelHtml5', exportOptions: {rows: ':not(:first-child)'}, className: 'btn btn_grp' },
+            { extend: 'csvHtml5', exportOptions: {rows: ':not(:first-child)'}, className: 'btn btn_grp' },
+            { extend: 'pdfHtml5', exportOptions: {rows: ':not(:first-child)'}, className: 'btn btn_grp' }
                 // 'copyHtml5',
                 // 'excelHtml5',
                 // 'csvHtml5',
