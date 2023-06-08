@@ -84,12 +84,11 @@ def google_sign_in_callback():
         )
 
         email = id_info.get('email')
-        allowed_domain = 'up.edu.ph'
         
-        if not email.endswith('@' + allowed_domain):
-             flash('You are not authorized to access this application.', 'error')
-             time.sleep(5)
-             return redirect(url_for('auth_blueprint.index'))
+        #if not email.endswith('@up.edu.ph'):
+         #    flash('You are not authorized to access this application.', 'error')
+          #   time.sleep(5)
+           #  return redirect(url_for('auth_blueprint.index'))
 
         #return id_info
         
