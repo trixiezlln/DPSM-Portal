@@ -43,7 +43,7 @@ flow = Flow.from_client_secrets_file(
 	#redirect_uri = 'https://cmsc-128-2.herokuapp.com/google_sign_in_callback')
 	#Localhost
 	#redirect_uri = 'https://cmsc-128-2.herokuapp.com/google_sign_in_callback')
-    redirect_uri = 'http://localhost:5000/google_sign_in_callback') #added by pa
+    redirect_uri = 'http://dpsm-portal.up.railway.app/google_sign_in_callback') #added by pa
 '''END'''
 
 
