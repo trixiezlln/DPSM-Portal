@@ -534,7 +534,7 @@ def department_chair_pending_approvals():
             elif info_form['type'] == 'ts':
                 info_record = TrainingSeminar.query.filter_by(id=info_form['id']).first()
             
-            info_record.info_status = None
+            #info_record.info_status = None
 
             db.session.commit()
 
