@@ -129,17 +129,16 @@
             
             let unit_count = {{ unit_count }};
             let unit_label = '{{ unit_label }}';
-
-            if (unit_label === "PGU"){
+            if (unit_label === "PGU") {
                 document.getElementById('unit').textContent = "Physics and Geology Unit"
-            } else if(unit_label === "CU"){
+            }
+            else if (unit_label === "CU") {
                 document.getElementById('unit').textContent = "Chemistry Unit"
             }
-
             let countChart = new Chart(accomplishmentChart, {
                 type:'bar', 
                 data:{
-                    labels:['Publication', 'Accomplishments', 'Trainings/Seminars', 'Licensure Exams', 'Research Grants'],
+                    labels:['Publication', 'Public Service', 'Trainings/Seminars', 'Licensure Exams', 'Research Grants'],
                     datasets:[{
                         label: unit_label,
                         data: unit_count,
@@ -178,11 +177,11 @@
                 <thead>
                     <tr>
                         <th scope="col">Name of Faculty</th>
-                        <th scope="col">Name/Contribution</th>
-                        <th scope="col">Type</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Category</th>
                         <th scope="col">Start Date</th>
                         <th scope="col">End Date</th>
-                    </tr>                    
+                    </tr>
                 </thead>
                 <tbody id="myTable">
                     <form class="add-info-form" id="add_date_form" name="add_date_form" method="POST">
@@ -199,7 +198,7 @@
                                     <option value="Publication">Publication</option>
                                     <option value="Research Grant">Research Grant</option>
                                     <option value="Licensure Exam">Licensure Exam</option>
-                                    <option value="Accomplishment">Accomplishment</option>
+                                    <option value="Accomplishment">Public Service</option>
                                     <option value="Training/Seminar">Training/Seminar</option>
                                 </select>
                             </th>
@@ -310,7 +309,7 @@
 $(document).ready(function(){
   $("#faculty_name").on("keyup", function() {
     var value = $(this).val().toLowerCase();
-   $("#myTable tr:not(:first)").filter(function() {
+    $("#myTable tr:not(:first)").filter(function() {
       $(this).toggle($(this).find("th").text().toLowerCase().indexOf(value) > -1)
     });
   });
@@ -324,7 +323,7 @@ $(document).ready(function(){
 
   $("#start_date").on("change", function() {
     var value = $(this).val().toLowerCase();
-   $("#myTable tr:not(:first)").filter(function() {
+    $("#myTable tr:not(:first)").filter(function() {
       $(this).toggle($(this).find("td:eq(2)").text().toLowerCase().indexOf(value) > -1)
     });
   });
@@ -335,7 +334,6 @@ $(document).ready(function(){
       $(this).toggle($(this).find("td:eq(3)").text().toLowerCase().indexOf(value) > -1)
     });
   });
-  $('#filter').attr('disabled', true);
 });
 </script>
 
@@ -347,10 +345,18 @@ $(document).ready(function(){
             dom: 'Bfrtip',
             className: 'btn_grp',
             buttons: [
-            { extend: 'copyHtml5', exportOptions: {rows: ':not(:first-child)'}, className: 'btn btn_grp' },
-            { extend: 'excelHtml5', exportOptions: {rows: ':not(:first-child)'}, className: 'btn btn_grp' },
-            { extend: 'csvHtml5', exportOptions: {rows: ':not(:first-child)'}, className: 'btn btn_grp' },
-            { extend: 'pdfHtml5',exportOptions: {rows: ':not(:first-child)'},className: 'btn btn_grp' }
+            { extend: 'copyHtml5', 
+            exportOptions: {rows: ':not(:first-child)'}, 
+            className: 'btn btn_grp' },
+            { extend: 'excelHtml5', 
+            exportOptions: {rows: ':not(:first-child)'}, 
+            className: 'btn btn_grp' },
+            { extend: 'csvHtml5', 
+            exportOptions: {rows: ':not(:first-child)'}, 
+            className: 'btn btn_grp' },
+            { extend: 'pdfHtml5',
+            exportOptions: {rows: ':not(:first-child)'},
+            className: 'btn btn_grp' }
                 // 'copyHtml5',
                 // 'excelHtml5',
                 // 'csvHtml5',
@@ -422,20 +428,6 @@ $(document).ready(function(){
             table.draw();
         });
     });
-</script>
-
-<script>
-    function checkInputs() {
-        var minDate = $('#min_date').val();
-        var maxDate = $('#max_date').val();
-        return minDate !== '' && maxDate !== '';
-    }
-    function toggleFilterButton() {
-        var filterButton = $('#filter');
-        var enableButton = checkInputs();
-        filterButton.prop('disabled', !enableButton);
-    }
-    $('#min_date, #max_date').on('input', toggleFilterButton);
 </script>
 
 {% endblock %}
